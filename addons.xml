@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addons>
+<addon id="magicTR.repo"
+		name="magic [COLOR red]T[/COLOR]U[COLOR red]R[/COLOR]K[COLOR red]I[/COLOR]Y[COLOR red]E[/COLOR] Eklenti Deposu"
+		version="0.1"
+		provider-name="MagicTR-Team">
+	<extension point="xbmc.addon.repository" name="MagicTR Add-on Repository">
+		<info compressed="false">https://magic-tr-team.googlecode.com/svn/trunk/addons.xml</info>
+		<checksum>https://magic-tr-team.googlecode.com/svn/trunk/addons.xml.md5</checksum>
+		<datadir zip="true">https://magic-tr-team.googlecode.com/svn/trunk/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Install Add-ons from magicTR Add-on Repository</summary>
+		<summary lang="tr">xbmcTR.com sitesindeki Tum Eklentileri burdan yukleyebilirsiniz.</summary>
+		<description lang="en">Video plug-ins and Movie info scrapers for XBMC</description>
+		<description lang="tr">XBMC programi icin turkce kaynakli dizi,sinema,belgesel,islami yayinlar ve cok daha fazlasi burada...</description>
+		<disclaimer lang="tr">xbmcTR.com sitesi telif hakki ile korunan hicbir medyayi yayinlamaz.Link vermez.Tum yayinlar muhtelif web sitelerinden alinmaktadir.</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="plugin.video.CizgiFilm"
+       name="[COLOR orange]CizgiFilm[/COLOR]"
+       version="0.0.2"
+       provider-name="xbmcTR Team">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.urlresolver" version="2.4.0"/>
+	<import addon="script.module.beautifulsoup" version="3.0.8"/>
+	<import addon="script.module.t0mm0.common" />
+	  </requires>
+  <extension point="xbmc.python.pluginsource" provides="video" library="CizgiFilm.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>xbmcTR Team </summary>
+    <description>[COLOR orange]~~~xbmcTR Team  ~~~[/COLOR]</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.dream-clup"
+       name="[COLOR orange]XbmcTR Dream-Clup[/COLOR]"
+       version="4.2.9"
+       provider-name="xbmcTR TEAM">
+    <requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.beautifulsoup" version="3.0.8"/>
+		<import addon="script.module.simplejson" />
+		<import addon="script.module.urlresolver" />
+		<import addon="script.module.t0mm0.common" />
+		<import addon="script.module.mechanize" version="0.2.5"/>
+		<import addon="script.module.buggalo" version="1.1.6"/>
+		<import addon="script.module.requests" version="2.4.3"/>
+	</requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>[COLOR lightblue] Film, Dizi, Muzik, Haber, Spor ve Dahasi... [/COLOR] [COLOR lightyellow] xbmcTR.com[/COLOR]</summary>
+    <description>[COLOR orange]Cinema, Live TV, TV Shows, Videos and Many More.. All from Turkish Sources[/COLOR] [COLOR lightyellow]Presents by xbmcTR.com[/COLOR] [COLOR green]GOTHAM ve FRODO da sorunla karsialsirsaniz forumdan belirtiniz.[/COLOR]</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.mc"
+       name="xbmcTR Mc 3"
+       version="0.1.5"
+       provider-name="xbmcTR TEAM">
+    <requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.beautifulsoup" version="3.0.8"/>
+		<import addon="script.module.simplejson" />
+		<import addon="script.module.mechanize" version="0.2.5"/>
+	</requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Beta surum sadece v.i.p. uyelere aciktir.Bircok bolum calismayabilir.Cok az kaldi,yakinda sizlerle</summary>
+    <description>lutfen deneyerek hatalari forumda yaziniz.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.Sinema"
+       name="[COLOR orange]Sinema[/COLOR]"
+       version="0.0.1"
+       provider-name="xbmcTR Team">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.urlresolver" version="2.4.0"/>
+	<import addon="script.module.beautifulsoup" version="3.0.8"/>
+	<import addon="script.module.t0mm0.common" />
+	  </requires>
+  <extension point="xbmc.python.pluginsource" provides="video" library="sinema.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>xbmcTR Team </summary>
+    <description>[COLOR orange]~~~xbmcTR Team  ~~~[/COLOR]</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.temizlik.imandan.gelir"
+       name="[COLOR yellow]Temizle Pakla[/COLOR]"
+       version="0.0.4"
+       provider-name="HappyFeets">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	  </requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary> Temizle Pakla: Pur-u Pak </summary>
+    <description>[COLOR yellow]xbmcTR Team[/COLOR] sunar. Xbmc nizin daha hizli ve iyi calismasini saglar.Sifresizdir.Herkes Kullanabilir. </description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.xbmcTRIPTV"
+       name="[COLOR beige]IPTV[/COLOR][COLOR red]TR[/COLOR]"
+       version="0.0.1"
+       provider-name="xbmcTR Team">
+  <requires>
+	<import addon="xbmc.python" version="2.1.0"/>
+	</requires>
+  <extension point="xbmc.python.pluginsource" library="IPTV.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>xbmcTR Team Sunar</summary>
+    <description>~~~xbmcTR Team Sunar ~~~ IPTV ~~~</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.xman"
+       name="[COLOR orange]XMAN[/COLOR]"
+       version="5.0.6"
+       provider-name="KodiTR Team">
+    <requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.beautifulsoup" version="3.0.8"/>
+		<import addon="script.module.simplejson" />
+		<import addon="script.module.urlresolver" />
+		<import addon="script.module.t0mm0.common" />
+		<import addon="script.module.mechanize" version="0.2.5"/>
+		<import addon="script.module.requests" version="2.4.3"/>
+    </requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>KodiTR Team +18</summary>
+    <description>[COLOR orange]~~~xbmcTR Team [/COLOR][COLOR yellow]KodiTR Team[/COLOR][COLOR orange] Sunar ~~~[/COLOR]
+	+18 Addon / Eklentidir.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.yetiskin"
+       name="[COLOR orange]Yetiskin[/COLOR]"
+       version="3.0.6"
+       provider-name="xbmcTR Team">
+    <requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.beautifulsoup" version="3.0.8"/>
+		<import addon="script.module.simplejson" />
+		<import addon="script.module.urlresolver" />
+		<import addon="script.module.t0mm0.common" />
+		<import addon="script.module.mechanize" version="0.2.5"/>
+		<import addon="script.module.requests" version="2.4.3"/>
+    </requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>xbmcTR Team +18</summary>
+    <description>[COLOR orange]~~~xbmcTR Team [/COLOR][COLOR orange] Sunar ~~~[/COLOR]
+	+18 Addon / Eklentidir.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="script.module.urlresolver"
+     name="URLResolver"
+     version="2.8.1"
+     provider-name="Eldorado">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+    <import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.simplejson" version="3.3.0"/>
+    <import addon="plugin.video.youtube" version="4.4.7"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">Resolve common video host URL's to be playable in XBMC/Kodi.</summary>
+    <description lang="en">Resolve common video host URL's to be playable in XBMC/Kodi, simplify addon development of video plugins requiring multi video hosts.</description>
+  </extension>
+</addon>
+
+<addon id="script.module.xbmctr"
+	     name="Dream AYARLARI"
+	     version="2.1.54"
+	     provider-name="xbmcTR TEAM">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+	<import addon="script.module.urlresolver"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">some functions for XbmcTR Team addons</summary>
+    <description lang="en">test....</description>
+  </extension>
+</addon>
+
+<addon id="script.xbmc.debug.log" name="[COLOR yellow]Log Yukleyici[/COLOR]" version="12.0.2" provider-name="Tristan">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="addon.py"/>
+    <extension point="xbmc.addon.metadata">
+        <language></language>
+        <platform>all</platform>
+        <website>http://xbmcLogs.com</website>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+		<summary lang="tr">Log larinizi xbmclogs.com a Yukler</summary>
+		<summary lang="de">Lädt logs zu xbmclogs.com hoch</summary>
+        <summary lang="en">Uploads your logs to xbmclogs.com</summary>
+        <summary lang="fr">Envoie vos logs vers xbmclogs.com</summary>
+        <summary lang="hr">Pošaljite vaše zapise na xbmclogs.com</summary>
+        <summary lang="hu">Feltölti a naplófájljait az xbmclogs.com-ra</summary>
+        <summary lang="it">Carica i tuoi log su xbmclogs.com</summary>
+        <summary lang="nl">Upload je logs naar xbmclogs.com</summary>
+		<description lang="tr">Bu eklenti Loglarinizi xbmclogs.com[CR] a yukler.Yuklenen LOG lariniz icin email adresinize bildirimler gelir. Ceviri:>_HappyFeets_> </description>
+		<description lang="da">Denne addon indsender dine logfiler til xbmclogs.com[CR]Du vil modtage en email med direkte links til de indsendte logfiler.</description>
+        <description lang="de">Dieses Add-on lädt deine Logfiles auf www.xbmclogs.com hoch[CR]Du wirst eine Email mit Links zu deinen Logfiles erhalten.</description>
+        <description lang="el">Αυτό το Πρόσθετο ανεβάζει τα αρχεία καταγραφής σας στο xbmclogs.com[CR]Θα λάβετε ένα email με ξεχωριστούς συνδέσμους για τα ανεβασμένα αρχεία</description>
+        <description lang="en">Bu eklenti Loglarinizi xbmclogs.com[CR] a yukler.Yuklenen LOG lariniz icin email adresinize bildirimler gelir. Ceviri:>_HappyFeets_> This Addon uploads your logs to xbmclogs.com[CR]You will receive an email with seperate links to the uploaded logfiles</description>
+        <description lang="fr">Cette extension envoie vos logs vers xbmclogs.com[CR]Vous recevrez un email avec les liens pour les fichiers de log.</description>
+        <description lang="hu">Ez a kiegészítő feltölti a naplófájljait az xbmclogs.com-ra[CR]Kapni fog egy levelet külön-külön linkekkel a feltöltött naplókra.</description>
+        <description lang="it">Questo Addon carica i tuoi log su xbmclogos.com [CR] Riceverai una email con il link per caricare il file di log</description>
+        <description lang="nl">Deze addon upload je logs naar xbmclogs.com [CR] U ontvangt een e-mail met verschillende links naar de geuploade bestanden</description>
+    </extension>
+</addon>
+
+<addon id="script.xbmctr"
+	     name="Dream Clup"
+	     version="17"
+	     provider-name="xbmcTR Team">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+	<import addon="script.module.xbmctr" />
+  </requires>
+  <extension point="xbmc.python.script" library="default.py">
+        <provides>Settings</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">some functions for XbmcTR Team addons</summary>
+    <description lang="en">test....</description>
+  </extension>
+</addon>
+
+<addon id="xbmcTR.repo"
+		name="xbmc [COLOR red]T[/COLOR]U[COLOR red]R[/COLOR]K[COLOR red]I[/COLOR]Y[COLOR red]E[/COLOR] Eklenti Deposu"
+		version="1.7"
+		provider-name="drascom">
+	<extension point="xbmc.addon.repository" name="drascom Add-on Repository">
+		<info compressed="false">https://xbmc-tr-team-turkish-addon-s.googlecode.com/svn/trunk/addons.xml</info>
+		<checksum>https://xbmc-tr-team-turkish-addon-s.googlecode.com/svn/trunk/addons.xml.md5</checksum>
+		<datadir zip="true">https://xbmc-tr-team-turkish-addon-s.googlecode.com/svn/trunk/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Install Add-ons from xbmcTR Add-on Repository</summary>
+		<summary lang="tr">xbmcTR.com sitesindeki Tum Eklentileri burdan yukleyebilirsiniz.</summary>
+		<description lang="en">Video plug-ins and Movie info scrapers for XBMC</description>
+		<description lang="tr">XBMC programi icin turkce kaynakli dizi,sinema,belgesel,islami yayinlar ve cok daha fazlasi burada...</description>
+		<disclaimer lang="tr">xbmcTR.com sitesi telif hakki ile korunan hicbir medyayi yayinlamaz.Link vermez.Tum yayinlar muhtelif web sitelerinden alinmaktadir.</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+</addons>

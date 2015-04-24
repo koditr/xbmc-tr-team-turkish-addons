@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.module.xbmctr" 
+	     name="Dream AYARLARI" 
+	     version="2.1.54" 
+	     provider-name="xbmcTR TEAM">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+	<import addon="script.module.urlresolver"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">some functions for XbmcTR Team addons</summary>
+    <description lang="en">test....</description>    
+  </extension>
+</addon>
