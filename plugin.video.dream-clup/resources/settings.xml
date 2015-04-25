@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <category label="[COLOR orange][B]Dream-Clup[/B][/COLOR] Ayarlar">
+        <setting label="[COLOR beige]Merhaba[/COLOR]" type="lsep"/>
+		<setting id="Name" type="label" default="Merhaba"/>
+		<setting type="sep" />
+		<setting label="[COLOR white][B]Kodi[COLOR red][B]TR [COLOR white][B]Kullanici Adinizi Girin:[/B][/COLOR]" type="lsep"/>
+		<setting id="Username" type="text" default=""/>
+		<setting label="[COLOR white][B]Kodi[COLOR red][B]TR [COLOR white][B] Sifrenizi Girin:[/B][/COLOR]" type="lsep"/>
+		<setting id="password" type="text" default=""/>
+  </category>
+  <category label="[COLOR white][B]Kodi[COLOR red][B]TR[/B][/COLOR] Uyelik">
+		<setting label="350000" type="lsep"/>
+		<setting label="350001" type="lsep"/>
+		<setting type="sep" />
+		<setting label="350002" type="lsep"/>
+		<setting label="350003" type="lsep"/>
+		<setting type="sep" />
+		<setting label="350004" type="lsep"/>
+		<setting label="350005" type="lsep"/>
+		<setting type="sep" />
+		<setting label="350006" type="lsep"/>
+		<setting label="350007" type="lsep"/>
+		<setting type="sep" />
+		<setting label="350008" type="lsep"/>
+		<setting label="350009" type="lsep"/>
+		<setting type="sep" />
+		<setting label="3500010" type="lsep"/>
+		<setting label="3500011" type="lsep"/>
+  </category>
+</settings>

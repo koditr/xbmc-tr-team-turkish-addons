@@ -1,0 +1,71 @@
+<item>
+<title>BLoomberg HT</title>
+<link>rtmp://origin1.nar.tv/dvrh264/blumberg/ playpath=mp4:blumberg swfUrl=http://www.yildiz.tv/dvr/dvrGoogle16.swf?v=1.6b live=1 pageUrl=http://www.yildiz.tv/ </link>
+<thumbnail>http://upload.wikimedia.org/wikipedia/tr/archive/b/b0/20110131193506!Bloomberg_HT_logosu.png</thumbnail>
+</item> 
+
+<item>
+<title>Haberturk</title>
+<link>rtmp://origin2.nar.tv/dvrh264/haberturk/ playpath=mp4:haberturk swfUrl=http://www.yildiz.tv/dvr/dvrGoogle16.swf?v=1.6b pageUrl=http://www.yildiz.tv/ live=true swfVfy=true timeout=30</link>
+<thumbnail>http://4.bp.blogspot.com/_xtDDpGlT88A/S45fildVmNI/AAAAAAAAAV4/iitztrxsbGg/s320/haberturk.jpg</thumbnail>
+</item>
+
+<item>
+<title>24 TV</title>
+<link>rtmp://strm-3.tr.medianova.tv/kanal24/kanal243</link>
+<thumbnail>http://www.tvfrekans.com/wp-content/uploads/2012/10/24-tv-logo-resmi.jpg</thumbnail>
+</item>
+			
+<item>
+<title>A Haber</title>
+<link>rtsp://5.63.151.4:443/ahaber/ahaber3</link>
+<thumbnail>http://2.bp.blogspot.com/-nk4p9ulzNx0/ULewDC_gb9I/AAAAAAAAAkk/0Y7UhxH7Bgs/s400/a-haber.jpg</thumbnail>
+</item>
+<item>
+<title>Kanal 7</title>
+<link>mms://yayin5.canlitv.com/kanal7</link>
+<thumbnail>http://www.gostream.nl/stream-files/20080112233200.jpg</thumbnail>
+</item>
+
+<item>
+<title>Kanal 7 (HD)</title>
+<link>http://vsadmin:yxcvbnm123!@81.223.79.210:9246</link>
+<thumbnail>http://www.gostream.nl/stream-files/20080112233200.jpg</thumbnail>
+</item>
+
+<item>
+<title>Kanal 7 (HD) Avrupa</title>
+<link>http://vsadmin:yxcvbnm123!@81.223.79.210:9246</link>
+<thumbnail>http://upload.wikimedia.org/wikipedia/tr/a/aa/Kanal7Avrupa.jpg</thumbnail>
+</item>
+
+<item>
+<title>Ulusal TV</title>
+<link>rtmp://stream1.yayinizle.com/ulusaltv/ulusaltv</link>
+<thumbnail>http://i.e-tvizle.net/ulusal-kanal.png</thumbnail>
+</item>  
+
+<item>
+<title>Samanyolu Haber</title>
+<link>mms://yayin5.canlitv.com/shaber</link>
+<thumbnail>http://3.bp.blogspot.com/-mYZIIGVTkuw/TzPmZ-2XH1I/AAAAAAAAApw/DgdEHhFt9dA/s1600/samanyolu-haber-izle.jpg</thumbnail>
+</item>  
+
+<item>
+<title>TGRT Haber</title>
+<link>rtmp://strm-3.tr.medianova.tv/tgrt/tgrt2</link>
+<thumbnail>http://www.tvfrekans.com/wp-content/uploads/2012/12/tgrt-haber-logo-resmi.jpg</thumbnail>
+</item>  
+
+<item>
+<title>TRT Haber</title>
+<link>mms://yayin5.canlitv.com/trt1</link>
+<thumbnail>http://i.e-tvizle.net/trt-haber.png</thumbnail>
+</item>
+
+<item>
+<title>Kanalturk</title>
+<link>rtmp://94.75.221.227/iphone/KanalTurk3</link>
+<thumbnail>http://www.tutkuyuz.net/wp-content/uploads/2012/12/kanalturk.jpg</thumbnail>
+</item>  
+</items>

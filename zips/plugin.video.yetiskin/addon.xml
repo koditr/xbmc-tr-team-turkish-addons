@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.yetiskin"
+       name="[COLOR orange]Yetiskin[/COLOR]"
+       version="3.0.6"
+       provider-name="xbmcTR Team">
+    <requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.beautifulsoup" version="3.0.8"/>
+		<import addon="script.module.simplejson" />
+		<import addon="script.module.urlresolver" />
+		<import addon="script.module.t0mm0.common" />
+		<import addon="script.module.mechanize" version="0.2.5"/>
+		<import addon="script.module.requests" version="2.4.3"/>
+    </requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>xbmcTR Team +18</summary>
+    <description>[COLOR orange]~~~xbmcTR Team [/COLOR][COLOR orange] Sunar ~~~[/COLOR]
+	+18 Addon / Eklentidir.</description>
+    <platform>all</platform>
+  </extension>
+</addon>

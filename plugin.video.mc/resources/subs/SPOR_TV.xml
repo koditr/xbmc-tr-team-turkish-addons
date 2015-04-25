@@ -1,0 +1,77 @@
+<item>
+<title>DE \ EuroSport</title>
+<link>rtmp://cp108478.live.edgefcs.net/live playpath=eurosport_1_800@45515 swfURL=http://www.wilmaa.com/player/main_v3.334.swf swfVfy=true live=true</link>
+<thumbnail>http://www.dbu-bowling.com/uploads/pics/eurosport.jpg</thumbnail>
+</item>
+
+<item>
+<title>EuroSport 2</title>
+<link>http://esioslive2-i.akamaihd.net/hls/live/201150/AL_ESP2_INT_ENG/playlist_1800.m3u8</link>
+<thumbnail>http://www.dbu-bowling.com/uploads/pics/eurosport.jpg</thumbnail>
+</item>
+
+<item>
+<title>Sport 1 (HD)</title>
+<link>http://95.188.115.251:1234/udp/233.7.70.131:5000</link>
+<thumbnail>http://www.hddaily.de/wp-content/uploads/2010/09/sport1-hd.jpg</thumbnail>
+</item>
+
+<item>
+<title>TJK</title>
+<link>rtmp://tjk-l.mncdn.com/tjk/tjk2</link>
+<thumbnail>http://www.liderform.com.tr/images/haber/1268156752536.jpg</thumbnail>
+</item>  
+	
+<item>
+<title>CNN SPOR</title>
+<link>mms://yayin.networkbil.com/cnnspor</link>
+<thumbnail>http://www.webkalem.net/wp-content/uploads/2012/06/cnnturk-yay%C4%B1n-ak%C4%B1%C5%9F%C4%B19.jpg</thumbnail>
+</item>
+			
+<item>
+<title>Bursaspor TV</title>
+<link>rtmp://stream.yayindayiz.biz:80/Bursaspor/bursaspor</link>
+<thumbnail>http://upload.wikimedia.org/wikipedia/tr/3/32/Bursasportv.jpg</thumbnail>
+</item>
+			
+<item>
+<title>Aztv Sport</title>
+<link>rtmp://lswb-de-08.servers.octoshape.net:1935/live/aztvsport</link>
+<thumbnail>http://bzfilm.com/wp-content/uploads/2011/10/aztv-1.jpg</thumbnail>
+</item>
+
+<item>
+<title>NTV Spor</title>
+<link>http://85.132.44.99:1935/turktv/ntvspor.sdp/playlist.m3u8</link>
+<thumbnail>http://img-ntvspor.mncdn.com/C/I/159/ntvspor_hd_logo_600_J0VQY.jpg</thumbnail>
+</item>
+
+<item>
+<title>TRT 3 Spor</title>
+<link>rtmp://trt-i.mncdn.com/trtspor4/trtspor4</link>
+<thumbnail>http://img.webme.com/pic/f/fbmlkodarsiv/trt-3-spor-tv.png</thumbnail>
+</item>  
+
+<item>
+<title>Galatasaray TV</title>
+<link>rtmp://cdn21.motiwe.com/live/gstv370</link>
+<thumbnail>http://3.bp.blogspot.com/-hgaDhG7C27w/T9n8MszxFHI/AAAAAAAAAMw/pEz8ebEuWb0/s1600/gstv.jpg</thumbnail>
+</item>
+
+<item>
+<title>Euronews Turkiye</title>
+<link>rtsp://fr-par-5.stream-relay.hexaglobe.net:1935/rtpeuronewslive/tr_video750_flash_all.sdp</link>
+<thumbnail>http://4.bp.blogspot.com/-uD9PEi_lAUM/Tuj9s9auHWI/AAAAAAAAHcc/OhF7R-7Vuzo/s1600/EuroNews_svg+%25281%2529.png</thumbnail>
+</item>
+
+<item>
+<title>RedBull TV</title>
+<link>rtmp://fms30.mediadirect.ro:1935/live3?id=14703526/dolcesport_low swfurl=http://static.mediadirect.ro/player-preload/swf/preloader/preloader.swf live=true</link>
+</item>
+
+<item>
+<title>NBA TV</title>
+<link>rtmp://31.7.58.122:1935/stream/I8s9S4H7.stream playpath=N1V3R0h8.stream swfUrl=http://thecdn.04stream.com/p/bbp.swf live=true  pageUrl=http://www.04stream.com/</link>
+<thumbnail>http://www.lyngsat-logo.com/hires/nn/nba_tv.png</thumbnail>
+<item>
+</items>

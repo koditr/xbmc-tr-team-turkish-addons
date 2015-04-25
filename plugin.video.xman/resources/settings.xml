@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <category label="Yetiskin VIP + Ayarlar">
+        <setting label="Merhaba" type="lsep"/>
+		<setting id="Name" type="label" default="Merhaba"/>
+		<setting label="Vip + Yetiskin Kullanici Adinizi Girin:" type="lsep"/>
+		<setting id="Username" type="text" default=""/>
+		<setting label="Vip + Yetiskin Sifrenizi Girin:" type="lsep"/>
+		<setting id="password" type="text" option="hidden" default=""/>
+  </category>
+</settings>

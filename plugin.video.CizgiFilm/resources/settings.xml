@@ -1,0 +1,6 @@
+<settings>
+	<category label="Yetiskin Ayarlar ">
+		<setting id="login" label="xbmcTR KULLANICI ADINIZI GIRINIZ" type="text" default=""/>
+		<setting id="password"   label="Sifre'nizi Giriniz " type="text" option="hidden" default=""/>
+	</category>
+</settings>

@@ -1,0 +1,7 @@
+<settings>
+	<category label="mc3 ayarlar ">
+		<setting id="login" label="30000" type="text" default=""/>
+		<setting id="password"   label="30001" type="text" option="hidden" default=""/>
+		<setting id="downloadFolder" type="folder" source="files" label="Download Location"  option="writeable" default=""/>
+	</category>
+</settings>

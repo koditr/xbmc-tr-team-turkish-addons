@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- Translated using Transifex web application. For support, or if you would like to to help out, please visit your language team! -->
+<!-- English language-Team URL: http://www.transifex.com/projects/p/xbmc-addons/language/en/ -->
+<!-- Report language file syntax bugs at: alanwww1@xbmc.org -->
+<strings>
+    <!-- Dialog strings -->
+    <string id="30000">LOG Yuklensin mi? "%s"?</string>
+    <string id="30001">ID: [B]%s[/B] ile Yuklendi</string>
+    <string id="30002">URL: [B]%s[/B]</string>
+    <string id="30003">Email Gonderilmeyecek (Email Adresi Tanimlanmamis)</string>
+    <string id="30004">Suraya : %s Email Gonderildi</string>
+
+    <!-- Settings -->
+    <string id="31000">Email Adresinizi Buradan Tanimlayin</string>
+    <string id="31001">Bunu Daima Yoksay xbmc.old.log (log from previous run)</string>
+
+    <!-- Usage help strings in settings dialog -->
+    <string id="32000">Bu Eklenti LOG larinizi xbmclogs.com a yukler</string>
+    <string id="32001">Dogrudan Baglanti iceren Linki Al</string>
+    <string id="32002">Logu Yuklemek icin,Email Adresi Tanimlamaniz Gerek</string>
+    <string id="32004">Yuklenen Loglarda Kullanici adi ve sifreleriniz Gorunebilir!</string>
+</strings>
