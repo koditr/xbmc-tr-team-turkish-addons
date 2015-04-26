@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <category label=" Live Street Ayarlar">
+        <setting label="Merhaba" type="lsep"/>
+		<setting id="Name" type="label" default="Merhaba"/>
+		<setting label="Live Street Kullanici Adinizi Girin:" type="lsep"/>
+		<setting id="Username" type="text" default=""/>
+		<setting label="Live Street Sifrenizi Giriniz" type="lsep"/>
+		<setting id="password" type="text" default=""/>
+  </category>
+</settings>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.Live_Street"
+       name="[COLOR orange]Live_Street[/COLOR]"
+       version="0.0.3"
+       provider-name="xbmcTR Team">
+    <requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.simplejson" />
+		<import addon="script.module.t0mm0.common" />
+		<import addon="script.module.mechanize" version="0.2.5"/>
+    </requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>xbmcTR Team</summary>
+    <description>[COLOR orange]~~~xbmcTR Team [/COLOR][COLOR orange] Sunar ~~~[/COLOR]
+	Live Stream / Eklentidir.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
