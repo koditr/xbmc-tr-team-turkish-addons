@@ -4,7 +4,6 @@ import re
 import os,base64,time
 import mechanize
 import sys
-##from BeautifulSoup import BeautifulStoneSoup, BeautifulSoup, BeautifulSOAP as BS
 import simplejson as json
 from xbmctools import web1,web2,web4
 
@@ -33,6 +32,15 @@ addon_icon    = __settings__.getAddonInfo('icon')
 
 def main():
         html = xbmctools.sifre3()
+        match1 = re.compile('<!--AL#(.*?)-->').findall(html)
+        for web in match1:
+                web=xbmctools.angel(base64.b64decode(web))
+                match = re.compile('<name>(.*?)</name>\n\n\t<link>(.*?)</link>').findall(web)
+                for name,url in match:
+                        if "Disney" in name:
+                                pass
+                        else:
+                                xbmctools.addDir(fileName,'[COLOR beige][B][COLOR blue]>>[/COLOR]'+name+'[/B][/COLOR]', "VideoLinks(name,url)",url,'')      
         name=__settings__.getSetting("Name")
         bak = re.compile('<!--##(.*?)-->').findall(html)
         for bilgi in bak:
@@ -91,8 +99,8 @@ def main():
                                                                 match = total.split(':;')
                                                                 del match[-1]
                                                                 totalLinks = len(match)
-                                                                percent = int( ( totalLinks / 67.0) * 100)
-                                                                loadedLinks = 67
+                                                                percent = int( ( totalLinks / 58.0) * 100)
+                                                                loadedLinks = 58
                                                                 remaining_display ='Bulunan Kanal Sayisi '+'[COLOR yellow][B]'+str(totalLinks)+'[/B][/COLOR]'+' / '+'[COLOR green][B]'+str(loadedLinks)+'[/B][/COLOR]'
                                                                 note='[COLOR pink]'+'https://www.koditr.org'+'[/COLOR]'+'      '+'[COLOR beige][B]'+'Magic'+'[COLOR red]TR[/COLOR] Team'+'[/B][/COLOR]'
                                                                 pDialog.update(percent,'[COLOR red][B]'+'Kanallar Olusturulurken Lutfen Bekleyiniz...'+'[/B][/COLOR]',remaining_display,note)
@@ -101,14 +109,14 @@ def main():
                                                                 totalLinks=totalLinks+1                       
                                                                 for kanal in match2:
                                                                     url2=kanal
-                                                                    xbmctools.addDir(fileName,'[COLOR beige][B][COLOR blue]>>[/COLOR]'+name+'[/B][/COLOR]', "VideoLinks(name,url)",url2,'')
+                                                                    xbmctools.addDir(fileName,'[COLOR beige][B][COLOR orange]>>[/COLOR]'+name+'[/B][/COLOR]', "VideoLinks(name,url)",url2,'')
 
 
 def VideoLinks(name,url):
         xbmcPlayer = xbmc.Player()
         playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
         playList.clear()
-        xbmctools.addLink('RETURN List << ','','')
+        xbmctools.addLink('RETURN List << ','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
         listitem = xbmcgui.ListItem(name)
         playList.add(url, listitem)
         xbmcPlayer.play(playList)
