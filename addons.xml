@@ -22,7 +22,7 @@
 
 <addon id="plugin.video.dream-clup"
        name="[COLOR orange]XbmcTR Dream-Clup[/COLOR]"
-       version="4.2.9"
+       version="4.2.10"
        provider-name="xbmcTR TEAM">
     <requires>
 		<import addon="xbmc.python" version="2.1.0"/>
