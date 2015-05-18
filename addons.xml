@@ -47,7 +47,7 @@
 
 <addon id="plugin.video.Live_Street"
        name="[COLOR orange]Live_Street[/COLOR]"
-       version="0.0.5"
+       version="0.0.6"
        provider-name="xbmcTR Team">
     <requires>
 		<import addon="xbmc.python" version="2.1.0"/>
