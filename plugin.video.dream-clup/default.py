@@ -22,7 +22,7 @@ folder = xbmc.translatePath(os.path.join(home, 'resources', 'lib'))
 addon_icon    = __settings__.getAddonInfo('icon')
 sys.path.append(folder)
 import xbmctools1
-import member as mem
+#import member as mem
 
 klasorler=os.walk(channels).next()[1]
 for klasor in klasorler:
@@ -44,10 +44,10 @@ try:
             url=xbmc.translatePath(os.path.join(channels, klasor))
             xbmctools1.addDir("xbmctools1", name,"listing(IMAGES_PATH,url)", url,thumbnail)
         xbmc.executebuiltin("Container.SetViewMode(500)")
-        threadName=[]
-        delay=[]
-        mem.baslamak(threadName, delay)
-        mem.playlist3()
+##        threadName=[]
+##        delay=[]
+##        mem.baslamak(threadName, delay)
+##        mem.playlist3()
 
     ##addon_id = 'plugin.video.dream-clup'
     ##
