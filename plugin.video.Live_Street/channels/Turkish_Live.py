@@ -67,6 +67,7 @@ def main():
                 dialog1.ok('[COLOR red][B]Hesabiniz Kitlendi[/B][/COLOR]','[COLOR yellow][B] Lutfen Musteri Hizmetlerine Basvurun!! koditr.media@gmail.com[/B][/COLOR]')
                 sys.exit()
 def de_get(name,url):
+        import requests as requests
         url1=xbmctools.angel(base64.b64decode(DA))
         link=xbmctools.get_url(url1)
         match=re.compile('.m3u8\?(.*?)"').findall(link)
