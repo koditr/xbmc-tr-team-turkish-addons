@@ -116,7 +116,7 @@ def VideoLinks(name,url):
         xbmcPlayer = xbmc.Player()
         playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
         playList.clear()
-        xbmctools.addLink('RETURN List << ','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+        xbmctools.addLink('[COLOR red][B]RETURN List << [/B][/COLOR]','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
         listitem = xbmcgui.ListItem(name)
         playList.add(url, listitem)
         xbmcPlayer.play(playList)
