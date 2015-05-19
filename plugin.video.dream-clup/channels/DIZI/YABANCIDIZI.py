@@ -175,8 +175,10 @@ def diziicerik(url):
                 buggalo.onExceptionRaised()
 def ayrisdirma(url):
         url=url+'/9'
+        url=url.replace('//9','/9')
         link=xbmctools1.get_url(url)
-        match = re.compile('<option value=\'http://www.dizibox.org/(.*?)\'>(.*?)</option>').findall(link)
+        print url
+        match = re.compile('http:\/\/www.dizibox.net\/(.*?)\'>(.*?)</option>').findall(link)
         for url,name in match:
                 if "My" in name:
                         pass
@@ -213,13 +215,21 @@ def VIDEOLINKS(name,url):
                 playList.clear()
                 link=xbmctools1.get_url(url)
                 link=link.replace('&amp;', '&').replace('&', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-                ok=re.compile('src="http://www.dizibox.org/player/dbx.php\?v\=(.*?)"').findall(link)
-                for url in ok:                                           
+                ok=re.compile('http:\/\/play.dizibox.net\/dbx.php\?v\=aH(.*?)"').findall(link)
+                for url in ok:
+                      url='aH'+url
                       url=(base64.b64decode(url))
+                      print url,'AAA'
                       name='OK-Ply'
-                      cozuculer1.magix_player(name,url)
+                      cozuculer1.ok_ru(url)
+                      
                 ok1=re.compile('src="http:\/\/odnoklassniki.ru\/videoembed\/(.*?)"').findall(link)
                 for url in ok1:
+                        url='http://ok.ru/videoembed/'+url
+                        name='OK-Ply'
+                        cozuculer1.magix_player(name,url)
+                ok2=re.compile('src="http://ok.ru\/videoembed\/(.*?)"').findall(link)
+                for url in ok2:
                         url='http://ok.ru/videoembed/'+url
                         name='OK-Ply'
                         cozuculer1.magix_player(name,url)
@@ -227,6 +237,14 @@ def VIDEOLINKS(name,url):
                 vk1=re.compile('src="http:\/\/www.dizibox.org\/Vkplayer\/(.*?)"').findall(link)
                 for url in vk1:
                         url=url.replace('&#038;', '&').replace('&', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+                        url='http://vk.com/'+url
+                        name='Vk-Ply'
+                        cozuculer1.magix_player(name,url)
+                vk9=re.compile('http://vk.com/dbx.php\?v\=(.*?)"').findall(link)
+                for url in vk9:
+                        url=(base64.b64decode(url))
+
+                        #url=url.replace('&#038;', '&').replace('&', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
                         url='http://vk.com/'+url
                         name='Vk-Ply'
                         cozuculer1.magix_player(name,url)

@@ -49,8 +49,11 @@ def main():
                                                 web=xbmctools1.angel(base64.b64decode(web))
                                                 tr=re.compile('<isim>(.*?)</isim><link>(.*?)</link>').findall(web)
                                                 for name,url in tr:
-                                                        name=ifix.decode_fix(name)
-                                                        xbmctools1.addDir(fileName,'[COLOR beige][B][COLOR orange]>[/COLOR]'+name+'[/B][/COLOR]', "Recent(url)",url,'','')
+                                                        if "Yerli" in name:
+                                                                pass
+                                                        else:
+                                                                name=ifix.decode_fix(name)
+                                                                xbmctools1.addDir(fileName,'[COLOR beige][B][COLOR orange]>[/COLOR]'+name+'[/B][/COLOR]', "Recent(url)",url,'','')
 
                                 
                 except:

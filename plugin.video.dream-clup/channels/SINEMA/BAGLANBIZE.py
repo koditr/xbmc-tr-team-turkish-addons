@@ -194,6 +194,11 @@ def VIDEOLINKS(name,url):
                         url = 'http://vk.com/'+str(url).encode('utf-8', 'ignore')
                         cozuculer1.magix_player(name,url)
                         #---------------------------------------------#
+                vk_3=re.compile('src="\/\/direkhdfilmler.com\/(.*?)"').findall(link)
+                for url in vk_3:
+                        url = 'http://vk.com/'+str(url).encode('utf-8', 'ignore')
+                        cozuculer1.magix_player(name,url)
+                        #---------------------------------------------#
                 youtube=re.compile(' src\="\/\/www.youtube.com\/embed\/(.*?)"').findall(link)
                 for url in youtube:
                         url = 'http://www.youtube.com/embed/'+str(url).encode('utf-8', 'ignore')
