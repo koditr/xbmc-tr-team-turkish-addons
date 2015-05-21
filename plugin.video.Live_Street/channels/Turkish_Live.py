@@ -38,14 +38,14 @@ def main():
 #------------------------------------------------#
         try:
                 html = xbmctools.sifre4()
-                print html
+
                 name=__settings__.getSetting("Name")
                 login=__settings__.getSetting("Username")
                 password=__settings__.getSetting("password")
                 match = re.compile('<!--#(.*?)-->').findall(html)
                 for web in match:
                         web=xbmctools.angel(base64.b64decode(web))
-                        tr=re.compile('<title>(.*?)</title>\n        <stream_url>(.*?)</stream_url>\n        <thumbnail>(.*?)</thumbnail>').findall(web)
+                        tr=re.compile('<title>(.*?)</title>\n    <stream_url>(.*?)</stream_url>\n    <thumbnail>(.*?)</thumbnail>').findall(web)
                         for name,url,Thumbnail in tr:
                                 url=url.replace('<![CDATA[','').replace(']]>','')
                                 name=name.replace('<![CDATA[','').replace(']]>','')
@@ -55,7 +55,7 @@ def main():
                         web=xbmctools.angel(base64.b64decode(web))
                         match=re.compile('<name>(.*?)</name>\n<resim>(.*?)</resim>\n<link>(.*?)</link>').findall(web)
                         for name,Thumbnail,url in match:
-                                xbmctools.addDir(fileName,'[COLOR blue][B] >>[/B][/COLOR]'+ '[COLOR pink][B] BETA & SD > - '+name+'[/B][/COLOR]',"VideoLinks2(name,url)",url,Thumbnail,Thumbnail)
+                                xbmctools.addDir(fileName,'[COLOR blue][B] >>[/B][/COLOR]'+ '[COLOR pink][B]>> & SD > - '+name+'[/B][/COLOR]',"VideoLinks2(name,url)",url,Thumbnail,Thumbnail)
                 match1 = re.compile('<!--#??#(.*?)-->').findall(html)
                 for web in match1:
                         web=xbmctools.angel(base64.b64decode(web))
