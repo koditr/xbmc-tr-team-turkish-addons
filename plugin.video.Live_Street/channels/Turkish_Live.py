@@ -38,7 +38,6 @@ def main():
 #------------------------------------------------#
         try:
                 html = xbmctools.sifre4()
-
                 name=__settings__.getSetting("Name")
                 login=__settings__.getSetting("Username")
                 password=__settings__.getSetting("password")
@@ -47,15 +46,16 @@ def main():
                         web=xbmctools.angel(base64.b64decode(web))
                         tr=re.compile('<title>(.*?)</title>\n    <stream_url>(.*?)</stream_url>\n    <thumbnail>(.*?)</thumbnail>').findall(web)
                         for name,url,Thumbnail in tr:
-                                url=url.replace('<![CDATA[','').replace(']]>','')
+                                url=url.replace('<![CDATA[','').replace(']]>','').replace('amp;','')
                                 name=name.replace('<![CDATA[','').replace(']]>','')
                                 xbmctools.addDir(fileName,'[COLOR blue][B] >>[/B][/COLOR]'+ '[COLOR beige][B]'+name+'[/B][/COLOR]',"VideoLinks(name,url)",url,Thumbnail,Thumbnail)
                 match9 = re.compile('<!--#BETA#(.*?)-->').findall(html)
                 for web in match9:
-                        web=xbmctools.angel(base64.b64decode(web))
-                        match=re.compile('<name>(.*?)</name>\n<resim>(.*?)</resim>\n<link>(.*?)</link>').findall(web)
-                        for name,Thumbnail,url in match:
-                                xbmctools.addDir(fileName,'[COLOR blue][B] >>[/B][/COLOR]'+ '[COLOR pink][B]>> & SD > - '+name+'[/B][/COLOR]',"VideoLinks2(name,url)",url,Thumbnail,Thumbnail)
+                        url=xbmctools.angel(base64.b64decode(web))
+                        link=xbmctools.get_url(url)
+                        match1 = re.compile('href="(.*?)" title=".*?"> <span class=".*?">.*?</span> <span class=".*?"> <img src="(.*?)" alt="(.*?)"/>').findall(link)
+                        for url,Thumbnail,name in match1:
+                                xbmctools.addDir(fileName,'[COLOR blue][B] >>[/B][/COLOR]'+ '[COLOR pink][B] & SD > - '+name+'[/B][/COLOR]',"VideoLinks2(name,url)",url,Thumbnail,Thumbnail)
                 match1 = re.compile('<!--#??#(.*?)-->').findall(html)
                 for web in match1:
                         web=xbmctools.angel(base64.b64decode(web))
@@ -95,7 +95,7 @@ def de_get(name,url):
 #-----------------------------------------#
 def VideoLinks(name,url):
         link=xbmctools.get_url(url)
-        match = re.compile('\{file: "(.*?)"').findall(link)
+        match = re.compile('\{file\: "(.*?)"').findall(link)
         for url in match:
                 url=url+xbmctools.angel(base64.b64decode(pt))
                 xbmcPlayer = xbmc.Player()
@@ -111,18 +111,22 @@ def VideoLinks(name,url):
                 else:
                         xbmctools.playlist2()
 def VideoLinks2(name,url):
-        xbmcPlayer = xbmc.Player()
-        playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
-        playList.clear()
-        xbmctools.addLink('[COLOR red][B]RETURN List << [/B][/COLOR]','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
-        listitem = xbmcgui.ListItem(name)
-        playList.add(url, listitem)
-        xbmcPlayer.play(playList)
-        exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
-        if exec_version < 14.0:
-                xbmctools.playlist()
-        else:
-                xbmctools.playlist2()
+        link=xbmctools.get_url(url)
+        match=re.compile('file: \'(.*?)u8\',').findall(link)
+        for url in match:
+                url=url+'u8'
+                xbmcPlayer = xbmc.Player()
+                playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+                playList.clear()
+                xbmctools.addLink('[COLOR red][B]RETURN List << [/B][/COLOR]','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                listitem = xbmcgui.ListItem(name)
+                playList.add(url, listitem)
+                xbmcPlayer.play(playList)
+                exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
+                if exec_version < 14.0:
+                        xbmctools.playlist()
+                else:
+                        xbmctools.playlist2()
 
 
 
