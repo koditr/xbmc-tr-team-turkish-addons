@@ -8,6 +8,7 @@ import sys
 import simplejson as json
 from xbmctools import pt
 DA='LDE4OQlray8lK1osJ2JQXCUcPSo+KyJkOiM8dC0hcXsBdA=='
+ZS='LDE4OQlraz87Mh0qLThSXyNWPj8mLWQpJWQZABAwPiIcEDE6JyxALxwaHUcwRw=='
 
 fileName ="Turkish_Live"
 
@@ -49,13 +50,27 @@ def main():
                                 url=url.replace('<![CDATA[','').replace(']]>','').replace('amp;','')
                                 name=name.replace('<![CDATA[','').replace(']]>','')
                                 xbmctools.addDir(fileName,'[COLOR blue][B] >>[/B][/COLOR]'+ '[COLOR beige][B]'+name+'[/B][/COLOR]',"VideoLinks(name,url)",url,Thumbnail,Thumbnail)
-                match9 = re.compile('<!--#BETA#(.*?)-->').findall(html)
-                for web in match9:
-                        url=xbmctools.angel(base64.b64decode(web))
-                        link=xbmctools.get_url(url)
-                        match1 = re.compile('href="(.*?)" title=".*?"> <span class=".*?">.*?</span> <span class=".*?"> <img src="(.*?)" alt="(.*?)"/>').findall(link)
-                        for url,Thumbnail,name in match1:
-                                xbmctools.addDir(fileName,'[COLOR blue][B] >>[/B][/COLOR]'+ '[COLOR pink][B] & SD > - '+name+'[/B][/COLOR]',"VideoLinks2(name,url)",url,Thumbnail,Thumbnail)
+                HA=xbmctools.angel(base64.b64decode(ZS))
+                link=xbmctools.get_url(HA)
+                match11 = re.compile("-1,(.*?)\n(.*?)\n").findall(link)
+                for name,url in match11:
+                        if "Twi" in name:
+                                pass
+                        else:
+                                if "Sinem" in name:
+                                        pass
+                                else:
+                                        if "V Fi" in name:
+                                                pass
+                                        else:
+                                                xbmctools.addDir(fileName,'[COLOR orange][B] >>[/B][/COLOR]'+ '[COLOR blue][B]'+name+'[/B][/COLOR]',"VideoLinks3(name,url)",url,'','')
+##                match9 = re.compile('<!--#BETA#(.*?)-->').findall(html)
+##                for web in match9:
+##                        url=xbmctools.angel(base64.b64decode(web))
+##                        link=xbmctools.get_url(url)
+##                        match1 = re.compile('href="(.*?)" title=".*?"> <span class=".*?">.*?</span> <span class=".*?"> <img src="(.*?)" alt="(.*?)"/>').findall(link)
+##                        for url,Thumbnail,name in match1:
+##                                xbmctools.addDir(fileName,'[COLOR blue][B] >>[/B][/COLOR]'+ '[COLOR pink][B] & SD > - '+name+'[/B][/COLOR]',"VideoLinks2(name,url)",url,Thumbnail,Thumbnail)
                 match1 = re.compile('<!--#??#(.*?)-->').findall(html)
                 for web in match1:
                         web=xbmctools.angel(base64.b64decode(web))
@@ -63,6 +78,9 @@ def main():
                         for name,url in match:
                                 img=''
                                 xbmctools.addDir(fileName,'[COLOR red][B] >>[/B][/COLOR]'+ '[COLOR orange][B]'+name+'[/B][/COLOR]',"de_get(name,url)",url,img,img)
+ 
+                        
+                
                        
                
         except:
@@ -77,8 +95,8 @@ def de_get(name,url):
         link=xbmctools.get_url(url1)
         match=re.compile('.m3u8\?(.*?)"').findall(link)
         for cd in match:
-                if "ro" in url:
-                    VideoLinks2(name,url)
+                if "utna" in url:
+                    VideoLinks3(name,url)
                 else:
                     import requests as requests
 
@@ -128,7 +146,6 @@ def VideoLinks2(name,url):
                         xbmctools.playlist2()
                         
 def VideoLinks3(name,url):
-        
         xbmcPlayer = xbmc.Player()
         playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
         playList.clear()
