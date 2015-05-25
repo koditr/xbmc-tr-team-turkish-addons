@@ -77,7 +77,6 @@ def de_get(name,url):
         link=xbmctools.get_url(url1)
         match=re.compile('.m3u8\?(.*?)"').findall(link)
         for cd in match:
-                print cd
                 if "ro" in url:
                     VideoLinks2(name,url)
                 else:
@@ -90,7 +89,7 @@ def de_get(name,url):
                     url = x[0]
                     id = x[2].replace('xxx','')
                     url=url+'?'+cd
-                    VideoLinks2(name,url)
+                    VideoLinks3(name,url)
 
 #-----------------------------------------#
 def VideoLinks(name,url):
@@ -127,6 +126,21 @@ def VideoLinks2(name,url):
                         xbmctools.playlist()
                 else:
                         xbmctools.playlist2()
+                        
+def VideoLinks3(name,url):
+        
+        xbmcPlayer = xbmc.Player()
+        playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+        playList.clear()
+        xbmctools.addLink('[COLOR red][B]RETURN List << [/B][/COLOR]','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+        listitem = xbmcgui.ListItem(name)
+        playList.add(url, listitem)
+        xbmcPlayer.play(playList)
+        exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
+        if exec_version < 14.0:
+                xbmctools.playlist()
+        else:
+                xbmctools.playlist2()
 
 
 
