@@ -50,20 +50,20 @@ def main():
                                 url=url.replace('<![CDATA[','').replace(']]>','').replace('amp;','')
                                 name=name.replace('<![CDATA[','').replace(']]>','')
                                 xbmctools.addDir(fileName,'[COLOR blue][B] >>[/B][/COLOR]'+ '[COLOR beige][B]'+name+'[/B][/COLOR]',"VideoLinks(name,url)",url,Thumbnail,Thumbnail)
-                HA=xbmctools.angel(base64.b64decode(ZS))
-                link=xbmctools.get_url(HA)
-                match11 = re.compile("-1,(.*?)\n(.*?)\n").findall(link)
-                for name,url in match11:
-                        if "Twi" in name:
-                                pass
-                        else:
-                                if "Sinem" in name:
-                                        pass
-                                else:
-                                        if "V Fi" in name:
-                                                pass
-                                        else:
-                                                xbmctools.addDir(fileName,'[COLOR orange][B] >>[/B][/COLOR]'+ '[COLOR blue][B]'+name+'[/B][/COLOR]',"VideoLinks3(name,url)",url,'','')
+##                HA=xbmctools.angel(base64.b64decode(ZS))
+##                link=xbmctools.get_url(HA)
+##                match11 = re.compile("-1,(.*?)\n(.*?)\n").findall(link)
+##                for name,url in match11:
+##                        if "Twi" in name:
+##                                pass
+##                        else:
+##                                if "Sinem" in name:
+##                                        pass
+##                                else:
+##                                        if "V Fi" in name:
+##                                                pass
+##                                        else:
+##                                                xbmctools.addDir(fileName,'[COLOR orange][B] >>[/B][/COLOR]'+ '[COLOR blue][B]'+name+'[/B][/COLOR]',"VideoLinks3(name,url)",url,'','')
 ##                match9 = re.compile('<!--#BETA#(.*?)-->').findall(html)
 ##                for web in match9:
 ##                        url=xbmctools.angel(base64.b64decode(web))
@@ -78,6 +78,22 @@ def main():
                         for name,url in match:
                                 img=''
                                 xbmctools.addDir(fileName,'[COLOR red][B] >>[/B][/COLOR]'+ '[COLOR orange][B]'+name+'[/B][/COLOR]',"de_get(name,url)",url,img,img)
+                html = xbmctools.sifre2()
+                name=__settings__.getSetting("Name")
+                login=__settings__.getSetting("Username")
+                password=__settings__.getSetting("password")
+                match = re.compile('<!--#li2#(.*?)-->').findall(html)
+                for web in match:
+                        web=xbmctools.angel(base64.b64decode(web))
+                        tr=re.compile('<isim>(.*?)</isim>\n<link>(.*?)</link>\n<resim>(.*?)</resim>').findall(web)
+                        for name,url2,Thumbnail in tr:
+                                if "--" in name:
+                                        pass
+                                else:
+                                        if "ugur" in name:
+                                                pass
+                                        else:
+                                                xbmctools.addDir(fileName,'[COLOR beige][B][COLOR purple]>>[/COLOR]  '+name+'[/B][/COLOR]',"VideoLinks9(name,url)",url2,Thumbnail,Thumbnail)
  
                         
                 
@@ -158,6 +174,30 @@ def VideoLinks3(name,url):
                 xbmctools.playlist()
         else:
                 xbmctools.playlist2()
+def VideoLinks9(name,url):
+        
+        link=xbmctools.get_url(url)
+        match=re.compile('"mediaUrl":"(.*?)"').findall(link)
+        for url in match:
+                if match >1:
+                        del match [1]
+                        
+                        url=url.replace('\\','')
+                        xbmcPlayer = xbmc.Player()
+                        
+                        playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+                        
+                        playList.clear()
+                        xbmctools.addLink('[COLOR blue][B]'+'RETURN List <<'+' [/B][/COLOR]','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                        
+                        listitem = xbmcgui.ListItem(name)
+                        playList.add(url, listitem)
+                        xbmcPlayer.play(playList)
+                        exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
+                        if exec_version < 14.0:
+                                xbmctools.playlist()
+                        else:
+                                xbmctools.playlist2()
 
 
 

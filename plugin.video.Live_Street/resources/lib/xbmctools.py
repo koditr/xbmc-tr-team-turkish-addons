@@ -198,6 +198,47 @@ def sifre4():
         br.open('https://koditr.org/canlitvdeneme/')
         html = br.response().read()
         return html
+def sifre2():
+        
+        filepath=os.path.join(folders,'nfo.txt')
+        cj = mechanize.CookieJar()
+        name=__settings__.getSetting("Name")
+        login=__settings__.getSetting("Username")
+        password=__settings__.getSetting("password")
+        if not login:
+                __settings__.openSettings()
+        else:
+                pass
+        br = mechanize.Browser(factory=mechanize.RobustFactory())
+        br.set_cookiejar(cj)
+
+        br.set_handle_equiv(True)
+
+        br.set_handle_redirect(True)
+
+        br.set_handle_referer(True)
+
+        br.set_handle_robots(False)
+
+        br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+
+        br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Char‌​set', 'ISO-8859-1,utf-8;q=0.7,*;q=0.3'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')]
+        br.open('https://koditr.org/wp-login.php')
+        br.title()
+        br.select_form(nr=0)
+        br.form['log']=__settings__.getSetting("Username")
+        br.form['pwd']=__settings__.getSetting("password")
+        br.submit()
+        html2=br.response().read()
+        if "welcome" in html2:
+                print "basarili bir login yapildi"
+        else:
+                dialog = xbmcgui.DialogProgress()
+                dialog1 = xbmcgui.Dialog()
+                dialog1.ok('[COLOR red][B]IPTV HATA UYARISI[/B][/COLOR]','[COLOR yellow][B]Bronze Uye Olmaniz Gerekiyor!!! Eger Bronze Uye Iseniz ve Bu Mesaji Goruyorsaniz[/B][/COLOR]','[COLOR red][B]Yanlis Kullanici adi veya Sifre Girdiniz!!! Lutfen Tekrar Deneyiniz.[/B][/COLOR]')  
+        br.open('https://koditr.org/greating1/')
+        html = br.response().read()
+        return html   
 
 
         
