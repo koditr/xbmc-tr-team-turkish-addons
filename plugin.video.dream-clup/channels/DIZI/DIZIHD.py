@@ -194,16 +194,16 @@ def VIDEOLINKS(name,url):
             
             url = 'http://ok.ru/videoembed/'+str(mailrugelen)
             xbmctools1.addDir(fileName,'[COLOR blue][B]>>>>>> OK.RU > '+name+'[/B][/COLOR]',"cozuculer1.ok_ru(url)",url,'')
-        youtube=re.compile('src="http://www.youtube.com/embed/(.*?)"').findall(link)
+        youtube=re.compile('www.youtube.com/embed/(.*?)"').findall(link)
         for url in youtube:
                 url=url.replace('?showinfo=0','')
                 url = 'http://www.youtube.com/embed/'+str(url).encode('utf-8', 'ignore')
                 xbmctools1.addDir(fileName,'[COLOR blue][B]>>>>>> Y Server  > '+name+'[/B][/COLOR]',"cozuculer1.magix_player(name,url)",url,'')
 
 ##                #---------------------------------------------#
-        mailru=re.compile('http:\/\/.*?\/mail\/(.*?).html').findall(link)
+        mailru=re.compile("_myvideo/(.*?)'").findall(link)
         for mailrugelen in mailru:
-                url = 'http://videoapi.my.mail.ru/videos/embed/mail/'+str(mailrugelen)+'.html'
+                url = 'http://videoapi.my.mail.ru/videos/embed/mail/bi.siktir1/_myvideo/'+str(mailrugelen)+'.html'
                 xbmctools1.addDir(fileName,'[COLOR blue][B]>>>>>> Mail Ru  > '+name+'[/B][/COLOR]',"cozuculer1.magix_player(name,url)",url,'') 
         dm=re.compile(' src="//www.dailymotion.com/embed/video/(.*?)" ').findall(link)
         if "x2fy4px" in dm:
