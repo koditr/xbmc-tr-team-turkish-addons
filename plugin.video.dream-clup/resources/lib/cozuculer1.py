@@ -60,8 +60,8 @@ def magix_player(name,url):
         MailRu_Player(url)
     if "ok.ru" in url:
         ok_ru(url)
-
-            
+    if "dailymotion" in url:
+        DailyMotion(name,url)          
     else:
         
 
@@ -79,7 +79,35 @@ def EXIT():
         xbmc.executebuiltin("XBMC.Container.Refresh(path,replace)")
         xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
 
-
+def DailyMotion(name,url):
+    print url
+    link=xbmctools1.get_url(url)
+    if "stream_hls_url" in link:
+            match=re.compile('"stream_hls_url":"(.*?)"').findall(link)
+    elif "stream_h264_ld_url" in link:                          
+            match=re.compile('"stream_h264_ld_url":"(.*?)"').findall(link)
+    elif "stream_h264_url" in link:                            
+            match=re.compile('"stream_h264_url":"(.*?)"').findall(link)
+    elif "stream_h264_hq_url" in link:         
+            match=re.compile('"stream_h264_hq_url":"(.*?)"').findall(link)
+    elif "stream_h264_hd1080_url" in link: 
+            match=re.compile('"stream_h264_hd1080_url":"(.*?)"').findall(link)
+    elif "auto" in link:
+            match=re.compile('"type":"application\\\\/x-mpegURL","url":"(.*?)"').findall(link)
+    elif "380" in link:
+            match=re.compile('"380":\[\{"type":"video\\\\/mp4","url":"(.*?)"').findall(link)
+    elif "480" in link:
+            match=re.compile('"480":\[\{"type":"video\\\\/mp4","url":"(.*?)"').findall(link)
+    elif "720" in link:
+            match=re.compile('"720":\[\{"type":"video\\\\/mp4","url":"(.*?)"').findall(link)
+    else:
+            print "video yok"
+    for url in match:
+            url=url.replace("\\","")
+            
+    xbmctools1.addLink(name,url,'')
+    xbmctools1.playlist_yap(playList,name,url)
+    xbmcPlayer.play(playList)
 
 ###########################MAIL-RU-PLAYER######################################
 def MailRu_Player(url):

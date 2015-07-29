@@ -34,8 +34,10 @@ def main():
                         match = re.compile('<!--#(.*?)-->').findall(html)
                         for web in match:
                                 web=xbmctools1.angel(base64.b64decode(web))
+                                print wew
                                 tr=re.compile('<site>(.*?)</site>').findall(web)
                                 for sinema in tr:
+                                        print sinema
                                         xbmctools1.addDir(fileName,'[COLOR red][B]>>[/B][/COLOR][COLOR yellow][B]Belgesel ARA - SEARCH[/B][/COLOR][COLOR red][B] <<[/B][/COLOR]', "BSearch()", "","https://koditr.org/changelog/search.png")
                                         xbmctools1.addDir(fileName,'[COLOR blue][B]>>[/B][/COLOR] [COLOR lightblue][B]YeniEklenen BElgeseller[/B][/COLOR]', "BRecent(url)",sinema,"special://home/addons/plugin.video.dream-clup/resources/images/yeni.png")
                                         html = xbmctools1.belgesel()

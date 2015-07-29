@@ -1,2 +1,2 @@
-Versiyon: 4.2.11 
-Versiyon Yayin Tarihi: 16.06.2015
+Versiyon: 4.2.12
+Versiyon Yayin Tarihi: 29.07.2015
