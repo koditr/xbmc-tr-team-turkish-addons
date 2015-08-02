@@ -37,8 +37,8 @@ def main():
                 web=xbmctools1.angel(base64.b64decode(web))
                 tr=re.compile('<site>(.*?)</site>').findall(web)
                 for sinema in tr:
-                        xbmctools1.addDir(fileName,'[COLOR yellow][B]>>[/B][/COLOR] [COLOR red][B]>> - Arama/Search -<< [/B][/COLOR]', "Arama()",sinema,"https://koditr.org/changelog/search.png",'special://home/addons/plugin.video.dream-clup/fanart.jpg' )
-                        xbmctools1.addDir(fileName,'[COLOR blue][B]>>[/B][/COLOR] [COLOR lightblue][B]Yeni Eklenen Diziler [/B][/COLOR]', "Recent(url)",sinema,"",'special://home/addons/plugin.video.dream-clup/fanart.jpg')
+                        xbmctools1.addDir(fileName,'[COLOR yellow]>>[/COLOR] [COLOR red]>> - Arama/Search -<< [/COLOR]', "Arama()",sinema,"https://koditr.org/changelog/search.png",'special://home/addons/plugin.video.dream-clup/fanart.jpg' )
+                        xbmctools1.addDir(fileName,'[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Diziler [/COLOR]', "Recent(url)",sinema,"",'special://home/addons/plugin.video.dream-clup/fanart.jpg')
         match1 = re.compile('<!--Dizi(.*?)-->').findall(html)
         for web in match1:
                 web=xbmctools1.angel(base64.b64decode(web))
@@ -52,14 +52,14 @@ def main():
                                 a=li.find('a')
                                 url= a['href']
                                 name=li.text.encode('utf-8', 'ignore')
-                                xbmctools1.addDir(fileName,'[COLOR beige][B][COLOR orange]>[/COLOR]'+name+'[/B][/COLOR]', "Recent(url)",url,'','')
+                                xbmctools1.addDir(fileName,'[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]', "Recent(url)",url,'','')
 
                                 
 ##                except:
-##                        showMessage("[COLOR blue][B]MagicTR[/B][/COLOR]","[COLOR blue][B]IP Adresiniz Kitlendi[/B][/COLOR]","[COLOR red][B]Lutfen Musteri Hizmetlerine Basvurun!! koditr.media@gmail.com[/B][/COLOR]")
+##                        showMessage("[COLOR blue]MagicTR[/COLOR]","[COLOR blue]IP Adresiniz Kitlendi[/COLOR]","[COLOR red]Lutfen Musteri Hizmetlerine Basvurun!! koditr.media@gmail.com[/COLOR]")
 ##                        dialog = xbmcgui.DialogProgress()
 ##                        dialog1 = xbmcgui.Dialog()
-##                        dialog1.ok('[COLOR red][B]Hesabiniz Kitlendi[/B][/COLOR]','[COLOR yellow][B] Lutfen Musteri Hizmetlerine Basvurun!! koditr.media@gmail.com[/B][/COLOR]')
+##                        dialog1.ok('[COLOR red]Hesabiniz Kitlendi[/COLOR]','[COLOR yellow] Lutfen Musteri Hizmetlerine Basvurun!! koditr.media@gmail.com[/COLOR]')
 ##                        sys.exit()
 
 ###################################################################                
@@ -84,7 +84,7 @@ def Arama():
                                         query=query.replace(' ','+')
                                         url = (sinema+'/?s='+query)
                                         Recent(url)
-                xbmctools1.addDir(fileName,'[COLOR yellow][B]YENI ARAMA YAP[/B][/COLOR]', "Arama()","","Arama")
+                xbmctools1.addDir(fileName,'[COLOR yellow]YENI ARAMA YAP[/COLOR]', "Arama()","","Arama")
 
 
 def Recent(url):
@@ -98,7 +98,7 @@ def Recent(url):
                 url=panel[i].find("a")['href']
                 name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
                 thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')        
-                xbmctools1.addDir(fileName,'[COLOR beige][B]'+name+'[/B][/COLOR]',"Part(name,url)",url,thumbnail,thumbnail)
+                xbmctools1.addDir(fileName,'[COLOR beige]'+name+'[/COLOR]',"Part(name,url)",url,thumbnail,thumbnail)
 
 
         #sayfalama basladi
@@ -107,8 +107,8 @@ def Recent(url):
         for url,name in page:
                 name="Sonraki Sayfa"
                 url=str(url)
-                xbmctools1.addDir(fileName,'[COLOR blue][B]>>>>>>'+name+'[/B][/COLOR]',"Recent(url)",url,thumbnail)
-        xbmc.executebuiltin("Container.SetViewMode(500)")
+                xbmctools1.addDir(fileName,'[COLOR blue]>>>>>>'+name+'[/COLOR]',"Recent(url)",url,thumbnail)
+        #xbmc.executebuiltin("Container.SetViewMode(500)")
 
 def Part(name,url):
         url=url+"/9"
@@ -117,7 +117,7 @@ def Part(name,url):
         panel = soup.findAll("div", {"class": "keremiya_part"})
         match=re.compile('<a href="(.*?)"><span>(.*?)</span></a>').findall(str(panel))
         for url,name in match:
-                xbmctools1.addDir(fileName,'[COLOR beige][B]'+name+'[/B][/COLOR]',"VIDEOLINKS(name,url)",url,"","")
+                xbmctools1.addDir(fileName,'[COLOR beige]'+name+'[/COLOR]',"VIDEOLINKS(name,url)",url,"","")
         
 
 def VIDEOLINKS(name,url):
@@ -133,7 +133,7 @@ def VIDEOLINKS(name,url):
         vk_2=re.compile('\/vk.com\/(.*?)"').findall(link)
         for url in vk_2:
                 url = 'http://vk.com/'+str(url).encode('utf-8', 'ignore')
-                name='[COLOR beige][B][COLOR orange]>>>   [/COLOR] V Server [/B][/COLOR]'
+                name='[COLOR beige][COLOR orange]>>>   [/COLOR] V Server [/COLOR]'
                 cozuculer1.magix_player(name,url)
                 #---------------------------------------------#
 
@@ -146,29 +146,29 @@ def VIDEOLINKS(name,url):
                     print url
                     zong=""
                     print zong
-                    xbmctools1.addDir(fileName,'[COLOR blue][B]Daily Server  > '+name+'[/B][/COLOR]',"cozuculer1.yeni4(name,url)",url,'')
+                    xbmctools1.addDir(fileName,'[COLOR blue]Daily Server  > '+name+'[/COLOR]',"cozuculer1.yeni4(name,url)",url,'')
         ok=re.compile('http:\/\/ok.ru\/videoembed\/(.*?)" ').findall(link)
         for mailrugelen in ok:
             
             url = 'http://ok.ru/videoembed/'+str(mailrugelen)
-            xbmctools1.addDir(fileName,'[COLOR blue][B]>>>>>> OK.RU > '+name+'[/B][/COLOR]',"cozuculer1.ok_ru(url)",url,'')
+            xbmctools1.addDir(fileName,'[COLOR blue]>>>>>> OK.RU > '+name+'[/COLOR]',"cozuculer1.ok_ru(url)",url,'')
 
         cloudy=re.compile('https://www.cloudy.ec/embed.php\?id\=(.*?)"').findall(link)
         for mailrugelen in cloudy:
             url = 'https://www.cloudy.ec/embed.php?id='+str(mailrugelen)
-            xbmctools1.addDir(fileName,'[COLOR blue][B]>>>>>> Cloudy '+name+'[/COLOR]',"cozuculer1.cloudy(url)",url,'')
+            xbmctools1.addDir(fileName,'[COLOR blue]>>>>>> Cloudy '+name+'[/COLOR]',"cozuculer1.cloudy(url)",url,'')
         youtube=re.compile('www.youtube.com/embed/(.*?)"').findall(link)
         for url in youtube:
                 url=url.replace('?showinfo=0','')
                 url = 'http://www.youtube.com/embed/'+str(url).encode('utf-8', 'ignore')
-                xbmctools1.addDir(fileName,'[COLOR blue][B]>>>>>> Y Server  > '+name+'[/B][/COLOR]',"cozuculer1.magix_player(name,url)",url,'')
+                xbmctools1.addDir(fileName,'[COLOR blue]>>>>>> Y Server  > '+name+'[/COLOR]',"cozuculer1.magix_player(name,url)",url,'')
 
 ##                #---------------------------------------------#
         mailru=re.compile("_myvideo/(.*?)'").findall(link)
         for mailrugelen in mailru:
                 url = 'http://videoapi.my.mail.ru/videos/embed/mail/bi.siktir1/_myvideo/'+str(mailrugelen)+'.html'
-                xbmctools1.addDir(fileName,'[COLOR blue][B]>>>>>> Mail Ru  > '+name+'[/B][/COLOR]',"cozuculer1.magix_player(name,url)",url,'') 
-        dm=re.compile(' src="//www.dailymotion.com/embed/video/(.*?)" ').findall(link)
+                xbmctools1.addDir(fileName,'[COLOR blue]>>>>>> Mail Ru  > '+name+'[/COLOR]',"cozuculer1.magix_player(name,url)",url,'') 
+        dm=re.compile('dailymotion.com\/embed\/video\/(.*?)"').findall(link)#"http://www.dailymotion.com/embed/video/x2zgrwd"
         if "x2fy4px" in dm:
             pass
         else:
@@ -182,7 +182,7 @@ def VIDEOLINKS(name,url):
                     for url in dm:            
                            
                         url = 'http://www.dailymotion.com/embed/video/'+str(url).encode('utf-8', 'ignore')
-                        xbmctools1.addDir(fileName,'[COLOR blue][B]>>>>>> DM Server  > '+name+'[/B][/COLOR]',"cozuculer1.magix_player(name,url)",url,'')
+                        xbmctools1.addDir(fileName,'[COLOR blue]>>>>>> DM Server  > '+name+'[/COLOR]',"cozuculer1.magix_player(name,url)",url,'')
         if not urlList:
                 match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)
                 print match
