@@ -603,7 +603,7 @@ def dizihd():
                 dialog1.ok('[COLOR red][B]IPTV HATA UYARISI[/B][/COLOR]','[COLOR yellow][B]Bronze Uye Olmaniz Gerekiyor!!! Eger Bronze Uye Iseniz ve Bu Mesaji Goruyorsaniz[/B][/COLOR]','[COLOR red][B]Yanlis Kullanici adi veya Sifre Girdiniz!!! Lutfen Tekrar Deneyiniz.[/B][/COLOR]')
 
               
-        br.open('https://koditr.org/dizihd')
+        br.open('https://koditr.org/dizihd1')
         html = br.response().read()
 
         return html
