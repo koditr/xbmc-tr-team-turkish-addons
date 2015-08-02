@@ -106,20 +106,20 @@ def Recent(url):
                 page=re.compile('<link rel=\'next\' href=\'(.*?)\' />\n\n').findall(link)
                 for url in page:
                         xbmctools1.addDir(fileName,'[COLOR blue][B]>> Sonraki SAYFA-> [/B][/COLOR]',"Yeni(url)",url,"https://koditr.org/changelog/sonrakisayfa.png")                     
-                xbmc.executebuiltin("Container.SetViewMode(500)")
+                #xbmc.executebuiltin("Container.SetViewMode(500)")
 
         except Exception:
                 buggalo.onExceptionRaised()
 def ayrisdirma(url):
         buggalo.SUBMIT_URL = denemesite
         try:
-                url=url+'/8'
+                url=url+'/10'
 
                 listeler=[]
                 urller=[]
                 link=xbmctools1.get_url(url)
                 soup = BeautifulSoup(link)
-                panel=soup.find("div", {"class": "partlar"})
+                panel=soup.find("ul", {"class": "partlar"})
                 for a in panel.findAll('a'):
                     url=a['href']
                     name= a.text

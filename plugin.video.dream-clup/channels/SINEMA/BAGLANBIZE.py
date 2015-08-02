@@ -102,8 +102,7 @@ def baglanfilmizleRecent(url):
                 for Url,name in page:
                         xbmctools1.addDir(fileName,'[COLOR blue][B]Sayfa>>[/B][/COLOR]'+'[COLOR red][B]'+name+'[/B][/COLOR]', "baglanfilmizleRecent(url)",Url,"https://koditr.org/changelog/sonrakisayfa.png")
                 xbmc.executebuiltin("Container.SetViewMode(501)")
-                
-
+                       
         #except Exception:
                 #buggalo.onExceptionRaised()
 def Arama():
@@ -135,9 +134,9 @@ def ayrisdirma(name,url):
                 link=xbmctools1.get_url(url)
                 soup = BeautifulSoup(link)
                 panel = soup.findAll("ul", {"class": "partlar"})
-                print panel
-                match=re.compile('href="http://www.baglanfilmiizle.com/(.*?)">(.*?)</a>').findall(str(panel[0]))
+                match=re.compile('href="(.*?)">(.*?)</a>').findall(str(panel))
                 for url,name in match:
+                        url=url.replace('" rel="nofollow',"")
                         if "Fragman" in name:
                                 pass
                         else:                        
@@ -147,7 +146,7 @@ def ayrisdirma(name,url):
                                     if "PLUS" in name:
                                         pass
                                     else:
-                                        xbmctools1.addDir(fileName,'[COLOR blue][B]>>[/B][/COLOR] [COLOR lightblue][B]'+name+'[/B][/COLOR]',"VIDEOLINKS(name,url)",'http://www.baglanfilmiizle.com/'+url,"")	
+                                        xbmctools1.addDir(fileName,'[COLOR blue][B]>>[/B][/COLOR] [COLOR lightblue][B]'+name+'[/B][/COLOR]',"VIDEOLINKS(name,url)",url,"")	
         #except Exception:
                 #buggalo.onExceptionRaised()
 ##def baglanfilmizleRecent2(Url):
@@ -186,12 +185,15 @@ def VIDEOLINKS(name,url):
                 playList.clear()
                 link=xbmctools1.get_url(url)
                 link=link.replace('&amp;', '&').replace('&#038;', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-
                         #---------------------------------------------#
                 vk_2=re.compile('vk.com\/(.*?)"').findall(link)
                 for url in vk_2:
-                        url = 'http://vk.com/'+str(url).encode('utf-8', 'ignore')
-                        cozuculer1.magix_player(name,url)
+                    url = 'http://vk.com/'+str(url).encode('utf-8', 'ignore')
+                    cozuculer1.magix_player(name,url)
+                vk_4=re.compile('\/\/baglanfilmplayer.tk/video_ext.php(.*?)"').findall(link)
+                for url in vk_4:
+                    url = 'http://vk.com/video_ext.php'+str(url).encode('utf-8', 'ignore')
+                    cozuculer1.magix_player(name,url)
                         #---------------------------------------------#
                 vk_3=re.compile('src="\/\/direkhdfilmler.com\/(.*?)"').findall(link)
                 for url in vk_3:
@@ -219,6 +221,14 @@ def VIDEOLINKS(name,url):
                        
                         value=[]
                         value.append((name,cozuculer1.ok_ru(url)))
+                ok2=re.compile('http://baglanfilmplayer.tk/ok.php\?id\=(.*?)"').findall(link)
+                for mailrugelen in ok2:
+                        url = 'http://ok.ru/videoembed/'+str(mailrugelen)
+                       
+                        value=[]
+                        value.append((name,cozuculer1.ok_ru(url)))
+                
+                
                         #---------------------------------------------#
                 if not urlList:
                         match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)

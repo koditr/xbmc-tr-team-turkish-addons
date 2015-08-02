@@ -174,11 +174,12 @@ def diziicerik(url):
         except Exception:
                 buggalo.onExceptionRaised()
 def ayrisdirma(url):
-        url=url+'/9'
-        url=url.replace('//9','/9')
+        url=url+'/15'
+        url=url.replace('//15','/15')
         link=xbmctools1.get_url(url)
-        print url
-        match = re.compile('http:\/\/www.dizibox.net\/(.*?)\'>(.*?)</option>').findall(link)
+        soup = BeautifulSoup(link)
+        panel = soup.findAll("div", {"class": "video-toolbar"})
+        match=re.compile('<option value="(.*?)">(.*?)</option>').findall(str(panel))
         for url,name in match:
                 if "My" in name:
                         pass
@@ -201,10 +202,10 @@ def ayrisdirma(url):
                                                                 if "Ve" in name:
                                                                         pass
                                                                 else:
-                                                                        url='http://www.dizibox.org/'+url
+##                                                                        url='http://www.dizibox.com/'+url
                                                                         xbmctools1.addDir(fileName,'[COLOR lightblue][B]>> [/B][/COLOR]'+'[COLOR lightgreen][B]' + name+'[/B][/COLOR]',"VIDEOLINKS(name,url)",url,'')
                 
-
+ 
                 
 def VIDEOLINKS(name,url):
         buggalo.SUBMIT_URL = denemesite
@@ -214,12 +215,20 @@ def VIDEOLINKS(name,url):
                 #---------------------------#
                 playList.clear()
                 link=xbmctools1.get_url(url)
-                link=link.replace('&amp;', '&').replace('&', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-                ok=re.compile('http:\/\/play.dizibox.net\/dbx.php\?v\=aH(.*?)"').findall(link)
+                link=link.replace('&amp;', '&').replace('&', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/').replace("&#038;","&")
+                ok=re.compile('http:\/\/play.dizibox.net\/dbx.php\?.*?v\=aH(.*?)"').findall(link)
+                
                 for url in ok:
                       url='aH'+url
                       url=(base64.b64decode(url))
-                      print url,'AAA'
+                      name='OK-Ply'
+                      cozuculer1.ok_ru(url)
+
+                ok5=re.compile('http:\/\/play.dizibox.net\/dbx.php\?.*?v\=aH(.*?)&sub=.*?.srt"').findall(link)
+                
+                for url in ok5:
+                      url='aH'+url
+                      url=(base64.b64decode(url))
                       name='OK-Ply'
                       cozuculer1.ok_ru(url)
                       
@@ -241,11 +250,22 @@ def VIDEOLINKS(name,url):
                         name='Vk-Ply'
                         cozuculer1.magix_player(name,url)
                 vk9=re.compile('http://vk.com/dbx.php\?v\=(.*?)"').findall(link)
+
                 for url in vk9:
                         url=(base64.b64decode(url))
 
                         #url=url.replace('&#038;', '&').replace('&', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
                         url='http://vk.com/'+url
+                        name='Vk-Ply'
+                        cozuculer1.magix_player(name,url)
+
+                vk8=re.compile('http://play.dizibox.net/vk/?(.*?)"').findall(link)
+
+                for url in vk8:
+                
+
+##                        url=url.replace('&#038;', '&').replace('&', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+                        url='http://vk.com/video_ext.php'+url
                         name='Vk-Ply'
                         cozuculer1.magix_player(name,url)
                 mailru=re.compile('http:\/\/.*?\/mail\/(.*?).html').findall(link)

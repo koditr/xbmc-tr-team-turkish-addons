@@ -109,6 +109,20 @@ def DailyMotion(name,url):
     xbmctools1.playlist_yap(playList,name,url)
     xbmcPlayer.play(playList)
 
+
+def cloudy(url):
+    link=xbmctools1.get_url(url)
+    match=re.compile('key: "(.*?)",\n\t\t\t\t\t\t  file:"(.*?)"').findall(link)
+    for key,feli in match:
+            url='http://www.cloudy.ec/api/player.api.php?&file='+feli+'&key='+key
+            link=xbmctools1.get_url(url)
+            link=link.replace('%3A',':').replace('%2F','/')
+            match=re.compile('url=(.*?)&title').findall(link)
+            for url in match:
+                name="Cloudy Player"
+            xbmctools1.addLink(name,url,'')
+            xbmctools1.playlist_yap(playList,name,url)
+            xbmcPlayer.play(playList)
 ###########################MAIL-RU-PLAYER######################################
 def MailRu_Player(url):
     req = urllib2.Request(url)

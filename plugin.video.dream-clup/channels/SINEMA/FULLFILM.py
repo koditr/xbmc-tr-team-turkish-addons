@@ -156,6 +156,13 @@ def VIDEOLINKS(name,url):
                         url = 'http://ok.ru/videoembed/'+str(mailrugelen)
                         value=[]
                         value.append((name,cozuculer1.ok_ru(url)))
+                ok2=re.compile('player/okplayer.php\?a\=(.*?)"').findall(link)
+                for mailrugelen in ok2:
+                        mailrugelen=base64.b64decode(mailrugelen)
+                        url = 'http://ok.ru/videoembed/'+str(mailrugelen)
+                        value=[]
+                        value.append((name,cozuculer1.ok_ru(url)))
+
                         #---------------------------------------------#
                 if not urlList:
                         match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)

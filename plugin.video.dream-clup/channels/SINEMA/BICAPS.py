@@ -161,6 +161,10 @@ def VIDEOLINK(name,url):
                         url = 'http://ok.ru/videoembed/'+str(mailrugelen)
                         value=[]
                         value.append((name,cozuculer1.ok_ru(url)))
+##                cloudy=re.compile('https://www.cloudy.ec/embed.php\?id\=(.*?)"').findall(link)
+##                for mailrugelen in cloudy:
+##                        url = 'https://www.cloudy.ec/embed.php?id='+str(mailrugelen)
+##                        cozuculer1.magix_player(name,str(url))
                         #---------------------------------------------#
                 if not urlList:
                         match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)
