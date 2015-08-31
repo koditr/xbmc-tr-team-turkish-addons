@@ -9,6 +9,8 @@ import simplejson as json
 from xbmctools import pt
 DA='LDE4OQlray8lK1osJ2JQXCUcPSo+KyJkOiM8dC0hcXsBdA=='
 ZS='LDE4OQlraz87Mh0qLThSXyNWPj8mLWQpJWQZABAwPiIcEDE6JyxALxwaHUcwRw=='
+tk="|User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Char‌​set', 'ISO-8859-1,utf-8;q=0.7,*;q=0.3'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')"
+
 
 fileName ="Turkish_Live"
 
@@ -130,7 +132,7 @@ def VideoLinks(name,url):
         link=xbmctools.get_url(url)
         match = re.compile('\{file\: "(.*?)"').findall(link)
         for url in match:
-                url=url+xbmctools.angel(base64.b64decode(pt))
+                url=url+tk
                 xbmcPlayer = xbmc.Player()
                 playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
                 playList.clear()
