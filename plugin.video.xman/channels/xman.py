@@ -49,7 +49,7 @@ def main():
                         
         
                         link=xbmctools.get_url(url)
-                        match=re.compile('<li><a target="_self" href="/tag/(.*?)" >(.*?)</a>').findall(link)
+                        match=re.compile('<li><a target="_self" href="/tag/(.*?)"  title=".*?" alt="(.*?)">').findall(link)
                         for a,b in match:                                
                                 url1=homepage+'tag/'+a
                                 name=b                
@@ -80,8 +80,8 @@ def Recent(url1):
                 homepage=homepage
                 link=xbmctools.get_url(url1)
                 html = xbmctools.get_url(url1)
-                ids = re.search('var tumbid  =(.+?);', html).group(1)
-                descs = re.search('var tumbalt =(.+?)\];', html).group(1)
+                ids = re.search('var tumb_id  =(.+?);', html).group(1)
+                descs = re.search('var tumb_alt =(.+?)\];', html).group(1)
 
                 ids = ids[1:-1]
                 idlist = ids.split(',')
