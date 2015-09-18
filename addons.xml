@@ -145,7 +145,7 @@
 
 <addon id="plugin.video.xman"
        name="[COLOR orange]XMAN[/COLOR]"
-       version="5.0.6"
+       version="5.0.7"
        provider-name="KodiTR Team">
     <requires>
 		<import addon="xbmc.python" version="2.1.0"/>
