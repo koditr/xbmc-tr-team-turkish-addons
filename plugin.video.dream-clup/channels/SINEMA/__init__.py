@@ -1,1 +1,0 @@
-__all__ = ['BAGLANBIZE', 'BICAPS', 'FULLFILM', 'HD720P', 'Media64_EVRENSEL', 'Ultra_Film']
