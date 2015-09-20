@@ -1,0 +1,50 @@
+msgid ""
+msgstr ""
+
+msgctxt "#350000"
+msgid "[COLOR yellow][B]Membership Name:[/B][/COLOR]"
+msgstr ""
+
+msgctxt "#350001"
+msgid "[COLOR beige][B]yigitki[/B][/COLOR]"
+msgstr ""
+
+msgctxt "#350002"
+msgid "[COLOR brown][B]Membership Type:[/B][/COLOR]"
+msgstr ""
+
+msgctxt "#350003"
+msgid "[COLOR beige][B]Platinum Member[/B][/COLOR]"
+msgstr ""
+
+msgctxt "#350004"
+msgid "[COLOR green][B]Your IP Address:[/B][/COLOR]"
+msgstr ""
+
+msgctxt "#350005"
+msgid "[COLOR beige][B]184.88.144.232 [/B][/COLOR]"
+msgstr ""
+
+msgctxt "#350006"
+msgid "[COLOR red][B]Your Email:[/B][/COLOR]"
+msgstr ""
+
+msgctxt "#350007"
+msgid "[COLOR beige][B]osman.yi@hotmail.com[/B][/COLOR]"
+msgstr ""
+
+msgctxt "#350008"
+msgid "[COLOR orange][B]Membership End Date:[/B][/COLOR]"
+msgstr ""
+
+msgctxt "#350009"
+msgid "[COLOR beige][B]Sonsuz[/B][/COLOR]"
+msgstr ""
+
+msgctxt "#3500010"
+msgid "[COLOR purple][B]Number of Enter :[/B][/COLOR]"
+msgstr ""
+
+msgctxt "#3500011"
+msgid "[COLOR beige][B]1712[/B][/COLOR]"
+msgstr ""
