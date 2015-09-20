@@ -20,9 +20,34 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.dreAM"
+       name="[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR]"
+       version="0.0.2"
+       provider-name="[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR]">
+  <requires>
+	<import addon="xbmc.python" version="2.1.0"/>
+        <import version="3.0.8" addon="script.module.beautifulsoup"/>
+        <import addon="script.module.simplejson"/>
+        <import addon="script.module.urlresolver"/>
+        <import addon="script.module.t0mm0.common"/>
+        <import version="0.2.6" addon="script.module.mechanize"/>
+        <import version="1.1.6" addon="script.module.buggalo"/>
+        <import version="2.4.3" addon="script.module.requests"/>
+	</requires>
+  <extension point="xbmc.python.pluginsource" library="dreAM.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR] [COLOR beige]Team Sunar[/COLOR]</summary>
+    <description>[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR] Internet Uzerinden Canli TV, Sinema, Dizi, Belgesel ve daha Fazlasi elinizin altinda.
+	[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR] internet Uzerinden topladigi Linklerle calisir ve hicbir video veya canli yayini serverlarinda bulundurmaz.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.dream-clup"
        name="[COLOR orange]XbmcTR Dream-Clup[/COLOR]"
-       version="4.2.16"
+       version="4.2.17"
        provider-name="xbmcTR TEAM">
     <requires>
 		<import addon="xbmc.python" version="2.1.0"/>
@@ -41,49 +66,6 @@
   <extension point="xbmc.addon.metadata">
     <summary>[COLOR lightblue] Film, Dizi, Muzik, Haber, Spor ve Dahasi... [/COLOR] [COLOR lightyellow] xbmcTR.com[/COLOR]</summary>
     <description>[COLOR orange]Cinema, Live TV, TV Shows, Videos and Many More.. All from Turkish Sources[/COLOR] [COLOR lightyellow]Presents by xbmcTR.com[/COLOR] [COLOR green]GOTHAM ve FRODO da sorunla karsialsirsaniz forumdan belirtiniz.[/COLOR]</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.Live_Street"
-       name="[COLOR orange]Live_Street[/COLOR]"
-       version="0.0.13"
-       provider-name="xbmcTR Team">
-    <requires>
-		<import addon="xbmc.python" version="2.1.0"/>
-		<import addon="script.module.simplejson" />
-		<import addon="script.module.t0mm0.common" />
-		<import addon="script.module.mechanize" version="0.2.5"/>
-    </requires>
-  <extension point="xbmc.python.pluginsource"
-            library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>xbmcTR Team</summary>
-    <description>[COLOR orange]~~~xbmcTR Team [/COLOR][COLOR orange] Sunar ~~~[/COLOR]
-	Live Stream / Eklentidir.</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.mc"
-       name="xbmcTR Mc 3"
-       version="0.1.5"
-       provider-name="xbmcTR TEAM">
-    <requires>
-		<import addon="xbmc.python" version="2.1.0"/>
-		<import addon="script.module.beautifulsoup" version="3.0.8"/>
-		<import addon="script.module.simplejson" />
-		<import addon="script.module.mechanize" version="0.2.5"/>
-	</requires>
-  <extension point="xbmc.python.pluginsource"
-            library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>Beta surum sadece v.i.p. uyelere aciktir.Bircok bolum calismayabilir.Cok az kaldi,yakinda sizlerle</summary>
-    <description>lutfen deneyerek hatalari forumda yaziniz.</description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -139,56 +121,6 @@
   <extension point="xbmc.addon.metadata">
     <summary>xbmcTR Team Sunar</summary>
     <description>~~~xbmcTR Team Sunar ~~~ IPTV ~~~</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.xman"
-       name="[COLOR orange]XMAN[/COLOR]"
-       version="5.0.7"
-       provider-name="KodiTR Team">
-    <requires>
-		<import addon="xbmc.python" version="2.1.0"/>
-		<import addon="script.module.beautifulsoup" version="3.0.8"/>
-		<import addon="script.module.simplejson" />
-		<import addon="script.module.urlresolver" />
-		<import addon="script.module.t0mm0.common" />
-		<import addon="script.module.mechanize" version="0.2.5"/>
-		<import addon="script.module.requests" version="2.4.3"/>
-    </requires>
-  <extension point="xbmc.python.pluginsource"
-            library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>KodiTR Team +18</summary>
-    <description>[COLOR orange]~~~xbmcTR Team [/COLOR][COLOR yellow]KodiTR Team[/COLOR][COLOR orange] Sunar ~~~[/COLOR]
-	+18 Addon / Eklentidir.</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.yetiskin"
-       name="[COLOR orange]Yetiskin[/COLOR]"
-       version="3.0.6"
-       provider-name="xbmcTR Team">
-    <requires>
-		<import addon="xbmc.python" version="2.1.0"/>
-		<import addon="script.module.beautifulsoup" version="3.0.8"/>
-		<import addon="script.module.simplejson" />
-		<import addon="script.module.urlresolver" />
-		<import addon="script.module.t0mm0.common" />
-		<import addon="script.module.mechanize" version="0.2.5"/>
-		<import addon="script.module.requests" version="2.4.3"/>
-    </requires>
-  <extension point="xbmc.python.pluginsource"
-            library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>xbmcTR Team +18</summary>
-    <description>[COLOR orange]~~~xbmcTR Team [/COLOR][COLOR orange] Sunar ~~~[/COLOR]
-	+18 Addon / Eklentidir.</description>
     <platform>all</platform>
   </extension>
 </addon>
