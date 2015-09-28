@@ -92,8 +92,8 @@
 
 <addon id="plugin.video.temizlik.imandan.gelir"
        name="[COLOR yellow]Temizle Pakla[/COLOR]"
-       version="0.0.4"
-       provider-name="HappyFeets">
+       version="0.0.5"
+       provider-name="DreamTR">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	  </requires>
@@ -102,8 +102,8 @@
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary> Temizle Pakla: Pur-u Pak </summary>
-    <description>[COLOR yellow]xbmcTR Team[/COLOR] sunar. Xbmc nizin daha hizli ve iyi calismasini saglar.Sifresizdir.Herkes Kullanabilir. </description>
+    <summary>Kodi Temizlik Eklentisi</summary>
+    <description>[COLOR yellow]DreamTR Team[/COLOR] sunar. Xbmc,Kodi nizin daha hizli ve iyi calismasini saglar.Sifresizdir.Herkes Kullanabilir. </description>
     <platform>all</platform>
   </extension>
 </addon>
