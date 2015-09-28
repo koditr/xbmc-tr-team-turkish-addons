@@ -14,6 +14,7 @@ settings = xbmcaddon.Addon(id='plugin.video.Sinema')
 
 def CATEGORIES():
         cal()
+        addDir('[COLOR orange][B]<SINIRLI SAYIDA UYELIKLER ACILMISTIR;ALMAK ISTEYENLER http://forum.dreamtr.org den Ogrenebilirler>[/B][/COLOR]','','','http://dreamtr.org/resimler/icon1.png')
         
         addDir('[COLOR red]<<< [ Film ARA  ] >>>[/COLOR]','Search',3,'')
         url='http://www.ultrafilmizle.com/'
@@ -28,7 +29,7 @@ def CATEGORIES():
                 name=sembol_fix(name)
                 addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,1,'')
 def cal():
-        url='http://www.youtube.com/embed/R43eK2lkFtQ'
+        url='http://www.youtube.com/embed/3UA8c44TOWE'
         name='play'
         xbmctools.magix_player(name,url)
         
@@ -68,16 +69,16 @@ def ayrisdirma(url):
                 if "yap" in name:
                         pass
                 else:
-                        addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
-        addDir('[COLOR yellow][B]TEK Part[/B][/COLOR]',url1,44,'')
-                
-
-                        
-                                
-        
-
-
-                
+                        if "Ope" in name:
+                                pass
+                        else:
+                                if "Fra" in name:
+                                        pass
+                                else:
+                                        if "Ok" in name:
+                                                pass
+                                        else:
+                                                addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
 
 
 def VIDEOLINKS(name,url):
@@ -108,7 +109,14 @@ def VIDEOLINKS(name,url):
                 url = 'http://ok.ru/videoembed/'+str(mailrugelen)
                 value=[]
                 value.append((name,xbmctools.ok_ru(url)))
-		#---------------------------------------------#
+##        ok1=re.compile('allowfullscreen src="http://www.ultrafilmizle.com/player/url/(.*?)"').findall(link)
+##        for url in ok1:
+##                url = 'http://www.ultrafilmizle.com/player/url/'+url
+##                print url
+##                link=get_url(url)
+##                match=re.compile('"file":"(.*?)type=1"').findall(link)
+##                for url in match:
+##                        url=url+'type=1'
         if not urlList:
                 match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)
                 print match
@@ -136,7 +144,6 @@ def playerdenetle(name, urlList):
                     
         if  value:
             return value
-        #############
 def sembol_fix(x):
     try:
         x=x.replace('\x93','"').replace('\x92',"'").replace('\x94','"').replace('/',"-").replace('-',"").replace('_'," ").replace("'","'").replace('&#8211;','&').replace('&#8217;','`').replace('&#038;','`').replace('\x85','...').replace('\xb4',"'")
