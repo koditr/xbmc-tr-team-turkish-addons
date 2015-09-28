@@ -110,7 +110,7 @@
 
 <addon id="plugin.video.xbmcTRIPTV"
        name="[COLOR beige]IPTV[/COLOR][COLOR red]TR[/COLOR]"
-       version="0.0.1"
+       version="0.0.2"
        provider-name="xbmcTR Team">
   <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
@@ -119,8 +119,8 @@
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>xbmcTR Team Sunar</summary>
-    <description>~~~xbmcTR Team Sunar ~~~ IPTV ~~~</description>
+    <summary>DreamTR Team Sunar</summary>
+    <description>~~~http://forum.dreamtr.org ~~~ IPTV ~~~</description>
     <platform>all</platform>
   </extension>
 </addon>
