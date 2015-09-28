@@ -7,16 +7,13 @@ import urllib,urllib2,re,xbmcplugin,xbmcgui
 XbmcTRteam='http://XbcmTR.com'
 
 def CATEGORIES():
-        addDir('[COLOR red][B]>>  INFOYU OKUYUNUZ  <<[/B][/COLOR] ', "INFO(name)",'7','http://koditr.org/changelog/nl.png')
-        addDir('[COLOR orange][B]>> [/B][/COLOR]'+ '[COLOR beige][B]PACKAGES TEMIZLIGI - 1 -[/B][/COLOR] ', "MAINDEL(name)",'1','http://koditr.org/changelog/nl.png')
-        addDir('[COLOR orange][B]>> [/B][/COLOR]'+ '[COLOR beige][B]CACHE TEMIZLIGI - 2 -[ Sadece PC ][/B][/COLOR] ', "MAINDEL2(name)",'2','http://koditr.org/changelog/nl.png')
-        addDir('[COLOR yellow][B]>> [/B][/COLOR]'+ '[COLOR yellow][B]! Apple TV & Android BOX Cache Temizligi ![/B][/COLOR] ', "MAINDEL3(name)",'11','http://koditr.org/changelog/nl.png')
-        addDir('[COLOR yellow][B]>> [/B][/COLOR]'+ '[COLOR yellow][B]!Tum CIHAZLAR icin DREAM Sifre Silinmesi Bilmiyorsaniz YAPMAYIN![/B][/COLOR] ', "MAINDEL4(name)",'12','http://koditr.org/changelog/nl.png')
-        addDir('[COLOR yellow][B]>> [/B][/COLOR]'+ '[COLOR yellow][B]!Tum CIHAZLAR icin MagicTR Sifre Silinmesi Bilmiyorsaniz YAPMAYIN![/B][/COLOR] ', "MAINDEL5(name)",'13','http://koditr.org/changelog/nl.png')
-
+        addDir('[COLOR red][B]>>  INFOYU OKUYUNUZ  <<[/B][/COLOR] ', "INFO(name)",'7','http://www.kanal23.com/dosya/unlem-1.jpg')
+        addDir('[COLOR orange][B]>> [/B][/COLOR]'+ '[COLOR beige][B]PACKAGES TEMIZLIGI - 1 -[/B][/COLOR] ', "MAINDEL(name)",'1','http://ryayla.com/uploads/images/okey.png')
+        addDir('[COLOR orange][B]>> [/B][/COLOR]'+ '[COLOR beige][B]CACHE TEMIZLIGI - 2 -[ Sadece PC ][/B][/COLOR] ', "MAINDEL2(name)",'2','http://ryayla.com/uploads/images/okey.png')
+        addDir('[COLOR yellow][B]>> [/B][/COLOR]'+ '[COLOR yellow][B]! Apple TV & Android BOX Cache Temizligi ![/B][/COLOR] ', "MAINDEL3(name)",'11','http://ryayla.com/uploads/images/okey.png')
 def MAINDEL(name):
         dialog = xbmcgui.Dialog()
-        ret = dialog.yesno('KodiTR Team UYARI', 'PACKAGES temizliginden Eminmisiniz ! ','','','No', 'Yes')
+        ret = dialog.yesno('DreamTR Team UYARI', 'PACKAGES temizliginden Eminmisiniz ! ','','','No', 'Yes')
         if ret:
             import os 
             folder = xbmc.translatePath(os.path.join('special://home/addons/packages/', ''))
@@ -30,7 +27,7 @@ def MAINDEL(name):
                     i = dialog.ok('!!! Packages !!!', "[COLOR beige]Packages Temizliginiz Bitmistir[/COLOR]","[COLOR pink]iyi kullanimlar.[/COLOR]")
 def MAINDEL2(name):
         dialog = xbmcgui.Dialog()
-        ret = dialog.yesno('KodiTR Team UYARI', 'CACHE temizliginden Eminmisiniz ! ','','','No', 'Yes')
+        ret = dialog.yesno('DreamTR Team UYARI', 'CACHE temizliginden Eminmisiniz ! ','','','No', 'Yes')
         if ret:
             import os 
             folder = xbmc.translatePath(os.path.join('special://home/cache', ''))
@@ -44,7 +41,7 @@ def MAINDEL2(name):
                     i = dialog.ok('Temizlendi Uyarisi !!!', "[COLOR beige]Temizliginiz basariyla bitmistir[/COLOR]","[COLOR pink]iyi kullanimlar.[/COLOR]")
 def MAINDEL3(name):
         dialog = xbmcgui.Dialog()
-        ret = dialog.yesno('KodiTR Team UYARI', 'Apple TV & Android Box - CACHE temizliginden Eminmisiniz ! ','','','No', 'Yes')
+        ret = dialog.yesno('DreamTR Team UYARI', 'Apple TV & Android Box - CACHE temizliginden Eminmisiniz ! ','','','No', 'Yes')
         if ret:
             import os 
             folder = xbmc.translatePath(os.path.join('special://home/temp', ''))
