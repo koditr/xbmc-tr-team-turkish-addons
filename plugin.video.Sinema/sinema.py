@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-import urllib,urllib2
+import urllib,urllib2,base64
 import re,xbmcplugin,xbmcgui,xbmcaddon,xbmc
 from BeautifulSoup import BeautifulStoneSoup, BeautifulSoup, BeautifulSOAP as BS
 import xbmctools
@@ -85,7 +85,7 @@ def VIDEOLINKS(name,url):
         urlList=[]
         #---------------------------#
         playList.clear()
-        link=get_url(url)
+        link=xbmctools.get_url(url)
         link=link.replace('&amp;', '&').replace('&#038;', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
 
 		#---------------------------------------------#
@@ -109,17 +109,21 @@ def VIDEOLINKS(name,url):
                 url = 'http://ok.ru/videoembed/'+str(mailrugelen)
                 value=[]
                 value.append((name,xbmctools.ok_ru(url)))
-##        ok1=re.compile('allowfullscreen src="http://www.ultrafilmizle.com/player/url/(.*?)"').findall(link)
-##        for url in ok1:
-##                url = 'http://www.ultrafilmizle.com/player/url/'+url
-##                print url
-##                link=get_url(url)
-##                match=re.compile('"file":"(.*?)type=1"').findall(link)
-##                for url in match:
-##                        url=url+'type=1'
+        ply=re.compile('src="http:\/\/www.ultrafilmizle.com\/player\/url\/(.*?)"').findall(link)
+        for name in ply:
+                name=base64.b64decode(name)
+                reverseName=""
+                for x in range(len(name)-1,-1,-1):
+                        reverseName+=name[x]
+                reverseName=base64.b64decode(reverseName)
+                reverseName=reverseName.replace('ok/','')
+                url=reverseName
+                value=[]
+                url = 'http://ok.ru/videoembed/'+str(url)
+                value.append((name,xbmctools.ok_ru(url)))
+
         if not urlList:
                 match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)
-                print match
                 if match:
                         for url in match:
                                 VIDEOLINKS(name,url)
@@ -132,6 +136,14 @@ def VIDEOLINKS(name,url):
                         listitem.setInfo('video', {'name': name } )
                         playList.add(url,listitem=listitem)
                 xbmcPlayer.play(playList)
+def VideoLinksyet2(name,url):
+        xbmcPlayer = xbmc.Player()
+        playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+        playList.clear()
+        xbmctools.addLink('RETURN List << ','','')
+        listitem = xbmcgui.ListItem(name)
+        playList.add(url, listitem)
+        xbmcPlayer.play(playList)
      
 def playerdenetle(name, urlList):
         value=[]
