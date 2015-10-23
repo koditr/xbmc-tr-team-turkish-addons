@@ -71,7 +71,7 @@
 
 <addon id="plugin.video.Sinema"
        name="[COLOR orange]Sinema[/COLOR]"
-       version="0.0.2"
+       version="0.0.3"
        provider-name="xbmcTR Team">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
