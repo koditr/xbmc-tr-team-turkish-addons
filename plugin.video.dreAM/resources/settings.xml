@@ -13,6 +13,9 @@
 		<setting label="350000" type="lsep"/>
 		<setting label="350001" type="lsep"/>
 		<setting type="sep" />
+		<setting label="3500010" type="lsep"/>
+		<setting label="3500011" type="lsep"/>
+		<setting type="sep" />
 		<setting label="350002" type="lsep"/>
 		<setting label="350003" type="lsep"/>
 		<setting type="sep" />
@@ -24,9 +27,6 @@
 		<setting type="sep" />
 		<setting label="350008" type="lsep"/>
 		<setting label="350009" type="lsep"/>
-		<setting type="sep" />
-		<setting label="3500010" type="lsep"/>
-		<setting label="3500011" type="lsep"/>
   </category>
   <category label="[COLOR white][B]Dre[COLOR red][B]AM[/B][/COLOR] +18 Uyelik">
         <setting label="+18 Videolar" type="lsep" />
