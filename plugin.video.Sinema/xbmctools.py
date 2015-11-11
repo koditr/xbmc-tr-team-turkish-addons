@@ -80,26 +80,17 @@ USER_AGENT 	= 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, li
 ACCEPT 		= 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
 
 def ok_ru(url):
-
-
         sources = []
-
         if(re.search(r'ok.ru', url)):
-            
-               # try:
             id = re.search('\d+', url).group(0)
             jsonUrl = 'http://ok.ru/dk?cmd=videoPlayerMetadata&mid=' + id
             jsonSource = json.loads(http_req(jsonUrl))
             
             for source in jsonSource['videos']:
                     name = '%s %s' % ('', source['name'])
-                    link = '%s|User-Agent=%s&Accept=%s&Referer=%s' % (source['url'], USER_AGENT, ACCEPT, urllib.quote_plus(url))
-                    #item = {'name': name, 'url': link}
-                    #sources.append(item)
-                    url = link
+                    duzenleyici = re.search(r'sig.+', source['url']).group(0)
+                    url='http://m.ok.ru/dk?st.cmd=moviePlaybackRedirect&st.'+duzenleyici
                     addLink('[COLOR lightblue][B]>>  [/B][/COLOR]'+name,url,'')
-               # except: pass
-        #return sources
 
 def http_req(url, getCookie=False):
 	req = urllib2.Request(url)
