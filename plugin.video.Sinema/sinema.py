@@ -38,7 +38,7 @@ def cal():
 
 def RECENT(url):
         link=get_url(url)
-        match=re.compile('<a href="(.*?)">\n<span class=".*?"></span><div class=".*?"><span>.*?</div><img src="(.*?)" alt="(.*?)" height=".*?" width=".*?"').findall(link)
+        match=re.compile('<a href="(.*?)">\n\t\t<div class=".*?">\n\t\t\t<div class=".*?">.*?</div>\t\t\t<div class=".*?">.*?</div>\n\t\t</div>\n\t\t<img src="(.*?)" alt="(.*?)"').findall(link)
         for url,thumbnail,name in match:
                 name=sembol_fix(name)
                 addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,41,thumbnail)
@@ -69,7 +69,7 @@ def ayrisdirma(url):
                 if "yap" in name:
                         pass
                 else:
-                        if "Ope" in name:
+                        if "OP" in name:
                                 pass
                         else:
                                 if "Fra" in name:
