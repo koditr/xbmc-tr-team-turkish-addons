@@ -56,29 +56,20 @@ def Search():
 
 
 
-def ayrisdirma(url):
-        url1=url
-        url=url+'/9'
+def ayrisdirma(name,url):
+        url=url+'9'
+        name='Part 1'
+        addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,41,"")
         link=xbmctools.get_url(url)
-        soup = BeautifulSoup(link)
-        panel=soup.find("div", {"class": "keremiya_part"})
-        for a in panel.findAll('a'):
-                
-                url=a['href']
-                name= a.text
-                if "yap" in name:
+        match=re.compile('<a href="(.*?)"><span>(.*?)</span>').findall(link)
+        for url,name in match:
+                if "OP" in name:
                         pass
                 else:
-                        if "OP" in name:
+                        if "Fra" in name:
                                 pass
                         else:
-                                if "Fra" in name:
-                                        pass
-                                else:
-                                        if "Ok" in name:
-                                                pass
-                                        else:
-                                                addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
+                                addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
 
 
 def VIDEOLINKS(name,url):
@@ -241,7 +232,7 @@ elif mode==1:
         RECENT(url)
 
 elif mode==41:        
-        ayrisdirma(url)
+        ayrisdirma(name,url)
         
 elif mode==40:        
         INFO(url)
