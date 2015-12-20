@@ -24,8 +24,9 @@ def CATEGORIES():
         response = urllib2.urlopen(req)
         link=response.read()
         response.close()
-        match=re.compile('class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-.*?"><a href="(.*?)">(.*?)</a></li').findall(link)
+        match=re.compile('category menu-item-.*?"><a\nhref="http://www.ultrafilmizle.com/hdizle/(.*?)">(.*?)</a>').findall(link)
         for url,name in match:
+                url='http://www.ultrafilmizle.com/hdizle/'+url
                 name=sembol_fix(name)
                 addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,1,'')
 def cal():
@@ -38,12 +39,12 @@ def cal():
 
 def RECENT(url):
         link=get_url(url)
-        match=re.compile('<a href="(.*?)">\n\t\t<div class=".*?">\n\t\t\t<div class=".*?">.*?</div>\t\t\t<div class=".*?">.*?</div>\n\t\t</div>\n\t\t<img src="(.*?)" alt="(.*?)"').findall(link)
+        match=re.compile('href="(.*?)"><div\nclass=".*?"><div\nclass=".*?">.*?</div><div\nclass=".*?">.*?</div></div> <img\nsrc="(.*?)" alt="(.*?)"').findall(link)
         for url,thumbnail,name in match:
                 name=sembol_fix(name)
                 addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,41,thumbnail)
                 
-        sayfalama=re.compile('<span class=\'current\'>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
+        sayfalama=re.compile('class=\'current\'>.*?</span><a\nclass="page larger" href="(.*?)">(.*?)</a>').findall(link)
         for url,name in sayfalama:
             addDir('[COLOR orange][B]>>SAYFA-' +name+'[/B][/COLOR]',url,1,'')
 def Search():
@@ -61,7 +62,7 @@ def ayrisdirma(name,url):
         name='Part 1'
         addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,41,"")
         link=xbmctools.get_url(url)
-        match=re.compile('<a href="(.*?)"><span>(.*?)</span>').findall(link)
+        match=re.compile('href="(.*?)"><span>(.*?)</span>').findall(link)
         for url,name in match:
                 if "OP" in name:
                         pass
