@@ -22,7 +22,7 @@
 
 <addon id="plugin.video.dreAM"
        name="[COLOR beige]dream[/COLOR][COLOR red]TR[/COLOR]"
-       version="0.0.25"
+       version="0.0.26"
        provider-name="[COLOR beige]dream[/COLOR][COLOR red]TR[/COLOR]">
   <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
@@ -40,31 +40,6 @@
     <summary>[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR] [COLOR beige]Team Sunar[/COLOR]</summary>
     <description>[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR] Internet Uzerinden Canli TV, Sinema, Dizi, Belgesel ve daha Fazlasi elinizin altinda.
 	[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR] internet Uzerinden topladigi Linklerle calisir ve hicbir video veya canli yayini serverlarinda bulundurmaz.</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.dream-clup"
-       name="[COLOR orange]XbmcTR Dream-Clup[/COLOR]"
-       version="4.2.17"
-       provider-name="xbmcTR TEAM">
-    <requires>
-		<import addon="xbmc.python" version="2.1.0"/>
-		<import addon="script.module.beautifulsoup" version="3.0.8"/>
-		<import addon="script.module.simplejson" />
-		<import addon="script.module.urlresolver" />
-		<import addon="script.module.t0mm0.common" />
-		<import addon="script.module.mechanize" version="0.2.5"/>
-		<import addon="script.module.buggalo" version="1.1.6"/>
-		<import addon="script.module.requests" version="2.4.3"/>
-	</requires>
-  <extension point="xbmc.python.pluginsource"
-            library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>[COLOR lightblue] Film, Dizi, Muzik, Haber, Spor ve Dahasi... [/COLOR] [COLOR lightyellow] xbmcTR.com[/COLOR]</summary>
-    <description>[COLOR orange]Cinema, Live TV, TV Shows, Videos and Many More.. All from Turkish Sources[/COLOR] [COLOR lightyellow]Presents by xbmcTR.com[/COLOR] [COLOR green]GOTHAM ve FRODO da sorunla karsialsirsaniz forumdan belirtiniz.[/COLOR]</description>
     <platform>all</platform>
   </extension>
 </addon>
