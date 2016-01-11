@@ -24,11 +24,10 @@ def CATEGORIES():
         response = urllib2.urlopen(req)
         link=response.read()
         response.close()
-        match=re.compile('category menu-item-.*?"><a\nhref="http://www.ultrafilmizle.com/hdizle/(.*?)">(.*?)</a>').findall(link)
+        match=re.compile('category menu-item-.*?"><a href="(.*?)">(.*?)</a>').findall(link)
         for url,name in match:
-                url='http://www.ultrafilmizle.com/hdizle/'+url
                 name=sembol_fix(name)
-                addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,1,'')
+                addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,4,'')
 def cal():
         url='http://www.youtube.com/embed/3UA8c44TOWE'
         name='play'
@@ -38,15 +37,36 @@ def cal():
 
 
 def RECENT(url):
-        link=get_url(url)
-        match=re.compile('href="(.*?)"><div\nclass=".*?"><div\nclass=".*?">.*?</div><div\nclass=".*?">.*?</div></div> <img\nsrc="(.*?)" alt="(.*?)"').findall(link)
-        for url,thumbnail,name in match:
-                name=sembol_fix(name)
-                addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,41,thumbnail)
+    link=get_url(url)
+    soup = BeautifulSoup(link)
+    panel = soup.findAll("div", {"class": "filmcontent"},smartQuotesTo=None)
+    panel = panel[0].findAll("div", {"class": "ultra-movie"})
+    for i in range (len (panel)):
+            url=panel[i].find('a')['href']
+            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+            name=name.replace('&#8211','').replace('&','')
+            name=sembol_fix(name)
+            addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,41,thumbnail)
                 
-        sayfalama=re.compile('class=\'current\'>.*?</span><a\nclass="page larger" href="(.*?)">(.*?)</a>').findall(link)
-        for url,name in sayfalama:
+    sayfalama=re.compile('<span class=\'current\'>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
+    for url,name in sayfalama:
             addDir('[COLOR orange][B]>>SAYFA-' +name+'[/B][/COLOR]',url,1,'')
+def kat(url):
+    link=get_url(url)
+    soup = BeautifulSoup(link)
+    panel = soup.findAll("div", {"class": "leftC"},smartQuotesTo=None)
+    panel = panel[0].findAll("div", {"class": "ultra-movie"})
+    for i in range (len (panel)):
+        url=panel[i].find('a')['href']
+        name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+        thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+        name=name.replace('&#8211;','&').replace('&#8217;','')
+        addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,41,thumbnail)
+                
+    sayfalama=re.compile('<span class=\'current\'>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
+    for url,name in sayfalama:
+            addDir('[COLOR orange][B]>>SAYFA-' +name+'[/B][/COLOR]',url,4,'')
 def Search():
         keyboard = xbmc.Keyboard("", 'Search', False)
         keyboard.doModal()
@@ -59,8 +79,8 @@ def Search():
 
 def ayrisdirma(name,url):
         url=url+'9'
-        name='Part 1'
-        addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,41,"")
+##        name='Part 1'
+##        addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,41,"")
         link=xbmctools.get_url(url)
         match=re.compile('href="(.*?)"><span>(.*?)</span>').findall(link)
         for url,name in match:
@@ -70,7 +90,10 @@ def ayrisdirma(name,url):
                         if "Fra" in name:
                                 pass
                         else:
-                                addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
+                                if "VI" in name:
+                                        pass
+                                else:
+                                        addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
 
 
 def VIDEOLINKS(name,url):
@@ -91,12 +114,12 @@ def VIDEOLINKS(name,url):
                 url = 'http://www.youtube.com/embed/'+str(url).encode('utf-8', 'ignore')
                 xbmctools.magix_player(name,url)
 		#---------------------------------------------#
-        mailru=re.compile('http:\/\/.*?\/mail\/(.*?).html').findall(link)
+        mailru=re.compile('mail.ru\/videos\/embed\/mail\/(.*?).html').findall(link)
         for mailrugelen in mailru:
                 url = 'http://videoapi.my.mail.ru/videos/embed/mail/'+str(mailrugelen)+'.html'
                 value=[]
                 value.append((name,xbmctools.MailRu_Player(url)))
-        ok=re.compile('http:\/\/ok.ru\/videoembed\/(.*?)"').findall(link)
+        ok=re.compile('ok.ru\/videoembed\/(.*?)"').findall(link)
         for mailrugelen in ok:
                 url = 'http://ok.ru/videoembed/'+str(mailrugelen)
                 value=[]
@@ -229,19 +252,15 @@ if mode==None or url==None or len(url)<1:
         CATEGORIES()
        
 elif mode==1:
-        
         RECENT(url)
-
 elif mode==41:        
-        ayrisdirma(name,url)
-        
+        ayrisdirma(name,url)        
 elif mode==40:        
-        INFO(url)
-        
+        INFO(url)        
 elif mode==3:
         Search()
-
-
+elif mode==4:        
+        kat(url)
 elif mode==44:
         VIDEOLINKS(name,url)
         
