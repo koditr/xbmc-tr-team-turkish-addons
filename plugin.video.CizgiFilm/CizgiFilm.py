@@ -14,6 +14,7 @@ settings = xbmcaddon.Addon(id='plugin.video.CizgiFilm')
 
 def CATEGORIES():
         url='http://www.cizgifilmizlesen.com/'
+        addDir('[COLOR orange][B]<SINIRLI SAYIDA UYELIKLER ACILMISTIR;ALMAK ISTEYENLER http://dreamtr.club den Ogrenebilirler>[/B][/COLOR]','','','http://dreamtr.org/resimler/icon1.png')     
         req = urllib2.Request(url)
         req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
         response = urllib2.urlopen(req)
@@ -37,9 +38,11 @@ def RECENT(url):
                 if "script" in name:
                         pass
                 else:
-                                
-                        name=sembol_fix(name)
-                        addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,44,thumbnail)
+                        if "<span" in name:
+                                pass
+                        else:
+                                name=sembol_fix(name)
+                                addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,44,thumbnail)
 
 #####youtube kontrol#######
 from xbmcaddon import Addon
@@ -49,7 +52,7 @@ youtubeVersion = __YoutubeAddon__.getAddonInfo('version')
 
 
 def magictr():
-        videolar = ['VrCMoBhVteI','R43eK2lkFtQ','AJYrwNbqIu0','2fzdxj7Zg7E']
+        videolar = ['3UA8c44TOWE','3UA8c44TOWE','3UA8c44TOWE','3UA8c44TOWE']
         youtubeadres=random.choice(videolar)
         url='http://www.youtube.com/embed/'+str(youtubeadres).encode('utf-8', 'ignore')
         if youtubeVersion == "5":
