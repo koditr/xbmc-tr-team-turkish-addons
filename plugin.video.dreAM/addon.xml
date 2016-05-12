@@ -17,7 +17,7 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR] [COLOR beige]Team Sunar[/COLOR]</summary>
-    <description>[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR] Internet Uzerinden Canli TV, Sinema, Dizi, Belgesel ve daha Fazlasi elinizin altinda.
+    <description>[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR] Internet Uzerinden Canli TV, Sinema, Dizi, Belgesel ve daha Fazlasi elinizin altinda.
 	[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR] internet Uzerinden topladigi Linklerle calisir ve hicbir video veya canli yayini serverlarinda bulundurmaz.
 	Aradiginiz hersey www.dreamtr.club sitemizde</description>
     <platform>all</platform>
