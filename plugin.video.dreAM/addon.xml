@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.dreAM"
-       name="[COLOR beige]dream[/COLOR][COLOR red]TR[/COLOR]"
-       version="0.0.46"
-       provider-name="[COLOR beige]dream[/COLOR][COLOR red]TR[/COLOR]">
+       name="[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]"
+       version="0.0.47"
+       provider-name="[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]">
   <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
         <import version="3.0.8" addon="script.module.beautifulsoup"/> 
@@ -16,9 +16,10 @@
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR] [COLOR beige]Team Sunar[/COLOR]</summary>
+    <summary>[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR] [COLOR beige]Team Sunar[/COLOR]</summary>
     <description>[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR] Internet Uzerinden Canli TV, Sinema, Dizi, Belgesel ve daha Fazlasi elinizin altinda.
-	[COLOR beige]dre[/COLOR][COLOR red]AM[/COLOR] internet Uzerinden topladigi Linklerle calisir ve hicbir video veya canli yayini serverlarinda bulundurmaz.</description>
+	[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR] internet Uzerinden topladigi Linklerle calisir ve hicbir video veya canli yayini serverlarinda bulundurmaz.
+	Aradiginiz hersey www.dreamtr.club sitemizde</description>
     <platform>all</platform>
   </extension>
 </addon>
