@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#--dreamtr.club / Yaptiklarimiz Yapacaklarimizin Teminatidir ------------#
 import sys
 import urllib,urllib2,base64
 import re,xbmcplugin,xbmcgui,xbmcaddon,xbmc
@@ -14,7 +15,7 @@ settings = xbmcaddon.Addon(id='plugin.video.Sinema')
 
 def CATEGORIES():
         cal()
-        addDir('[COLOR orange][B]<SINIRLI SAYIDA UYELIKLER ACILMISTIR;ALMAK ISTEYENLER http://forum.dreamtr.org den Ogrenebilirler>[/B][/COLOR]','','','http://dreamtr.org/resimler/icon1.png')
+        addDir('[COLOR orange][B]<SINIRLI SAYIDA UYELIKLER ACILMISTIR;ALMAK ISTEYENLER http://dreamtr.club den Ogrenebilirler>[/B][/COLOR]','','','http://dreamtr.club/resimler/icon1.png')
         
         addDir('[COLOR red]<<< [ Film ARA  ] >>>[/COLOR]','Search',3,'')
         url='http://www.ultrafilmizle.com/'
@@ -47,11 +48,12 @@ def RECENT(url):
             thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
             name=name.replace('&#8211','').replace('&','')
             name=sembol_fix(name)
+            print url
             addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,41,thumbnail)
                 
     sayfalama=re.compile('<span class=\'current\'>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
     for url,name in sayfalama:
-            addDir('[COLOR orange][B]>>SAYFA-' +name+'[/B][/COLOR]',url,1,'')
+            addDir('[COLOR orange][B]>>SAYFA-' +name+'[/B][/COLOR]',url,1,"http://www.cloudforge.com/sites/default/files/codesion/images/com-next.jpg")
 def kat(url):
     link=get_url(url)
     soup = BeautifulSoup(link)
@@ -66,7 +68,7 @@ def kat(url):
                 
     sayfalama=re.compile('<span class=\'current\'>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
     for url,name in sayfalama:
-            addDir('[COLOR orange][B]>>SAYFA-' +name+'[/B][/COLOR]',url,4,'')
+            addDir('[COLOR orange][B]>>SAYFA-' +name+'[/B][/COLOR]',url,4,"http://www.cloudforge.com/sites/default/files/codesion/images/com-next.jpg")
 def Search():
         keyboard = xbmc.Keyboard("", 'Search', False)
         keyboard.doModal()
@@ -78,22 +80,14 @@ def Search():
 
 
 def ayrisdirma(name,url):
-        url=url+'9'
-##        name='Part 1'
-##        addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,41,"")
+        url=url+'3'
         link=xbmctools.get_url(url)
         match=re.compile('href="(.*?)"><span>(.*?)</span>').findall(link)
         for url,name in match:
-                if "OP" in name:
-                        pass
+                if "Ok." in name:
+                        addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
                 else:
-                        if "Fra" in name:
-                                pass
-                        else:
-                                if "VI" in name:
-                                        pass
-                                else:
-                                        addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
+                        pass
 
 
 def VIDEOLINKS(name,url):
