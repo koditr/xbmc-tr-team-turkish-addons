@@ -47,8 +47,8 @@
 
 <addon id="plugin.video.Sinema"
        name="[COLOR orange]Sinema[/COLOR]"
-       version="0.0.8"
-       provider-name="xbmcTR Team">
+       version="0.0.9"
+       provider-name="DreamTR Team">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.urlresolver" version="2.4.0"/>
@@ -60,7 +60,8 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>DreamTR Team </summary>
-    <description>[COLOR orange]~~~http://forum.dreamtr.org  ~~~[/COLOR]</description>
+    <description>[COLOR orange]~~~http://dreamtr.club  ~~~Free Demo eklentidir
+	* Demo Eklentidir ,Tavsiyemiz DreamTR 2016 Eklentisi *[/COLOR]</description>
     <platform>all</platform>
   </extension>
 </addon>
