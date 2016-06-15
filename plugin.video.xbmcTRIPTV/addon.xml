@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.xbmcTRIPTV"
        name="[COLOR beige]IPTV[/COLOR][COLOR red]TR[/COLOR]"
-       version="0.0.2"
-       provider-name="xbmcTR Team">
+       version="0.0.3"
+       provider-name="DreamTR Team">
   <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.urlresolver"/>
 	</requires>
   <extension point="xbmc.python.pluginsource" library="IPTV.py">
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>DreamTR Team Sunar</summary>
-    <description>~~~http://forum.dreamtr.org ~~~ IPTV ~~~</description>
+    <description>~~~http://dreamtr.club ~~~ IPTV Free Edition~~~</description>
     <platform>all</platform>
   </extension>
 </addon>
-
