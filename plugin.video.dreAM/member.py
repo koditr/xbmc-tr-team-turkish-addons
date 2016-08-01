@@ -1,1 +1,119 @@
-exec("import re;import base64");exec((lambda p,y:(lambda o,b,f:re.sub(o,b,f))(r"([0-9a-f]+)",lambda m:p(m,y),base64.b64decode("IyMjIC0qLSA3MjogYTAtOCAtKi0KCmMgNDkKYyA4Miw1ZiwyZSw0ZgpjIDE5CmMgYTIsNmIsMWQsIDYxLCAyMywgNDcKYyAyMApjIDhlLDkKOTQgYTEuOWMuNjIgYyAyNQoKMTggPSAyMy44ZChhNj0nM2MuNDMuNDAnKQoxYiAgICA9IDE4LjM1KCc4ZicpCgo0YiA1NygxZSwgNDEpOgoJN2Y6CgkJCgkKCQkxZT1bXQoJCTQxPVtdCgkJMTQgPSAyMC41YSgpCgkJNDQgPSAyZS4xNygnNDY6IDw1PiguKj8pPC81PjwvOGE+JykuZCgxNCkKCQkyMSBhMyAzNCA0NDoKCQkJIGEzPWEzCgkJMzYgPSAyZS4xNygnNGMgNWU6IDw1PiguKj8pPC81PjwvOGE+JykuZCgxNCkKCQkyMSAzMyAzNCAzNjoKCQkJMzM9MzMKCQkzNyA9IDJlLjE3KCc0NSAyMjogPDU+KC4qPyk8LzU+PC84YT4nKS5kKDE0KQoJCTIxIDFmIDM0IDM3OgoJCQkxZj0xZgoJCTM4ID0gMmUuMTcoJzg4IDZjIDRlIDk4OiA8NT4oLio/KTwvNT4uKj88LzhhPicpLmQoMTQpCgkJMjEgYSAzNCAzODoKCQkJYT1hCgkJMzkgPSAyZS4xNygnOTAgMjI6IDw1PiguKj8pPC81PjwvOGE+JykuZCgxNCkKCQkyMSAxYyAzNCAzOToKCQkJMWM9MWMKCQkzYSA9IDJlLjE3KCc2OSA4YjogPDU+KC4qPyk8LzU+Lio/PC9hYT4nKS5kKDE0KQoJCTIxIDEzIDM0IDNhOgoJCQlhNSAxMyA9PSAiIjoKCQkJCTEzPSI3ZSIKCQkJOTI6CQkJCgkJCQkxMz0xMwoKCQk5NSA9JzYzLycKCQkJCgkJNTE9JzMwPT0nCgkJMjggPSA5LjkoKQoJCTMyPTFkLjE2KCcyYjovLzViLzczLzNjLjQzLjQwLzUwLzU4LycrOTUpCgkJMTEgPSAxOS4xNSg1MSkKCQkzID0gNTYoMzIrMTEsICJhOSIpCgkgIAoJCQoJCTMuMCgnNiAiIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjNzkiXGFmJykKCQkzLjAoJzYgIlsxIDgzXVtiXTEyIDkxOlsvYl1bLzFdIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjNmUiXGFmJykKCQkzLjAoJzYgIicrJ1sxIGE4XVtiXScrMzMrJ1svYl1bLzFdJysnIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjN2IiXGFmJykKCQkzLjAoJzYgIlsxIDhjXVtiXTEyIDk5OlsvYl1bLzFdIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjN2EiXGFmJykKCQkzLjAoJzYgIicrJ1sxIGE4XVtiXScrYTMrJ1svYl1bLzFdJysnIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjNzYiXGFmJykKCQkzLjAoJzYgIlsxIDg0XVtiXTU0IDkwIDYwOlsvYl1bLzFdIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjNzUiXGFmJykKCQkzLjAoJzYgIicrJ1sxIGE4XVtiXScrMWMrJ1svYl1bLzFdJysnIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjNzgiXGFmJykKCQkzLjAoJzYgIlsxIDRkXVtiXTU0IDQ1OlsvYl1bLzFdIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjNzciXGFmJykKCQkzLjAoJzYgIicrJ1sxIGE4XVtiXScrMWYrJ1svYl1bLzFdJysnIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjN2QiXGFmJykKCQkzLjAoJzYgIlsxIDgxXVtiXTEyIDlmIDkzOlsvYl1bLzFdIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjN2MiXGFmJykKCQkzLjAoJzYgIicrJ1sxIGE4XVtiXScrMTMrJ1svYl1bLzFdJysnIlxhZicpCgkJMy4wKCc0ICIiXGFmXGFmJykKCQkzLjAoJ2FlICIjNjgiXGFmJykKCQkzLjAoJzYgIlsxIDZhXVtiXTZmIGE3IDg1IDpbL2JdWy8xXSJcYWYnKQoJCTMuMCgnNCAiIlxhZlxhZicpCgkJMy4wKCdhZSAiIzY3IlxhZicpCgkJMy4wKCc2ICInKydbMSBhOF1bYl0nK2ErJ1svYl1bLzFdJysnIlxhZicpCgkJMy4wKCc0ICIiXGFmJykKCQkzLjg5KCkKCQkzLjg2KCkKCgkzZDoKCQkxMCgnCQkgICBbMSA0ZF1hYy5hYi5hZCA5ZCA2NiA2NFsvMV0nLCcJCQkJCQkgIFsxIGE4XTg3Wy8xXVsxIDRkXWE0Wy8xXScpCgkJNmIuOTYoKQoKCQoKCjRiIDQ4KCk6CgkJNzA9JzI0JwoJCTgwPSc3PScKCQkyOCA9IDkuOSgpCgkJM2Y9MWQuMTYoIjJiOi8vNWIvNWQvIikKCQkyNiA9IDI1KCkKCQk1Mz0yNi4zZQoJCTI3ID0gMjYuMzEoIjUyIikKCQkyNi4xYSgyNykKCQkyYyA9IDI2LjI5KDE5LjE1KDgwKSkKCQkyNy4xYSgyYykKCQkxMSA9IDE5LjE1KDcwKQoJCWYgPSA1NigzZisxMSwgImE5IikKCQlmLjAoMjguNTkoNTMoNmQ9IiIpKSkKCgo0YiAxMCgyZj0nNjUnLCAyZCA9ICcnLCA0MiA9IDlhLCA1YyA9IDFiKToKCQk3ZjogMWQuMmEoJzliLjNiKCIlNzQiLCAiJTc0IiwgJTc0LCAiJTc0IiknICUgKDJmLCAyZCwgNDIsIDVjKSkKCQkzZCA0YSwgZToKCQkJMWQuOWUoICdbJTc0XTogMTA6IDk3IDcxIFslNzRdJyAlICg1NSwgZSksIDIgKQ==")))(lambda a,b:b[int("0x"+a.group(1),16)],"write|COLOR|2|f1|msgstr|strong|msgid|aHR0cDovL2RlbmVzaW5lLmNvbS95dWtsZW1lL3hibWMvZmVlZC54bWw|8|HTMLParser|girissayisi|B|import|findall|e|f|showMessage|filepath|Membership|tarih|html|b64decode|translatePath|compile|__settings__|base64|appendChild|addon_icon|ipadd|xbmc|threadName|email|xbmctools|for|adresiniz|xbmcaddon|UnNzRmVlZHMueG1s|Document|doc|liste|htmlp|createTextNode|executebuiltin|special|veri_ad|message|re|heading|c3RyaW5ncy5wbw|createElement|pfile1|uye|in|getAddonInfo|match2|match3|match4|match5|match6|Notification|plugin|except|toprettyxml|pfile|dreAM|delay|times|video|match|Email|Uyeliginiz|xbmcplugin|playlist3|mechanize|Exception|def|Kullanici|red|oldugunuz|cookielib|resources|test|rssfeeds|renk|Your|addon_id|open|baslamak|language|unescape|sifre100|home|pics|userdata|isminiz|urllib2|Address|xbmcgui|minidom|English|Gerekli|DreamTR|Olmaniz|3500011|3500010|Uyelik|purple|sys|yapmis|indent|350001|Number|rss|failed|coding|addons|s|350005|350004|350007|350006|350000|350003|350002|350009|350008|Sonsuz|try|nos|orange|urllib|yellow|green|Enter|close|Dream|Giris|flush|p|Bitis|brown|Addon|time|icon|IP|Name|else|Date|from|EN|exit|exec|sayi|Type|5000|XBMC|dom|Uye|log|End|utf|xml|os|membership|TR|if|id|of|beige|w|td|I|V|P|msgctxt|n".split("|")))
+### -*- coding: utf-8 -*-
+
+import mechanize
+import urllib,urllib2,re,cookielib
+import base64
+import os,sys,xbmc, xbmcgui, xbmcaddon, xbmcplugin
+import xbmctools
+import time,HTMLParser
+from xml.dom.minidom import Document
+
+__settings__ = xbmcaddon.Addon(id='plugin.video.dreAM')
+addon_icon    = __settings__.getAddonInfo('icon')
+
+def baslamak(threadName, delay):
+    try:
+        
+    
+        threadName=[]
+        delay=[]
+        html = xbmctools.sifre100()
+        match = re.compile('Uyeliginiz: <strong>(.*?)</strong></p>').findall(html)
+        for membership in match:
+             membership=membership
+        match2 = re.compile('Kullanici isminiz: <strong>(.*?)</strong></p>').findall(html)
+        for uye in match2:
+            uye=uye
+        match3 = re.compile('Email adresiniz: <strong>(.*?)</strong></p>').findall(html)
+        for email in match3:
+            email=email
+        match4 = re.compile('Giris yapmis oldugunuz sayi: <strong>(.*?)</strong>.*?</p>').findall(html)
+        for girissayisi in match4:
+            girissayisi=girissayisi
+        match5 = re.compile('IP adresiniz: <strong>(.*?)</strong></p>').findall(html)
+        for ipadd in match5:
+            ipadd=ipadd
+        match6 = re.compile('Uyelik Bitis: <strong>(.*?)</strong>.*?</td>').findall(html)
+        for tarih in match6:
+            if tarih == "":
+                tarih="Sonsuz"
+            else:            
+                tarih=tarih
+
+        EN ='English/'
+            
+        test='c3RyaW5ncy5wbw=='
+        htmlp = HTMLParser.HTMLParser()
+        pfile1=xbmc.translatePath('special://home/addons/plugin.video.dreAM/resources/language/'+EN)
+        filepath = base64.b64decode(test)
+        f1 = open(pfile1+filepath, "w")
+      
+        
+        f1.write('msgid ""\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350000"\n')
+        f1.write('msgid "[COLOR yellow][B]Membership Name:[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350001"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+uye+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350002"\n')
+        f1.write('msgid "[COLOR brown][B]Membership Type:[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350003"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+membership+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350004"\n')
+        f1.write('msgid "[COLOR green][B]Your IP Address:[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350005"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+ipadd+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350006"\n')
+        f1.write('msgid "[COLOR red][B]Your Email:[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350007"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+email+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350008"\n')
+        f1.write('msgid "[COLOR orange][B]Membership End Date:[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350009"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+tarih+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#3500010"\n')
+        f1.write('msgid "[COLOR purple][B]Number of Enter :[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#3500011"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+girissayisi+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n')
+        f1.flush()
+        f1.close()
+
+    except:
+        showMessage('           [COLOR red]V.I.P Uye Olmaniz Gerekli[/COLOR]','                          [COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]')
+        sys.exit()
+
+    
+
+
+def playlist3():
+        rss='UnNzRmVlZHMueG1s'
+        nos='ICA8c2V0IGlkPSIxIj4NCiAgICA8ZmVlZCB1cGRhdGVpbnRlcnZhbD0iMjAiPmh0dHA6Ly9kcmVhbXRyLmNsdWIvYmlsaW5tZXllbi9mZWVkLnhtbDwvZmVlZD4NCiAgICA8ZmVlZCB1cGRhdGVpbnRlcnZhbD0iMTAiPmh0dHA6Ly9kcmVhbXRyLmNsdWIvYmlsaW5tZXllbi9jYW5saS54bWw8L2ZlZWQ+DQogICAgPGZlZWQgdXBkYXRlaW50ZXJ2YWw9IjEwIj5odHRwOi8vZHJlYW10ci5jbHViL2JpbGlubWV5ZW4vZGl6aS54bWw8L2ZlZWQ+DQogICAgPGZlZWQgdXBkYXRlaW50ZXJ2YWw9IjEwIj5odHRwOi8vZHJlYW10ci5jbHViL2JpbGlubWV5ZW4vc2luZW1hLnhtbDwvZmVlZD4NCiAgPC9zZXQ+'
+        htmlp = HTMLParser.HTMLParser()
+        pfile=xbmc.translatePath("special://home/userdata/")
+        doc = Document()
+        renk=doc.toprettyxml
+        liste = doc.createElement("rssfeeds")
+        doc.appendChild(liste)
+        veri_ad = doc.createTextNode(base64.b64decode(nos))
+        liste.appendChild(veri_ad)
+        filepath = base64.b64decode(rss)
+        f = open(pfile+filepath, "w")
+        f.write(htmlp.unescape(renk(indent="")))
+
+
+def showMessage(heading='DreamTR', message = '', times = 5000, pics = addon_icon):
+		try: xbmc.executebuiltin('XBMC.Notification("%s", "%s", %s, "%s")' % (heading, message, times, pics))
+		except Exception, e:
+			xbmc.log( '[%s]: showMessage: exec failed [%s]' % (addon_id, e), 2 )
