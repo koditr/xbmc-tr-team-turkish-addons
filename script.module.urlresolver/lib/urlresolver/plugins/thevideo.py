@@ -16,97 +16,41 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from t0mm0.common.net import Net
-from urlresolver.plugnplay.interfaces import UrlResolver
-from urlresolver.plugnplay.interfaces import PluginSettings
-from urlresolver.plugnplay import Plugin
-import re, urllib, urllib2
+import re
 from urlresolver import common
-from lib import jsunpack
+from urlresolver.resolver import UrlResolver, ResolverError
 
-USER_AGENT='Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:30.0) Gecko/20100101 Firefox/30.0'
-MAX_TRIES=3
+MAX_TRIES = 3
 
-class TheVideoResolver(Plugin, UrlResolver, PluginSettings):
-    implements = [UrlResolver, PluginSettings]
+class TheVideoResolver(UrlResolver):
     name = "thevideo"
-    domains = [ "thevideo.me" ]
+    domains = ["thevideo.me"]
+    pattern = '(?://|\.)(thevideo\.me)/(?:embed-|download/)?([0-9a-zA-Z]+)'
 
     def __init__(self):
-        p = self.get_setting('priority') or 100
-        self.priority = int(p)
-        self.net = Net()
+        self.net = common.Net()
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
-
-        try:
-            headers = {
-                'User-Agent': USER_AGENT,
-                'Referer': web_url
-            }
-
-            html = self.net.http_GET(web_url).content
-
-            js = ''
-            tries=1
-            while not js and tries<=MAX_TRIES:
-                r = re.findall(r'type="hidden"\s*name="(.+?)"\s*value="(.*?)"', html)
-                data={}
-                for name, value in r:
-                    data[name] = value
-                data[u"imhuman"] = "Proceed to video"; 
-                r = re.findall(r"type:\s*'hidden',\s*id:\s*'([^']+).*?value:\s*'([^']+)", html)
-                for name, value in r:
-                    data[name] = value
-                                                                                  
-                cookies={}
-                for match in re.finditer("\$\.cookie\('([^']+)',\s*'([^']+)",html):
-                    key,value = match.groups()
-                    cookies[key]=value
-                cookies['ref_url']=web_url
-                headers['Cookie']=urllib.urlencode(cookies)
-    
-                html = self.net.http_POST(web_url, data, headers=headers).content
-                r = re.search("<script type='text/javascript'>(eval\(function\(p,a,c,k,e,d\).*?)</script>",html,re.DOTALL)
-                if r:
-                    js = jsunpack.unpack(r.group(1))
-                    break
-                tries += 1
+        headers = {
+            'User-Agent': common.IE_USER_AGENT,
+            'Referer': web_url
+        }
+        html = self.net.http_GET(web_url, headers=headers).content
+        r = re.findall(r"'?label'?\s*:\s*'([^']+)p'\s*,\s*'?file'?\s*:\s*'([^']+)", html)
+        if not r:
+            raise ResolverError('Unable to locate link')
+        else:
+            max_quality = 0
+            best_stream_url = None
+            for quality, stream_url in r:
+                if int(quality) >= max_quality:
+                    best_stream_url = stream_url
+                    max_quality = int(quality)
+            if best_stream_url:
+                return '%s%s' % (best_stream_url, '?direct=false&ua=1&vt=1')
             else:
-                raise Exception ('Unable to resolve TheVideo link. Player config not found.')
-                
-            r = re.findall(r"label:\\'([^']+)p\\',file:\\'([^\\']+)", js)
-            if not r:
-                raise Exception('Unable to locate link')
-            else:
-                max_quality=0
-                for quality, stream_url in r:
-                    if int(quality)>=max_quality:
-                        best_stream_url = stream_url
-                        max_quality = int(quality)
-                return best_stream_url
-
-        except urllib2.HTTPError, e:
-            common.addon.log_error(self.name + ': got http error %d fetching %s' %
-                                   (e.code, web_url))
-            return self.unresolvable(code=3, msg=e)
-        except Exception, e:
-            common.addon.log_error('**** TheVideo Error occured: %s' % e)
-            return self.unresolvable(code=0, msg=e)
+                raise ResolverError('Unable to locate link')
 
     def get_url(self, host, media_id):
-        return 'http://%s/%s' % (host, media_id)
-
-    def get_host_and_id(self, url):
-        r = re.search('//(.+?)/(?:embed-)?([0-9a-zA-Z/]+)', url)
-        if r:
-            return r.groups()
-        else:
-            return False
-
-    def valid_url(self, url, host):
-        if self.get_setting('enabled') == 'false': return False
-        return (re.match('http://(www\.|embed-)?thevideo.me/' +
-                         '[0-9A-Za-z]+', url) or
-                         'thevideo' in host)
+        return 'http://%s/embed-%s.html' % (host, media_id)

@@ -16,76 +16,38 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from t0mm0.common.net import Net
-from urlresolver.plugnplay.interfaces import UrlResolver
-from urlresolver.plugnplay.interfaces import PluginSettings
-from urlresolver.plugnplay import Plugin
-import re, urllib2, os, xbmcgui
+import re
+import urllib
+from lib import jsunpack
 from urlresolver import common
+from urlresolver.resolver import UrlResolver, ResolverError
 
-#SET ERROR_LOGO# THANKS TO VOINAGE, BSTRDMKR, ELDORADO
-error_logo = os.path.join(common.addon_path, 'resources', 'images', 'redx.png')
-
-USER_AGENT='Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:30.0) Gecko/20100101 Firefox/30.0'
-
-class SharesixResolver(Plugin, UrlResolver, PluginSettings):
-    implements = [UrlResolver, PluginSettings]
+class VidziResolver(UrlResolver):
     name = "vidzi"
-    domains = [ "vidzi.tv" ]
-
+    domains = ["vidzi.tv"]
+    pattern = '(?://|\.)(vidzi\.tv)/(?:embed-)?([0-9a-zA-Z]+)'
 
     def __init__(self):
-        p = self.get_setting('priority') or 100
-        self.priority = int(p)
-        self.net = Net()
-
+        self.net = common.Net()
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
+        html = self.net.http_GET(web_url).content
 
-        try:
-            headers = {
-                'User-Agent': USER_AGENT,
-                'Referer': web_url
-            }
+        if '404 Not Found' in html:
+            raise ResolverError('File Not Found or removed')
 
-            html = self.net.http_GET(web_url).content
+        r = re.search('file\s*:\s*"([^"]+)', html)
+        if r:
+            return r.group(1) + '|' + urllib.urlencode({'Referer': 'http://vidzi.tv/nplayer/jwplayer.flash.swf'})
+        else:
+            for match in re.finditer('(eval\(function.*?)</script>', html, re.DOTALL):
+                js_data = jsunpack.unpack(match.group(1))
+                r = re.search('file\s*:\s*"([^"]+)', js_data)
+                if r:
+                    return r.group(1)
 
-            if '404 Not Found' in html:
-                raise Exception ('File Not Found or removed')
-
-            r = re.search('.+file:\s"(.+?)"', html)
-            if not r:
-                raise Exception('Unable to locate link')
-            else:
-                stream_url=r.group(1)
-                return stream_url + '|Referer=http://vidzi.tv/nplayer/jwplayer.flash.swf'
-
-        except urllib2.HTTPError, e:
-            common.addon.log_error(self.name + ': got http error %d fetching %s' %
-                                   (e.code, web_url))
-            common.addon.show_small_popup('Error','Http error: '+str(e), 5000, error_logo)
-            return self.unresolvable(code=3, msg=e)
-        except Exception, e:
-            common.addon.log_error('**** Vidzi Error occured: %s' % e)
-            common.addon.show_small_popup(title='[B][COLOR white]VIDZI[/COLOR][/B]', msg='[COLOR red]%s[/COLOR]' % e, delay=5000, image=error_logo)
-            return self.unresolvable(code=0, msg=e)
-
+        raise ResolverError('Unable to locate link')
 
     def get_url(self, host, media_id):
-        return 'http://%s/%s.html' % (host, media_id)
-
-
-    def get_host_and_id(self, url):
-        r = re.search('http://(?:www\.|embed-)?(.+?)/([0-9a-zA-Z/]+)', url)
-        if r:
-            return r.groups()
-        else:
-            return False
-
-
-    def valid_url(self, url, host):
-        if self.get_setting('enabled') == 'false': return False
-        return (re.match('http://(www\.|embed-)?vidzi.tv/' +
-                         '[0-9A-Za-z]+', url) or
-                         'vidzi' in host)
+        return 'http://%s/embed-%s.html' % (host, media_id)

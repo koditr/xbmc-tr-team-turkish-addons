@@ -16,63 +16,41 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from t0mm0.common.net import Net
-from urlresolver.plugnplay.interfaces import UrlResolver
-from urlresolver.plugnplay.interfaces import PluginSettings
-from urlresolver.plugnplay import Plugin
 import re
+import urllib
+import urlparse
+from lib import helpers
 from urlresolver import common
+from urlresolver.resolver import UrlResolver, ResolverError
 
-class VidSpotResolver(Plugin, UrlResolver, PluginSettings):
-    implements = [UrlResolver, PluginSettings]
+class VidSpotResolver(UrlResolver):
     name = "vidspot"
-    domains = [ "vidspot.net" ]
+    domains = ["vidspot.net"]
+    pattern = '(?://|\.)(vidspot\.net)/(?:embed-)?([0-9a-zA-Z]+)'
 
     def __init__(self):
-        p = self.get_setting('priority') or 100
-        self.priority = int(p)
-        self.net = Net()
+        self.net = common.Net()
 
     def get_media_url(self, host, media_id):
-        try:
-            url = self.get_url(host, media_id)
-            html = self.net.http_GET(url).content
-    
-            data = {}
-            r = re.findall(r'type="hidden" name="(.+?)"\s* value="?(.+?)">', html)
-            for name, value in r:
-                data[name] = value
-                
-            html = self.net.http_POST(url, data).content
-            
-            r = re.search('"sources"\s*:\s*\[(.*?)\]', html, re.DOTALL)
-            if r:
-                fragment = r.group(1)
-                stream_url = None
-                for match in re.finditer('"file"\s*:\s*"([^"]+)', fragment):
-                    stream_url = match.group(1)
-                
-                if stream_url:
-                    return stream_url
-                else:
-                    raise Exception('could not find file')
-            else:
-                raise Exception('could not find sources')          
-        
-        except Exception, e:
-            common.addon.log('**** vidspot Error occured: %s' % e)
-            return self.unresolvable(code=0, msg='Exception: %s' % e)
-        
-    def get_url(self, host, media_id):
-        return 'http://vidspot.net/%s' % media_id 
+        url = self.get_url(host, media_id)
+        html = self.net.http_GET(url).content
 
-    def get_host_and_id(self, url):
-        r = re.search('//(.+?)/(?:embed-)?([0-9a-zA-Z]+)',url)
+        data = helpers.get_hidden(html)
+        html = self.net.http_POST(url, data).content
+        r = re.search('"sources"\s*:\s*\[(.*?)\]', html, re.DOTALL)
         if r:
-            return r.groups()
-        else:
-            return False
+            fragment = r.group(1)
+            stream_url = None
+            for match in re.finditer('"file"\s*:\s*"([^"]+)', fragment):
+                stream_url = match.group(1)
 
-    def valid_url(self, url, host):
-        if self.get_setting('enabled') == 'false': return False
-        return (re.match('http://(www.)?vidspot.net/[0-9A-Za-z]+', url) or re.match('http://(www.)?vidspot.net/embed-[0-9A-Za-z]+[\-]*\d*[x]*\d*.*[html]*', url) or 'vidspot' in host)
+            if stream_url:
+                stream_url = '%s?%s&direct=false' % (stream_url.split('?')[0], urlparse.urlparse(stream_url).query)
+                return stream_url + '|' + urllib.urlencode({'User-Agent': common.IE_USER_AGENT})
+            else:
+                raise ResolverError('could not find file')
+        else:
+            raise ResolverError('could not find sources')
+
+    def get_url(self, host, media_id):
+        return 'http://vidspot.net/embed-%s.html' % (media_id)

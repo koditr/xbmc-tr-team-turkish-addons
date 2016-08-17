@@ -1,6 +1,7 @@
 """
     Kodi urlresolver plugin
     Copyright (C) 2014  smokdpi
+    Updated by Gujal (c) 2016
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,92 +17,53 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from t0mm0.common.net import Net
+import re, time
+from lib import jsunpack
 from urlresolver import common
-from urlresolver.plugnplay import Plugin
-from urlresolver.plugnplay.interfaces import UrlResolver
-from urlresolver.plugnplay.interfaces import PluginSettings
-import re
-import urllib2
-import xbmcgui
+from urlresolver.resolver import UrlResolver, ResolverError
 
-
-class FlashxResolver(Plugin, UrlResolver, PluginSettings):
-    implements = [UrlResolver, PluginSettings]
+class FlashxResolver(UrlResolver):
     name = "flashx"
     domains = ["flashx.tv"]
+    pattern = '(?://|\.)(flashx\.tv)/(?:embed-|dl\?)?([0-9a-zA-Z/-]+)'
 
     def __init__(self):
-        p = self.get_setting('priority') or 100
-        self.priority = int(p)
-        self.net = Net()
-        self.pattern = 'http://((?:www.|play.)?flashx.tv)/(?:embed-)?([0-9a-zA-Z/-]+)(?:.html)?'
+        self.net = common.Net()
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
-        headers = {'Referer': web_url}
-        smil = ''
-        try:
-            html = self.net.http_GET(web_url, headers=headers).content
-            swfurl = 'http://static.flashx.tv/player6/jwplayer.flash.swf'
-            r = re.search('"(http://.+?\.smil)"', html)
-            if r: smil = r.group(1)
-            else:
-                r = re.search('\|smil\|(.+?)\|sources\|', html)
-                if r: smil = 'http://flashx.tv/' + r.group(1) + '.smil'
-            if smil:
-                html = self.net.http_GET(smil, headers=headers).content
-                r = re.search('<meta base="(rtmp://.*?flashx\.tv:[0-9]+/)(.+/)".*/>', html, re.DOTALL)
-                if r:
-                    rtmp = r.group(1)
-                    app = r.group(2)
-                    sources = re.compile('<video src="(.+?)" height="(.+?)" system-bitrate="(.+?)" width="(.+?)".*/>').findall(html)
-                    vid_list = []
-                    url_list = []
-                    best = 0
-                    quality = 0
-                    if sources:
-                        if len(sources) > 1:
-                            for index, video in enumerate(sources):
-                                if int(video[1]) > quality: best = index
-                                quality = int(video[1])
-                                vid_list.extend(['FlashX - %sp' % quality])
-                                url_list.extend([video[0]])
-                    if len(sources) == 1: vid_sel = sources[0][0]
-                    else:
-                        if self.get_setting('auto_pick') == 'true': vid_sel = url_list[best]
-                        else:
-                            result = xbmcgui.Dialog().select('Choose a link', vid_list)
-                            if result != -1: vid_sel = url_list[result]
-                            else: return self.unresolvable(code=0, msg='No link selected')
+        resp = self.net.http_GET(web_url)
+        html = resp.content
+        cfdcookie = resp._response.info()['set-cookie']
+        cfduid = re.search('cfduid=(.*?);', cfdcookie).group(1)
+        file_id = re.search("'file_id', '(.*?)'", html).group(1)
+        aff = re.search("'aff', '(.*?)'", html).group(1)
+        headers = { 'Referer': web_url,
+                    'Cookie': '__cfduid=' + cfduid + '; lang=1'}
+        surl = 'http://www.flashx.tv/code.js?c=' + file_id
+        dummy = self.net.http_GET(url=surl, headers=headers).content
+        headers = { 'Referer': web_url,
+                    'Cookie': '__cfduid=' + cfduid + '; lang=1; file_id=' + file_id + '; aff=' + aff }
+        html = self.net.http_GET(url=web_url, headers=headers).content
+        fname = re.search('name="fname" value="(.*?)"', html).group(1)
+        hash = re.search('name="hash" value="(.*?)"', html).group(1)
+        fdata = { 'op': 'download1',
+                  'usr_login': '',
+                  'id': media_id,
+                  'fname': fname,
+                  'referer': '',
+                  'hash': hash,
+                  'imhuman': 'Proceed to video' }
+        furl = 'http://www.flashx.tv/dl?' + media_id
+        time.sleep(5)
+        html = self.net.http_POST(url=furl, form_data=fdata, headers=headers).content
+        strhtml = jsunpack.unpack(re.search('(eval\(function.*?)</script>', html, re.DOTALL).group(1))
+        stream = re.search('file:"([^"]*)",label', strhtml).group(1)
 
-                    if vid_sel: return '%s app=%s playpath=%s swfUrl=%s pageUrl=%s swfVfy=true' % (rtmp, app, vid_sel, swfurl, web_url)
-
-            raise Exception('File not found')
-
-        except urllib2.URLError, e:
-            common.addon.log_error(self.name + ': got http error %d fetching %s' % (e.reason, web_url))
-            return self.unresolvable(code=3, msg=e)
-        
-        except Exception, e:
-            common.addon.log_error(self.name + ': general error occured: %s' % e)
-            return self.unresolvable(code=0, msg=e)
+        if stream:
+            return stream
+        else:
+            raise ResolverError('Filelink not found.')
 
     def get_url(self, host, media_id):
-        urlhash = re.search('([a-zA-Z0-9]+)(?:-+[0-9]+[xX]+[0-9]+)', media_id)
-        if urlhash: media_id = urlhash.group(1)
-        return 'http://flashx.tv/embed-%s.html' % media_id
-
-    def get_host_and_id(self, url):
-        r = re.search(self.pattern, url)
-        if r: return r.groups()
-        else: return False
-
-    def valid_url(self, url, host):
-        if self.get_setting('enabled') == 'false': return False
-        return re.match(self.pattern, url) or self.name in host
-
-    def get_settings_xml(self):
-        xml = PluginSettings.get_settings_xml(self)
-        xml += '<setting id="%s_auto_pick" type="bool" label="Automatically pick best quality" default="false" visible="true"/>' % (self.__class__.__name__)
-        return xml
+        return 'http://www.flashx.tv/%s.html' % media_id

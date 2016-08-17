@@ -16,87 +16,42 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from t0mm0.common.net import Net
-from urlresolver.plugnplay.interfaces import UrlResolver
-from urlresolver.plugnplay.interfaces import PluginSettings
-from urlresolver.plugnplay import Plugin
-import re, os
+import re
 from urlresolver import common
-from lib import jsunpack
+from urlresolver.resolver import UrlResolver, ResolverError
 
-# SET ERROR_LOGO# THANKS TO VOINAGE, BSTRDMKR, ELDORADO
-error_logo = os.path.join(common.addon_path, 'resources', 'images', 'redx.png')
-
-net = Net()
-
-class NosvideoResolver(Plugin, UrlResolver, PluginSettings):
-    implements = [UrlResolver, PluginSettings]
+class NosvideoResolver(UrlResolver):
     name = "nosvideo"
-    domains = ["nosvideo.com"]
+    domains = ["nosvideo.com", "noslocker.com"]
+    pattern = '(?://|\.)(nosvideo.com|noslocker.com)/(?:\?v\=|embed/|.+?\u=)?([0-9a-zA-Z]+)'
 
     def __init__(self):
-        p = self.get_setting('priority') or 100
-        self.priority = int(p)
-        self.net = Net()
+        self.net = common.Net()
 
     def get_media_url(self, host, media_id):
-        code = 0
-        try:
-            url = self.get_url(host, media_id)
-            print url
-            html = self.net.http_GET(url).content
-            if 'File Not Found' in html:
-                code = 1
-                raise Exception('File Not Found')
+        web_url = self.get_url(host, media_id)
 
-            headers = {
-                'Referer': url
-            }
+        html = self.net.http_GET(web_url).content
 
-            data = {}
-            r = re.findall(r'type="hidden" name="(.+?)"\s* value="(.+?)"', html)
-            for name, value in r:
-                data[name] = value
-            data.update({'method_free': 'Free Download'})
-            print data
+        if 'File Not Found' in html:
+            raise ResolverError('File Not Found')
 
-            html = net.http_POST(url, data, headers=headers).content
+        web_url = 'http://nosvideo.com/vj/video.php?u=%s&w=&h=530' % media_id
 
-            r = re.search('(eval\(function\(p,a,c,k,e,[dr].*)', html)
-            if r:
-                js = jsunpack.unpack(r.group(1))
-                r = re.search('playlist=(.*)&config=', js)
-                if r:
-                    html = self.net.http_GET(r.group(1)).content
-                    r = re.search('<file>\s*(.*)\s*</file>', html)
-                    if r:
-                        return r.group(1)
-                    else:
-                        raise Exception('Unable to locate video file')
-                else:
-                    raise Exception('Unable to locate playlist')
-            else:
-                raise Exception('Unable to locate packed data')
+        html = self.net.http_GET(web_url).content
 
-        except Exception, e:
-            common.addon.log('**** Nosvideo Error occured: %s' % e)
-            common.addon.show_small_popup('*** Nosvideo Error occured ***', str(e), 5000, '')
-            return self.unresolvable(code=code, msg='Exception: %s' % e)
+        smil_url = re.compile('\':\'(.+?)\'').findall(html)
+        smil_url = [i for i in smil_url if '.smil' in i][0]
+
+        html = self.net.http_GET(smil_url).content
+
+        streamer = re.findall('base\s*=\s*"(.+?)"', html)[0]
+        playpath = re.findall('src\s*=\s*"(.+?)"', html)[0]
+
+        stream_url = '%s playpath=%s' % (streamer, playpath)
+
+        return stream_url
 
     def get_url(self, host, media_id):
-        return 'http://nosvideo.com/?v=%s' % media_id
+        return 'http://nosvideo.com/%s' % media_id
 
-    def get_host_and_id(self, url):
-        r = re.search('//(.+?)/(?:\?v\=|embed/)?([0-9a-zA-Z]+)', url)
-        if r:
-            return r.groups()
-        else:
-            return False
-        return('host', 'media_id')
-
-
-    def valid_url(self, url, host):
-        if self.get_setting('enabled') == 'false': return False
-        return (re.match('http://(www.)?nosvideo.com/' +
-                         '(?:\?v\=|embed/)[0-9A-Za-z]+', url) or
-                         'nosvideo' in host)

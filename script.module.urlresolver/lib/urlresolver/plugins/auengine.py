@@ -16,53 +16,28 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from t0mm0.common.net import Net
-from urlresolver.plugnplay.interfaces import UrlResolver
-from urlresolver.plugnplay.interfaces import PluginSettings
-from urlresolver.plugnplay import Plugin
-import urllib,urllib2
-from urlresolver import common
 import re
+import urllib
+from urlresolver import common
+from urlresolver.resolver import UrlResolver, ResolverError
 
-class FilenukeResolver(Plugin, UrlResolver, PluginSettings):
-    implements = [UrlResolver, PluginSettings]
+class AuEngineResolver(UrlResolver):
     name = "auengine.com"
-    domains = [ "auengine.com" ]
+    domains = ["auengine.com"]
+    pattern = '(?://|\.)(auengine\.com)/embed.php\?file=([0-9a-zA-Z\-_]+)[&]*'
 
     def __init__(self):
-        p = self.get_setting('priority') or 100
-        self.priority = int(p)
-        self.net = Net()
-        self.pattern = 'http://((?:www.)?auengine.com)/embed.php\?file=([0-9a-zA-Z\-_]+)[&]*'
-
-    def get_url(self, host, media_id):
-            return 'http://www.auengine.com/embed.php?file=%s' % (media_id) #&w=800&h=600
-
-    def get_host_and_id(self, url):
-        r = re.search(self.pattern, url)
-        if r: return r.groups()
-        else: return False
-
-    def valid_url(self, url, host):
-        if self.get_setting('enabled') == 'false': return False
-        return re.match(self.pattern, url) or self.name in host
+        self.net = common.Net()
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
-        post_url = web_url
-        hostname = self.name
-        common.addon.log(web_url)
-        try:
-            resp = self.net.http_GET(web_url)
-            html = resp.content
-        except urllib2.URLError, e:
-            common.addon.log_error(hostname+': got http error %d fetching %s' % (e.code, web_url))
-            return self.unresolvable(code=3, msg='Exception: %s' % e) #return False
+        resp = self.net.http_GET(web_url)
+        html = resp.content
         r = re.search("video_link\s=\s'(.+?)';", html)
         if r:
-            stream_url = urllib.unquote_plus(r.group(1))
+            return urllib.unquote_plus(r.group(1))
         else:
-            common.addon.log_error(hostname+': stream url not found')
-            return self.unresolvable(code=0, msg='no file located') #return False
-        return stream_url
+            raise ResolverError('no file located')
 
+    def get_url(self, host, media_id):
+        return 'http://www.auengine.com/embed.php?file=%s' % (media_id)

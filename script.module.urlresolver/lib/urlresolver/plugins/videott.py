@@ -16,86 +16,62 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import os
-import xbmc
-from t0mm0.common.net import Net
-from urlresolver.plugnplay.interfaces import UrlResolver
-from urlresolver.plugnplay.interfaces import PluginSettings
-from urlresolver.plugnplay import Plugin
 import re
-import urllib2, urllib
+import json
+import urlparse
 from urlresolver import common
+from urlresolver.resolver import UrlResolver, ResolverError
 
-# Custom imports
-try:
-    from json import loads
-except ImportError:
-    from simplejson import loads
-
-class VideoTTResolver(Plugin, UrlResolver, PluginSettings):
-    implements = [UrlResolver, PluginSettings]
+class VideoTTResolver(UrlResolver):
     name = "videott"
     domains = ["video.tt"]
+    pattern = '(?://|\.)(video\.tt)/(?:video\/|embed\/|watch_video\.php\?v=)(\w+)'
 
     def __init__(self):
-        p = self.get_setting('priority') or 100
-        self.priority = int(p)
-        self.net = Net()
-        self.pattern = 'http://(?:www\.)?(video\.tt)/(?:video\/|embed\/|watch_video\.php\?v=)(\w+)'
+        self.net = common.Net()
 
     def get_media_url(self, host, media_id):
         json_url = 'http://www.video.tt/player_control/settings.php?v=%s' % media_id
+        data = self.net.http_GET(json_url).content
+        data = json.loads(data)
 
-        try:
-            json = self.net.http_GET(json_url).content
-            data = loads(json)
+        vids = data['settings']['res']
 
-            vids = data['settings']['res']
+        if vids:
+            vUrlsCount = len(vids)
 
-            if not vids:
-                err_title = 'Content not available.'
-                err_message = 'The requested video was not found.'
-                common.addon.log_error(self.name + ' - fetching %s - %s - %s ' % (json_url, err_title, err_message))
-                return self.unresolvable(1, err_message)
+            if (vUrlsCount > 0):
+                q = self.get_setting('quality')
+                # Lowest Quality
+                li = 0
 
-            else:
-                vUrlsCount = len(vids)
+                if q == '1':
+                    # Medium Quality
+                    li = (int)(vUrlsCount / 2)
+                elif q == '2':
+                    # Highest Quality
+                    li = vUrlsCount - 1
 
-                if (vUrlsCount > 0):
-                    q = self.get_setting('quality')
-                    # Lowest Quality
-                    li = 0
+                vUrl = vids[li]['u'].decode('base-64')
+                return vUrl
 
-                    if q == '1':
-                        # Medium Quality
-                        li = (int)(vUrlsCount / 2)
-                    elif q == '2':
-                        # Highest Quality
-                        li = vUrlsCount - 1
+        else:
+            vUrl = data['settings']['config']
 
-                    vUrl = vids[li]['u'].decode('base-64')
-                    return vUrl
+            vUrl = [i[1].decode('base-64') for i in vUrl.items() if i[0].startswith('token')]
+            vUrl = [(urlparse.parse_qsl(urlparse.urlparse(i).query), i) for i in vUrl]
+            vUrl = [([x[1] for x in i[0] if x[0] == 'r'], i[1]) for i in vUrl]
+            vUrl = [(i[0][0], i[1]) for i in vUrl if i[0]]
+            vUrl = vUrl[0][1]
+            return vUrl
 
-        except urllib2.URLError, e:
-            return self.unresolvable(3, str(e))
-        except Exception, e:
-            return self.unresolvable(0, str(e))
-
+        raise ResolverError('The requested video was not found.')
 
     def get_url(self, host, media_id):
         return 'http://www.video.tt/watch_video.php?v=%s' % media_id
 
-    def get_host_and_id(self, url):
-        r = re.search(self.pattern, url)
-        return r.groups()
-
-    def valid_url(self, url, host):
-        if self.get_setting('enabled') == 'false': return False
-        return re.match(self.pattern, url) or self.name in host
-
-    #PluginSettings methods
-    def get_settings_xml(self):
-        xml = PluginSettings.get_settings_xml(self)
-        xml += '<setting label="Video Quality" id="%s_quality" ' % self.__class__.__name__
-        xml += 'type="enum" values="Low|Medium|High" default="2" />\n'
+    @classmethod
+    def get_settings_xml(cls):
+        xml = super(cls, cls).get_settings_xml()
+        xml.append('<setting label="Video Quality" id="%s_quality" type="enum" values="High|Medium|Low" default="0" />' % (cls.__name__))
         return xml

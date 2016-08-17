@@ -16,55 +16,29 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from t0mm0.common.net import Net
-from urlresolver.plugnplay.interfaces import UrlResolver
-from urlresolver.plugnplay.interfaces import PluginSettings
-from urlresolver.plugnplay import Plugin
-import urllib,urllib2
-from urlresolver import common
 import re
+import urllib
+from urlresolver import common
+from urlresolver.resolver import UrlResolver, ResolverError
 
-class FilenukeResolver(Plugin, UrlResolver, PluginSettings):
-    implements = [UrlResolver, PluginSettings]
+class Play44Resolver(UrlResolver):
     name = "play44.net"
-    domains = [ "play44.net" ]
-    
+    domains = ["play44.net"]
+    pattern = '(?://|\.)(play44\.net)/embed\.php?.*?vid=([0-9a-zA-Z_\-\./]+)[\?&]*'
+
     def __init__(self):
-        p = self.get_setting('priority') or 100
-        self.priority = int(p)
-        self.net = Net()
-        # http://play44.net/embed.php?w=718&h=438&vid=og/saint_seiya_omega_-_69.mp4
-        self.pattern = 'http://((?:www.)?play44.net)/embed\.php?.*?vid=([0-9a-zA-Z_\-\./]+)[\?&]*'
-        #self.pattern = 'http://((?:www.)?videofun.me)/embed/(.+?)'
-    
-    def get_url(self, host, media_id):
-            return 'http://play44.net/embed.php?&vid=%s' % (media_id)
-    
-    def get_host_and_id(self, url):
-        r = re.search(self.pattern, url)
-        if r: return r.groups()
-        else: return False
-    
-    def valid_url(self, url, host):
-        if self.get_setting('enabled') == 'false': return False
-        return re.match(self.pattern, url) or self.name in host
-    
+        self.net = common.Net()
+
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
-        post_url = web_url
-        hostname = self.name
-        common.addon.log(media_id)
-        common.addon.log(web_url)
-        try:
-            resp = self.net.http_GET(web_url)
-            html = resp.content
-        except urllib2.URLError, e:
-            common.addon.log_error(hostname+': got http error %d fetching %s' % (e.code, web_url))
-            return self.unresolvable(code=3, msg='Exception: %s' % e) #return False
+        resp = self.net.http_GET(web_url)
+        html = resp.content
         r = re.search("playlist:\s*\n*\s*\[\s*\n*\s*\{\s*\n*\s*\s*\n*\s*url\s*:\s*'(.+?)'", html)
         if r:
             stream_url = urllib.unquote_plus(r.group(1))
         else:
-            common.addon.log_error(hostname+': stream url not found')
-            return self.unresolvable(code=0, msg='no file located') #return False
+            raise ResolverError('no file located')
         return stream_url
+
+    def get_url(self, host, media_id):
+        return 'http://play44.net/embed.php?&vid=%s' % (media_id)
