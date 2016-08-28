@@ -47,7 +47,7 @@
 
 <addon id="plugin.video.Sinema"
        name="[COLOR orange]Sinema[/COLOR]"
-       version="0.0.9"
+       version="0.0.10"
        provider-name="DreamTR Team">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
