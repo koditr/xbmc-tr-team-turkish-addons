@@ -15,11 +15,10 @@ settings = xbmcaddon.Addon(id='plugin.video.Sinema')
 
 def CATEGORIES():
         cal()
-        addDir('[COLOR orange][B]<SINIRLI SAYIDA UYELIKLER ACILMISTIR;ALMAK ISTEYENLER http://dreamtr.club den Ogrenebilirler>[/B][/COLOR]','','','http://dreamtr.club/resimler/icon1.png')
-        
-        addDir('[COLOR red]<<< [ Film ARA  ] >>>[/COLOR]','Search',3,'')
+        addDir('[COLOR orange][B]<SINIRLI SAYIDA UYELIKLER ACILMISTIR;ALMAK ISTEYENLER http://dreamtr.club den Ogrenebilirler>[/B][/COLOR]','','','http://dreamtr.club/resimler/icon2.png')
+        addDir('[COLOR red]<<< [ Film ARA  ] >>>[/COLOR]','Search',3,'http://dreamtr.club/resimler/icon2.png')
         url='http://www.ultrafilmizle.com/'
-        addDir('[COLOR blue]<<< [ Yeni EKLENENLER  ] >>>[/COLOR]',url,1,'')
+        addDir('[COLOR blue]<<< [ Yeni EKLENENLER  ] >>>[/COLOR]',url,1,'http://dreamtr.club/resimler/icon2.png')
         req = urllib2.Request(url)
         req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
         response = urllib2.urlopen(req)
@@ -33,10 +32,6 @@ def cal():
         url='http://www.youtube.com/embed/3UA8c44TOWE'
         name='play'
         xbmctools.magix_player(name,url)
-        
-    
-
-
 def RECENT(url):
     link=get_url(url)
     soup = BeautifulSoup(link)
@@ -48,7 +43,6 @@ def RECENT(url):
             thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
             name=name.replace('&#8211','').replace('&','')
             name=sembol_fix(name)
-            print url
             addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,41,thumbnail)
                 
     sayfalama=re.compile('<span class=\'current\'>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
@@ -80,44 +74,31 @@ def Search():
 
 
 def ayrisdirma(name,url):
-        url=url+'3'
+        url=url+'4'
         link=xbmctools.get_url(url)
         match=re.compile('href="(.*?)"><span>(.*?)</span>').findall(link)
         for url,name in match:
-                if "Ok." in name:
-                        addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
-                else:
-                        pass
-
+                addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
 
 def VIDEOLINKS(name,url):
         urlList=[]
         #---------------------------#
         playList.clear()
-        link=xbmctools.get_url(url)
-        link=link.replace('&amp;', '&').replace('&#038;', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-
-		#---------------------------------------------#
-        vk_2=re.compile('\/\/vk.com\/(.*?)"').findall(link)
+        req = urllib2.Request(url)
+        req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36")
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
+        vk_2=re.compile('<div class="filmicerik">\r\n\r\n\t\t<!--baslik:.*?-->\r\n<p><iframe src="(.*?)"').findall(link)
         for url in vk_2:
-                url = 'http://vk.com/'+str(url).encode('utf-8', 'ignore')
                 xbmctools.magix_player(name,url)
-		#---------------------------------------------#
-        youtube=re.compile(' src\="\/\/www.youtube.com\/embed\/(.*?)"').findall(link)
-        for url in youtube:
-                url = 'http://www.youtube.com/embed/'+str(url).encode('utf-8', 'ignore')
+        vk_3=re.compile('src="(.*?)\&\#038;width\=700\&\#038;height\=430"').findall(link)
+        for url in vk_3:
                 xbmctools.magix_player(name,url)
-		#---------------------------------------------#
-        mailru=re.compile('mail.ru\/videos\/embed\/mail\/(.*?).html').findall(link)
-        for mailrugelen in mailru:
-                url = 'http://videoapi.my.mail.ru/videos/embed/mail/'+str(mailrugelen)+'.html'
-                value=[]
-                value.append((name,xbmctools.MailRu_Player(url)))
-        ok=re.compile('ok.ru\/videoembed\/(.*?)"').findall(link)
-        for mailrugelen in ok:
-                url = 'http://ok.ru/videoembed/'+str(mailrugelen)
-                value=[]
-                value.append((name,xbmctools.ok_ru(url)))
+        vk_4=re.compile('https://videoapi.my.mail.ru/videos/embed/mail/(.*?).html').findall(link)
+        for url in vk_4:
+                url='https://videoapi.my.mail.ru/videos/embed/mail/'+url+'.html'
+                xbmctools.magix_player(name,url)
         ply=re.compile('src="http:\/\/www.ultrafilmizle.com\/player\/url\/(.*?)"').findall(link)
         for name in ply:
                 name=base64.b64decode(name)
@@ -129,7 +110,7 @@ def VIDEOLINKS(name,url):
                 url=reverseName
                 value=[]
                 url = 'http://ok.ru/videoembed/'+str(url)
-                value.append((name,xbmctools.ok_ru(url)))
+                xbmctools.magix_player(name,url)
 
         if not urlList:
                 match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)
