@@ -14,23 +14,44 @@ settings = xbmcaddon.Addon(id='plugin.video.CizgiFilm')
 
 def CATEGORIES():
         url='http://www.cizgifilmizlesen.com/'
-        addDir('[COLOR orange][B]<SINIRLI SAYIDA UYELIKLER ACILMISTIR;ALMAK ISTEYENLER http://dreamtr.club den Ogrenebilirler>[/B][/COLOR]','','','http://dreamtr.org/resimler/icon1.png')     
-        req = urllib2.Request(url)
-        req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
-        response = urllib2.urlopen(req)
-        link=response.read()
-        response.close()
+        addDir('[COLOR orange][B]Tum Eklentilerimiz Tek uyelikle elinizde http://dreamtr.club sitemizden ulasabilirsiniz[/B][/COLOR]','','','http://dreamtr.club/resimler/icon2.png')     
+        addDir('[COLOR blue][B]Yeni Eklenenler[/B][/COLOR]',url,2,'http://dreamtr.club/resimler/icon2.png')
+        link=get_url(url)
+        soup = BeautifulSoup(link)
+        panel = soup.findAll("div", {"class": "post-item mb4 mr4"},smartQuotesTo=None)
+        for i in range (len (panel)):
+            url=panel[i].find('a')['href']
+            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+            name=sembol_fix(name)
+            addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,44,thumbnail)
+        url2='http://www.cizgifilmizlesen.com/sayfa-2/'
+        link=get_url(url2)
+        soup = BeautifulSoup(link)
+        panel = soup.findAll("div", {"class": "post-item mb4 mr4"},smartQuotesTo=None)
+        for i in range (len (panel)):
+            url=panel[i].find('a')['href']
+            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+            name=sembol_fix(name)
+            addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,44,thumbnail)
+        url3='http://www.cizgifilmizlesen.com/sayfa-2/'
+        link=get_url(url3)
+        soup = BeautifulSoup(link)
+        panel = soup.findAll("div", {"class": "post-item mb4 mr4"},smartQuotesTo=None)
+        for i in range (len (panel)):
+            url=panel[i].find('a')['href']
+            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+            name=sembol_fix(name)
+            addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,44,thumbnail)
+        link=get_url(url)
         match=re.compile('<li><h3><a href="http://www.cizgifilmizlesen.com/(.*?)">(.*?)</a></h3></li>').findall(link)
         for url,name in match:
                 url='http://www.cizgifilmizlesen.com/'+url
                 name=sembol_fix(name)
                 addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,1,'')
         magictr()
-
-        
-    
-
-
 def RECENT(url):
         link=get_url(url)
         match=re.compile('<a href="(.*?)" title="(.*?)">\r                                    <img src="(.*?)" width=".*?" height=".*?"').findall(link)
@@ -43,54 +64,70 @@ def RECENT(url):
                         else:
                                 name=sembol_fix(name)
                                 addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,44,thumbnail)
+def RECENT2(url):
+        link=get_url(url)
+        soup = BeautifulSoup(link)
+        panel = soup.findAll("div", {"class": "post-item mb4 mr4"},smartQuotesTo=None)
+        for i in range (len (panel)):
+            url=panel[i].find('a')['href']
+            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+            name=sembol_fix(name)
+            addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,44,thumbnail)
+        url2='http://www.cizgifilmizlesen.com/sayfa-2/'
+        link=get_url(url2)
+        soup = BeautifulSoup(link)
+        panel = soup.findAll("div", {"class": "post-item mb4 mr4"},smartQuotesTo=None)
+        for i in range (len (panel)):
+            url=panel[i].find('a')['href']
+            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+            name=sembol_fix(name)
+            addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,44,thumbnail)
+        url3='http://www.cizgifilmizlesen.com/sayfa-2/'
+        link=get_url(url3)
+        soup = BeautifulSoup(link)
+        panel = soup.findAll("div", {"class": "post-item mb4 mr4"},smartQuotesTo=None)
+        for i in range (len (panel)):
+            url=panel[i].find('a')['href']
+            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+            name=sembol_fix(name)
+            addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,44,thumbnail)
 
-#####youtube kontrol#######
 from xbmcaddon import Addon
 __YoutubePluginName__ = 'plugin.video.youtube'
 __YoutubeAddon__ = Addon(__YoutubePluginName__)
 youtubeVersion = __YoutubeAddon__.getAddonInfo('version')
-
-
 def magictr():
         videolar = ['3UA8c44TOWE','3UA8c44TOWE','3UA8c44TOWE','3UA8c44TOWE']
         youtubeadres=random.choice(videolar)
         url='http://www.youtube.com/embed/'+str(youtubeadres).encode('utf-8', 'ignore')
-        if youtubeVersion == "5":
-            
-            
+        if youtubeVersion == "5":            
             Youtube_Player(str(url))
-        else:
-            
+        else:            
             Youtube_Player2(str(url))
-
-
 def Youtube_Player(url):
         playList.clear()   
         code=re.match(r"http://www.youtube.com/embed/(.*?)$", url).group(1)
-        print '[code]'+str(code)
         url='plugin://plugin.video.youtube/play/?video_id=' + code
         name='MagicTR Reklam'
         addLink(name,url,'')
         playlist_yap(playList,name,url)
         xbmcPlayer.play(playList)
-
-
 def Youtube_Player2(url):
         playList.clear()   
         code=re.match(r"http://www.youtube.com/embed/(.*?)$", url).group(1)
-        print '[code]'+str(code)
         url='plugin://plugin.video.youtube/?action=play_video&videoid=' + code
         name='MagicTR Reklam'
         addLink(name,url,'')
         playlist_yap(playList,name,url)
-        xbmcPlayer.play(playList)
-        
+        xbmcPlayer.play(playList)        
 def playlist_yap(playList,name,url):
         listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage="")
         listitem.setInfo('video', {'name': name } )
         playList.add(url,listitem=listitem)
-        return playList
-            
+        return playList            
 def VIDEOLINKS(name,url):
         link=get_url(url)
         match=re.compile('var file = "(.*?)"').findall(link)
@@ -183,20 +220,14 @@ except:
 if mode==None or url==None or len(url)<1:
         CATEGORIES()
        
-elif mode==1:
-        
+elif mode==1:        
         RECENT(url)
-
-
-        
+elif mode==2:        
+        RECENT2(url) 
 elif mode==40:        
-        INFO(url)
-        
+        INFO(url)        
 elif mode==3:
         Search()
-
-
 elif mode==44:
-        VIDEOLINKS(name,url)
-        
+        VIDEOLINKS(name,url)        
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
