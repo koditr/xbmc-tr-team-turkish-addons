@@ -120,7 +120,7 @@
   </extension>
 </addon>
 
-<addon id="script.module.urlresolver" name="URLResolver" version="3.0.17" provider-name="Eldorado">
+<addon id="script.module.urlresolver" name="URLResolver" version="3.0.20" provider-name="Eldorado">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 	</requires>
