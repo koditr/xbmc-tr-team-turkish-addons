@@ -1,5 +1,5 @@
-===0.0.10===
+===0.0.11===
 .............
-Tarih: 28.08.2016
+Tarih: 19.09.2016
 
 * Demo Eklentidir ,Tavsiyemiz DreamTR 2016 Eklentisi *

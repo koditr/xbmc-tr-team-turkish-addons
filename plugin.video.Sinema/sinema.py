@@ -29,7 +29,7 @@ def CATEGORIES():
                 name=sembol_fix(name)
                 addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,4,'')
 def cal():
-        url='http://www.youtube.com/embed/3UA8c44TOWE'
+        url='http://www.youtube.com/embed/xIPBV5TGeQo'
         name='play'
         xbmctools.magix_player(name,url)
 def RECENT(url):
