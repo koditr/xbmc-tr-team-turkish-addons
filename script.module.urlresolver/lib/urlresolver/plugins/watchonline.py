@@ -1,6 +1,7 @@
+# -*- coding: UTF-8 -*-
 """
-    urlresolver XBMC Addon
-    Copyright (C) 2011 t0mm0
+    Kodi urlresolver plugin
+    Copyright (C) 2016  alifrezser
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,29 +18,36 @@
 """
 
 import re
+from lib import jsunpack
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
-class VodlockerResolver(UrlResolver):
-    name = "vodlocker.com"
-    domains = ["vodlocker.com"]
-    pattern = '(?://|\.)(vodlocker\.com)/(?:embed-)?([0-9a-zA-Z]+)'
+class WatchonlineResolver(UrlResolver):
+    name = "watchonline"
+    domains = ["watchonline.to"]
+    pattern = '(?://|\.)(watchonline\.to)/(?:embed-)?([0-9a-zA-Z]+)'
 
     def __init__(self):
         self.net = common.Net()
+        self.user_agent = common.IE_USER_AGENT
+        self.net.set_user_agent(self.user_agent)
+        self.headers = {'User-Agent': self.user_agent}
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
-        link = self.net.http_GET(web_url).content
-        if 'FILE WAS DELETED' in link:
-            raise ResolverError('File deleted.')
 
-        video_link = str(re.compile('file[: ]*"(.+?)"').findall(link)[0])
+        html = self.net.http_GET(web_url).content
 
-        if len(video_link) > 0:
-            return video_link
+        for match in re.finditer('(eval\(function.*?)</script>', html, re.DOTALL):
+            js_data = jsunpack.unpack(match.group(1))
+            js_data = js_data.replace('\\\'', '\'')
+
+        r = re.search('{\s*file\s*:\s*["\']([^{}]+\.mp4)["\']', js_data)
+
+        if r:
+            return r.group(1)
         else:
-            raise ResolverError('No playable video found.')
+            raise ResolverError('File not found')
 
     def get_url(self, host, media_id):
-        return 'http://vodlocker.com/embed-%s-640x400.html' % media_id
+        return 'http://www.%s/embed-%s.html' % (host, media_id)

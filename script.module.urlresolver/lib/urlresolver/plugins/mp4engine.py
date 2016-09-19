@@ -1,7 +1,6 @@
 """
     urlresolver XBMC Addon
     Copyright (C) 2011 t0mm0
-    Updated by alifrezser (c) 2016
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,47 +17,35 @@
 """
 
 import re
+from lib import jsunpack
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
-class NovamovResolver(UrlResolver):
-    name = "novamov"
-    domains = ['novamov.com', 'auroravid.to']
-    pattern = '(?://|\.)(novamov.com|auroravid.to)/(?:video/|embed/\?v=|embed\.php\?v=)([A-Za-z0-9]+)'
+
+class Mp4EngineResolver(UrlResolver):
+    name = "mp4engine"
+    domains = ["mp4engine.com"]
+    pattern = '(?://|\.)(mp4engine\.com)/(?:embed-)?([0-9a-zA-Z]+)(?:-[0-9]x[0-9].html)?'
 
     def __init__(self):
         self.net = common.Net()
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
-
         html = self.net.http_GET(web_url).content
 
-        try:
-            r = re.search('flashvars.filekey=(.+?);', html)
-            if r == None: raise Exception()
+        js_data = re.findall('(eval\(function.*?)</script>', html.replace('\n', ''))
 
-            r = r.group(1)
-    
-            try: filekey = re.compile('\s+%s="(.+?)"' % r).findall(html)[-1]
-            except: filekey = r
-    
-            player_url = 'http://www.auroravid.to/api/player.api.php?key=%s&file=%s' % (filekey, media_id)
-    
-            html = self.net.http_GET(player_url).content
-    
-            r = re.search('url=(.+?)&', html)
+        for i in js_data:
+            try: html += jsunpack.unpack(i)
+            except: pass
 
-        except:
-            r = re.search('source src="(.+?)"', html)
-            
-        if r:
-            stream_url = r.group(1)
-            return stream_url
-        
-        else:
-            raise ResolverError('File Not Found or removed')
+        match = re.search('''file:(?:\s+|\v+)?['|"]([^'"]+)['|"]''', html)
 
- 
+        if match:
+            return match.group(1).replace(" ", "%20")
+
+        raise ResolverError('File Not Found or removed')
+
     def get_url(self, host, media_id):
-        return 'http://www.auroravid.to/embed/?v=%s' % media_id
+        return 'http://%s/embed-%s.html' % (host, media_id)

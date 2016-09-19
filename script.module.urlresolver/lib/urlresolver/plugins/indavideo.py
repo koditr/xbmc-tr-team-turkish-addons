@@ -1,7 +1,8 @@
-'''
-    urlresolver Kodi plugin
-    Copyright (C) 2016 Gujal
-
+# -*- coding: UTF-8 -*-
+"""
+    Kodi urlresolver plugin
+    Copyright (C) 2016  alifrezser
+    
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -14,41 +15,46 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
-import re
+import re, json
 from lib import helpers
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
-class YouLOLResolver(UrlResolver):
-    name = "youlol.biz"
-    domains = ["youlol.biz", "shitmovie.com"]
-    pattern = '(?://|\.)(youlol\.biz|shitmovie\.com)/(?:embed-)?([0-9a-zA-Z]+)'
+class IndavideoResolver(UrlResolver):
+    name = "indavideo"
+    domains = ["indavideo.hu"]
+    pattern = '(?://|\.)(indavideo\.hu)/(?:player/video/|video/)(.*)'
 
     def __init__(self):
         self.net = common.Net()
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
+
         html = self.net.http_GET(web_url).content
 
-        if 'Not Found' in html:
-            raise ResolverError('File Removed')
+        hash = re.search('emb_hash.+?value="(.+?)"', html)
+        if not hash:
+            raise ResolverError('File not found')
 
-        if 'Video is processing' in html:
-            raise ResolverError('File still being processed')
+        url = 'http://amfphp.indavideo.hu/SYm0json.php/player.playerHandler.getVideoData/' + hash.group(1)
 
-        match = re.search('sources\s*:\s*\[(.*?)\]', html, re.DOTALL)
-        if match:
-            sources = re.findall('''['"]?file['"]?\s*:\s*['"]([^'"]+)['"][^{,]*(?:,['"]?label['"]?\s*:\s*['"]([^'"]*))?''', match.group(1))
-            sources = [(s[1], s[0]) for s in sources]
-            return helpers.pick_source(sources, self.get_setting('auto_pick') == 'true')
+        html = self.net.http_GET(url).content
+        if '"success":"1"' in html:
+            html = json.loads(html)['data']
+            flv_files = list(set(html['flv_files']))
+            sources = [(html['video_file'].rsplit('/', 1)[0] + '/' + i) for i in flv_files]
+            sources = [(i.rsplit('.', 2)[1], i) for i in sources]
+            source = helpers.pick_source(sources, self.get_setting('auto_pick') == 'true')
 
-        raise ResolverError('Unable to find youlol video')
+            return source
+        
+        raise ResolverError('File not found')
 
     def get_url(self, host, media_id):
-        return 'http://%s/%s.html' % (host, media_id)
+        return 'http://indavideo.hu/video/%s' % (media_id)
 
     @classmethod
     def get_settings_xml(cls):

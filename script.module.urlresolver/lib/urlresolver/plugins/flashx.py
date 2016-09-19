@@ -25,7 +25,7 @@ from urlresolver.resolver import UrlResolver, ResolverError
 class FlashxResolver(UrlResolver):
     name = "flashx"
     domains = ["flashx.tv"]
-    pattern = '(?://|\.)(flashx\.tv)/(?:embed-|dl\?)?([0-9a-zA-Z/-]+)'
+    pattern = '(?://|\.)(flashx\.tv)/(?:embed-|dl\?|embed.php\?c=)?([0-9a-zA-Z/-]+)'
 
     def __init__(self):
         self.net = common.Net()
@@ -40,7 +40,7 @@ class FlashxResolver(UrlResolver):
         aff = re.search("'aff', '(.*?)'", html).group(1)
         headers = { 'Referer': web_url,
                     'Cookie': '__cfduid=' + cfduid + '; lang=1'}
-        surl = 'http://www.flashx.tv/code.js?c=' + file_id
+        surl = re.search('src="(.*?' + file_id + ')',html).group(1)
         dummy = self.net.http_GET(url=surl, headers=headers).content
         headers = { 'Referer': web_url,
                     'Cookie': '__cfduid=' + cfduid + '; lang=1; file_id=' + file_id + '; aff=' + aff }
