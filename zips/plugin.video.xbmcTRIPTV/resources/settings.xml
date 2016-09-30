@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <category label="[COLOR white][B]Iptv[COLOR red]TR[/B][/COLOR] Ayarlar">
+        <setting label="[COLOR beige]Merhaba[/COLOR]" type="lsep"/>
+		<setting id="Name" type="label" default="Merhaba"/>
+		<setting type="sep" />
+		<setting label="[COLOR white][B]Iptv[COLOR red][B]TR [COLOR white][B]Kullanici Adinizi Girin:[/B][/COLOR]" type="lsep"/>
+		<setting id="Username" type="text" default=""/>
+		<setting label="[COLOR white][B]Iptv[COLOR red][B]TR [COLOR white][B] Sifrenizi Girin:[/B][/COLOR]" type="lsep"/>
+		<setting id="password" type="text" default=""/>
+  </category>
+</settings>

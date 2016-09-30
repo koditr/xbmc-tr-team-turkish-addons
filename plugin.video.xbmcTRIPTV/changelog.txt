@@ -1,3 +1,9 @@
-===0.0.5===
+=== 0.0.6 ===
 .............
-Tarih: 19.09.2016
+Tarih: 30.09.2016
+
+.............
+Bu Eklenti DreamTR ekibi tarafindan Hazirlanmistir.
+Eklenti icin ayrintili bilgi 
+http://dreamtr.club/iptvtr/
+Saygilar
