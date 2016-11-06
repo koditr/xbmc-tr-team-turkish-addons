@@ -22,7 +22,7 @@
 
 <addon id="plugin.video.dreAM"
        name="[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]"
-       version="0.0.75"
+       version="0.0.76"
        provider-name="[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]">
   <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
