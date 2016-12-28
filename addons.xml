@@ -22,13 +22,7 @@
 
 <addon id="plugin.video.dreAM"
        name="[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]"
-<<<<<<< .mine
        version="0.0.84"
-||||||| .r254
-       version="0.0.73"
-=======
-       version="0.0.83"
->>>>>>> .r287
        provider-name="[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]">
   <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
