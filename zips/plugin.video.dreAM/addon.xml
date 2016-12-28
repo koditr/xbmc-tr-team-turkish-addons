@@ -11,7 +11,8 @@
         <import addon="script.module.t0mm0.common"/>
         <import version="0.2.6" addon="script.module.mechanize"/>
         <import version="2.4.3" addon="script.module.requests"/>
-	</requires>
+  
+  </requires>
   <extension point="xbmc.python.pluginsource" library="dreAM.py">
         <provides>video</provides>
   </extension>
