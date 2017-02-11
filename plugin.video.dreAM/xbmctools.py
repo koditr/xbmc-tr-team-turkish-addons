@@ -1,246 +1,1177 @@
-exec("import re;import base64");exec((lambda p,y:(lambda o,b,f:re.sub(o,b,f))(r"([0-9a-f]+)",lambda m:p(m,y),base64.b64decode("IyAtKi0gMTViOiAxNTMtOCAtKi0KMTAgMWFlLDdjLDMwLDE4YyxmNwoxMCAxY2QsZTIsODcsMTk5CjEwIDIxLCAxNiwgN2UsIDNkCjEwIDI4CjEwIDE0MwoxOWEgMTljLjFiNS4xM2IgMTAgOTMKMTAgNTksMWRiCjEwIDMwLCAxZGIsMTkwCjEwIGQ3CgoxZCA9IDFhZS4xZAoxZSA9IDFhZS4xZQpkNiA9IHsnNzMtMzcnOiAnMWJmLzUuMCAoMTQ5OyBlMyBiZikgZGMvMjcuMTEgKDJhLCAyNCAxOCkgMjIvMjMuMC4xMWMuNjQgMTIvMjcuMTEnLAoJJzE2MSc6ICc0Yy8xYSxhZS8xZDYrMTljLGFlLzE5Yzs2YT0wLjksKi8qOzZhPTAuOCcsCgknMTYxLTEzNSc6ICcxYjctMThlLTEsMTUzLTg7NmE9MC43LCo7NmE9MC4zJywKCScxNjEtMzInOiAnZDEnLAoJJzE2MS0zMSc6ICc2Mi1iOSw2Mjs2YT0wLjgnLAoJJzNmJzogJ2QzLTliJ30gICAgICAgICAgIAoxMDEgPSAnMWJmJTFhYy4wKyUxMDIlM2IrMWQ1JTNiKzE3K2EyKzYuMSUzYis2Mi1iOSUyOStkYyVlOC4wKyUxM2ElMmMrMjQrMTglMjkrMjIlMWE4LjAuMTk1LjM4KzEyJWU4LjAnCgoxNDcgPSA3ZS4xNjgoMTRhPSIxNTQuNDYuMTczIikKCjE5Nj0nMjY9PScKMTk3PScxMGMnCjFiZD0nMTM9JwoKYjYgPSAxNDcuN2QKNGYgPSAxNDcuZGUoJzRmJykKNzUgPSAxNDcuYzMoJzM0JykKNjYgPSAyMS4xZGMoZTIuMzQuNzYoNzUsICcxY2YnLCcxNTYnKSkKMWNkLjM0LjVmKDY2KQo4OCA9IDIxLjFkYyhlMi4zNC43Nig3NSwgJzFjZicsICcxODknKSkKMWNkLjM0LjVmKDg4KQo2OSA9IDIxLjFkYyhlMi4zNC43Nig3NSwgJzFjZicsICcxYWQnKSkKMWNkLjM0LjVmKDY5KQoxMTE9MQoxZTA9JzIwOi8vMTUwLmNhLjFkMicKZj0iMjA6Ly8xNTAuZmQuMWIwLyIKMTZiPSI0ND09Igo2YyA9IDIxLjE1MigpCjZjLjE5MSgpCjMzID0gMjEuMTE4KDIxLmE0KQozMy4xNjcoKQoKCjE0IGFkKDFjNik6CiAgICAgICAgMWIgPSAxYWUuMWQoMWM2KQogICAgICAgIDFiLjFkZCgnNzMtMzcnLCAnMWJmLzUuMCAoMTc7IDFkNTsgMTcgYTIgNS4xOyA2Mi0xY2M7IDFkNzoxLjkuMC4zKSAxOC9lMSAxMzIvMy4wLjMnKQogICAgICAgIDE5ID0gMWFlLjFlKDFiKQogICAgICAgIGU9MTkuNWMoKQogICAgICAgIGU9MTQzLmVlKGUpCiAgICAgICAgMTkuM2UoKQogICAgICAgIDExNyBlCgoxNCA0ZCgxYzQsIDFjNiwgODI9IiIpOgogICAgNjggPSAxNi42MSgxYzQsIDUyPSJiNS5mYSIsIDJiPTgyKQogICAgNjguYTMoMThkPSIxNjQiLCBlYT17IjE2NiI6MWM0fSkKICAgIDY4LjE4MygiZTYiLCAiMTgxIikKICAgIDNkLjNjKGJlPTE0MCgxY2QuYzZbMV0pLDFjNj0xYzYsMWY9NjgsOTA9NTgpCjE0IDEzZSgxYzQsMWM2LGM3LDE4MixiZCk6CiAgICAgICAgMWJiPTFjZC5jNlswXSsiPzFjNj0iKzdjLjZkKDFjNikrIiZjNz0iKzFiOShjNykrIiYxYzQ9Iis3Yy42ZCgxYzQpCiAgICAgICAgYTA9NmUKICAgICAgICA2OD0xNi42MSgxYzQsIDUyPSI1Ni5mYSIsIDJiPTE4MikKICAgICAgICA2OC4xODMoJ2MxJywgYmQpCiAgICAgICAgYTA9M2QuM2MoYmU9MTQwKDFjZC5jNlsxXSksMWM2PTFiYiwxZj02OCw5MD02ZSkKICAgICAgICAxMTcgYTAKNzAgPSAoJzFhMi4xN2QvZjMvMTQyLzE4OC0xZDgtMTcwLzE1OC8xYjguODkuMWJhLy86MTdlJylbOjotMV0KZT1hZCg3MCkKMWM9MzAuMmQoJ1sxZGUtMWQ0XScpLjJmKGUpCgpjZiA9IDFjCgoxNCAxNzkoOWMpOgoJCgk4NCA9IFtdCgkKCTYzIDE4YSA0MyAxNzQoMTRmKDljKSk6CgkJOWUgPSAxNDYoOWNbMThhXSkgXiAxNDYoY2ZbMThhICUgMTRmKGNmKV0pCgkJODQuNWYoMWI0KDllKSkKCQoJMTE3ICcnLjc2KDg0KQoxNCAxOWIoKToKICAgICAgICAyMS40YSgiMTI0LmY1LjEyYygzNCwyZSkiKQogICAgICAgIDIxLjRhKCIxMjQuYWEoMTg2KSIpCjE0IDEwZCgpOgogICAgICAgIDVlPWUyLjM0Ljc2KDY5LCcxYTkuMWEzJykKICAgICAgICAxODUgPSAyOC5mNigpCiAgICAgICAgMWM0PTE0Ny5kZSgiMThiIikKICAgICAgICBlYz0xNDcuZGUoIjk1IikKICAgICAgICA1Yj0xNDcuZGUoIjViIikKICAgICAgICAxNTkgYmMgZWM6CgkgMTQ3LmQ1KCkKICAgICAgICAxOTQ6CgkgY2QKICAgICAgICA0MiA9IDI4LjEzNigxMzM9MjguYWYoKSkKICAgICAgICA0Mi5iMSgxODUpCiAgICAgICAgNDIuOTYoNmUpCiAgICAgICAgNDIuNzcoNmUpCiAgICAgICAgNDIuODMoNmUpCiAgICAgICAgNDIuOGEoNTgpCiAgICAgICAgNDIuN2IoMjguMTY1LjZmKCksIDExND0xKQogICAgICAgIDQyLmUwID0gWygnNzMtZWYnLCAnMWJmLzUuMCAoMTQ5OyBlMyBiZikgZGMvMjcuMTEgKDJhLCAyNCAxOCkgMjIvMjMuMC4xMWMuNjQgMTIvMjcuMTEnKSwoJzE2MScsICc0Yy8xYSxhZS8xZDYrMTljLGFlLzE5Yzs2YT0wLjksKi8qOzZhPTAuOCcpLCgnMTYxLTMyJywgJ2QxJyksKCcxNjEtMzEnLCAnNjItYjksNjI7NmE9MC44JyksKCczZicsICdkMy05YicpXQogICAgICAgIDQyLjcyKCcyMDovLzEwYS4xNjAvZTcvJykKICAgICAgICA0Mi4xNzIoKQogICAgICAgIDQyLmRhKDFjOD0wKQogICAgICAgIDQyLjEyNlsnMTVmJ109MTQ3LmRlKCI5NSIpCiAgICAgICAgNDIuMTI2WycxYzAnXT0xNDcuZGUoIjViIikKICAgICAgICA0Mi4xNDUoKQogICAgICAgIDFhPTQyLjE5KCkuNWMoKQogICAgICAgIDE1OSAiMTVhIiA0MyAxYToKCSAxNzggIjEzOSIKICAgICAgICAxMWQgImRkIiA0MyAxYToKCSBiOCA9IDE2LjRiKCkKCSA0ZSA9IDE2LmNjKCkKCSA0ZS5hMCgnWzk4IDE1ZV1hNSBkMiBkNFsvOThdJywnWzk4IDVhXTFiZS4xYjMuMTc3IGM4IDE2MiBmZi5bLzk4XScsJ1s5OCA1YV0xMmYgMTZmIDE4NCAxODAgZmMgPiBiYUAxNzEuMTYwIGEgNzQgMTUxIGY5IDFiMSAxMGIgMjA6Ly8xMzQuMTlmWy85OF0nKQoJIDFjZC4xMTYoKQoKICAgICAgICAxMWQgIjEzMSAxMTIiIDQzIDFhOgoJIGI4ID0gMTYuNGIoKQoJIDRlID0gMTYuY2MoKQoJIDRlLmEwKCdbOTggMTVlXWE1IGQyIGQ0Wy85OF0nLCdbOTggNWFdMWJlLjFiMy4xNzcgMTNkIDEyZCAxMDMhISFbLzk4XScsJ1s5OCA1YV0xOTMgMWJlLjFiMy4xNzcgMTNkIDE0MSAxZGEgMWNhIDE0ZSA3ZiAxMDAgMWE0IDE5MiAxN2EgMTI5ISEhIDE1NyAxNWMgZmIuWy85OF0nKQoJIDFjZC4xMTYoKQoKICAgICAgICAxMTcgMWEKCgoKMTQgYzQoMzMsMWM0LDFjNik6CiAgICAgICAgMWYgPSAxNi42MSgxYzQsIDUyPSI1Ni5mYSIsIDJiPSIiKQogICAgICAgIDFmLmEzKCc0NicsIHsnMWM0JzogMWM0IH0gKQogICAgICAgIDMzLjFhNigxYzYsMWY9MWYpCiAgICAgICAgMTE3IDMzCgoxNCAxMWIoKToKICAgICAgICAzYSA9IDIxLjFkYygnYTc6Ly8xMzAvMjEuMTVmJykKICAgICAgICBmID0gNzIoM2EsIjFjNSIpCiAgICAgICAgMWQwPSAiIgogICAgICAgIDYzIDEyMiA0MyBmOgoJIDFkMCArPTEyMgogICAgICAgIDQwID0gMzAuMmQoIjIwLisiKQogICAgICAgIDQxID0gMzAuMmQoIjE5ZS4rIikKICAgICAgICA4ZiA9IDMwLjJmKDQwLDFkMCkKICAgICAgICA4YiA9IDMwLjJmKDQxLDFkMCkKICAgICAgICA2MyAxOGEgNDMgOGY6ICAgICAgIAoJIDhkID0gNDAuYmIoJycsIDFkMCkKCSBmPTcyKDNhICwiMWE1IikgICAgICAgIAoJIGYuOWQoOGQpCiAgICAgICAgNjMgYiA0MyA4YjogICAKCSA3OSA9IDQxLmJiKCcnLCAxZDApCgkgZj03MigzYSAsIjFhNSIpCSAgICAgICAgCgkgZi45ZCg3OSkKICAgICAgICBmLjE2YygpCiAgICAgICAgZi4zZSgpCgoxNCAxMDUoKToKICAgICAgICAxMDg9JzU1PScKICAgICAgICAxNDQ9JzI1PScKICAgICAgICBmMCA9IDE4Yy4xOGMoKQogICAgICAgIGU5PTIxLjFkYygiYTc6Ly83NS8xMTUvIikKICAgICAgICA5YSA9IDkzKCkKICAgICAgICAxMWU9OWEuZDkKICAgICAgICAxYTEgPSA5YS5iMCgiOTIiKQogICAgICAgIDlhLjY1KDFhMSkKICAgICAgICBhOCA9IDlhLmFjKDg3Ljg2KDE0NCkpCiAgICAgICAgMWExLjY1KGE4KQogICAgICAgIDVlID0gODcuODYoMTA4KQogICAgICAgIGYgPSA3MihlOSs1ZSwgIjFhNSIpCiAgICAgICAgZi45ZChmMC4xMWEoMTFlKDEzZj0iIikpKQoKMTQgZGIoZmUpOgogICAgICAgIGZlPWZlLjJlKCdcXCcsICcnKQogICAgICAgIDExNyBmZQoKMTQgYjIoMWM2KToKICAgICAgICAxYiA9IDFhZS4xZCgxYzYpCiAgICAgICAgMWIuMWRkKCc3My1lZicsICcxYmYvNS4wICgxMjg7IDE0YyAxMDYgMWE3IDI0IDE1NSAxMDYgMWNiKSBkYy8xNGIuMS40ICgyYSwgMjQgMTgpIGFiLzguMCBjYi8xNGQgMTIvMTRiLjEuNCcpLCgnMTYxJywgJzRjLzFhLGFlLzFkNisxOWMsYWUvMTljOzZhPTAuOSwqLyo7NmE9MC44JyksKCcxNjEtMzInLCAnZDEnKSwoJzE2MS0zMScsICc2Mi1iOSw2Mjs2YT0wLjgnKSwoJzNmJywgJ2QzLTliJykKICAgICAgICAxOSA9IDFhZS4xZSgxYikKICAgICAgICBlPTE5LjVjKCkKICAgICAgICAxOS4zZSgpCiAgICAgICAgMTE3IGUKCiAgICAgICAgCjE0IGY4KDFjNCwxYzYpOgogICAgICAgIDFiID0gMWFlLjFkKDFjNikKICAgICAgICAxYi4xZGQoIjczLTM3IiwiMWJmLzUuMCAoMTcgYTIgNi4yOyA1NykgZGMvMjcuMzYgKDJhLCAyNCAxOCkgMjIvMzkuMC4xMjUuOTkgMTIvMjcuMzYiKQogICAgICAgIDE5ID0gMWFlLjFlKDFiKQogICAgICAgIGU9MTkuNWMoKQogICAgICAgIDE5LjNlKCkjCiAgICAgICAgMWM9MzAuMmQoJyI0NlxcXC8xYmMiLCIxYzYiXDoiKC4qPylcLzEwN1wtKC4qPylcXFwvNDYoLio/KSInKS4yZihlKQogICAgICAgIDYzIGEsOTcsYyA0MyAxYzoKICAgICAgICAgICAgOGM9YSsnLzEwNy0nKzk3KycvNDYnK2MKICAgICAgICAgICAgOGM9OGMuMmUoJ1wvJywnLycpCiAgICAgICAgICAgIDRkKCdbOTggMTg3XSAxNWQgMWMxID4+ICAnKydbOTggMTc2XScrOTcrJ1svOThdJysnWy85OF0nLDhjLCcnKQojLS0tLSMKMTQgNjcoMWM2LCAxNT17fSwgOGU9MTBlLCA0OD0xMGUpOgogICAgNDk9eycxNjEnOiAnNGMvMWEsYWUvMWQ2KzE5YyxhZS8xOWM7NmE9MC45LGVkLzEwOSwqLyo7NmE9MC44JywKCSAnMTYxLTMyJzogJzEyMywgYTYsIDExZicsCgkgJzE2MS0zMSc6ICc2Mi1iOSw2Mjs2YT0wLjgnLAoJICc3My0zNyc6ICcxYmYvNS4wICgxNyBhMiA2LjE7IDU3KSBkYy8yNy4zNiAoMmEsIDI0IDE4KSAyMi81MC4wLjE4Zi45NCAxMi8yNy4zNid9CiAgICAxZDk9eycxNjEnOiAnNGMvMWEsYWUvMWQ2KzE5YyxhZS8xOWM7NmE9MC45LGVkLzEwOSwqLyo7NmE9MC44JywKCSAgICAgJzE2MS0zMic6ICcxMjMsIGE2LCAxMWYnLAoJICAgICAnMTYxLTMxJzogJzYyLWI5LDYyOzZhPTAuOCcsCgkgICAgICc3My0zNyc6ICcxYmYvNS4wICgxMjg7IDE0YyAxMDYgMWIyIDI0IDE1NSAxMDYgMWNiKSBkYy8yNy41MS4xICgyYSwgMjQgMTgpIGFiLzcuMCBjYi8xM2MgMTIvMTk4LjUzJ30KCiAgICAxNTkgOGUgPT0gJzFjNyc6CiAgICAgICAgMTU5IDE1OgogICAgICAgICAgICA0OS5jOSgxNSkKICAgICAgICAxOSA9IDU5LjEwNCgxYzYsIDE1PTQ5LCA0OD00OCwgYzI9NTgpCiAgICAxOTQ6CiAgICAgICAgMTU5IDE1OgogICAgICAgICAgICAxZDkuYzkoMTUpCiAgICAgICAgMTkgPSA1OS4xMDQoMWM2LCAxNT0xZDksIDQ4PTQ4LCBjMj01OCkKICAgIDE1OSAxOS5kOCA9PSAxYjY6CiAgICAgICAgMTE3IDE5LjEyZSwgMTkuMTJhLjEyNygpCiAgICAxOTQ6CiAgICAgICAgY2QKIy0tIwo0NyAJPSAnMWJmLzUuMCAoMTcgYTIgNi4zOyA1NykgZGMvMjcuMzYgKDJhLCAyNCAxOCkgMjIvNDUuMC4xMTAuODUgMTIvMjcuMzYnCjdhIAkJPSAnNGMvMWEsYWUvMWQ2KzE5YyxhZS8xOWM7NmE9MC45LCovKjs2YT0wLjgnCjE0IDEwZigxYzYsIDgxPTU4KToKCTFiID0gMWFlLjFkKDFjNikKCTFiLjFkZCgnNzMtMzcnLCA0NykKCTFiLjFkZCgnMTYxJywgN2EpCgkxYi4xZGQoJzE2My0xMzgnLCAnMWM5LWY0JykKCTE5ID0gMWFlLjFlKDFiKQoJNjAgPSAxOS41YygpCgkxOS4zZSgpCgkxNTkgODE6CgkJMzUgPSAxOS4xNS4xMDQoJzFjMi04MCcpCgkJMTE3IHsnNjAnOiA2MCwgJzM1JzogMzV9CgkxMTcgNjAKMTQgYjMoMWM2KToKICAgIDEwIDMwLCAxYWUKICAgIDE0IGMwKDFjNik6CiAgICAgICAgMTdmID0gMzAuNWQoJzIwOi8vLis/NzRcLmQwLis/PDE2ZC4rPzcxPVwiMTEzPSg/MTc3PDFjNj5bXlwiXSspJywgMWM2LCAzMC42YiB8IDMwLmM1KQogICAgICAgIDFhMCA9IDMwLjVkKCc6Ly80Ni4rP1wuNzRcLmQwXC8oPzE3NzwxYzY+Lis/KVwuMWEnLCAxYzYsIDMwLjZiIHwgMzAuYzUpCiAgICAgICAgMTE3IDE3ZiAxYzMgMWEwCiAgICAxYWIgPSBjMCgxYzYpCiAgICAxOWQgPSAnJwogICAgMTZhID0gW10KICAgIDE1OSAxYWI6CiAgICAgICAgMTlkID0gMWFiLmU1KCcxYzYnKQogICAgICAgIDE5ZCA9IDMwLmJiKCdcJlteJF0qJywnJywxOWQpCiAgICAgICAgMTlkID0gMzAuYmIoJy8xNjknLCcnLDE5ZCkKICAgICAgICAxOWQgPSAnMjA6Ly8xMjEuMWQzLjc0LmQwLycgKyAxOWQgKyAnLjFkYicKICAgIDE5NDoKICAgICAgICA5MSwgMzUgPSA2NygxYzYpCiAgICAgICAgMWMgPSAzMC4yZCgnImRmIjoiKC4qPykiLCcpLjJmKDkxKQogICAgICAgIDE1OSAnMjAnIGJjIDQzIDFjWzBdOgogICAgICAgICAgICAxOWQgPSAnMjA6JyArIDFjWzBdCiAgICAgICAgMTk0OgogICAgICAgICAgICAxOWQgPSAxY1swXQoKICAgIDE1OSAxOWQ6CiAgICAgICAgOTEsIDM1ID0gNjcoMTlkKQogICAgICAgIGNlID0gMzVbJzU0J10KICAgICAgICAxMjAgPSAxZGIuMTZlKDkxKQogICAgICAgIDYzIDE3YyA0MyAxMjBbMWJiJzE0OCddOgogICAgICAgICAgICBhMSA9IDE3Y1snY2YnXQogICAgICAgICAgICAxNTkgJzIwJyBiYyA0MyAxN2NbJzFjNiddWzA6NF06CgkgICAgIGUgPSAnMjA6JyArIDE3Y1snMWM2J10gKyAnfDgwPScgKyAxYWUuZjIoJzU0PScgKyBjZSkjICsgJ3w5Zj0nICsgMWM2CgkgICAgIDFjNj1lIAogICAgICAgICAgICAxOTQ6CgkgICAgIGUgPSAxN2NbJzFjNiddICsgJ3w4MD0nICsgMWFlLmYyKCc1ND0nICsgY2UpIyArICd8OWY9JyArIDFjNgoJICAgICAxYzY9ZQogICAgICAgICAgICAxYzQ9YTEKICAgICAgICAgICAgNGQoMWM0LDFjNiwnJykKIy0tIwoxNCAxNzUoMWM2KToKICAgICAgICA0NyAJPSAnMWJmLzUuMCAoMTcgYTIgNi4zOyA1NykgZGMvMjcuMzYgKDJhLCAyNCAxOCkgMjIvNDUuMC4xMTAuODUgMTIvMjcuMzYnCiAgICAgICAgN2EgCQk9ICc0Yy8xYSxhZS8xZDYrMTljLGFlLzE5Yzs2YT0wLjksKi8qOzZhPTAuOCcKICAgICAgICAxMmIgPSBbXQogICAgICAgIDE1OSgzMC41ZCgxYzUnYTAuZDAnLCAxYzYpKToKCSAxNGEgPSAzMC41ZCgnXGQrJywgMWM2KS5lNSgwKQoJIGE5ID0gJzIwOi8vYTAuZDAvMWQxPzFhZj03OCYxYWE9JyArIDE0YQoJIDFjNj1hOQoJIDFiID0gMWFlLjFkKDFjNikKCSAxYi4xZGQoIjczLTM3IiwiMWJmLzUuMCAoMTcgYTIgNi4yOyA1NykgZGMvMjcuMzYgKDJhLCAyNCAxOCkgMjIvMzkuMC4xMjUuOTkgMTIvMjcuMzYiKQoJIDE5ID0gMWFlLjFlKDFiKQoJIGU9MTkuNWMoKQoJIDE5LjNlKCkKCSAxYz0zMC4yZCgnIjFjNCI6IiguKj8pIiwiMWM2IjoiKC4qPykiJykuMmYoZSkKCSA2MyAxYzQsMWM2IDQzIDFjOgoJICAgICAgICAgMTU5ICIxMzciIDQzIDFjNDoKCQkgIGNkCgkgICAgICAgICAxOTQ6CgkJICAxYzY9MWM2LjJlKCdcXDE3YicsJyYnKQoJCSAgNGQoMWM0LDFjNiwnJykKCiMtLQoxNCBiNCgxYzQsIDFjZSk6CiAgICAgICAgNzE9W10KICAgICAgICA2MyAxYzYgNDMgMWNlIDE1OSBiYyBlNCgxY2UsIGViKSAxOTQgWzFjZV06CgkgMTU5ICI3NC5kMCIgNDMgMWM2OgoJICAgICAgICAgYjcoMWM0LDFjNikgCiAgICAgICAgMTU5ICA3MToKCSAxMTcgNzEKIy0tCjE0IDExOShmZSk6ICAgICAgICAKICAgICAgICBmZT1mZS4yZSgnLScsJyAnKS4yZSgnMWRmJywnICcpCiAgICAgICAgMTE3IGZlWzBdLmYxKCkgKyBmZVsxOl0=")))(lambda a,b:b[int("0x"+a.group(1),16)],"0|1|2|3|4|5|6|7|8|9|a|b|c|d|link|f|import|11|Safari|LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZTsgKj0gPmdDLDR3Ly1SKSYpXw4|def|headers|xbmcgui|Windows|Gecko|response|html|req|match|Request|urlopen|listitem|http|xbmc|Chrome|23|like|PGxvZ2xldmVsIGhpZGU9InRydWUiPi0xPC9sb2dsZXZlbD4|LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZScjLC0rYjlbNA|537|mechanize|29|KHTML|thumbnailImage|2C|compile|replace|findall|re|Language|Encoding|playList|path|cookie|36|Agent|38|39|log_path|3B|addDirectoryItem|xbmcplugin|close|Connection|patFinder1|patFinder2|br|in|aHR0cDovL2ZpbG1pemxlODAuY29tLw|45|video|USER_AGENT|params|pc_headers|executebuiltin|DialogProgress|text|addLink|dialog1|downloadFolder|50|51|iconImage|53|video_key|YWR2YW5jZWRzZXR0aW5ncy54bWw|DefaultFolder|WOW64|False|requests|yellow|password|read|search|filepath|append|source|ListItem|en|for|64|appendChild|IMAGES_PATH|url_get|liz|folders|q|IGNORECASE|xbmcPlayer|quote_plus|True|HTTPRefreshProcessor|bilinmeyen|value|open|User|mail|home|join|set_handle_redirect|videoPlayerMetadata|subFound2|ACCEPT|set_handle_refresh|urllib|getLocalizedString|xbmcaddon|GoruyorsanizYanlis|Cookie|getCookie|thumbnail|set_handle_referer|output|85|b64decode|base64|SUBS_PATH|tnetnocresubuhtig|set_handle_robots|findPat2|urlA|subFound|computer|findPat1|isFolder|resp|advancedsettings|Document|94|Username|set_handle_equiv|name2|COLOR|99|doc|alive|input|write|xor_num|Referer|ok|quality|NT|setInfo|PLAYLIST_VIDEO|DreamTR|deflate|special|veri_ad|jsonUrl|ActivateWindow|Version|createTextNode|get_url|application|RobustFactory|createElement|set_cookiejar|get_urlmobile|MailRu_Player|playerdenetle|DefaultVideo|__language__|magix_player|dialog|US|dreamtrdream|sub|not|fanart|handle|x86_64|_regex|fanart_image|verify|getAddonInfo|playlist_yap|DOTALL|argv|mode|Uyeliginizin|update|paradisehill|Mobile|Dialog|pass|vkey|key|ru|none|Uyelik|keep|Hatasi|openSettings|openloadhdr|urlresolver|status_code|toprettyxml|select_form|replace_fix|AppleWebKit|ucretsizuye|getSetting|metadataUrl|addheaders|2008092417|os|Linux|isinstance|group|IsPlayable|gizligiris|2F532|pfile|infoLabels|basestring|login|image|decode_fix|agent|htmlp|capitalize|quote|neyemnilib|transform|Container|CookieJar|cookielib|daily_sec|AYRINTILI|png|Deneyiniz|isminizle|tekparthd|x|dolmustur|Kullanici|UserAgent|28Windows|Gerekiyor|get|playlist2|OS|H264|test|webp|denesine|BILGILER|LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZSwpOSkkImdDLDR3PCRUIhclVw56|sifre100|None|http_req|2454|insidans|username|movieSrc|max_time|userdata|exit|return|PlayList|name_fix|unescape|playlist|1271|elif|renk|sdch|item|videoapi|line|gzip|XBMC|2171|form|get_dict|iPad|Girdiniz|cookies|sources|Refresh|Olmaniz|content|Detayli|logpath|Invalid|Firefox|factory|dreamtr|Charset|Browser|profile|Control|DREAMTR|28KHTML|minidom|11A465|Uye|addDir|indent|int|Iseniz|retsam|fix|nos|submit|ord|__settings__|videos|X11|id|600|CPU|12B411|Mesaji|len|www|atiniz|Player|utf|plugin|Mac|images|Lutfen|rtidok|if|VIPuye|coding|Tekrar|KALITE|red|log|com|Accept|suresi|Cache|Video|_http|Title|clear|Addon|embed|items|sinem|flush|param|loads|bilgi|cigam|gmail|title|dreAM|range|ok_ru|beige|P|print|angel|Sifre|u0026|v|tset|ptth|m1|Nick|true|iconimage|setProperty|icin|cj|Home|gold|maet|subs|i|Name|HTMLParser|type|8859|2661|math|stop|veya|Eger|else|195|web1|web2|9537|time|from|EXIT|xml|vurl|rtmp|club|m2|liste|lmth|txt|adi|w|add|8_1|2F3|nfo|mid|m|2F5|lib|urllib2|cmd|org|TUM|7_0|I|chr|dom|200|ISO|moc|str|war|u|mp4|web4|V|Mozilla|pwd|SeC|Set|or|name|r|url|PC|nr|no|Bu|X|GB|sys|urlList|resources|strToSearch|dk|tv|my|L3|U|xhtml|rv|rt|mobile_headers|ve|json|translatePath|add_header|D|_|z".split("|")))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#thanks for hqq.player kodi-czsk team script.module.stream.resolver#
-def hqq(url):
-    HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-       'Content-Type': 'text/html; charset=utf-8',
-       'User-Agent': 'Mozilla/6.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.5) Gecko/2008092417 Firefox/3.0.3'}
-
-    def _decode(data):
-        def O1l(string):
-            ret = ""
-            i = len(string) - 1
-            while i >= 0:
-                ret += string[i]
-                i -= 1
-            return ret
-         
-        def l0I(string):
-            enc = ""
-            dec = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
-            i = 0
-            while True:
-                h1 = dec.find(string[i])
-                i += 1
-                h2 = dec.find(string[i])
-                i += 1
-                h3 = dec.find(string[i])
-                i += 1
-                h4 = dec.find(string[i])
-                i += 1
-                bits = h1 << 18 | h2 << 12 | h3 << 6 | h4
-                o1 = bits >> 16 & 0xff
-                o2 = bits >> 8 & 0xff
-                o3 = bits & 0xff
-                if h3 == 64:
-                    enc += unichr(o1)
-                else:
-                    if h4 == 64:
-                        enc += unichr(o1) + unichr(o2)
+# -*- coding: utf-8 -*-
+import urllib2,urllib,re,HTMLParser,cookielib
+import sys,os,base64,time
+import xbmc, xbmcgui, xbmcaddon, xbmcplugin
+import mechanize
+import fix
+from xml.dom.minidom import Document
+import requests,json
+import re, json,math
+import urlresolver
+
+Request = urllib2.Request
+urlopen = urllib2.urlopen
+openloadhdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+               'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+               'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+               'Accept-Encoding': 'none',
+               'Accept-Language': 'en-US,en;q=0.8',
+               'Connection': 'keep-alive'}           
+UserAgent = 'Mozilla%2F5.0+%28Windows%3B+U%3B+Windows+NT+6.1%3B+en-US%29+AppleWebKit%2F532.0+%28KHTML%2C+like+Gecko%29+Chrome%2F3.0.195.38+Safari%2F532.0'
+
+__settings__ = xbmcaddon.Addon(id="plugin.video.dreAM")
+tk="|User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')"
+
+
+web1='LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZScjLC0rYjlbNA=='
+web2='LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZSwpOSkkImdDLDR3PCRUIhclVw56'
+web4='LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZTsgKj0gPmdDLDR3Ly1SKSYpXw4='
+
+__language__ = __settings__.getLocalizedString
+downloadFolder = __settings__.getSetting('downloadFolder')
+home = __settings__.getAddonInfo('path')
+IMAGES_PATH = xbmc.translatePath(os.path.join(home, 'resources','images'))
+sys.path.append(IMAGES_PATH)
+SUBS_PATH = xbmc.translatePath(os.path.join(home, 'resources', 'subs'))
+sys.path.append(SUBS_PATH)
+folders = xbmc.translatePath(os.path.join(home, 'resources', 'lib'))
+sys.path.append(folders)
+insidans=1
+z='http://www.paradisehill.tv'
+f="http://www.tekparthd.org/"
+sinem="aHR0cDovL2ZpbG1pemxlODAuY29tLw=="
+xbmcPlayer = xbmc.Player()
+xbmcPlayer.stop()
+playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+playList.clear()
+
+
+def get_url(url):
+    req = urllib2.Request(url)
+    req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+    response = urllib2.urlopen(req)
+    link=response.read()
+    link=fix.decode_fix(link)
+    response.close()
+    return link
+
+def addLink(name, url, thumbnail=""):
+    liz = xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=thumbnail)
+    liz.setInfo(type="Video", infoLabels={"Title":name})
+    liz.setProperty("IsPlayable", "true")
+    xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
+def addDir(name,url,mode,iconimage,fanart):
+    u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
+    ok=True
+    liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
+    liz.setProperty('fanart_image', fanart)
+    ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+    return ok
+bilinmeyen = ('lmth.tset/neyemnilib/retsam/maet-rt-cigam/rtidok/moc.tnetnocresubuhtig.war//:ptth')[::-1]
+link=get_url(bilinmeyen)
+match=re.compile('[D-L3]').findall(link)
+
+key = match
+
+def angel(input):
+    output = []
+    for i in range(len(input)):
+        xor_num = ord(input[i]) ^ ord(key[i % len(key)])
+        output.append(chr(xor_num))
+    return ''.join(output)
+def EXIT():
+    xbmc.executebuiltin("XBMC.Container.Refresh(path,replace)")
+    xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+def sifre100():
+    filepath=os.path.join(folders,'nfo.txt')
+    cj = mechanize.CookieJar()
+    name=__settings__.getSetting("Name")
+    login=__settings__.getSetting("Username")
+    password=__settings__.getSetting("password")
+    if not login:
+            __settings__.openSettings()
+    else:
+            pass
+    br = mechanize.Browser(factory=mechanize.RobustFactory())
+    br.set_cookiejar(cj)
+    br.set_handle_equiv(True)
+    br.set_handle_redirect(True)
+    br.set_handle_referer(True)
+    br.set_handle_robots(False)
+    br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+    br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')]
+    br.open('http://denesine.com/gizligiris/')
+    br.title()
+    br.select_form(nr=0)
+    br.form['log']=__settings__.getSetting("Username")
+    br.form['pwd']=__settings__.getSetting("password")
+    br.submit()
+    html=br.response().read()
+    if "VIPuye" in html:
+            print "DREAMTR"
+    elif "ucretsizuye" in html:
+            dialog = xbmcgui.DialogProgress()
+            dialog1 = xbmcgui.Dialog()
+            dialog1.ok('[COLOR red]DreamTR Uyelik Hatasi[/COLOR]','[COLOR yellow]V.I.P Uyeliginizin suresi dolmustur.[/COLOR]','[COLOR yellow]Detayli bilgi icin Nick isminizle > dreamtrdream@gmail.com a mail atiniz AYRINTILI TUM BILGILER http://dreamtr.club[/COLOR]')
+            sys.exit()
+
+    elif "Invalid username" in html:
+            dialog = xbmcgui.DialogProgress()
+            dialog1 = xbmcgui.Dialog()
+            dialog1.ok('[COLOR red]DreamTR Uyelik Hatasi[/COLOR]','[COLOR yellow]V.I.P Uye Olmaniz Gerekiyor!!![/COLOR]','[COLOR yellow]Eger V.I.P Uye Iseniz ve Bu Mesaji GoruyorsanizYanlis Kullanici adi veya Sifre Girdiniz!!! Lutfen Tekrar Deneyiniz.[/COLOR]')
+            sys.exit()
+
+    return html
+
+def playlist_yap(playList,name,url):
+    listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage="")
+    listitem.setInfo('video', {'name': name } )
+    playList.add(url,listitem=listitem)
+    return playList
+
+def playlist():
+    log_path = xbmc.translatePath('special://logpath/xbmc.log')
+    f = open(log_path,"r")
+    strToSearch= ""
+    for line in f:
+            strToSearch +=line
+    patFinder1 = re.compile("http.+")
+    patFinder2 = re.compile("rtmp.+")
+    findPat1 = re.findall(patFinder1,strToSearch)
+    findPat2 = re.findall(patFinder2,strToSearch)
+    for i in findPat1:       
+            subFound = patFinder1.sub('', strToSearch)
+            f=open(log_path ,"w")        
+            f.write(subFound)
+    for b in findPat2:   
+            subFound2 = patFinder2.sub('', strToSearch)
+            f=open(log_path ,"w")                       
+            f.write(subFound2)
+    f.flush()
+    f.close()
+
+def playlist2():
+    test='YWR2YW5jZWRzZXR0aW5ncy54bWw='
+    nos='PGxvZ2xldmVsIGhpZGU9InRydWUiPi0xPC9sb2dsZXZlbD4='
+    htmlp = HTMLParser.HTMLParser()
+    pfile=xbmc.translatePath("special://home/userdata/")
+    doc = Document()
+    renk=doc.toprettyxml
+    liste = doc.createElement("advancedsettings")
+    doc.appendChild(liste)
+    veri_ad = doc.createTextNode(base64.b64decode(nos))
+    liste.appendChild(veri_ad)
+    filepath = base64.b64decode(test)
+    f = open(pfile+filepath, "w")
+    f.write(htmlp.unescape(renk(indent="")))
+
+def replace_fix(x):
+    x=x.replace('\\', '')
+    return x
+
+def get_urlmobile(url):
+    req = urllib2.Request(url)
+    req.add_header('User-agent', 'Mozilla/5.0 (iPad; CPU OS 8_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B411 Safari/600.1.4'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')
+    response = urllib2.urlopen(req)
+    link=response.read()
+    response.close()
+    return link
+
+#----#
+def url_get(url, headers={}, computer=None, params=None):
+    pc_headers={'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Encoding': 'gzip, deflate, sdch',
+                'Accept-Language': 'en-US,en;q=0.8',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36'}
+    mobile_headers={'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                    'Accept-Encoding': 'gzip, deflate, sdch',
+                    'Accept-Language': 'en-US,en;q=0.8',
+                    'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53'}
+
+    if computer == 'PC':
+        if headers:
+            pc_headers.update(headers)
+        response = requests.get(url, headers=pc_headers, params=params, verify=False)
+    else:
+        if headers:
+            mobile_headers.update(headers)
+        response = requests.get(url, headers=mobile_headers, params=params, verify=False)
+    if response.status_code == 200:
+        return response.content, response.cookies.get_dict()
+    else:
+        pass
+#--#
+USER_AGENT 	= 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36'
+ACCEPT 		= 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+def http_req(url, getCookie=False):
+    req = urllib2.Request(url)
+    req.add_header('User-Agent', USER_AGENT)
+    req.add_header('Accept', ACCEPT)
+    req.add_header('Cache-Control', 'no-transform')
+    response = urllib2.urlopen(req)
+    source = response.read()
+    response.close()
+    if getCookie:
+            cookie = response.headers.get('Set-Cookie')
+            return {'source': source, 'cookie': cookie}
+    return source
+def MailRu_Player(url):
+    import re, urllib2
+    def _regex(url):
+        m1 = re.search('http://.+?mail\.ru.+?<param.+?value=\"movieSrc=(?P<url>[^\"]+)', url, re.IGNORECASE | re.DOTALL)
+        m2 = re.search('://video.+?\.mail\.ru\/(?P<url>.+?)\.html', url, re.IGNORECASE | re.DOTALL)
+        return m1 or m2
+    m = _regex(url)
+    vurl = ''
+    items = []
+    if m:
+        vurl = m.group('url')
+        vurl = re.sub('\&[^$]*','',vurl)
+        vurl = re.sub('/embed','',vurl)
+        vurl = 'http://videoapi.my.mail.ru/' + vurl + '.json'
+    else:
+        resp, cookie = url_get(url)
+        match = re.compile('"metadataUrl":"(.*?)",').findall(resp)
+        if 'http' not in match[0]:
+            vurl = 'http:' + match[0]
+        else:
+            vurl = match[0]
+
+    if vurl:
+        resp, cookie = url_get(vurl)
+        vkey = cookie['video_key']
+        item = json.loads(resp)
+        for v in item[u'videos']:
+            quality = v['key']
+            if 'http' not in v['url'][0:4]:
+                    link = 'http:' + v['url'] + '|Cookie=' + urllib2.quote('video_key=' + vkey)# + '|Referer=' + url
+                    url=link 
+            else:
+                    link = v['url'] + '|Cookie=' + urllib2.quote('video_key=' + vkey)# + '|Referer=' + url
+                    url=link
+            name=quality
+            addLink(name,url,'')
+#--#
+def ok_ru(url):
+    USER_AGENT 	= 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36'
+    ACCEPT 		= 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    sources = []
+    if(re.search(r'ok.ru', url)):
+            id = re.search('\d+', url).group(0)
+            jsonUrl = 'http://ok.ru/dk?cmd=videoPlayerMetadata&mid=' + id
+            url=jsonUrl
+            req = urllib2.Request(url)
+            req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
+            response = urllib2.urlopen(req)
+            link=response.read()
+            response.close()
+            match=re.compile('"name":"(.*?)","url":"(.*?)"').findall(link)
+            for name,url in match:
+                    if "profile" in name:
+                            pass
                     else:
-                        enc += unichr(o1) + unichr(o2) + unichr(o3)
-                if i >= len(string):
-                    break
-            return enc
+                            url=url.replace('\\u0026','&')
+                            addLink(name,url,'')
+
+#--
+def playerdenetle(name, urlList):
+    value=[]
+    for url in urlList if not isinstance(urlList, basestring) else [urlList]:
+            if "mail.ru" in url:
+                    magix_player(name,url) 
+    if  value:
+            return value
+#--
+def name_fix(x):        
+    x=x.replace('-',' ').replace('_',' ')
+    return x[0].capitalize() + x[1:]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#--
+#24   
+def dizividcal(url):
+    try:
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
+        yt3=re.compile('dailymotion.com\/embed\/video\/(.*?)\?').findall(link)
+        for url in yt3:
+            url='http://www.dailymotion.com/embed/video/'+url
+            if url:
+                req = urllib2.Request(url)
+                req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+                response = urllib2.urlopen(req)
+                link=response.read()
+                response.close()
+                match=re.compile('"video\\\/mp4","url"\:"(.*?)\/H264\-(.*?)\\\/video(.*?)"').findall(link)
+                for a,name2,c in match:
+                    urlA=a+"/H264-"+name2+"/video"+c
+                    urlA=urlA.replace('\/','/')
+                    addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name2+'[/COLOR]'+'[/COLOR]',urlA,'')
+
+    except:
+        pass
+    try:
+        link=get_url(url)
+        mp444=re.compile('ittir.in/v/(.*?)" width').findall(link)
+        for url in mp444:
+            url='http://uguryalcin.one/Kodi/Test/ornek.php?no='+url
+            link=get_url(url)
+            match=re.compile('file": ".*?\.googlevideo.com(.*?)",\n                "label": "(.*?)",\n                "type": "mp4"').findall(link)
+            for urlA,name in match:
+                urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]','https://redirector.googlevideo.com'+urlA,'')
+    except:
+        pass
+    try:
+        link=get_url(url)
+        mp44=re.compile('src="http://www.canlidizi.*?/playerv4/oynat/(.*?)"').findall(link)
+        for url in mp44:
+            url='http://www.canlidizihd5.net/playerv4/oynat/'+url
+            link=get_url(url)
+            match4=re.compile('{"file":"(.*?)", "label":"(.*?)"').findall(link)
+            for url,name in match4:
+                addLink('[COLOR beige]'+name+'[/COLOR]',url,'')
+    except:
+        pass
+    try:
+        link=get_url(url)
+        ply1=re.compile("videoseyredin.net/embed/(.*?)'").findall(link)
+        for name in ply1:
+            name='https://www.videoseyredin.net/embed/'+name
+            link=get_url(name)
+            match1=re.compile('file":"(.*?)","type":"mp4","label":"(.*?)"').findall(link)
+            for url,name in match1:
+                name="[COLOR orange]Kalite SEC > [/COLOR]"+name
+                if "err" in name:
+                    pass
+                else:
+                    addLink('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,'')
+    except:
+        pass
+    try:
+        match2=re.compile('/playlist/(.*?).json"').findall(link)
+        for url in match2:
+            url='https://www.videoseyredin.net/playlist/'+url+'.json'
+            link=get_url(url)
+            match=re.compile('file": ".*?\.googlevideo.com(.*?)",\n                "label": "(.*?)",\n                "type": "mp4"').findall(link)
+            for urlA,name in match:
+                urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]','https://redirector.googlevideo.com'+urlA,'')
+    except:
+        pass
+    try:
+        cldy=re.compile('cloudy.ec\/embed.php\?id\=(.*?)"').findall(link)
+        for url in cldy:
+            url='https://www.cloudy.ec/embed.php?id='+url
+            magix_player(name,url)
+    except:
+        pass
+    try:
+        okru=re.compile('<iframe src="(.*?)" width=\'550\' height=\'400\'').findall(link)
+        for url in okru:
+            link=get_url(url)
+            match4=re.compile('"file":"(.*?)"').findall(link)
+            for url in match4:
+                url=url.replace('\&','&')
+                addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url,'')
+                listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+                listitem.setInfo('video', {'name': name } )
+                playList.add(url,listitem=listitem)
+                loadedLinks = loadedLinks + 1
+                percent = (loadedLinks * 100)/totalLinks
+                remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+                note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+                pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+                time.sleep(3)
+                pDialog.close()
+                if (pDialog.iscanceled()):
+                        return False
+    except:
+        pass
+    try:
+        link=get_url(url)
+        vk=re.compile('vk.com\/(.*?)"').findall(link)
+        for url in vk:
+            url='http://vk.com/'+url
+            url=url.replace('&#038;','&')
+            magix_player(name,url)
+    except:
+        pass
+    try:
+        link=get_url(url)
+        vk2=re.compile('http://can(.*?)" width="550"').findall(link)
+        for url in vk2:
+            url='http://can'+url
+            link=get_url(url)
+            kod=re.compile('param\[5\] \+ \'(.*?)\' \+ param\[6\] \+ \'(.*?)\' \+ param\[7\] \+ \'(.*?)\' \+').findall(link)
+            for oid,vidid,has in kod:
+              url='https://api.vk.com/method/video.getEmbed?oid='+oid+'&video_id='+vidid+'&embed_hash='+has
+              link=get_url(url)
+              if "480" in link:
+                  match4=re.compile('"url480":"(.*?)"').findall(link)
+              elif "360" in link:
+                  match4=re.compile('"url360":"(.*?)"').findall(link)
+              elif "240" in link:
+                  match4=re.compile('"url240":"(.*?)"').findall(link)
+              else:
+                print "video yok"
+                for url in match4:
+                    url=url.replace("\/","/")                                                       
+                    addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url,'')
+                    listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+                    listitem.setInfo('video', {'name': name } )
+                    playList.add(url,listitem=listitem)
+                    loadedLinks = loadedLinks + 1
+                    percent = (loadedLinks * 100)/totalLinks
+                    remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+                    note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+                    pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+                    time.sleep(3)
+                    pDialog.close()
+                    if (pDialog.iscanceled()):
+                            return False
+    except:
+        pass
+    try:
+
+        link=get_url(url)
+        m3u8=re.compile('file: "http://(.*?)"').findall(link)
+        for url in m3u8:
+            url='http://'+url                                                
+            addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url,'')
+            listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+            listitem.setInfo('video', {'name': name } )
+            playList.add(url,listitem=listitem)
+            loadedLinks = loadedLinks + 1
+            percent = (loadedLinks * 100)/totalLinks
+            remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+            note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+            pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+            if (pDialog.iscanceled()):
+                    return False
+    except:
+        pass
+    try:
+        link=get_url(url)       
+        yt=re.compile("encodeURIComponent\(\'(.*?)\'").findall(link)
+        for url in yt:
+            url=url.replace('http://www.youtube.com/watch?v=','')
+            url='plugin://plugin.video.youtube/?action=play_video&videoid=' + str(url)
+            addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url,'')
+            listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+            listitem.setInfo('video', {'name': name } )
+            playList.add(url,listitem=listitem)
+            loadedLinks = loadedLinks + 1
+            percent = (loadedLinks * 100)/totalLinks
+            remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+            note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+            pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+            if (pDialog.iscanceled()):
+                return False
+    except:
+        pass
+    try:
+        link=get_url(url)
+        mr=re.compile('value="movieSrc=(.*?)&amp;mp4=1&').findall(link)#
+        for url in mr:
+            url= 'http://videoapi.my.mail.ru/videos/embed/'+str(url)+'.html'
+            req = urllib2.Request(url)
+            resp = urllib2.urlopen(req)
+            html = resp.read()
+            cookie_string = resp.headers.getheader('Set-Cookie').split(';')[0]
+            print resp.headers.getheader('Set-Cookie')
+            headers = {
+                'Cookie': cookie_string
+            }
+            metadata_url_start = html.find('metadataUrl') + len('metadataUrl":"')
+            metadata_url_end = html.find('"', metadata_url_start)
+            metadata_url = html[metadata_url_start:metadata_url_end]
+            metadata_response =  urllib2.urlopen(metadata_url)
+            metadata = json.loads(metadata_response.read()) 
+            xbmc_cookies = '|Cookie=' + urllib.quote(cookie_string)
+            streams = [(v['key'], v['url'] + xbmc_cookies) for v in metadata['videos']]
+            if streams >0:
+                del streams[0]
+                for name2,url2 in streams:   
+                    addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url2,'')
+                    listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+                    listitem.setInfo('video', {'name': name } )
+                    playList.add(url2,listitem=listitem)
+                    loadedLinks = loadedLinks + 1
+                    percent = (loadedLinks * 100)/totalLinks
+                    remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+                    note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+                    pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+                    if (pDialog.iscanceled()):
+                            return False
+    except:
+        pass
+    try:
+        link=get_url(url)
+        yt2=re.compile('http:\/\/www.youtube.com\/embed\/(.*?)feature=player_detailpage"').findall(link)
+        for url in yt2:
+            url=url.replace('?','').replace('iv_load_policy=3','').replace('iv_load_policy=3&#038;','')
+            url='plugin://plugin.video.youtube/?action=play_video&videoid='+str(url)
+            addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url,'')
+            listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+            listitem.setInfo('video', {'name': name } )
+            playList.add(url,listitem=listitem)
+            loadedLinks = loadedLinks + 1
+            percent = (loadedLinks * 100)/totalLinks
+            remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+            note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+            pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+            if (pDialog.iscanceled()):
+                    return False
+    except:
+        pass
+    try:
+        
+        link=get_url(url)
+        yt3=re.compile('youtube.*?\/embed\/(.*?)\?').findall(link)
+        for url in yt3:
+            url='http://www.youtube.com/embed/'+url
+            magix_player(name,url)
+    except:
+        pass
+    try:
+        link=get_url(url)
+        yt4=re.compile('http://www.youtube.com/embed/(.*?)showinfo=0"').findall(link)
+        for url in yt4:
+            url=url.replace('?','').replace('iv_load_policy=3','').replace('iv_load_policy=3&#038;','')
+            url='plugin://plugin.video.youtube/play/?video_id='+str(url)
+            addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url,'')
+            listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+            listitem.setInfo('video', {'name': name } )
+            playList.add(url,listitem=listitem)
+            loadedLinks = loadedLinks + 1
+            percent = (loadedLinks * 100)/totalLinks
+            remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+            note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+            pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+            if (pDialog.iscanceled()):
+                    return False
+    except:
+        pass
+    try:
+        link=get_url(url)
+        yt5=re.compile('\'file\': \'(.*?)\'').findall(link)
+        for url in yt5:
+            url='plugin://plugin.video.youtube/?action=play_video&videoid='+str(url)
+            addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url,'')
+            listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+            listitem.setInfo('video', {'name': name } )
+            playList.add(url,listitem=listitem)
+            loadedLinks = loadedLinks + 1
+            percent = (loadedLinks * 100)/totalLinks
+            remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+            note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+            pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+            if (pDialog.iscanceled()):
+                    return False
+    except:
+        pass
+    try:
+        link=get_url(url)
+        mr2=re.compile("src='http://videoapi.my.mail.ru/videos/embed/(.*?).html'").findall(link)
+        for url in mr2:
+            url= 'http://videoapi.my.mail.ru/videos/embed/'+str(url)+'.html'
+            req = urllib2.Request(url)
+            resp = urllib2.urlopen(req)
+            html = resp.read()
+            cookie_string = resp.headers.getheader('Set-Cookie').split(';')[0]
+            print resp.headers.getheader('Set-Cookie')
+            headers = {
+                'Cookie': cookie_string
+            }
+            metadata_url_start = html.find('metadataUrl') + len('metadataUrl":"')
+            metadata_url_end = html.find('"', metadata_url_start)
+            metadata_url = html[metadata_url_start:metadata_url_end]
+            metadata_response =  urllib2.urlopen(metadata_url)
+            metadata = json.loads(metadata_response.read()) 
+            xbmc_cookies = '|Cookie=' + urllib.quote(cookie_string)
+            streams = [(v['key'], v['url'] + xbmc_cookies) for v in metadata['videos']]
+            if streams >0:
+                del streams[0]
+                for name2,url2 in streams: 
+                    addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url2,'')
+                    listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+                    listitem.setInfo('video', {'name': name } )
+                    playList.add(url2,listitem=listitem)
+                    loadedLinks = loadedLinks + 1
+                    percent = (loadedLinks * 100)/totalLinks
+                    remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+                    note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+                    pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+                    if (pDialog.iscanceled()):
+                            return False
+    except:
+        pass
+    try:
+        link=get_url(url)
+        mr3=re.compile("src='http://api.video.mail.ru/videos/embed/(.*?).html'").findall(link)
+        for url in mr3:
+            url= 'http://videoapi.my.mail.ru/videos/embed/'+str(url)+'.html'
+            req = urllib2.Request(url)
+            resp = urllib2.urlopen(req)
+            html = resp.read()
+            cookie_string = resp.headers.getheader('Set-Cookie').split(';')[0]
+            print resp.headers.getheader('Set-Cookie')
+            headers = {
+                'Cookie': cookie_string
+            }
+            metadata_url_start = html.find('metadataUrl') + len('metadataUrl":"')
+            metadata_url_end = html.find('"', metadata_url_start)
+            metadata_url = html[metadata_url_start:metadata_url_end]
+            metadata_response =  urllib2.urlopen(metadata_url)
+            metadata = json.loads(metadata_response.read()) 
+            xbmc_cookies = '|Cookie=' + urllib.quote(cookie_string)
+            streams = [(v['key'], v['url'] + xbmc_cookies) for v in metadata['videos']]
+            if streams >0:
+                del streams[0]
+                for name2,url2 in streams:  
+                    addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url2,'')
+                    listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+                    listitem.setInfo('video', {'name': name } )
+                    playList.add(url2,listitem=listitem)
+                    loadedLinks = loadedLinks + 1
+                    percent = (loadedLinks * 100)/totalLinks
+                    remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+                    note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+                    pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+                    if (pDialog.iscanceled()):
+                            return False
+    except:
+        pass
+    try:
+        link=get_url(url)
+        okru2=re.compile('".*?\/player\/ok\/1.*?\.php\?v\=(.*?)"').findall(link)
+        for url in okru2:
+          url=(base64.b64decode(url))
+          url=url.replace("http://ok.ru/video/","")
+          url='http://ok.ru/videoembed/'+str(url)
+          ok_ru(url)
+        link=get_url(url)  
+        okru3=re.compile('ok.ru\/videoembed\/(.*?)"').findall(link)
+        for url in okru3:
+          url='http://ok.ru/videoembed/'+str(url)
+          ok_ru(url)
+        link=get_url(url)  
+        m3u82=re.compile('file:"(.*?)\?",width:').findall(link)
+        for url in m3u82:                                            
+            addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url,'')
+            listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+            listitem.setInfo('video', {'name': name } )
+            playList.add(url,listitem=listitem)
+            loadedLinks = loadedLinks + 1
+            percent = (loadedLinks * 100)/totalLinks
+            remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+            note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+            pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+            if (pDialog.iscanceled()):
+                    return False
+    except:
+        pass
+    try:
+        link=get_url(url)  
+        vidag=re.compile('http://vid.ag/(.*?)"').findall(link)
+        for url in vidag:
+            url='http://vid.ag/'+url
+            link=get_url(url)
+            match4=re.compile('\|static\|\|.*?\|\|.*?\|.*?\|.*?\|.*?\|(.*?)\|html\|').findall(link)
+            for url in match4:
+                url='http://vid.ag/'+url+'.m3u8'
+            addLink(name+' '+'[COLOR beige]'+name2+'[/COLOR]',url,'')
+            listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+            listitem.setInfo('video', {'name': name } )
+            playList.add(url,listitem=listitem)
+            loadedLinks = loadedLinks + 1
+            percent = (loadedLinks * 100)/totalLinks
+            remaining_display ='[COLOR yellow]'+'Islem Yapilan Video Sayisi'+'=    '+'' +str(loadedLinks)+'[/COLOR]'+'[COLOR blue]'+' / '+'[/COLOR]'+'[COLOR green]'+str(totalLinks)+''+'[/COLOR]'+'[COLOR lightgreen]'+'   '+'Video Bulundu'+'[/COLOR]'
+            note='[COLOR pink]'+'http://dreamtr.club'+'[/COLOR]'+'      '+'[COLOR beige]'+'DreamTR Team'+'[/COLOR]'
+            pDialog.update(percent,'[COLOR red]'+'Videolar Olusturuluyor... Lutfen Bekleyin'+'[/COLOR]',remaining_display,note)
+            if (pDialog.iscanceled()):
+                    return False
+    except:
+        pass
+
+xbmcPlayer.play(playList)
+#--
+#41 
+def VIDEOLINKS1(name,url):
+    xbmcPlayer = xbmc.Player()
+    playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+    urlList=[]
+    playList.clear()
+    link=get_url(url)
+    matchOK=re.compile('\/live\/(.*?)"').findall(link)
+    for url in matchOK:
+        url=url.replace('#038;','')
+        url='http://embedlive.flexmmp.com/live/'+url
+        link=get_url(url)
+        match2=re.compile('src: "(.*?)"').findall(link)
+        for url in match2:
+            url=url.replace('&amp;', '&').replace('&#038;', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/') 
+            xbmcPlayer = xbmc.Player()
+            playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+            playList.clear()
+            addLink('[COLOR blue]'+'RETURN List <<'+' [/COLOR]','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+            listitem = xbmcgui.ListItem(name)
+            playList.add(url, listitem)
+            xbmcPlayer.play(playList)
+            exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
+            if exec_version < 14.0:
+                playlist()
+            else:
+                playlist2()
+    ply=re.compile('\/player\/url\/(.*?)"').findall(link)
+    for name in ply:
+        name=base64.b64decode(name)
+        reverseName=""
+        for x in range(len(name)-1,-1,-1):
+            reverseName+=name[x]
+            reverseName=base64.b64decode(reverseName)
+            reverseName=reverseName.replace('ok/','')
+            url=reverseName
+            url = 'http://ok.ru/videoembed/'+str(url).encode('utf-8', 'ignore')
+            ok_ru(url)
+    ply1=re.compile("videoseyredin.net/embed/(.*?)'").findall(link)
+    for name in ply1:
+        name='https://www.videoseyredin.net/embed/'+name
+        link=get_url(name)
+        match1=re.compile('https:\/\/cdn2.videoseyredin.net\/(.*?).mp4').findall(link)
+        for url in match1:
+            url='https://cdn2.videoseyredin.net/'+url+'.mp4'
+            name=url
+            name=name.replace('https://cdn2.videoseyredin.net/','').replace('/',' ').replace('.mp4','')
+            name="[COLOR orange]Kalite SEC > [/COLOR]"+name
+            if "err" in name:
+                pass
+            else:
+                addLink('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,'')
+        
+    ply2=re.compile('src\="https://openload.co/embed/(.*?)"').findall(link)
+    for name in ply2:
+        name='https://openload.co/embed/'+name
+        url=name
+        magix_player(name,url)
+    mega2=re.compile('http:\/\/videomega.tv\/view.php\?ref\=(.*?)\&.*?').findall(link)
+    for url in mega2:
+        url='http://videomega.tv/view.php?ref='+url
+        magix_player(name,url)
+    cldy=re.compile('cloudy.ec\/embed.php\?id\=(.*?)"').findall(link)
+    for url in cldy:
+        url='https://www.cloudy.ec/embed.php?id='+url
+        magix_player(name,url)
+    cldy1=re.compile('cloudy.ec\/embed.php\?id\=(.*?)&').findall(link)
+    for url in cldy1:
+        url='https://www.cloudy.ec/embed.php?id='+url
+        magix_player(name,url)
+    vidag=re.compile('vid.ag\/embed\-(.*?)\.html"').findall(link)
+    for url in vidag:
+        url='http://vid.ag/embed-'+url+'.html'
+        magix_player(name,url)
+    mega=re.compile('\videomega.tv\/(.*?)\&amp;width.*?"').findall(link)
+    for url in mega:
+        url='http://videomega.tv/'+str(url).encode('utf-8', 'ignore')
+        magix_player(name,url)
+    opn=re.compile('src="https://openload.co/embed/(.*?)/"').findall(link)
+    for url in opn:
+        url='https://openload.co/embed/'+url+'/'
+        magix_player(name,url)
+    mlr=re.compile('\/videos\/embed\/mail\/(.*?)\.html').findall(link)
+    for url in mlr:
+        url='http://videoapi.my.mail.ru/videos/embed/mail/'+url+'.html'
+        magix_player(name,url)
+    link=link.replace('&amp;', '&').replace('&#038;', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+    ok=re.compile('ok.ru\/videoembed\/(.*?)"').findall(link)
+    for url in ok:
+        url = 'http://ok.ru/videoembed/'+str(url).encode('utf-8', 'ignore')
+        ok_ru(url)
+    ok_9=re.compile('ok.php\?vid\=(.*?)"').findall(link)
+    for url in ok_9:
+        url = 'http://ok.ru/videoembed/'+str(url).encode('utf-8', 'ignore')
+        ok_ru(url)
+    vk_2=re.compile('vk.com\/(.*?)"').findall(link)
+    for url in vk_2:
+        url = 'http://vk.com/'+str(url).encode('utf-8', 'ignore')
+        magix_player(name,url)
+    vk_3=re.compile('rc="http://snnyk.com/(.*?)"').findall(link)
+    for url1 in vk_3:
+        url1=url1.replace('&amp;', '&').replace('&#038;', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+        url1 = 'http://snnyk.com/'+str(url1).encode('utf-8', 'ignore')
+        link=get_url(url1)
+        vkvk=re.compile('param\[5\] \+ \'(.*?)\' \+ param\[6\] \+ \'(.*?)\' \+ param\[7\] \+ \'(.*?)\' \+').findall(link)
+        for oid,vidid,has in vkvk:
+            url='https://api.vk.com/method/video.getEmbed?oid='+oid+'&video_id='+vidid+'&embed_hash='+has
+            magix_player(name,url)
+    youtube=re.compile('\youtube\.com\/embed\/(.*?)\"').findall(link)
+    for url in youtube:
+        url = 'http://www.youtube.com/embed/'+str(url).encode('utf-8', 'ignore')
+        magix_player(name,url)
+    mailru2=re.compile('\/\/videoapi.my.mail.ru\/videos\/embed\/mail\/(.*?).html').findall(link)
+    for mailrugelen in mailru2:
+        url = 'http://videoapi.my.mail.ru/videos/embed/mail/'+mailrugelen+'.html'
+        magix_player(name,url)
+    mailru3=re.compile('http://api.video.mail.ru/videos/embed/mail/(.*?).html').findall(link)
+    for mailrugelen in mailru3:
+        url = 'http://videoapi.my.mail.ru/videos/embed/mail/'+mailrugelen+'.html'
+        magix_player(name,url)
+    dm=re.compile('www.dailymotion.com/embed/video/(.*?)\?').findall(link)
+    for url in dm:
+        url = 'http://www.dailymotion.com/embed/video/'+url
+        magix_player(name,url)
+    if not urlList:
+        match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)
+        if match:
+            for url in match:
+                VIDEOLINKS1(name,url)
+    if urlList:
+        Sonuc=playerdenetle(name, urlList)
+        for name,url in Sonuc:
+            listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
+            listitem.setInfo('video', {'name': name } )
+            playList.add(url,listitem=listitem)
+        xbmcPlayer.play(playList)
+#--
+#107
+def radyocal(url):
+    name=''
+    link=get_url(url)
+    match93=re.compile('"http\:\/\/(.*?)\.m3u8(.*?)"').findall(link)
+    for a,b in match93:
+        url='http://'+a+'.m3u8'+b+tk
+        xbmcPlayer = xbmc.Player()
+        playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+        playList.clear()
+        addLink('[COLOR blue]'+'RETURN List <<'+' [/COLOR]','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+        listitem = xbmcgui.ListItem(name)
+        playList.add(url, listitem)
+        xbmcPlayer.play(playList)
+        exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
+        if exec_version < 14.0:
+            playlist()
+        else:
+            playlist2()
+    match94=re.compile('style\="width.*?" src\="(.*?)">').findall(link)
+    for url in match94:
+        if ".gif" in url:
+            pass
+        else:
+            xbmcPlayer = xbmc.Player()
+            playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+            playList.clear()
+            addLink('[COLOR blue]'+'RETURN List <<'+' [/COLOR]','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+            listitem = xbmcgui.ListItem(name)
+            playList.add(url, listitem)
+            xbmcPlayer.play(playList)
+            exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
+            if exec_version < 14.0:
+                    playlist()
+            else:
+                    playlist2()
+    match95=re.compile('file: \'(.*?)\',\n\t\t\t\twidth').findall(link)
+    for url in match95:
+        yenical4(name,url)
+#--
+#42
+def yenical4(name,url):
+    xbmcPlayer = xbmc.Player() 
+    playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO) 
+    playList.clear() 
+    addLink(name,url,'')
+    listitem = xbmcgui.ListItem(name) 
+    playList.add(url, listitem) 
+    xbmcPlayer.play(playList)
+#--
+#99
+def magix_player(name,url):
+        if "www.dailymotion.com" in url:
+            fix.daily_sec(name,url)
+        elif "mail." in url:
+            MailRu_Player(url)
+        elif "ok." in url:
+            ok_ru(url)
+        else:
+            UrlResolverPlayer = url
+            playList.clear()
+            media = urlresolver.HostedMediaFile(UrlResolverPlayer)
+            source = media
+            if source:
+                url = source.resolve()
+                addLink(name,url,'')
+                playlist_yap(playList,name,url)
+                xbmcPlayer.play(playList)
+#--
+#29
+def ayrisdirm1(url):
+    link=get_url(url)
+    try:
+        ply=re.compile('\/pusuk\/url\/(.*?)"').findall(link)
+        for name in ply:
+            name=name.replace('?mode=flash','')
+            name=base64.b64decode(name)
+            reverseName=""
+            for x in range(len(name)-1,-1,-1):
+                    reverseName+=name[x]
+            reverseName=base64.b64decode(reverseName)
+            reverseName=reverseName.replace('ok/','')
+            url=reverseName
+            url = 'http://ok.ru/videoembed/'+str(url).encode('utf-8', 'ignore')
+            ok_ru(url)
+        ply1=re.compile('\/pusuk\/url\/(.*?)=').findall(link)
+        for name in ply1:
+            name=name+'='
+            name=base64.b64decode(name)
+            reverseName=""
+            for x in range(len(name)-1,-1,-1):
+                    reverseName+=name[x]
+            reverseName=base64.b64decode(reverseName)
+            url=reverseName
+            url=url.replace('/mail','')
+            url = 'http://videoapi.my.mail.ru/videos/embed/'+url+'.html'
+            magix_player(name,url)
+    except:
+        pass
     
-        escape = re.search("var _escape=\'([^\']+)", l0I(O1l(data))).group(1)
-        return escape.replace('%', '\\').decode('unicode-escape')
+    req = urllib2.Request(url)
+    req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
+    response = urllib2.urlopen(req)
+    link=response.read()
+    response.close()
+    hqq=re.compile('src="https://hqq.tv/(.*?)"').findall(link)
+    for url in hqq:
+        url = 'https://hqq.tv/'+url
+        url=url.replace('#038;','')
+        hqq(url)
+    ply10=re.compile('src="http:\/\/www.ultrafilmizle.com\/player\/url\/(.*?)"').findall(link)
+    for name in ply10:
+        name=base64.b64decode(name)
+        reverseName=""
+        for x in range(len(name)-1,-1,-1):
+                reverseName+=name[x]
+        reverseName=base64.b64decode(reverseName)
+        reverseName=reverseName.replace('ok/','')
+        url=reverseName
+        value=[]
+        url = 'http://ok.ru/videoembed/'+str(url)
+        magix_player(name,url)
+    ytt=re.compile('TEK PLUS--><br />\n<iframe width=".*?" height=".*?" src="(.*?)"').findall(link)
+    for url in ytt:
+        link=get_url(url)
+        match=re.compile('file":"(.*?)"').findall(link)
+        name='TEK PLUS Sec'
+        for url in match:
+            addLink('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,'')
+    yt=re.compile('youtube.com/embed/(.*?)"').findall(link)
+    for code in yt:
+        url = 'http://www.youtube.com/embed/'+code
+        name='Fragman'
+        magix_player(name,url)
+    ok2=re.compile('ok.ru\/videoembed\/(.*?)"').findall(link)
+    for code in ok2:
+        url = 'http://ok.ru/videoembed/'+str(code)
+        name='OK RU  '
+        ok_ru(url)
+    vk_2=re.compile('video_ext.php\?oid\=(.*?)"').findall(link) 
+    for code in vk_2:
+        url = 'http://vk.com/video_ext.php?oid='+str(code)
+        url=url.replace('&amp;', '&').replace('&#038;', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/') 
+        name='Vk - Play'
+        addDir('[COLOR yellow]'+name+'[/COLOR]',url,1030,'',"")
+    mailru2=re.compile('videos\/embed\/mail\/(.*?).html').findall(link)
+    for code in mailru2:
+        url = 'http://videoapi.my.mail.ru/videos/embed/mail/'+str(code)+'.html'
+        name='mail RU  '
+        addDir('[COLOR blue]'+name+'[/COLOR]',url,99,"","")
+    mailru22=re.compile('https://my.mail.ru/(.*?)\' width=').findall(link)
+    for url in mailru22:
+        url = 'https://my.mail.ru/'+url
+        link=get_url(url)
+        match=re.compile('movieSrc":"mail/(.*?)","metadataUrl').findall(link)
+        for url in match:
+            url = 'http://videoapi.my.mail.ru/videos/embed/mail/'+str(url)+'.html'
+            name='mail RU  '
+            magix_player(name,url)
+    upto=re.compile('src="http://uptostream.com/iframe/(.*?)"').findall(link)
+    for url in upto:
+        url = 'http://uptostream.com/iframe/'+url
+        name='play'
+        magix_player(name,url)
+    vidag=re.compile('http://vid.ag/(.*?)"').findall(link) 
+    for url in vidag: 
+        url = 'http://vid.ag/'+str(url).encode('utf-8', 'ignore')
+        name='Play'
+        addDir('[COLOR yellow]'+name+'[/COLOR]',url,99,"",'')
+    dd=re.compile('src="http://videomega.tv/view.php\?ref\=(.*?)\&width').findall(link) 
+    for url in dd: 
+        url = 'http://videomega.tv/view.php?ref='+str(url).encode('utf-8', 'ignore')
+        name='Play'
+        addDir('[COLOR yellow]'+name+'[/COLOR]',url,99,"",'')
+    ddo=re.compile('src="https://openload.co/embed/(.*?)"').findall(link) 
+    for url in ddo: 
+        url = 'https://openload.co/embed/'+str(url).encode('utf-8', 'ignore')
+        name='Play'
+        addDir('[COLOR yellow]'+name+'[/COLOR]',url,99,"",'')
+    vk_9=re.compile('video_ext.php\?oid\=(.*?)"').findall(link) 
+    for url in vk_9: 
+        url = 'http://vk.com/video_ext.php?oid='+str(url).encode('utf-8', 'ignore')
+        name='Play'
+        url=url.replace('&amp;', '&').replace('&#038;', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/') 
+        addDir('[COLOR yellow]'+name+'[/COLOR]',url,1030,"",'')
 
-    def _decode2(file_url):
-        def K12K(a, typ='b'):
-            codec_a = ["G", "L", "M", "N", "Z", "o", "I", "t", "V", "y", "x", "p", "R", "m", "z", "u",
-                       "D", "7", "W", "v", "Q", "n", "e", "0", "b", "="]
-            codec_b = ["2", "6", "i", "k", "8", "X", "J", "B", "a", "s", "d", "H", "w", "f", "T", "3",
-                       "l", "c", "5", "Y", "g", "1", "4", "9", "U", "A"]
-            if 'd' == typ:
-                tmp = codec_a
-                codec_a = codec_b
-                codec_b = tmp
-            idx = 0
-            while idx < len(codec_a):
-                a = a.replace(codec_a[idx], "___")
-                a = a.replace(codec_b[idx], codec_a[idx])
-                a = a.replace("___", codec_b[idx])
-                idx += 1
-            return a
-    
-        def _xc13(_arg1):
-            _lg27 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
-            _local2 = ""
-            _local3 = [0, 0, 0, 0]
-            _local4 = [0, 0, 0]
-            _local5 = 0
-            while _local5 < len(_arg1):
-                _local6 = 0
-                while _local6 < 4 and (_local5 + _local6) < len(_arg1):
-                    _local3[_local6] = _lg27.find(_arg1[_local5 + _local6])
-                    _local6 += 1
-                _local4[0] = ((_local3[0] << 2) + ((_local3[1] & 48) >> 4))
-                _local4[1] = (((_local3[1] & 15) << 4) + ((_local3[2] & 60) >> 2))
-                _local4[2] = (((_local3[2] & 3) << 6) + _local3[3])
-    
-                _local7 = 0
-                while _local7 < len(_local4):
-                    if _local3[_local7 + 1] == 64:
-                        break
-                    _local2 += chr(_local4[_local7])
-                    _local7 += 1
-                _local5 += 4
-            return _local2
-    
-        return _xc13(K12K(file_url, 'e'))    
-
-    def hqq_request(url):
-        req = urllib2.Request(url, headers=HEADERS)
-        try:
-            response = urllib2.urlopen(req)
-            data = response.read()
-            response.close()
-        except urllib2.HTTPError, error:
-            data=error.read() 
-            error.close()
-        return data
-
-    def hqq_post(url, data):
-        postdata = urllib.urlencode(data)
-        req = urllib2.Request(url, postdata, HEADERS)
-        try:
-            response = urllib2.urlopen(req)
-            data = response.read()
-            response.close()
-        except urllib2.HTTPError, error:
-            data=error.read() 
-            error.close()
-        return data
-
-
-    match = re.compile('vid=(.*?)&').findall(url)
-    vid = match[0]
-    data = hqq_request(url)
-    b64enc = re.search(r'base64([^\"]+)', data, re.DOTALL)
-    b64dec = b64enc and base64.decodestring(b64enc.group(1))
-    enc = b64dec and re.search(r"\'([^']+)\'", b64dec).group(1)
-    if enc:
-        data = re.findall('<input name="([^"]+?)" [^>]+? value="([^"]+?)">', _decode(enc))
-        post_data = {}
-        for idx in range(len(data)):
-            post_data[data[idx][0]] = data[idx][1]
-        data = hqq_post(url, data=post_data)
-        b64enc = re.search(r'base64([^\"]+)', data, re.DOTALL)
-        b64dec = b64enc and base64.decodestring(b64enc.group(1))
-        enc = b64dec and re.search(r"\'([^']+)\'", b64dec).group(1)
-        if enc:
-            data = re.findall('<input name="([^"]+?)" [^>]+? value="([^"]*)">', _decode(enc))
-            post_data = {}
-            for idx in range(len(data)):
-                post_data[data[idx][0]] = data[idx][1]
-            data = urllib.unquote(hqq_request('http://hqq.tv/sec/player/embed_player.php?' + urllib.urlencode(post_data)))
-            servervarname=re.search(r'server_1: ([^,]+)',re.findall(r'md5.*',data)[0]).group(1)
-            linkvarname=re.search(r'link_1: ([^,]+)',re.findall(r'md5.*',data)[0]).group(1)
-
-            vid_server = re.search(r'var\s*%s\s*=\s*"([^"]*?)"' % servervarname, data)
-            vid_link = re.search(r'var\s*%s\s*=\s*"([^"]*?)"' % linkvarname, data)
-            at = re.search(r'var\s*at\s*=\s*"([^"]*?)"', data)
-            vidi = re.search(r'var\s*vidi\s*=\s*"([^"]*?)"', data)
-            if vid_server and vid_link and at:
-                get_data = {'at': at.group(1),
-                            'adb': '0/',
-                            'b' : '1',
-                            'link_1': re.sub(r'\?socket=?$', '.mp4.m3u8', vid_link.group(1)),
-                            'server_1': vid_server.group(1),
-                            'vid' : vidi.group(1)
-                           }
-
-                headers = {'X-Requested-With': 'XMLHttpRequest'}
-                data = url_get("http://hqq.tv/player/get_md5.php?" + urllib.urlencode(get_data), computer='PC', headers=headers)[0]
-                jsondata = json.loads(data)
-                encodedm3u = jsondata['file']
-                decodedm3u=_decode2(encodedm3u.replace('\\', ''))
-                url=decodedm3u+'|User-Agent=Mozilla/5.0 (iPhone; CPU iPhone OS 5_0_1 like Mac OS X)'
-                addLink("Play",url,'')
