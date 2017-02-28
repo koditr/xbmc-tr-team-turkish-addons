@@ -104,12 +104,11 @@
 
 <addon id="plugin.video.xbmcTRIPTV"
        name="[COLOR beige]IPTV[/COLOR][COLOR red]TR[/COLOR][COLOR beige]Free-PRO[/COLOR]"
-       version="0.0.16"
+       version="0.0.17"
        provider-name="DreamTR Team">
   <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.urlresolver"/>
-    <import addon="repository.shani"/>
     <import addon="plugin.video.f4mTester"/>
     <import addon="script.video.F4mProxy"/>
 	</requires>
