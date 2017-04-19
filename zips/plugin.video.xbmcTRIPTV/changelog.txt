@@ -1,6 +1,6 @@
-=== 0.0.17 ===
+=== 0.0.18 ===
 .............
-Tarih: 28.02.2017
+Tarih: 19.04.2017
 
 .............
 Bu Eklenti DreamTR ekibi tarafindan Hazirlanmistir.
