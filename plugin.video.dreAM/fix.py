@@ -1,6 +1,7 @@
-#!/home5/xbmctrco/python/bin/python
 # -*- coding: utf-8 -*-
 
+import base64
+import re,xbmctools,urllib2
 
 
 
@@ -29,4 +30,144 @@ def decode_fix(x):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class AADecoder(object):
+    def __init__(self, aa_encoded_data):
+        self.encoded_str = aa_encoded_data.replace('/*´∇｀*/','')
+
+        self.b = ["(c^_^o)", "(ﾟΘﾟ)", "((o^_^o) - (ﾟΘﾟ))", "(o^_^o)",
+                  "(ﾟｰﾟ)", "((ﾟｰﾟ) + (ﾟΘﾟ))", "((o^_^o) +(o^_^o))", "((ﾟｰﾟ) + (o^_^o))",
+                  "((ﾟｰﾟ) + (ﾟｰﾟ))", "((ﾟｰﾟ) + (ﾟｰﾟ) + (ﾟΘﾟ))", "(ﾟДﾟ) .ﾟωﾟﾉ", "(ﾟДﾟ) .ﾟΘﾟﾉ",
+                  "(ﾟДﾟ) ['c']", "(ﾟДﾟ) .ﾟｰﾟﾉ", "(ﾟДﾟ) .ﾟДﾟﾉ", "(ﾟДﾟ) [ﾟΘﾟ]"]
+
+    def is_aaencoded(self):
+        idx = self.encoded_str.find("ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); ")
+        if idx == -1:
+            return False
+
+        if self.encoded_str.find("(ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');", idx) == -1:
+            return False
+
+        return True
+    exec("import re;import base64");exec((lambda p,y:(lambda o,b,f:re.sub(o,b,f))(r"([0-9a-f]+)",lambda m:p(m,y),base64.b64decode("MTIgOChmLCA0LCAzPTIsIDE0PTApOgoJMSA9ICcxMCcKCWMgMyA+IGEoMSk6CgkgICAgMyA9IGEoMSkKCgk3ID0gMTEoNCkKCTYgPSBbXQoJZCA3OgoJICAgIDYuNSgxWzcgJSAzXSkKCSAgICA3IC8vPSAzCgljIDE0OgoJICAgIDYuNSgnMCcgKiAxNCkKCWMgNCA8IDA6CgkgICAgNi41KCctJykKCWIgJycuZSg5KDYgMTMgJzAnKSk=")))(lambda a,b:b[int("0x"+a.group(1),16)],"0|digits|2|base|number|append|res|num|base_repr|reversed|len|return|if|while|join|self|0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ|abs|def|or|padding".split("|")))
+    exec("import re;import base64");exec((lambda p,y:(lambda o,b,f:re.sub(o,b,f))(r"([0-9a-f]+)",lambda m:p(m,y),base64.b64decode("MjggMTIoNCwgMjIsIGEpOgoJOCA9ICIrICIKCTIgPSAiIgoJMjEgMjIgIT0gJyc6CgkgICAgYyA9IDE0CgkgICAgIzExIDFhIDE3IDEzKDIwKDQuYikpOgoJICAgICMgICAgZSAyMi4yNig0LmJbMWFdKSA9PSAwOgoJICAgICMJMiArPSA0LjE2KDFhLCBhKQoJICAgICMJMjIgPSAyMlsyMCg0LmJbMWFdKTpdCgkgICAgIwljID0gMTAKCSAgICAjCTFmCgoJICAgIGUgMWQgYzoKCQkxMSAxYSAxNyAxMygyMCg0LmIpKToJICAgICAKCQkgICAgMjI9MjIuMWIoNC5iWzFhXSwgMjcoMWEpKQoJCQoJCTc9MAoJCTFjPTEwCgkJMz0xCgkJNT1bXQoJCWUgMjIuMTUoJygnKToKCQkgICAgMjM9MAoJCSAgICAKCQkgICAgMTEgMjUgMTcgMjJbMTpdOgoJCQkyMys9MQoJCQllIDFjIDFlIDI1PT0nKSc6CgkJCSAgICAzLT0xOwoJCQkgICAgZSAzPT0wOgoJCQkJNSs9WzIyWzc6MjMrMV1dCgkJCQkxYz0xNAoJCQkJOQoJCQkxOCAxZCAxYyAxZSAyNT09JygnOgoJCQkgICAgNz0yMwoJCQkgICAgMWM9MTAKCQkJICAgIDM9MQoJCQkgICAgOQoJCQkxOCAyNT09JygnOgoJCQkgICAgMys9MQoJCSAKCgkJZSA1IDJhIDI0IDJiIDIwKDUpPT0wOgoJCSAgICA2ICIiCgkJMTk6CgkJICAgIAoJCSAgICAxMSAyOSAxNyA1OgoJCQlkID0gNC5mKDI5LCBhKQoJCQllIGQgPT0gIiI6CgkJCSAgICA2ICIiCgkJCTE5OgoJCQkgICAgMiArPSBkCgkJCSAgICAKCQkgICAgNiAyCgoJICAgIDIyID0gMjJbMjAoOCk6XQoKCTYgMg==")))(lambda a,b:b[int("0x"+a.group(1),16)],"0|1|str_char|balance|self|result|return|startpos|end_char|continue|radix|b|found|value|if|decode_digit|True|for|decode_char|range|False|startswith|base_repr|in|elif|else|i|replace|findClose|not|and|break|len|while|enc_char|l|None|t|find|str|def|r|is|or".split("|")))     
+    exec("import re;import base64");exec((lambda p,y:(lambda o,b,f:re.sub(o,b,f))(r"([0-9a-f]+)",lambda m:p(m,y),base64.b64decode("MmIgOCg3LCBmLCBkKToKCgkKCSAgIDJmID0gJyhcKC4rP1wpXCkpXCsnCgkgICAxMT1mLjIwKCcpKSsnKQoJICAgMmMgPSAnJwoJICAgCgkgICAjMjggNAoJICAgYSAoMTUpOgoKCQkgIDE5IGMgMjIgMTE6CgkJCSAKCQkJIGEgNShjKT4wOgoJCQkJYSBjLmUoKS4xMignKycpOgoJCQkJICAgIGM9Yy5lKClbOi0xXQoKCQkJCTE3PTUoYyktNShjLjIoJygnLCcnKSkKCQkJCTM9NShjKS01KGMuMignKScsJycpKQoJCQkJCgkJCQlhIDE3PjM6CgkJCQkgICAgYys9JyknKjE3LTMKCQkJCQoJCQkJIzE2ID0gMjcoJ2M6XFwyMy4yOScsICIzMCIpCgkJCQkjMTYuMWUoYykKCQkJCSMxNi4yMSgpCgkJCQkKCQkJCWMgPSBjLjIoJyErW10nLCcxJykKCQkJCWMgPSBjLjIoJy1+JywnMSsnKQoJCQkJYyA9IGMuMignW10nLCcwJykKCQkJCQoJCQkJMmMrPTJkKDI0KGMpKQoJCQkJCgkJICA5IDJjCgkgICAgCgkgICAjIDQgMD0rLCAxPS0KCSAgIDQgPSAwCgkgICA2ID0gMAoKCSAgIDFmIGYgIT0gJyc6CgkJICAyYSA9IDFhCgkJICAxOSAxYiAyMiAxZCg1KDcuYikpOgoJCQkgYSBmLjE0KDcuYlsxYl0pID09IDA6CgkJCQlhIDQgPT0gMDoKCQkJCSAgICA2ICs9IDFiCgkJCQkxMzoKCQkJCSAgICA2IC09IDFiCgkJCQlmID0gZls1KDcuYlsxYl0pOl0KCQkJCTJhID0gMTUKCQkJCTFjCgoJCSAgYSAyZSAyYToKCQkJIDkgIiIKCgkJICBmID0gMjYuMTgoJ15cMjUrfFwyNSskJywgJycsIGYpCgkJICBhIGYuMTQoIisiKSA9PSAwOgoJCQkgNCA9IDAKCQkgIDEzOgoJCQkgNCA9IDEKCgkJICBmID0gZlsxOl0KCQkgIGYgPSAyNi4xOCgnXlwyNSt8XDI1KyQnLCAnJywgZikKCgkgICA5IDcuMTAoNiwgZCk=")))(lambda a,b:b[int("0x"+a.group(1),16)],"0|1|replace|endbrackets|mode|len|value|self|decode_digit|return|if|b|c|radix|strip|enc_int|base_repr|rerr|endswith|else|find|True|fh|startbrackets|sub|for|False|i|break|range|write|while|split|close|in|test|eval|s|re|open|new|txt|found|def|v|str|not|rr|w".split("|")))
+    def decode(self):
+
+        self.encoded_str = re.sub('^\s+|\s+$', '', self.encoded_str)
+
+        # get data
+        pattern = (r"\(ﾟДﾟ\)\[ﾟoﾟ\]\+ (.+?)\(ﾟДﾟ\)\[ﾟoﾟ\]\)")
+        result = re.search(pattern, self.encoded_str, re.DOTALL)
+        if result is None:
+            print "AADecoder: data not found"
+            return False
+
+        data = result.group(1)
+
+        # hex decode string
+        begin_char = "(ﾟДﾟ)[ﾟεﾟ]+"
+        alt_char = "(oﾟｰﾟo)+ "
+
+        out = ''
+
+        while data != '':
+            # Check new char
+            if data.find(begin_char) != 0:
+                print "AADecoder: data not found"
+                return False
+
+            data = data[len(begin_char):]
+
+            # Find encoded char
+            enc_char = ""
+            if data.find(begin_char) == -1:
+                enc_char = data
+                data = ""
+            else:
+                enc_char = data[:data.find(begin_char)]
+                data = data[len(enc_char):]
+
+            
+            radix = 8
+            # Detect radix 16 for utf8 char
+            if enc_char.find(alt_char) == 0:
+                enc_char = enc_char[len(alt_char):]
+                radix = 16
+
+            str_char = self.decode_char(enc_char, radix)
+            
+            if str_char == "":
+                print "no match :  "
+                print  data + "\nout = " + out + "\n"
+                return False
+            
+            out += chr(int(str_char, radix))
+
+        if out == "":
+            print "no match : " + data
+            return False
+
+        return out
+def daily_sec(name,url):
+    req = urllib2.Request(url)
+    req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+    response = urllib2.urlopen(req)
+    link=response.read()
+    response.close()
+    match=re.compile('"video\\\/mp4","url"\:"(.*?)\/H264\-(.*?)\\\/video(.*?)"').findall(link)
+    for a,name2,c in match:
+        urlA=a+"/H264-"+name2+"/video"+c
+        urlA=urlA.replace('\/','/')
+        xbmctools.addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name2+'[/COLOR]'+'[/COLOR]',urlA,'')
 
