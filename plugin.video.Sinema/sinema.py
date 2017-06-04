@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#--dreamtr.club / Yaptiklarimiz Yapacaklarimizin Teminatidir ------------#
+#--http://www.dreamtr.club / Yaptiklarimiz Yapacaklarimizin Teminatidir ------------#
 import sys
 import urllib,urllib2,base64
 import re,xbmcplugin,xbmcgui,xbmcaddon,xbmc
@@ -15,7 +15,7 @@ settings = xbmcaddon.Addon(id='plugin.video.Sinema')
 
 def CATEGORIES():
         cal()
-        addDir('[COLOR orange][B]<SINIRLI SAYIDA UYELIKLER ACILMISTIR;ALMAK ISTEYENLER http://dreamtr.club den Ogrenebilirler>[/B][/COLOR]','','','http://dreamtr.club/resimler/icon2.png')
+        addDir('[COLOR orange][B]< Full IPTV ACILMISTIR;ALMAK ISTEYENLER http://dreamtr.club den Ogrenebilirler>[/B][/COLOR]','','','http://dreamtr.club/resimler/icon2.png')
         addDir('[COLOR red]<<< [ Film ARA  ] >>>[/COLOR]','Search',3,'http://dreamtr.club/resimler/icon2.png')
         url='http://www.ultrafilmizle.com/'
         addDir('[COLOR blue]<<< [ Yeni EKLENENLER  ] >>>[/COLOR]',url,1,'http://dreamtr.club/resimler/icon2.png')
@@ -29,7 +29,7 @@ def CATEGORIES():
                 name=sembol_fix(name)
                 addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,4,'')
 def cal():
-        url='http://www.youtube.com/embed/xIPBV5TGeQo'
+        url='http://www.youtube.com/embed/neXKN4zw0vk'
         name='play'
         xbmctools.magix_player(name,url)
 def RECENT(url):
@@ -70,62 +70,37 @@ def Search():
             query = keyboard.getText()
             url = ('http://www.ultrafilmizle.com/?s='+query)
             RECENT(url)
-
-
-
 def ayrisdirma(name,url):
-        url=url+'4'
+        url=url+'7'
         link=xbmctools.get_url(url)
+        name="Secenek - 1"
+        url1=url.replace('/7','/')
+        xbmctools.addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url1,44,"")
         match=re.compile('href="(.*?)"><span>(.*?)</span>').findall(link)
         for url,name in match:
                 addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
-
 def VIDEOLINKS(name,url):
-        urlList=[]
-        #---------------------------#
-        playList.clear()
-        req = urllib2.Request(url)
-        req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36")
-        response = urllib2.urlopen(req)
-        link=response.read()
-        response.close()
-        vk_2=re.compile('<div class="filmicerik">\r\n\r\n\t\t<!--baslik:.*?-->\r\n<p><iframe src="(.*?)"').findall(link)
-        for url in vk_2:
-                xbmctools.magix_player(name,url)
-        vk_3=re.compile('src="(.*?)\&\#038;width\=700\&\#038;height\=430"').findall(link)
-        for url in vk_3:
-                xbmctools.magix_player(name,url)
-        vk_4=re.compile('https://videoapi.my.mail.ru/videos/embed/mail/(.*?).html').findall(link)
-        for url in vk_4:
-                url='https://videoapi.my.mail.ru/videos/embed/mail/'+url+'.html'
-                xbmctools.magix_player(name,url)
-        ply=re.compile('src="http:\/\/www.ultrafilmizle.com\/player\/url\/(.*?)"').findall(link)
-        for name in ply:
-                name=base64.b64decode(name)
-                reverseName=""
-                for x in range(len(name)-1,-1,-1):
-                        reverseName+=name[x]
-                reverseName=base64.b64decode(reverseName)
-                reverseName=reverseName.replace('ok/','')
-                url=reverseName
-                value=[]
-                url = 'http://ok.ru/videoembed/'+str(url)
-                xbmctools.magix_player(name,url)
+        link=get_url(url)
+        soup = BeautifulSoup(link)
+        panel = soup.findAll("div", {"class": "filmicerik"},smartQuotesTo=None)
+        match=re.compile('src="(.*?)"').findall(str(panel))
+        for url in match:
+                if "ultrafilmizle.com/player" in url:
+                        url=url.replace('http://www.ultrafilmizle.com/player/url/','')
+                        name=url
+                        name=base64.b64decode(name)
+                        reverseName=""
+                        for x in range(len(name)-1,-1,-1):
+                                reverseName+=name[x]
+                        reverseName=base64.b64decode(reverseName)
+                        reverseName=reverseName.replace('ok/','')
+                        url=reverseName
+                        value=[]
+                        url = 'http://ok.ru/videoembed/'+str(url)
+                        xbmctools.magix_player(name,url)
 
-        if not urlList:
-                match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)
-                if match:
-                        for url in match:
-                                VIDEOLINKS(name,url)
-       
-        if urlList:
-                Sonuc=playerdenetle(name, urlList)
-                for name,url in Sonuc:
-                        addLink(name,url,'')
-                        listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage='')
-                        listitem.setInfo('video', {'name': name } )
-                        playList.add(url,listitem=listitem)
-                xbmcPlayer.play(playList)
+                else:
+                        xbmctools.magix_player(name,url)
 def VideoLinksyet2(name,url):
         xbmcPlayer = xbmc.Player()
         playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
