@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import urllib,urllib2,xbmcplugin,xbmcgui,xbmcaddon,xbmc
 import re
+import BeautifulSoup as BS4
 import xbmctools,fix
 import os,base64,time
 import mechanize
@@ -13,6 +14,12 @@ from xbmctools import z
 from xbmctools import f
 import member as mem
 import requests
+
+fann="special://home/addons/plugin.video.dreAM/fanart.jpg"
+aramaa="http://dreamtr.club/resimler/aramasearch.png"
+yeniek="http://dreamtr.club/resimler/yenieklenenler.png"
+sonrakii="http://dreamtr.club/resimler/sonrakisayfa.png"
+
 tk="|User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')"
 USER_AGENT = 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36'
 ACCEPT = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
@@ -54,19 +61,18 @@ def CATEGORIES():
          gizlilik2 = __settings__.getSetting( "code" )
          gizlilik3 = __settings__.getSetting( "code2" )
          gizlilik4 = __settings__.getSetting( "adult2" )
-         xbmctools.addDir('[COLOR blue]SiNEMALAR[/COLOR]',"Sinema()",2,'http://dreamtr.club/resimler/Sinemalar.png','special://home/addons/plugin.video.dreAM/fanart.jpg')
-         xbmctools.addDir('[COLOR pink]DiZiLER[/COLOR]',"Dizi()",3,'http://dreamtr.club/resimler/Diziler.png','special://home/addons/plugin.video.dreAM/fanart.jpg' )
-         xbmctools.addDir('[COLOR yellow]CANLI YAYINLAR[/COLOR]',"canliyayin()",4,'http://dreamtr.club/resimler/CanliTVler.png','special://home/addons/plugin.video.dreAM/fanart.jpg' )
-         xbmctools.addDir('[COLOR yellow]DreamTR Radyolar[/COLOR]',"radyo()",105,'http://dreamtr.club/resimler/Radyo.png','special://home/addons/plugin.video.dreAM/fanart.jpg')
-         xbmctools.addDir('[COLOR purple]BELGESEL iZLE[/COLOR]',"Belgesel()",1,'http://dreamtr.club/resimler/belgeselizle.png','special://home/addons/plugin.video.dreAM/fanart.jpg' )
-         xbmctools.addDir('[COLOR grey]ALMAN Sinema[/COLOR]',"Alman()",62,'http://dreamtr.club/resimler/almanlar.png','special://home/addons/plugin.video.dreAM/fanart.jpg' )
-         xbmctools.addDir('[COLOR gold]Film ARA/Search[/COLOR]',"genelarama()",76,'http://dreamtr.club/resimler/genelarama.png','special://home/addons/plugin.video.dreAM/fanart.jpg' )
-         xbmctools.addDir('[COLOR grey]DREAM AYARLAR[/COLOR]',"Ayarlar()",2000,'http://dreamtr.club/resimler/ayarlar.png','special://home/addons/plugin.video.dreAM/fanart.jpg' )
+         xbmctools.addDir('[COLOR blue]SiNEMALAR[/COLOR]',"Sinema()",2,'http://dreamtr.club/resimler/Sinemalar.png',fann)
+         xbmctools.addDir('[COLOR pink]DiZiLER[/COLOR]',"Dizi()",3,'http://dreamtr.club/resimler/Diziler.png',fann)
+         xbmctools.addDir('[COLOR yellow]CANLI YAYINLAR[/COLOR]',"canliyayin()",4,'http://dreamtr.club/resimler/CanliTVler.png',fann)
+         xbmctools.addDir('[COLOR yellow]DreamTR Radyolar[/COLOR]',"radyo()",105,'http://dreamtr.club/resimler/Radyo.png',fann)
+         xbmctools.addDir('[COLOR purple]BELGESEL iZLE[/COLOR]',"Belgesel()",1,'http://dreamtr.club/resimler/belgeselizle.png',fann)
+         xbmctools.addDir('[COLOR grey]ALMAN Sinema[/COLOR]',"Alman()",62,'http://dreamtr.club/resimler/almanlar.png',fann)
+         xbmctools.addDir('[COLOR grey]DREAM AYARLAR[/COLOR]',"Ayarlar()",2000,'http://dreamtr.club/resimler/ayarlar.png',fann)
          xbmctools.addLink('[COLOR grey]* New IPTV-Pro-Platinium* [/COLOR]',"plugin://plugin.video.youtube/?action=play_video&videoid=neXKN4zw0vk",'http://3.bp.blogspot.com/-VpI9h1UREI8/Vkt5vbZh1AI/AAAAAAAAHPM/86_NgwKr42g/s1600/new-sign-ID-33314.png')
          if gizlilik == "false" or gizlilik2 != gizlilik3 or gizlilik4 == "false":
              pass
          else:
-             xbmctools.addDir('[COLOR red]+18[/COLOR]',"yetiskin()",16,'http://dreamtr.club/resimler/adult1.png','special://home/addons/plugin.video.dreAM/fanart.jpg' )
+             xbmctools.addDir('[COLOR red]+18[/COLOR]',"yetiskin()",16,'http://dreamtr.club/resimler/adult1.png',fann)
          xbmc.executebuiltin('Container.SetViewMode(500)')
 url = 'txt.2maerd/golegnahc/moc.enisened//:ptth'[::-1]
 link=xbmctools.get_url(url)
@@ -94,21 +100,21 @@ class windows():
         return "DUYURU ",txt
 #2
 def Sinema():
-        xbmctools.addDir('[COLOR gold]! Sinema 1 * New * ![/COLOR]',"Sinema1()",5,'http://dreamtr.club/resimler/Sinema1.png',"special://home/addons/plugin.video.dreAM/fanart.jpg" )
-        xbmctools.addDir('[COLOR gold]! Sinema 2 * New * ![/COLOR]',"Sinema2()",6,'http://dreamtr.club/resimler/Sinema2.png',"special://home/addons/plugin.video.dreAM/fanart.jpg" )
-        xbmctools.addDir('[COLOR beige]Sinema 3[/COLOR]',"Sinema3()",7,'http://dreamtr.club/resimler/Sinema3.png',"special://home/addons/plugin.video.dreAM/fanart.jpg" )
+        xbmctools.addDir('[COLOR gold]! Sinema 1 * New * ![/COLOR]',"Sinema1()",5,'http://dreamtr.club/resimler/Sinema1.png',fann)
+        xbmctools.addDir('[COLOR gold]! Sinema 2 * New * ![/COLOR]',"Sinema2()",6,'http://dreamtr.club/resimler/Sinema2.png',fann)
+        xbmctools.addDir('[COLOR beige]Sinema 3[/COLOR]',"Sinema3()",7,'http://dreamtr.club/resimler/Sinema3.png',fann)
         xbmc.executebuiltin('Container.SetViewMode(500)')
 #3
 def Dizi():
-    xbmctools.addDir('[COLOR orange]Dizi 1 * NEW Edition *[/COLOR]',"Dizi1()",8,'http://dreamtr.club/resimler/Dizi1.png',"special://home/addons/plugin.video.dreAM/fanart.jpg" )
-    xbmctools.addDir('[COLOR gold]Dizi 2 ## NEW ##[/COLOR]',"Dizi2()",9,'http://dreamtr.club/resimler/Dizi2.png',"special://home/addons/plugin.video.dreAM/fanart.jpg" )
+    xbmctools.addDir('[COLOR orange]Dizi 1 * NEW Edition *[/COLOR]',"Dizi1()",8,'http://dreamtr.club/resimler/Dizi1.png',fann)
+    xbmctools.addDir('[COLOR gold]Dizi 2 ## NEW ##[/COLOR]',"Dizi2()",9,'http://dreamtr.club/resimler/Dizi2.png',fann)
     xbmc.executebuiltin('Container.SetViewMode(500)')
 #4
 def canliyayin():
-        xbmctools.addDir('[COLOR beige]Canli Tv 1[/COLOR]',"Canli1()",11,'http://dreamtr.club/resimler/Canlitv1.png',"special://home/addons/plugin.video.dreAM/fanart.jpg" )
-        xbmctools.addDir('[COLOR pink]Canli Tv 2* New *[/COLOR]',"Canli2()",12,'http://dreamtr.club/resimler/Canlitv2.png',"special://home/addons/plugin.video.dreAM/fanart.jpg" )
-        xbmctools.addDir('[COLOR beige]Canli Tv 3[/COLOR]',"Canli3()",18,'http://dreamtr.club/resimler/Canlitv3.png',"special://home/addons/plugin.video.dreAM/fanart.jpg" )
-        xbmctools.addDir('[COLOR orange]* Canli Tv 4 * New *[/COLOR]',"Canli4()",27,'http://dreamtr.club/resimler/Canlitv4.png',"special://home/addons/plugin.video.dreAM/fanart.jpg" )
+        xbmctools.addDir('[COLOR beige]Canli Tv 1[/COLOR]',"Canli1()",11,'http://dreamtr.club/resimler/Canlitv1.png',fann)
+        xbmctools.addDir('[COLOR pink]Canli Tv 2* New *[/COLOR]',"Canli2()",12,'http://dreamtr.club/resimler/Canlitv2.png',fann)
+        xbmctools.addDir('[COLOR beige]Canli Tv 3[/COLOR]',"Canli3()",18,'http://dreamtr.club/resimler/Canlitv3.png',fann)
+        xbmctools.addDir('[COLOR orange]* Canli Tv 4 * New *[/COLOR]',"Canli4()",27,'http://dreamtr.club/resimler/Canlitv4.png',fann)
         xbmc.executebuiltin('Container.SetViewMode(500)')
 
 #--#
@@ -123,8 +129,8 @@ def get_url(url):
 #8
 def Dizi1():
     url='http://www.hdsonbolumizleyin.com/'#[::-1]
-    xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Arama/Search[/COLOR]',url,14,'http://dreamtr.club/resimler/aramasearch.png',"special://home/addons/plugin.video.dreAM/fanart.jpg" )
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,19,"http://dreamtr.club/resimler/yenieklenenler.png",'special://home/addons/plugin.video.dreAM/fanart.jpg' )
+    xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Arama/Search[/COLOR]',url,14,aramaa,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,19,yeniek,fann)
     link=get_url(url)
     soup = BeautifulSoup(link)
     panel = soup.findAll("li", {"id": "menu-item-171"})
@@ -185,10 +191,10 @@ def Yeni(url):
             xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
     page=re.compile('>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
     for Url,name in page:
-            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,"http://dreamtr.club/resimler/sonrakisayfa.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
 #20
 def dizivideolinks(url,name):
-    xbmctools.addDir('[COLOR beige]>>[/COLOR]'+'[COLOR gold]'+'1 . Secenek '+'[/COLOR]',url,22,"special://home/addons/plugin.video.dreAM/fanart.jpg","special://home/addons/plugin.video.dreAM/fanart.jpg")        
+    xbmctools.addDir('[COLOR beige]>>[/COLOR]'+'[COLOR gold]'+'1 . Secenek '+'[/COLOR]',url,22,fann,fann)        
     try:
         link=get_url(url)
         soup = BeautifulSoup(link)
@@ -196,10 +202,10 @@ def dizivideolinks(url,name):
         liste=BeautifulSoup(str(panel))
         match2=re.compile('<a href="(.*?)"><span class=\'safirButton\'>(.*?)</span>').findall(str(liste))
         for url,name2 in match2:
-            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,"special://home/addons/plugin.video.dreAM/fanart.jpg","special://home/addons/plugin.video.dreAM/fanart.jpg")        
+            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,fann,fann)        
         match3=re.compile('<a href="(.*?)"><span class="safirButton">(.*?)<').findall(str(liste))
         for url,name2 in match3:
-            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,"special://home/addons/plugin.video.dreAM/fanart.jpg","special://home/addons/plugin.video.dreAM/fanart.jpg")        
+            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,fann,fann)        
     
     except:
         pass
@@ -207,8 +213,8 @@ def dizivideolinks(url,name):
 #9
 def Dizi2():
         url='http://www.canlidizihd5.net/'
-        xbmctools.addDir('[COLOR red]>>>>>>>[/COLOR] [COLOR orange]Arama/Search[/COLOR]',url,25,"http://dreamtr.club/resimler/aramasearch.png",'special://home/addons/plugin.video.dreAM/fanart.jpg' )
-        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,21,"http://dreamtr.club/resimler/yenieklenenler.png",'special://home/addons/plugin.video.dreAM/fanart.jpg' )
+        xbmctools.addDir('[COLOR red]>>>>>>>[/COLOR] [COLOR orange]Arama/Search[/COLOR]',url,25,aramaa,fann)
+        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,21,yeniek,fann)
         url1='http://www.canlidizihd5.net/'
         link=get_url(url1)
         soup = BeautifulSoup(link)
@@ -245,7 +251,7 @@ def Yeni2(url):
             xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,26,thumbnail,thumbnail)
     page=re.compile('\'current\'>.*?</.*?="page larger" href="(.*?)">(.*?)</a>').findall(link)
     for Url,name in page:
-            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,21,"http://dreamtr.club/resimler/sonrakisayfa.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,21,sonrakii,fann)
 #26
 def dizivideolinks2(url,name):
         urlList=''
@@ -278,22 +284,22 @@ def dizivideolinks2(url,name):
         for url in match:
                 i+=1
                 name2=str(i)+'. Secenek'
-                xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,"special://home/addons/plugin.video.dreAM/fanart.jpg","special://home/addons/plugin.video.dreAM/fanart.jpg")        
+                xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,fann,fann)        
           
 #5
 def Sinema1():
     urlY="http://www.dijifem.com/"
-    xbmctools.addDir('[COLOR yellow]Arama/Search[/COLOR]',urlY,38,'http://dreamtr.club/resimler/aramasearch.png','special://home/addons/plugin.video.dreAM/fanart.jpg')
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR gold]** Yerli Filmler ** [/COLOR]','http://www.dijifem.com/category/turk-filmleri',67,"http://dreamtr.club/resimler/yenieklenenler.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',urlY,67,"http://dreamtr.club/resimler/yenieklenenler.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+    xbmctools.addDir('[COLOR yellow]Arama/Search[/COLOR]',urlY,38,aramaa,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR gold]** Yerli Filmler ** [/COLOR]','http://www.dijifem.com/category/turk-filmleri',67,yeniek,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',urlY,67,yeniek,fann)
     link=get_url(urlY)
-    match=re.compile('<a href="http://www.dijifem.com/category/(.*?)" title=".*?" data-wpel-link="internal">(.*?)</a>').findall(link)
+    match=re.compile('<li class="cat-item cat-item-.*?"><a href="http://www.dijifem.com/category/(.*?)" title=".*?">(.*?)</a>').findall(link)
     for url,name in match:
         url='http://www.dijifem.com/category/'+url
-        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',url,67,"","special://home/addons/plugin.video.dreAM/fanart.jpg")
+        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',url,67,"",fann)
 #38
 def Aramasinema1():
-    sinema="http://www.filmiizle.org"
+    sinema="http://www.dijifem.com/"
     keyboard = xbmc.Keyboard("", 'Search', False)
     keyboard.doModal()
     if keyboard.isConfirmed():
@@ -305,7 +311,7 @@ def sinemaRecent12(url):
     urla=url
     link=get_url(url)
     soup = BeautifulSoup(link)
-    panel = soup.findAll("div", {"class": "moviefilm"},smartQuotesTo=None)
+    panel = soup.findAll("div", {"class": "filmtabLo-resim koseoval"},smartQuotesTo=None)
     liste=BeautifulSoup(str(panel))
     for i in range (len(panel)):
         url=panel[i].find('a')['href']
@@ -313,30 +319,23 @@ def sinemaRecent12(url):
         name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
         name=name.replace('&#8211;','&').replace('&#8217;','')
         xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,200,thumbnail,thumbnail)
-    page=re.compile('current\'>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
+    page=re.compile('<span class=\'page-numbers current\'>.*?</span>\n<a class=\'page-numbers\' href=\'(.*?)\'>(.*?)</a>').findall(link)
     for url1,name in page:
         url1=url1.replace('" data-wpel-link="internal','')
-        xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url1,67,"http://dreamtr.club/resimler/sonrakisayfa.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+        xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url1,67,sonrakii,fann)
 #200
 def ayyris(url):
     link=get_url(url)
     soup = BeautifulSoup(link)
-    panel=soup.find("div", {"class": "keremiya_part"})
+    panel=soup.find("ul", {"class": "partLarisiraLa"})
     liste=BeautifulSoup(str(panel))
-##    match1=re.compile('<span>(.*?)art 1</span>').findall(str(liste))
-##    for name in match1:
-    name="Part 1"
+    name="Secenek - 1"
     url=url
     xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,29,"","")
-    match=re.compile('<a href="(.*?)" data-wpel-link="internal"><span>(.*?)</span>').findall(str(liste))
+    match=re.compile('<a href="(.*?)">(.*?)</a>').findall(str(liste))
     for url,name in match:
         url=url.replace('" data-wpel-link="internal','')
         xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,29,"","")
-##    match=re.compile('<strong>(.*?)YAKINDA.*?</strong>').findall(link)
-##    for name in match:
-##        name='Fragman'
-##        url=url.replace('" data-wpel-link="internal','')
-##        xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,29,"","")
 #40
 def ayrisdirma1(url):
     link=get_url(url)
@@ -350,10 +349,10 @@ def ayrisdirma1(url):
             Baglanvideo(url,name,pid)
 #6
 def Sinema2():
-    url='http://baglanfilmiizle.net/'#[::-1]
-    xbmctools.addDir('[COLOR yellow]Arama/Search[/COLOR]',url,44,'http://dreamtr.club/resimler/aramasearch.png','special://home/addons/plugin.video.dreAM/fanart.jpg')
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR red]** Yerli Filmler ** [/COLOR]','http://baglanfilmiizle.net/film-izle-yerli',43,"http://dreamtr.club/resimler/yenieklenenler.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',url,43,"http://dreamtr.club/resimler/yenieklenenler.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+    url='http://baglanfilmiizle.net/'
+    xbmctools.addDir('[COLOR yellow]Arama/Search[/COLOR]',url,44,aramaa,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR red]** Yerli Filmler ** [/COLOR]','http://baglanfilmiizle.net/film-izle-yerli',43,yeniek,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',url,43,yeniek,fann)
     link=get_url(url)
     soup = BeautifulSoup(link)
     panel = soup.findAll("ul", {"class": "ek-liste"},smartQuotesTo=None)
@@ -367,7 +366,7 @@ def Sinema2():
         if "rotik" in name:
             pass
         else:
-            xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',url,43,"","special://home/addons/plugin.video.dreAM/fanart.jpg")
+            xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',url,43,"",fann)
 #44
 def Search2():
     sinema="http://www.baglanfilmiizle.com"
@@ -396,7 +395,7 @@ def Yenisinema2(url):
             url='http://www.baglanfilmiizle.com/index.php?sayfa=1'
             r = requests.post(url, data={'anasayfa_sayfano': page})
             soup = BeautifulSoup(r.text)
-            xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]'+ '[COLOR red]'+''+'[/COLOR]',url,43,"http://dreamtr.club/resimler/sonrakisayfa.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+            xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]'+ '[COLOR red]'+''+'[/COLOR]',url,43,sonrakii,fann)
 
 #45
 def ayrisdirma2(url):
@@ -405,22 +404,26 @@ def ayrisdirma2(url):
     link=get_url(urla)
     match=re.compile('(.*?)<span id="g(.*?)" class="load"></span>').findall(link)
     for name,pid in match:
-        r = requests.post(urla, data={'pid': pid})
+        url=(str (urla+(pid)))
+        r = requests.post(url)
         soup = BeautifulSoup(r.text)
-        match=re.compile('src="(.*?)"').findall(str(soup))
-        for url1 in match:
-            if "media" in url1:
+        match1=re.compile('iframe src="(.*?)" scrolling').findall(str(soup))
+        for url1 in match1:
+            if "usa" in url:
                 pass
             else:
-                #url1=url1.replace('//ok','http://ok').replace('//www.youtube.com','http://www.youtube.com')
-                xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,99,'','')
+                if "width" in url1:
+                    pass
+                else:
+                    print url1,"GGG"
+                    xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,99,'','')
 
 #7
 def Sinema3():
     sinema='http://www.bicaps.net'
-    xbmctools.addDir('[COLOR yellow]>>[/COLOR] [COLOR red]>> - Arama/Search -<< [/COLOR]',sinema,48,"http://dreamtr.club/resimler/aramasearch.png",'special://home/addons/plugin.video.dreAM/fanart.jpg' )
+    xbmctools.addDir('[COLOR yellow]>>[/COLOR] [COLOR red]>> - Arama/Search -<< [/COLOR]',sinema,48,aramaa,fann)
     sinema=sinema+"/?am_force_theme_layout=desktop"
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',sinema,47,"http://dreamtr.club/resimler/yenieklenenler.png",'special://home/addons/plugin.video.dreAM/fanart.jpg')
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',sinema,47,yeniek,fann)
     url=sinema
     link=get_url(url)
     soup = BeautifulSoup(link)
@@ -452,10 +455,10 @@ def Recent3(url):
             xbmctools.addDir('[COLOR orange]>>[COLOR beige]'+name+'[/COLOR]',url,49,thumbnail,thumbnail)
         page=re.compile('current\'>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
         for url,name in page:
-                xbmctools.addDir('[COLOR blue]SAYFA >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',url,47,"http://dreamtr.club/resimler/sonrakisayfa.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+                xbmctools.addDir('[COLOR blue]SAYFA >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',url,47,sonrakii,fann)
         page2=re.compile('</a><a href=\'(.*?)\' class=\'page smaller\'>.*?</a><span class=\'current\'>.*?</span>').findall(link)
         for url in page2:
-                xbmctools.addDir('[COLOR red]Onceki Sayfa[/COLOR]',url,47,"http://dreamtr.club/resimler/sonrakisayfa.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+                xbmctools.addDir('[COLOR red]Onceki Sayfa[/COLOR]',url,47,sonrakii,fann)
 #48
 def Aramasinema3(): 
         sinema='http://www.bicaps.net'
@@ -497,7 +500,7 @@ def videolinks3(url,name):
 #1
 def Belgesel():
     sinema ='http://www.belgun.tv/'
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Belgeseller[/COLOR]',sinema,50,"http://dreamtr.club/resimler/yenieklenenler.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Belgeseller[/COLOR]',sinema,50,yeniek,fann)
     link=get_url(sinema)
     match=re.compile('category menu-item-.*?"><a href="(.*?)">(.*?)</a>').findall(link)
     for url,name in match:
@@ -515,14 +518,14 @@ def BRecent(url):
                 xbmctools.addDir('[COLOR cyan]'+name+'[/COLOR]',url,51,thumbnail,thumbnail)
         page=re.compile('current\'>.*?</span><a class="page larger" href="(.*?)">.*?</a>').findall(link)
         for url in page:
-                xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]',url,50,"http://dreamtr.club/resimler/sonrakisayfa.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+                xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]',url,50,sonrakii,fann)
 #51
 def BELayrisdirma(url):
-    xbmctools.addDir('[COLOR blue]Play >>[/COLOR]',url,41,"","special://home/addons/plugin.video.dreAM/fanart.jpg")
+    xbmctools.addDir('[COLOR blue]Play >>[/COLOR]',url,41,"",fann)
     link=get_url(url)
     match=re.compile(' <a href="(.*?)"><span>(.*?)</span></a>').findall(link)
     for url,name in match:
-        xbmctools.addDir('[COLOR blue]'+name+'[/COLOR]',url,41,"","special://home/addons/plugin.video.dreAM/fanart.jpg")
+        xbmctools.addDir('[COLOR blue]'+name+'[/COLOR]',url,41,"",fann)
  
 def sembol_fix(x):
     try:
@@ -549,15 +552,21 @@ def yetiskin():
 #78
 def RecentyetA(url):
         link=get_url(url)
-        match=re.compile('href="(.*?)" \n                    title=".*?">\n                        <span class=".*?">.*?</span>\n                        <span class=".*?">\n                            <img src="(.*?)" alt="(.*?)"').findall(link)
-        for url,thumbnail,name in match:
-            url=z+url
+        soup = BeautifulSoup(link)
+        panel = soup.findAll("div", {"class": "row new-collect"})
+        panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-4 col-xs-6 bc-item"})
+        for i in range (len (panel)):
+            url=panel[i].find("a", {"class": "bci-title-link"})['href']
+            name=panel[i].find("a", {"class": "bci-title-link"})['title'].encode('utf-8', 'ignore')
+            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
             thumbnail=z+thumbnail
+            url=z+url
+            name=name.replace("Watch porno online","")
             xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,54,thumbnail,thumbnail)
         page=re.compile('<li class="page active"><a href=".*?">.*?</a></li>\n<li class="page"><a href="(.*?)">(.*?)</a></li>').findall(link)
         for url,name in page:
                 url=z+url
-                xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,78,"http://dreamtr.club/resimler/sonrakisayfa.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+                xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,78,sonrakii,fann)
 
 #53
 def Recentyet(url):
@@ -576,7 +585,7 @@ def Recentyet(url):
         page=re.compile('<li class="page active"><a href=".*?">.*?</a></li>\n<li class="page"><a href="(.*?)">(.*?)</a></li>').findall(link)
         for url,name in page:
                 url=z+url
-                xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,53,"http://dreamtr.club/resimler/sonrakisayfa.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+                xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,53,sonrakii,fann)
 #54
 def ayrisdirmayet(url):
         link=get_url(url)     
@@ -622,12 +631,12 @@ def INFOyet(url):
 #62
 def AlmanS():
     sinema='http://view4u.co/'
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR gold] ! Neue Filme ![/COLOR]',sinema,65,"http://dreamtr.club/resimler/yenieklenenler.png",'special://home/addons/plugin.video.dreAM/fanart.jpg')
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR gold] ! Neue Filme ![/COLOR]',sinema,65,yeniek,fann)
     link=get_url(sinema)
     match=re.compile('<li><a href="/load(.*?)">(.*?)</a></li>').findall(link)
     for url,name in match:
         url='http://view4u.co/load'+url
-        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]'+name+'[/COLOR]',url,65,"",'special://home/addons/plugin.video.dreAM/fanart.jpg')                   
+        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]'+name+'[/COLOR]',url,65,"",fann)                   
 #65
 def Yeni2alman1(url):
     link=get_url(url)
@@ -639,7 +648,7 @@ def Yeni2alman1(url):
     page=re.compile('<b class="swchItemA1"><span>.*?</span></b> <a class="swchItem1" href="(.*?)" onclick').findall(link)
     for url1 in page:
         url='http://view4u.co/'+url1
-        xbmctools.addDir('[COLOR purple]>>'+'NeXt PaGe -> [/COLOR]',url,65,"http://dreamtr.club/resimler/sonrakisayfa.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
+        xbmctools.addDir('[COLOR purple]>>'+'NeXt PaGe -> [/COLOR]',url,65,sonrakii,fann)
 #201
 def a6666(url):
     link=get_url(url)
@@ -657,33 +666,6 @@ def Linkleralman1(url):
         for name,url in match1:
             url='http://streamcloud.eu/'+url+'.html'
             xbmctools.addDir('Play - > '+name,url,99,"","")
-
-#76
-def genelarama():
-        keyboard = xbmc.Keyboard("", 'Search', False)
-        keyboard.doModal()
-        if keyboard.isConfirmed():
-            query = keyboard.getText()
-            query=query.replace(' ','+')
-            query=xbmctools.name_fix(query)
-        try:
-            sinema='http://www.filmiizle.org'
-            xbmctools.addDir('[COLOR beige]vvvvvvvvvvvvvvvvvvvvvvvvvvvv[COLOR red]SINEMA 1[COLOR beige]vvvvvvvvvvvvvvvvvvvvvvvvvvvv[/COLOR]',sinema,'',"http://dreamtr.club/resimler/Sinema1.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
-            sinema='http://www.filmiizle.org'
-            url = (sinema+'/?s='+query)
-            sinemaRecent12(url)
-        except:
-            xbmc.executebuiltin('Notification("[COLOR white]Dream[COLOR white]TR[/COLOR]","[COLOR yellow]Sinema 1 Acilamadi[/COLOR]")') 
-        try:
-            sinema='http://www.bicaps.net'
-            xbmctools.addDir('[COLOR beige]vvvvvvvvvvvvvvvvvvvvvvvvvvvv[COLOR red]SINEMA 3[COLOR beige]vvvvvvvvvvvvvvvvvvvvvvvvvvvv[/COLOR]',sinema,48,"http://dreamtr.club/resimler/Sinema3.png","special://home/addons/plugin.video.dreAM/fanart.jpg")
-            sinema='http://www.bicaps.net'
-            url = (sinema+'/?s='+query)
-            Recent3(url)
-        except:
-            xbmc.executebuiltin('Notification("[COLOR white]Dream[COLOR red]TR[/COLOR]","[COLOR yellow]Sinema 3 Acilamadi[/COLOR]")')
-
-
 
 #11
 def Canli1():
@@ -741,7 +723,7 @@ def ctv1(name,url):
         xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png') 
 #12
 def Canli2():
-    url1='http://www.canlitvlive.co/izle/star-tv.html'
+    url1='http://www.canlitvlive.co/izle/star-tv-izle.html'
     req = urllib2.Request(url1)
     req.add_header("User-Agent","Dalvik/1.6.0 (Linux; U; Android 4.2.2; A850 Build/JDQ39) Configuration/CLDC-1.1; Opera Mini/att/4.2.")
     response = urllib2.urlopen(req)
