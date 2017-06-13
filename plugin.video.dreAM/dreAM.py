@@ -415,7 +415,6 @@ def ayrisdirma2(url):
                 if "width" in url1:
                     pass
                 else:
-                    print url1,"GGG"
                     xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,99,'','')
 
 #7
@@ -694,33 +693,51 @@ def Canli1():
         xbmctools.addDir('[COLOR orange]> - '+name+'[/COLOR]',url,107,thumbnail,'') 
 #100
 def ctv1(name,url):
-    try:
-        req = urllib2.Request(url)
-        req.add_header("User-Agent","Dalvik/1.6.0 (Linux; U; Android 4.2.2; A850 Build/JDQ39) Configuration/CLDC-1.1; Opera Mini/att/4.2.")
-        response = urllib2.urlopen(req)
-        link=response.read()
-        response.close()
-        match = re.compile('file:"(.*?)"').findall(link)
+    if "mcanlitv" in url:
+        link=get_url(url)
+        match=re.compile('mcanlitv.flexmmp(.*?)" frameborder=').findall(link)
         for url in match:
-            if url:
+            url='http://mcanlitv.flexmmp'+url
+            link=get_url(url)
+            match=re.compile('hls: \'(.*?)\'\n').findall(link)
+            for url in match:
                 url=url+tk
-                xbmcPlayer.play(url)
-            xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
-        match1= re.compile("file: \'http(.*?)m3u8\.'").findall(link)
-        for url in match1:
-            if url:
-                url='http'+url+'m3u8'+tk
-                xbmcPlayer.play(url)
-            xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
-        match2= re.compile('filexxx= "(.*?)"').findall(link)
-        for url in match2:
-            if url:
-                url=url+tk
-                xbmcPlayer.play(url)
-            xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
-    except:
-        showMessage('[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]','[COLOR red]Iyi Seyirler Diler!!![/COLOR]')
-        xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png') 
+                yenical44(name,url)
+    else:
+        
+        try:
+            req = urllib2.Request(url)
+            req.add_header("User-Agent","Dalvik/1.6.0 (Linux; U; Android 4.2.2; A850 Build/JDQ39) Configuration/CLDC-1.1; Opera Mini/att/4.2.")
+            response = urllib2.urlopen(req)
+            link=response.read()
+            response.close()
+            match = re.compile('file:"(.*?)"').findall(link)
+            for url in match:
+                if url:
+                    url=url+tk
+                    xbmcPlayer.play(url)
+                xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+            match3 = re.compile('file : "(.*?)"').findall(link)
+            for url in match3:
+                if url:
+                    url=url+tk
+                    xbmcPlayer.play(url)
+                xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+            match1= re.compile("file: \'http(.*?)m3u8\.'").findall(link)
+            for url in match1:
+                if url:
+                    url='http'+url+'m3u8'+tk
+                    xbmcPlayer.play(url)
+                xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+            match2= re.compile('filexxx= "(.*?)"').findall(link)
+            for url in match2:
+                if url:
+                    url=url+tk
+                    xbmcPlayer.play(url)
+                xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+        except:
+            showMessage('[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]','[COLOR red]Iyi Seyirler Diler!!![/COLOR]')
+            xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png') 
 #12
 def Canli2():
     url1='http://www.canlitvlive.co/izle/star-tv-izle.html'
@@ -736,6 +753,13 @@ def Canli2():
         name=fix.decode_fix(name)
         url='http://mobile.canlitvlive.co/izle/'+url
         xbmctools.addDir('[COLOR gold]> - '+name+'[/COLOR]',url,100,thumbnail,'')
+        #--
+    urlM='http://www.mcanlitv.net/'
+    link=get_url(urlM)
+    match=re.compile('src="(.*?)" class=".*? alt="" /></a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t<div class="post-link">\r\n\t\t\t\t<a href="(.*?)">(.*?)</a>').findall(link)
+    for thumbnail,url,name in match:
+        xbmctools.addDir('[COLOR green]> - '+name+'[/COLOR]',url,100,thumbnail,'')
+    #--
         
 #101
 def ctv2(url):
