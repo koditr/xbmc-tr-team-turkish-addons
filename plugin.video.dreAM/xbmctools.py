@@ -1,113 +1,277 @@
-exec("import re;import base64");exec((lambda p,y:(lambda o,b,f:re.sub(o,b,f))(r"([0-9a-f]+)",lambda m:p(m,y),base64.b64decode("IyAtKi0gMTQ5OiAxMzYtOCAtKi0KMWNiIDE2YSw3YywzMCwzYyxmMwoxY2IgNGMsZGQsMTg2LDE3MAoxY2IgMjAsIDE2LCA4MCwgM2YKMWNiIDI4CjFjYiAxNGMKMThlIDE5LjE5ZC4xMjMgMWNiIDhmCjFjYiA1OCw4YwoxY2IgMzAsIDhjLDE5MQoxY2IgZDgKCjJiID0gMTZhLjJiCjFjMCA9IDE2YS4xYzAKZGEgPSB7JzMzLTM3JzogJzFiZC81LjAgKGZiOyA5YiA4NCkgZDEvMjYuMTEgKDI3LCAxZCAxOCkgMjIvMjMuMC5jNi42NCAxMC8yNi4xMScsCgknMTQ0JzogJzNhLzE0LDE3LzMxKzE5LDE3LzE5OzU5PTAuOSwqLyo7NTk9MC44JywKCScxNDQtMTJiJzogJzFhNC0xN2ItMSwxMzYtODs1OT0wLjcsKjs1OT0wLjMnLAoJJzE0NC0xYyc6ICc5NScsCgknMTQ0LTFmJzogJzQ4LWEwLDQ4OzU5PTAuOCcsCgknMzInOiAnOTAtNjcnfSAgICAgICAgICAgCmY1ID0gJzFiZCUxYTcuMCslZWQlM2IrMWIwJTNiKzFhK2I1KzYuMSUzYis0OC1hMCUyOStkMSVlYS4wKyUxMWYlMmMrMWQrMTglMjkrMjIlMWE4LjAuMTk1LjM4KzEwJWVhLjAnCgoxOTcgPSA4MC4xNmUoMTNkPSIxNDMuOWQuMTY1IikKMWM4PSJ8MzMtMzc9MWJkLzUuMCAoZmI7IDliIDg0KSBkMS8yNi4xMSAoMjcsIDFkIDE4KSAyMi8yMy4wLmM2LjY0IDEwLzI2LjExJyksKCcxNDQnLCAnM2EvMTQsMTcvMzErMTksMTcvMTk7NTk9MC45LCovKjs1OT0wLjgnKSwoJzE0NC0xYycsICc5NScpLCgnMTQ0LTFmJywgJzQ4LWEwLDQ4OzU5PTAuOCcpLCgnMzInLCAnOTAtNjcnKSIKCgoxNzY9JzI1PT0nCjE3Nz0nYmUnCjE3NT0nMTI9JwoKY2IgPSAxOTcuN2YKMTcxID0gMTk3LmQ3KCcxNzEnKQo2NiA9IDE5Ny5jMCgnMzUnKQo1ZSA9IDIwLjFjZShkZC4zNS42ZCg2NiwgJzRmJywnMTNiJykpCjRjLjM1LjVjKDVlKQo4MiA9IDIwLjFjZShkZC4zNS42ZCg2NiwgJzRmJywgJzE3NCcpKQo0Yy4zNS41Yyg4MikKNjEgPSAyMC4xY2UoZGQuMzUuNmQoNjYsICc0ZicsICcxYTAnKSkKNGMuMzUuNWMoNjEpCjExMz0xCjFjYT0nMWU6Ly8xM2MuY2YuMWM5JwpmPSIxZTovLzEzYy5mOS4xYTYvIgoxNjk9IjQzPT0iCjcxID0gMjAuMTRlKCkKNzEuMTgxKCkKMmYgPSAyMC4xMDIoMjAuOWYpCjJmLjE2MCgpCgoKMTRkIGExKDFjZCk6CiAgICAyZCA9IDE2YS4yYigxY2QpCiAgICAyZC5lKCczMy0zNycsICcxYmQvNS4wICgxYTsgMWIwOyAxYSBiNSA1LjE7IDQ4LTFjNzsgMWJlOjEuOS4wLjMpIDE4L2U5IDEyMi8zLjAuMycpCiAgICBiMiA9IDE2YS4xYzAoMmQpCiAgICAxMz1iMi42OCgpCiAgICAxMz0xNGMuZTEoMTMpCiAgICBiMi41MigpCiAgICAxY2YgMTMKCjE0ZCAxNDAoODcsIDFjZCwgN2I9IiIpOgogICAgNjIgPSAxNi41NCg4NywgNGI9ImI0LmY3IiwgMTg4PTdiKQogICAgNjIuYTUoMThiPSIxNjciLCBkYz17IjE2ZiI6ODd9KQogICAgNjIuNjAoImU0IiwgIjE3MyIpCiAgICAzZi4xNTMoYmQ9MTMyKDRjLmMyWzFdKSwxY2Q9MWNkLDFiPTYyLDhhPTFiNCkKMTRkIDE0NSg4NywxY2QsYzMsN2UsYjYpOgogICAgMTkzPTRjLmMyWzBdKyI/MWNkPSIrN2MuNmIoMWNkKSsiJmMzPSIrMWExKGMzKSsiJjg3PSIrN2MuNmIoODcpCiAgICBhMj02ZgogICAgNjI9MTYuNTQoODcsIDRiPSIxYjUuZjciLCAxODg9N2UpCiAgICA2Mi42MCgnY2MnLCBiNikKICAgIGEyPTNmLjE1MyhiZD0xMzIoNGMuYzJbMV0pLDFjZD0xOTMsMWI9NjIsOGE9NmYpCiAgICAxY2YgYTIKNjkgPSAoJzE4Ny4xOTIvZTYvMTU0LzE4Yy0xYmYtMTVhLzE0OC8xYWUuODYuMWEzLy86MTdhJylbOjotMV0KMTM9YTEoNjkpCjJlPTMwLjk2KCdbMWNjLTFjMl0nKS4xYzYoMTMpCgpiYyA9IDJlCgoxNGQgMTYxKDk4KToKICAgIDc4ID0gW10KICAgIDc3IDE3YyA1NiAxNTYoMTUxKDk4KSk6CiAgICAgICAgYTYgPSAxNGEoOThbMTdjXSkgXiAxNGEoYmNbMTdjICUgMTUxKGJjKV0pCiAgICAgICAgNzguNWMoMWFjKGE2KSkKICAgIDFjZiAnJy42ZCg3OCkKMTRkIDE3MigpOgogICAgMjAuNDcoIjExNS5mNi4xMmUoMzUsNjUpIikKICAgIDIwLjQ3KCIxMTUuYTgoMTkwKSIpCjE0ZCAxMWIoKToKICAgIDVhPWRkLjM1LjZkKDYxLCcxYTkuMWFkJykKICAgIDE3ZCA9IDI4LmZkKCkKICAgIDg3PTE5Ny5kNygiMTgzIikKICAgIGRmPTE5Ny5kNygiODkiKQogICAgNTU9MTk3LmQ3KCI1NSIpCiAgICAxYjYgZmEgZGY6CiAgICAgICAgICAgIDE5Ny5iZigpCiAgICA0NjoKICAgICAgICAgICAgY2UKICAgIDQyID0gMjguMTJjKDEyNz0yOC5hZSgpKQogICAgNDIuYjEoMTdkKQogICAgNDIuOGQoNmYpCiAgICA0Mi43Myg2ZikKICAgIDQyLjgxKDZmKQogICAgNDIuODgoMWI0KQogICAgNDIuN2QoMjguMTVlLjZlKCksIDEwZD0xKQogICAgNDIuZGUgPSBbKCczMy1lYicsICcxYmQvNS4wIChmYjsgOWIgODQpIGQxLzI2LjExICgyNywgMWQgMTgpIDIyLzIzLjAuYzYuNjQgMTAvMjYuMTEnKSwoJzE0NCcsICczYS8xNCwxNy8zMSsxOSwxNy8xOTs1OT0wLjksKi8qOzU5PTAuOCcpLCgnMTQ0LTFjJywgJzk1JyksKCcxNDQtMWYnLCAnNDgtYTAsNDg7NTk9MC44JyksKCczMicsICc5MC02NycpXQogICAgNDIuNmMoJzFlOi8vMTA3LjE0MS9lNS8nKQogICAgNDIuMTVmKCkKICAgIDQyLmQ2KDFiMT0wKQogICAgNDIuMTAxWycxMzgnXT0xOTcuZDcoIjg5IikKICAgIDQyLjEwMVsnMTk0J109MTk3LmQ3KCI1NSIpCiAgICA0Mi4xMzcoKQogICAgMTQ9NDIuYjIoKS42OCgpCiAgICAxYjYgIjEzYSIgNTYgMTQ6CiAgICAgICAgICAgIDE2MyAiMTFkIgogICAgMTE4ICJkMiIgNTYgMTQ6CiAgICAgICAgICAgIGI3ID0gMTYuNDkoKQogICAgICAgICAgICA0YSA9IDE2LmJhKCkKICAgICAgICAgICAgNGEuYTIoJ1tjIDE1MF1hOSBjNSBjOFsvY10nLCdbYyA1ZF0xYWIuMTk5LjE2ZCBjYSAxMmYgZjAuWy9jXScsJ1tjIDVkXTEyNCAxNjggMTc5IDE4ZiBmMiA+IGJiQDE1ZC4xNDEgYSA5MyAxMzUgZmUgMWEyIDExYyAxZTovLzEyZC4xOGFbL2NdJykKICAgICAgICAgICAgNGMuMTAzKCkKCiAgICAxMTggIjEyMSAxMDkiIDU2IDE0OgogICAgICAgICAgICBiNyA9IDE2LjQ5KCkKICAgICAgICAgICAgNGEgPSAxNi5iYSgpCiAgICAgICAgICAgIDRhLmEyKCdbYyAxNTBdYTkgYzUgYzhbL2NdJywnW2MgNWRdMWFiLjE5OS4xNmQgMTRmIDEyOCBmOCEhIVsvY10nLCdbYyA1ZF0xODkgMWFiLjE5OS4xNmQgMTRmIDEzOSAxYjggMWI3IDE0NyA3OSBlZiAxOTYgMTgyIDE1YiAxMGYhISEgMTMwIDEzZiBmYy5bL2NdJykKICAgICAgICAgICAgNGMuMTAzKCkKCiAgICAxY2YgMTQKCjE0ZCBiOCgyZiw4NywxY2QpOgogICAgMWIgPSAxNi41NCg4NywgNGI9IjFiNS5mNyIsIDE4OD0iIikKICAgIDFiLmE1KCc5ZCcsIHsnODcnOiA4NyB9ICkKICAgIDJmLjE5OCgxY2QsMWI9MWIpCiAgICAxY2YgMmYKCjE0ZCAxMTEoKToKICAgIDFiOSA9IDIwLjFjZSgnYWI6Ly8xMWUvMjAuMTM4JykKICAgIGYgPSA2YygxYjksIjFiYyIpCiAgICBmMT0gIiIKICAgIDc3IDEwMCA1NiBmOgogICAgICAgICAgICBmMSArPTEwMAogICAgNDAgPSAzMC45NigiMWUuKyIpCiAgICA0MSA9IDMwLjk2KCIxN2YuKyIpCiAgICA5MiA9IDMwLjFjNig0MCxmMSkKICAgIDkxID0gMzAuMWM2KDQxLGYxKQogICAgNzcgMTdjIDU2IDkyOiAgICAgICAKICAgICAgICAgICAgMWM0ID0gNDAuY2QoJycsIGYxKQogICAgICAgICAgICBmPTZjKDFiOSAsIjFhNSIpICAgICAgICAKICAgICAgICAgICAgZi45YygxYzQpCiAgICA3NyBiIDU2IDkxOiAgIAogICAgICAgICAgICA4MyA9IDQxLmNkKCcnLCBmMSkKICAgICAgICAgICAgZj02YygxYjkgLCIxYTUiKQkgICAgICAgIAogICAgICAgICAgICBmLjljKDgzKQogICAgZi4xNTcoKQogICAgZi41MigpCgoxNGQgZWMoKToKICAgIGZmPSc0ZT0nCiAgICAxNGI9JzI0PScKICAgIGUwID0gM2MuM2MoKQogICAgZTM9MjAuMWNlKCJhYjovLzY2LzEwYy8iKQogICAgOWEgPSA4ZigpCiAgICAxMGU9OWEuZDkKICAgIDFjNSA9IDlhLmFmKCI5NyIpCiAgICA5YS41ZigxYzUpCiAgICBhNCA9IDlhLjllKDE4Ni43NCgxNGIpKQogICAgMWM1LjVmKGE0KQogICAgNWEgPSAxODYuNzQoZmYpCiAgICBmID0gNmMoZTMrNWEsICIxYTUiKQogICAgZi45YyhlMC4xMTQoMTBlKDEzZT0iIikpKQoKMTRkIGQ0KDE4MCk6CiAgICAxODA9MTgwLjY1KCdcXCcsICcnKQogICAgMWNmIDE4MAoKMTRkIGIzKDFjZCk6CiAgICAyZCA9IDE2YS4yYigxY2QpCiAgICAyZC5lKCczMy1lYicsICcxYmQvNS4wICgxMGI7IDE1MiAxMDUgMTlhIDFkIDEzMSAxMDUgMWMxKSBkMS8xMzQuMS40ICgyNywgMWQgMTgpIGFkLzguMCBjNC8xNDYgMTAvMTM0LjEuNCcpLCgnMTQ0JywgJzNhLzE0LDE3LzMxKzE5LDE3LzE5OzU5PTAuOSwqLyo7NTk9MC44JyksKCcxNDQtMWMnLCAnOTUnKSwoJzE0NC0xZicsICc0OC1hMCw0ODs1OT0wLjgnKSwoJzMyJywgJzkwLTY3JykKICAgIGIyID0gMTZhLjFjMCgyZCkKICAgIDEzPWIyLjY4KCkKICAgIGIyLjUyKCkKICAgIDFjZiAxMwoKIy0tLS0jCjE0ZCA2MygxY2QsIDE1PXt9LCA4ZT0xMTksIDNkPTExOSk6CiAgICA0ND17JzE0NCc6ICczYS8xNCwxNy8zMSsxOSwxNy8xOTs1OT0wLjksZGIvMTA0LCovKjs1OT0wLjgnLAoJICcxNDQtMWMnOiAnMTA2LCBhMywgMTE2JywKCSAnMTQ0LTFmJzogJzQ4LWEwLDQ4OzU5PTAuOCcsCgkgJzMzLTM3JzogJzFiZC81LjAgKDFhIGI1IDYuMTsgNmEpIGQxLzI2LjM2ICgyNywgMWQgMTgpIDIyLzUwLjAuMTdlLjk0IDEwLzI2LjM2J30KICAgIDJhPXsnMTQ0JzogJzNhLzE0LDE3LzMxKzE5LDE3LzE5OzU5PTAuOSxkYi8xMDQsKi8qOzU5PTAuOCcsCgkgICAgICcxNDQtMWMnOiAnMTA2LCBhMywgMTE2JywKCSAgICAgJzE0NC0xZic6ICc0OC1hMCw0ODs1OT0wLjgnLAoJICAgICAnMzMtMzcnOiAnMWJkLzUuMCAoMTBiOyAxNTIgMTA1IDFhYSAxZCAxMzEgMTA1IDFjMSkgZDEvMjYuNTEuMSAoMjcsIDFkIDE4KSBhZC83LjAgYzQvMTQyIDEwLzE4NS41Myd9CgogICAgMWI2IDhlID09ICcxYmEnOgogICAgICAgIDFiNiAxNToKICAgICAgICAgICAgNDQuYjkoMTUpCiAgICAgICAgYjIgPSA1OC5mNCgxY2QsIDE1PTQ0LCAzZD0zZCwgYzk9MWI0KQogICAgNDY6CiAgICAgICAgMWI2IDE1OgogICAgICAgICAgICAyYS5iOSgxNSkKICAgICAgICBiMiA9IDU4LmY0KDFjZCwgMTU9MmEsIDNkPTNkLCBjOT0xYjQpCiAgICAxYjYgYjIuZDUgPT0gMTllOgogICAgICAgIDFjZiBiMi4xMjYsIGIyLjEyNS4xMGEoKQogICAgNDY6CiAgICAgICAgY2UKIy0tIwozZSAJPSAnMWJkLzUuMCAoMWEgYjUgNi4zOyA2YSkgZDEvMjYuMzYgKDI3LCAxZCAxOCkgMjIvNDUuMC4xMTIuODUgMTAvMjYuMzYnCjc1IAkJPSAnM2EvMTQsMTcvMzErMTksMTcvMTk7NTk9MC45LCovKjs1OT0wLjgnCjE0ZCAxMDgoMWNkLCA3YT0xYjQpOgogICAgMmQgPSAxNmEuMmIoMWNkKQogICAgMmQuZSgnMzMtMzcnLCAzZSkKICAgIDJkLmUoJzE0NCcsIDc1KQogICAgMmQuZSgnMTYyLTEyOScsICcxYjItZWUnKQogICAgYjIgPSAxNmEuMWMwKDJkKQogICAgNTcgPSBiMi42OCgpCiAgICBiMi41MigpCiAgICAxYjYgN2E6CiAgICAgICAgICAgIDM0ID0gYjIuMTUuZjQoJzE5Yi03NicpCiAgICAgICAgICAgIDFjZiB7JzU3JzogNTcsICczNCc6IDM0fQogICAgMWNmIDU3CjE0ZCBiMCgxY2QpOgogICAgMWNiIDMwLCAxNmEKICAgIDE0ZCBjMSgxY2QpOgogICAgICAgIDE4ZCA9IDMwLjViKCcxZTovLy4rPzkzXC5lNy4rPzwxNTkuKz8xNWM9XCIxMTc9KD8xNmQ8MWNkPlteXCJdKyknLCAxY2QsIDMwLjcwIHwgMzAuZDApCiAgICAgICAgMTg0ID0gMzAuNWIoJzovLzlkLis/XC45M1wuZTdcLyg/MTZkPDFjZD4uKz8pXC4xNCcsIDFjZCwgMzAuNzAgfCAzMC5kMCkKICAgICAgICAxY2YgMThkIDFiMyAxODQKICAgIDE5YyA9IGMxKDFjZCkKICAgIDIxID0gJycKICAgIDE2YiA9IFtdCiAgICAxYjYgMTljOgogICAgICAgIDIxID0gMTljLmU4KCcxY2QnKQogICAgICAgIDIxID0gMzAuY2QoJ1wmW14kXSonLCcnLDIxKQogICAgICAgIDIxID0gMzAuY2QoJy8xNTUnLCcnLDIxKQogICAgICAgIDIxID0gJzFlOi8vMTEwLjFjMy45My5lNy8nICsgMjEgKyAnLjhjJwogICAgNDY6CiAgICAgICAgOGIsIDM0ID0gNjMoMWNkKQogICAgICAgIDJlID0gMzAuOTYoJyJkMyI6IiguKj8pIiwnKS4xYzYoOGIpCiAgICAgICAgMWI2ICcxZScgZmEgNTYgMmVbMF06CiAgICAgICAgICAgIDIxID0gJzFlOicgKyAyZVswXQogICAgICAgIDQ2OgogICAgICAgICAgICAyMSA9IDJlWzBdCgogICAgMWI2IDIxOgogICAgICAgIDhiLCAzNCA9IDYzKDIxKQogICAgICAgIGM3ID0gMzRbJzRkJ10KICAgICAgICAxMWEgPSA4Yy4xNmMoOGIpCiAgICAgICAgNzcgMTY2IDU2IDExYVsxOTMnMTMzJ106CiAgICAgICAgICAgIGFhID0gMTY2WydiYyddCiAgICAgICAgICAgIDFiNiAnMWUnIGZhIDU2IDE2NlsnMWNkJ11bMDo0XToKCSAgICAgMTMgPSAnMWU6JyArIDE2NlsnMWNkJ10gKyAnfDc2PScgKyAxNmEuZTIoJzRkPScgKyBjNykjICsgJ3xhYz0nICsgMWNkCgkgICAgIDFjZD0xMyAKICAgICAgICAgICAgNDY6CgkgICAgIDEzID0gMTY2WycxY2QnXSArICd8NzY9JyArIDE2YS5lMignNGQ9JyArIGM3KSMgKyAnfGFjPScgKyAxY2QKCSAgICAgMWNkPTEzCiAgICAgICAgICAgIDg3PWFhCiAgICAgICAgICAgIDE0MCg4NywxY2QsJycpCiMtLSMKMTRkIDE1OCgxY2QpOgogICAgM2UgCT0gJzFiZC81LjAgKDFhIGI1IDYuMzsgNmEpIGQxLzI2LjM2ICgyNywgMWQgMTgpIDIyLzQ1LjAuMTEyLjg1IDEwLzI2LjM2JwogICAgNzUgCQk9ICczYS8xNCwxNy8zMSsxOSwxNy8xOTs1OT0wLjksKi8qOzU5PTAuOCcKICAgIDEyMCA9IFtdCiAgICAxYjYoMzAuNWIoMWJjJ2EyLmU3JywgMWNkKSk6CiAgICAgICAgICAgIDEzZCA9IDMwLjViKCdcZCsnLCAxY2QpLmU4KDApCiAgICAgICAgICAgIGE3ID0gJzFlOi8vYTIuZTcvMWJiPzFhZj03MiYxOWY9JyArIDEzZAogICAgICAgICAgICAxY2Q9YTcKICAgICAgICAgICAgMmQgPSAxNmEuMmIoMWNkKQogICAgICAgICAgICAyZC5lKCIzMy0zNyIsIjFiZC81LjAgKDFhIGI1IDYuMjsgNmEpIGQxLzI2LjM2ICgyNywgMWQgMTgpIDIyLzM5LjAuMTc4Ljk5IDEwLzI2LjM2IikKICAgICAgICAgICAgYjIgPSAxNmEuMWMwKDJkKQogICAgICAgICAgICAxMz1iMi42OCgpCiAgICAgICAgICAgIGIyLjUyKCkKICAgICAgICAgICAgMmU9MzAuOTYoJyI4NyI6IiguKj8pIiwiMWNkIjoiKC4qPykiJykuMWM2KDEzKQogICAgICAgICAgICA3NyA4NywxY2QgNTYgMmU6CgkgICAgIDFiNiAiMTJhIiA1NiA4NzoKCSAgICAgICAgICAgICBjZQoJICAgICA0NjoKCSAgICAgICAgICAgICAxY2Q9MWNkLjY1KCdcXDE2NCcsJyYnKQoJICAgICAgICAgICAgIDE0MCg4NywxY2QsJycp")))(lambda a,b:b[int("0x"+a.group(1),16)],"0|1|2|3|4|5|6|7|8|9|a|b|COLOR|d|add_header|f|Safari|11|LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZTsgKj0gPmdDLDR3Ly1SKSYpXw4|link|html|headers|xbmcgui|application|Gecko|xml|Windows|listitem|Encoding|like|http|Language|xbmc|vurl|Chrome|23|PGxvZ2xldmVsIGhpZGU9InRydWUiPi0xPC9sb2dsZXZlbD4|LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZScjLC0rYjlbNA|537|KHTML|mechanize|29|mobile_headers|Request|2C|req|match|playList|re|xhtml|Connection|User|cookie|path|36|Agent|38|39|text|3B|HTMLParser|params|USER_AGENT|xbmcplugin|patFinder1|patFinder2|br|aHR0cDovL2ZpbG1pemxlODAuY29tLw|pc_headers|45|else|executebuiltin|en|DialogProgress|dialog1|iconImage|sys|video_key|YWR2YW5jZWRzZXR0aW5ncy54bWw|resources|50|51|close|53|ListItem|password|in|source|requests|q|filepath|search|append|yellow|IMAGES_PATH|appendChild|setProperty|folders|liz|url_get|64|replace|home|alive|read|bilinmeyen|WOW64|quote_plus|open|join|HTTPRefreshProcessor|True|IGNORECASE|xbmcPlayer|videoPlayerMetadata|set_handle_redirect|b64decode|ACCEPT|Cookie|for|output|GoruyorsanizYanlis|getCookie|thumbnail|urllib|set_handle_refresh|iconimage|getLocalizedString|xbmcaddon|set_handle_referer|SUBS_PATH|subFound2|x86_64|85|tnetnocresubuhtig|name|set_handle_robots|Username|isFolder|resp|json|set_handle_equiv|computer|Document|keep|findPat2|findPat1|mail|94|none|compile|advancedsettings|input|99|doc|Linux|write|video|createTextNode|PLAYLIST_VIDEO|US|get_url|ok|deflate|veri_ad|setInfo|xor_num|jsonUrl|ActivateWindow|DreamTR|quality|special|Referer|Version|RobustFactory|createElement|MailRu_Player|set_cookiejar|response|get_urlmobile|DefaultVideo|NT|fanart|dialog|playlist_yap|update|Dialog|dreamtrdream|key|handle|LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZSwpOSkkImdDLDR3PCRUIhclVw56|openSettings|getAddonInfo|_regex|argv|mode|Mobile|Uyelik|1271|vkey|Hatasi|verify|Uyeliginizin|__language__|fanart_image|sub|pass|paradisehill|DOTALL|AppleWebKit|ucretsizuye|metadataUrl|replace_fix|status_code|select_form|getSetting|urlresolver|toprettyxml|openloadhdr|image|infoLabels|os|addheaders|login|htmlp|decode_fix|quote|pfile|IsPlayable|gizligiris|neyemnilib|ru|group|2008092417|2F532|agent|playlist2|28Windows|transform|Kullanici|dolmustur|strToSearch|isminizle|cookielib|get|UserAgent|Container|png|Gerekiyor|tekparthd|not|X11|Deneyiniz|CookieJar|AYRINTILI|test|line|form|PlayList|exit|webp|OS|gzip|denesine|http_req|username|get_dict|iPad|userdata|max_time|renk|Girdiniz|videoapi|playlist|2454|insidans|unescape|XBMC|sdch|movieSrc|elif|None|item|sifre100|BILGILER|DREAMTR|logpath|28KHTML|sources|Invalid|Firefox|minidom|Detayli|cookies|content|factory|Olmaniz|Control|profile|Charset|Browser|dreamtr|Refresh|suresi|Lutfen|Mac|int|videos|600|atiniz|utf|submit|log|Iseniz|VIPuye|images|www|id|indent|Tekrar|addLink|com|11A465|plugin|Accept|addDir|12B411|Mesaji|rtidok|coding|ord|nos|fix|def|Player|Uye|red|len|CPU|addDirectoryItem|retsam|embed|range|flush|ok_ru|param|cigam|Sifre|value|gmail|_http|title|clear|angel|Cache|print|u0026|dreAM|v|Video|bilgi|sinem|urllib2|items|loads|P|Addon|Title|time|downloadFolder|EXIT|true|subs|web4|web1|web2|2171|icin|ptth|8859|i|cj|2661|rtmp|x|stop|veya|Name|m2|9537|base64|lmth|thumbnailImage|Eger|club|type|maet|m1|from|Nick|Home|math|tset|u|pwd|195|adi|__settings__|add|I|8_1|Set|m|dom|200|mid|lib|str|TUM|war|ISO|w|org|2F5|2F3|nfo|7_0|V|chr|txt|moc|cmd|U|nr|no|or|False|DefaultFolder|if|Bu|ve|log_path|PC|dk|r|Mozilla|rv|rt|urlopen|X|L3|my|subFound|liste|findall|GB|tk|tv|z|import|D|url|translatePath|return".split("|")))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# -*- coding: utf-8 -*-
+import urllib2,urllib,re,HTMLParser,cookielib
+import sys,os,base64,time
+import xbmc, xbmcgui, xbmcaddon, xbmcplugin
+import mechanize
+import fix
+from xml.dom.minidom import Document
+import requests,json
+import re, json,math
+import urlresolver
+
+Request = urllib2.Request
+urlopen = urllib2.urlopen
+openloadhdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+               'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+               'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+               'Accept-Encoding': 'none',
+               'Accept-Language': 'en-US,en;q=0.8',
+               'Connection': 'keep-alive'}           
+UserAgent = 'Mozilla%2F5.0+%28Windows%3B+U%3B+Windows+NT+6.1%3B+en-US%29+AppleWebKit%2F532.0+%28KHTML%2C+like+Gecko%29+Chrome%2F3.0.195.38+Safari%2F532.0'
+
+__settings__ = xbmcaddon.Addon(id="plugin.video.dreAM")
+tk="|User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')"
+
+
+web1='LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZScjLC0rYjlbNA=='
+web2='LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZSwpOSkkImdDLDR3PCRUIhclVw56'
+web4='LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZTsgKj0gPmdDLDR3Ly1SKSYpXw4='
+
+__language__ = __settings__.getLocalizedString
+downloadFolder = __settings__.getSetting('downloadFolder')
+home = __settings__.getAddonInfo('path')
+IMAGES_PATH = xbmc.translatePath(os.path.join(home, 'resources','images'))
+sys.path.append(IMAGES_PATH)
+SUBS_PATH = xbmc.translatePath(os.path.join(home, 'resources', 'subs'))
+sys.path.append(SUBS_PATH)
+folders = xbmc.translatePath(os.path.join(home, 'resources', 'lib'))
+sys.path.append(folders)
+insidans=1
+z='http://www.paradisehill.tv'
+f="http://www.tekparthd.org/"
+sinem="aHR0cDovL2ZpbG1pemxlODAuY29tLw=="
+xbmcPlayer = xbmc.Player()
+xbmcPlayer.stop()
+playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+playList.clear()
+
+
+def get_url(url):
+    req = urllib2.Request(url)
+    req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+    response = urllib2.urlopen(req)
+    link=response.read()
+    link=fix.decode_fix(link)
+    response.close()
+    return link
+
+def addLink(name, url, thumbnail=""):
+    liz = xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=thumbnail)
+    liz.setInfo(type="Video", infoLabels={"Title":name})
+    liz.setProperty("IsPlayable", "true")
+    xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
+def addDir(name,url,mode,iconimage,fanart):
+    u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
+    ok=True
+    liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
+    liz.setProperty('fanart_image', fanart)
+    ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+    return ok
+bilinmeyen = ('lmth.tset/neyemnilib/retsam/maet-rt-cigam/rtidok/moc.tnetnocresubuhtig.war//:ptth')[::-1]
+link=get_url(bilinmeyen)
+match=re.compile('[D-L3]').findall(link)
+
+key = match
+
+def angel(input):
+    output = []
+    for i in range(len(input)):
+        xor_num = ord(input[i]) ^ ord(key[i % len(key)])
+        output.append(chr(xor_num))
+    return ''.join(output)
+def EXIT():
+    xbmc.executebuiltin("XBMC.Container.Refresh(path,replace)")
+    xbmc.executebuiltin("XBMC.ActivateWindow(Home)")
+def sifre100():
+    filepath=os.path.join(folders,'nfo.txt')
+    cj = mechanize.CookieJar()
+    name=__settings__.getSetting("Name")
+    login=__settings__.getSetting("Username")
+    password=__settings__.getSetting("password")
+    if not login:
+            __settings__.openSettings()
+    else:
+            pass
+    br = mechanize.Browser(factory=mechanize.RobustFactory())
+    br.set_cookiejar(cj)
+    br.set_handle_equiv(True)
+    br.set_handle_redirect(True)
+    br.set_handle_referer(True)
+    br.set_handle_robots(False)
+    br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+    br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')]
+    br.open('http://denesine.com/gizligiris/')
+    br.title()
+    br.select_form(nr=0)
+    br.form['log']=__settings__.getSetting("Username")
+    br.form['pwd']=__settings__.getSetting("password")
+    br.submit()
+    html=br.response().read()
+    if "VIPuye" in html:
+            print "DREAMTR"
+    elif "ucretsizuye" in html:
+            dialog = xbmcgui.DialogProgress()
+            dialog1 = xbmcgui.Dialog()
+            dialog1.ok('[COLOR red]DreamTR Uyelik Hatasi[/COLOR]','[COLOR yellow]V.I.P Uyeliginizin suresi dolmustur.[/COLOR]','[COLOR yellow]Detayli bilgi icin Nick isminizle > dreamtrdream@gmail.com a mail atiniz AYRINTILI TUM BILGILER http://dreamtr.club[/COLOR]')
+            sys.exit()
+
+    elif "Invalid username" in html:
+            dialog = xbmcgui.DialogProgress()
+            dialog1 = xbmcgui.Dialog()
+            dialog1.ok('[COLOR red]DreamTR Uyelik Hatasi[/COLOR]','[COLOR yellow]V.I.P Uye Olmaniz Gerekiyor!!![/COLOR]','[COLOR yellow]Eger V.I.P Uye Iseniz ve Bu Mesaji GoruyorsanizYanlis Kullanici adi veya Sifre Girdiniz!!! Lutfen Tekrar Deneyiniz.[/COLOR]')
+            sys.exit()
+
+    return html
+
+def playlist_yap(playList,name,url):
+    listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage="")
+    listitem.setInfo('video', {'name': name } )
+    playList.add(url,listitem=listitem)
+    return playList
+
+def playlist():
+    log_path = xbmc.translatePath('special://logpath/xbmc.log')
+    f = open(log_path,"r")
+    strToSearch= ""
+    for line in f:
+            strToSearch +=line
+    patFinder1 = re.compile("http.+")
+    patFinder2 = re.compile("rtmp.+")
+    findPat1 = re.findall(patFinder1,strToSearch)
+    findPat2 = re.findall(patFinder2,strToSearch)
+    for i in findPat1:       
+            subFound = patFinder1.sub('', strToSearch)
+            f=open(log_path ,"w")        
+            f.write(subFound)
+    for b in findPat2:   
+            subFound2 = patFinder2.sub('', strToSearch)
+            f=open(log_path ,"w")                       
+            f.write(subFound2)
+    f.flush()
+    f.close()
+
+def playlist2():
+    test='YWR2YW5jZWRzZXR0aW5ncy54bWw='
+    nos='PGxvZ2xldmVsIGhpZGU9InRydWUiPi0xPC9sb2dsZXZlbD4='
+    htmlp = HTMLParser.HTMLParser()
+    pfile=xbmc.translatePath("special://home/userdata/")
+    doc = Document()
+    renk=doc.toprettyxml
+    liste = doc.createElement("advancedsettings")
+    doc.appendChild(liste)
+    veri_ad = doc.createTextNode(base64.b64decode(nos))
+    liste.appendChild(veri_ad)
+    filepath = base64.b64decode(test)
+    f = open(pfile+filepath, "w")
+    f.write(htmlp.unescape(renk(indent="")))
+
+def replace_fix(x):
+    x=x.replace('\\', '')
+    return x
+
+def get_urlmobile(url):
+    req = urllib2.Request(url)
+    req.add_header('User-agent', 'Mozilla/5.0 (iPad; CPU OS 8_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B411 Safari/600.1.4'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')
+    response = urllib2.urlopen(req)
+    link=response.read()
+    response.close()
+    return link
+
+#----#
+def url_get(url, headers={}, computer=None, params=None):
+    pc_headers={'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Encoding': 'gzip, deflate, sdch',
+                'Accept-Language': 'en-US,en;q=0.8',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36'}
+    mobile_headers={'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                    'Accept-Encoding': 'gzip, deflate, sdch',
+                    'Accept-Language': 'en-US,en;q=0.8',
+                    'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53'}
+
+    if computer == 'PC':
+        if headers:
+            pc_headers.update(headers)
+        response = requests.get(url, headers=pc_headers, params=params, verify=False)
+    else:
+        if headers:
+            mobile_headers.update(headers)
+        response = requests.get(url, headers=mobile_headers, params=params, verify=False)
+    if response.status_code == 200:
+        return response.content, response.cookies.get_dict()
+    else:
+        pass
+#--#
+USER_AGENT 	= 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36'
+ACCEPT 		= 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+def http_req(url, getCookie=False):
+    req = urllib2.Request(url)
+    req.add_header('User-Agent', USER_AGENT)
+    req.add_header('Accept', ACCEPT)
+    req.add_header('Cache-Control', 'no-transform')
+    response = urllib2.urlopen(req)
+    source = response.read()
+    response.close()
+    if getCookie:
+            cookie = response.headers.get('Set-Cookie')
+            return {'source': source, 'cookie': cookie}
+    return source
+def MailRu_Player(url):
+    import re, urllib2
+    def _regex(url):
+        m1 = re.search('http://.+?mail\.ru.+?<param.+?value=\"movieSrc=(?P<url>[^\"]+)', url, re.IGNORECASE | re.DOTALL)
+        m2 = re.search('://video.+?\.mail\.ru\/(?P<url>.+?)\.html', url, re.IGNORECASE | re.DOTALL)
+        return m1 or m2
+    m = _regex(url)
+    vurl = ''
+    items = []
+    if m:
+        vurl = m.group('url')
+        vurl = re.sub('\&[^$]*','',vurl)
+        vurl = re.sub('/embed','',vurl)
+        vurl = 'http://videoapi.my.mail.ru/' + vurl + '.json'
+    else:
+        resp, cookie = url_get(url)
+        match = re.compile('"metadataUrl":"(.*?)",').findall(resp)
+        if 'http' not in match[0]:
+            vurl = 'http:' + match[0]
+        else:
+            vurl = match[0]
+
+    if vurl:
+        resp, cookie = url_get(vurl)
+        vkey = cookie['video_key']
+        item = json.loads(resp)
+        for v in item[u'videos']:
+            quality = v['key']
+            if 'http' not in v['url'][0:4]:
+                    link = 'http:' + v['url'] + '|Cookie=' + urllib2.quote('video_key=' + vkey)# + '|Referer=' + url
+                    url=link 
+            else:
+                    link = v['url'] + '|Cookie=' + urllib2.quote('video_key=' + vkey)# + '|Referer=' + url
+                    url=link
+            name=quality
+            addLink(name,url,'')
+#--#
+def ok_ru(url):
+    USER_AGENT 	= 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36'
+    ACCEPT 		= 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    sources = []
+    if(re.search(r'ok.ru', url)):
+            id = re.search('\d+', url).group(0)
+            jsonUrl = 'http://ok.ru/dk?cmd=videoPlayerMetadata&mid=' + id
+            url=jsonUrl
+            req = urllib2.Request(url)
+            req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
+            response = urllib2.urlopen(req)
+            link=response.read()
+            response.close()
+            match=re.compile('"name":"(.*?)","url":"(.*?)"').findall(link)
+            for name,url in match:
+                    if "profile" in name:
+                            pass
+                    else:
+                            url=url.replace('\\u0026','&')
+                            addLink(name,url,'')
 
 #--
 def playerdenetle(name, urlList):
@@ -471,10 +635,56 @@ def frame(url):
     for url in matchab:
         url='http://ok.ru/videoembed/'+str(url)
         magix_player(name,url)
-    ply1=re.compile("videoseyredin.net/embed/(.*?)'").findall(link)
+    ply1=re.compile("videoseyredin.net/embed/(.*?)'").findall(link)#
     for url in ply1:
         url='https://www.videoseyredin.net/embed/'+url
         dizividcal(url)
+    mazz=re.compile('<iframe src="/matplayer/neez/(.*?)"').findall(link)#
+    for url in mazz:
+        url='http://www.ddizi1.com/matplayer/neez/'+url
+        link=get_url(url)
+        match=re.compile('src="https://embed.tune.pk/play/(.*?)\?').findall(link)
+        for url in match:
+            url='https://embed.tune.pk/play/'+url
+            link=get_url(url)
+            match=re.compile('var requestURL = \'(.*?)\';').findall(link)
+            for url in match:
+                link=get_url(url)
+                match=re.compile('file":"(.*?)","bitrate":(.*?),"label"').findall(link)
+                for url,name in match:
+                    url=url.replace('\/','/')
+                    addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+        match1=re.compile('dailymotion.com\/embed\/video\/(.*?)\?').findall(link)
+        for url in match1:
+            url='http://www.dailymotion.com/embed/video/'+url
+            magix_player(name,url)
+        match33=re.compile('file: "(.*?)",\n                label: "(.*?)"').findall(link)
+        for url,name in match33:
+            url='http://www.ddizi1.com'+url
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+            
+    mazz2=re.compile('src="http://www.ddizi1.com/matplayer/neez/(.*?)"').findall(link)#
+    for url in mazz2:
+        url='http://www.ddizi1.com/matplayer/neez/'+url
+        link=get_url(url)
+        match=re.compile('file: "(.*?)",\n                label: "(.*?)"').findall(link)
+        for url,name in match:
+            url='http://www.ddizi1.com'+url
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+            
+    tune=re.compile('src\="http://tune.pk\/player\/embed_player.php\?vid\=(.*?)"').findall(link)#
+    for url in tune:
+        url='https://embed.tune.pk/play/'+url
+        link=get_url(url)
+        match=re.compile('var requestURL = \'(.*?)\';').findall(link)
+        for url in match:
+            link=get_url(url)
+            match=re.compile('file":"(.*?)","bitrate":(.*?),"label"').findall(link)
+            for url,name in match:
+                url=url.replace('\/','/')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+                
+        
     ply2=re.compile('/playlist/(.*?).json"').findall(link)
     for url in ply2:
         url='https://www.videoseyredin.net/playlist/'+url+'.json'
@@ -547,7 +757,11 @@ def dizividcal(url):
                 url=url.replace('","default":"true','')
                 addLink('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,'')
     if "videoseyredin" in url:
-        link=get_url(url)
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
         ply2=re.compile('/playlist/(.*?).json"').findall(link)
         for url in ply2:
             url='https://www.videoseyredin.net/playlist/'+url+'.json'
@@ -556,181 +770,4 @@ def dizividcal(url):
             for urlA,name in match:
                 urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]','https://redirector.googlevideo.com'+urlA,'')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
