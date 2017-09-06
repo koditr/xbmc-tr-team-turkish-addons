@@ -111,13 +111,13 @@ def sifre100():
             print "DREAMTR"
     elif "ucretsizuye" in html:
             dialog = xbmcgui.DialogProgress()
-            dialog1 = xbmcgui.Dialog()
+            dialog1 = xbmcgui.Dia#log()
             dialog1.ok('[COLOR red]DreamTR Uyelik Hatasi[/COLOR]','[COLOR yellow]V.I.P Uyeliginizin suresi dolmustur.[/COLOR]','[COLOR yellow]Detayli bilgi icin Nick isminizle > dreamtrdream@gmail.com a mail atiniz AYRINTILI TUM BILGILER http://dreamtr.club[/COLOR]')
             sys.exit()
 
     elif "Invalid username" in html:
             dialog = xbmcgui.DialogProgress()
-            dialog1 = xbmcgui.Dialog()
+            dialog1 = xbmcgui.Dia#log()
             dialog1.ok('[COLOR red]DreamTR Uyelik Hatasi[/COLOR]','[COLOR yellow]V.I.P Uye Olmaniz Gerekiyor!!![/COLOR]','[COLOR yellow]Eger V.I.P Uye Iseniz ve Bu Mesaji GoruyorsanizYanlis Kullanici adi veya Sifre Girdiniz!!! Lutfen Tekrar Deneyiniz.[/COLOR]')
             sys.exit()
 
@@ -631,15 +631,19 @@ def frame(url):
         url='http://www.youtube.com/embed/'+url
         name='Play-Youtube'
         magix_player(name,url)
+    matchaa=re.compile('youtube.com\/embed\/(.*?)"').findall(link)
+    for url in matchaa:
+        url='http://www.youtube.com/embed/'+url
+        name='Play-Youtube'
+        magix_player(name,url)
     matchab=re.compile('ok.ru\/videoembed\/(.*?)"').findall(link)
     for url in matchab:
         url='http://ok.ru/videoembed/'+str(url)
         magix_player(name,url)
-    ply1=re.compile("videoseyredin.net/embed/(.*?)'").findall(link)#
+    ply1=re.compile("videoseyredin.net/embed/(.*?)'").findall(link)
     for url in ply1:
-        url='https://www.videoseyredin.net/embed/'+url
         dizividcal(url)
-    mazz=re.compile('<iframe src="/matplayer/neez/(.*?)"').findall(link)#
+    mazz=re.compile('<iframe src="/matplayer/neez/(.*?)"').findall(link)
     for url in mazz:
         url='http://www.ddizi1.com/matplayer/neez/'+url
         link=get_url(url)
@@ -700,6 +704,22 @@ def frame(url):
       url=url.replace("http://ok.ru/video/","")
       url='http://ok.ru/videoembed/'+str(url)
       magix_player(name,url)
+    hqq1=re.compile('goo.gl/(.*?)"').findall(link)
+    for url in hqq1:
+        url='https://goo.gl/'+url
+        link=get_url(url)
+        match=re.compile('videokeyorig = "(.*?)"').findall(link)
+        for vid in match:
+            resolve( vid)
+    izle7=re.compile('izle7.com\/embed\-(.*?)"').findall(link)
+    for url in izle7:
+        url='http://www.izle7.com/embed-'+url
+        link=get_url(url)
+        match=re.compile('src: "(.*?).mp4"').findall(link)
+        for vid in match:
+            vid=vid+'.mp4'
+            name='Izle7'
+            addLink(name,vid,'')
     itt=re.compile('src="https:\/\/ittir.in\/v\/(.*?)"').findall(link)
     for url in itt:
         url=url.replace('https://ittir.in/v/','')
@@ -762,7 +782,7 @@ def dizividcal(url):
         response = urllib2.urlopen(req)
         link=response.read()
         response.close()
-        ply2=re.compile('/playlist/(.*?).json"').findall(link)
+        ply2=re.compile('playlist/(.*?).json"').findall(link)
         for url in ply2:
             url='https://www.videoseyredin.net/playlist/'+url+'.json'
             link=get_url(url)
@@ -770,4 +790,157 @@ def dizividcal(url):
             for urlA,name in match:
                 urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]','https://redirector.googlevideo.com'+urlA,'')
+
+#--
+def request( url, headers={}):
+    print('request: %s' % url)
+    req = urllib2.Request(url, headers=headers)
+    try:
+        response = urllib2.urlopen(req)
+        data = response.read()
+        response.close()
+    except urllib2.HTTPError, error:
+        data=error.read()
+    print('len(data) %s' % len(data))
+    return data
+
+def _decode2( file_url):
+    def K12K(a, typ='b'):
+        codec_a = ["G", "L", "M", "N", "Z", "o", "I", "t", "V", "y", "x", "p", "R", "m", "z", "u",
+                   "D", "7", "W", "v", "Q", "n", "e", "0", "b", "="]
+        codec_b = ["2", "6", "i", "k", "8", "X", "J", "B", "a", "s", "d", "H", "w", "f", "T", "3",
+                   "l", "c", "5", "Y", "g", "1", "4", "9", "U", "A"]
+        if 'd' == typ:
+            tmp = codec_a
+            codec_a = codec_b
+            codec_b = tmp
+        idx = 0
+        while idx < len(codec_a):
+            a = a.replace(codec_a[idx], "___")
+            a = a.replace(codec_b[idx], codec_a[idx])
+            a = a.replace("___", codec_b[idx])
+            idx += 1
+        return a
+
+    def _xc13(_arg1):
+        _lg27 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+        _local2 = ""
+        _local3 = [0, 0, 0, 0]
+        _local4 = [0, 0, 0]
+        _local5 = 0
+        while _local5 < len(_arg1):
+            _local6 = 0
+            while _local6 < 4 and (_local5 + _local6) < len(_arg1):
+                _local3[_local6] = _lg27.find(_arg1[_local5 + _local6])
+                _local6 += 1
+            _local4[0] = ((_local3[0] << 2) + ((_local3[1] & 48) >> 4))
+            _local4[1] = (((_local3[1] & 15) << 4) + ((_local3[2] & 60) >> 2))
+            _local4[2] = (((_local3[2] & 3) << 6) + _local3[3])
+
+            _local7 = 0
+            while _local7 < len(_local4):
+                if _local3[_local7 + 1] == 64:
+                    break
+                _local2 += chr(_local4[_local7])
+                _local7 += 1
+            _local5 += 4
+        return _local2
+
+    return _xc13(K12K(file_url, 'e'))               
+
+def _decode3( w, i, s, e):
+    var1 = 0
+    var2 = 0
+    var3 = 0
+    var4 = []
+    var5 = []
+    while (True):
+        if (var1 < 5):
+            var5.append(w[var1])
+        elif (var1 < len(w)):
+            var4.append(w[var1])
+        var1 += 1
+        if (var2 < 5):
+            var5.append(i[var2])
+        elif (var2 < len(i)):
+            var4.append(i[var2])
+        var2 += 1
+        if (var3 < 5):
+            var5.append(s[var3])
+        elif (var3 < len(s)):
+            var4.append(s[var3])
+        var3 += 1
+        if (len(w) + len(i) + len(s) + len(e) == len(var4) + len(var5) + len(e)):
+            break
+    var6 = ''.join(var4)
+    var7 = ''.join(var5)
+    var2 = 0
+    result = []
+    for var1 in range(0, len(var4), 2):
+        ll11 = -1
+        if (ord(var7[var2]) % 2):
+            ll11 = 1
+        result.append(chr(int(var6[var1:var1 + 2], 36) - ll11))
+        var2 += 1
+        if (var2 >= len(var5)):
+            var2 = 0
+    return ''.join(result)
+
+def _decode_data( data):
+    valuesPattern = r";}\('(\w+)','(\w*)','(\w*)','(\w*)'\)\)"
+    values = re.search(valuesPattern, data, re.DOTALL)
+    return _decode3(values.group(1), values.group(2), values.group(3), values.group(4))
+
+def resolve( vid):
+    user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_3 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/57.0.2987.137 Mobile/13G34 Safari/601.1.46'
+    headers = { 'User-Agent': user_agent,
+                'Referer': 'https://hqq.watch/player/embed_player.php?vid=' + vid}
+    player_url = "https://hqq.watch/player/embed_player.php?vid=%s" % vid
+    data = request(player_url, headers)
+    data = _decode_data(data)
+    data = _decode_data(data)
+    
+    code_crypt = data.split(';; ')
+    data = _decode_data(code_crypt[1])
+
+    if data:
+        jsonInfo = request("http://hqq.watch/player/ip.php?type=json", headers)
+        jsonIp = json.loads(jsonInfo)['ip']
+
+        at = re.search(r'var at *= *"(\w+)";', data, re.DOTALL)
+        http_referer = re.search('var http_referer *= *"([^"]*)";', data, re.DOTALL)
+
+        if jsonIp and at:
+            get_data = {'iss': jsonIp, 'vid': vid, 'at': at.group(1), 'autoplayed': 'on', 'referer': 'on',
+                        'http_referer': http_referer.group(1), 'pass': '', 'embed_from' : '', 'need_captcha' : '0',
+                        'hash_from' : ''
+                        }
+            data = urllib.unquote(request("http://hqq.watch/sec/player/embed_player.php?" +
+                                               urllib.urlencode(get_data), headers))
+            
+            at = re.search(r'var\s*at\s*=\s*"([^"]*?)"', data)
+            l = re.search(r'link_1: ([a-zA-Z]+), server_1: ([a-zA-Z]+)', data)
+            
+            data = _decode_data(data)
+            data = _decode_data(data)
+            code_crypt = data.split(';; ')
+            data = _decode_data(code_crypt[1])
+            
+            vid_server = re.search(r'var ' + l.group(2) + ' = "([^"]+)"', data).group(1)
+            vid_link = re.search(r'var ' + l.group(1) + ' = "([^"]+)"', data).group(1)
+
+            if vid_server and vid_link and at:
+                get_data = {'server_1': vid_server, 'link_1': vid_link, 'at': at.group(1), 'adb': '0/',
+                            'b': '1', 'vid': vid }
+                headers['x-requested-with'] = 'XMLHttpRequest'
+                data = request("http://hqq.watch/player/get_md5.php?" + urllib.urlencode(get_data), headers)
+                jsonData = json.loads(data)
+                encodedm3u = jsonData['file']
+                decodedm3u = _decode2(encodedm3u.replace('#', ''))
+                decodedm3u = decodedm3u.replace("?socket", ".mp4.m3u8")
+                fake_agent = user_agent
+                name='Hqq_Player'
+                url=decodedm3u  + '|' + fake_agent
+                addLink(name,url,'')
+                    
 
