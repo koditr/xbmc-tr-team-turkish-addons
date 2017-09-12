@@ -68,7 +68,7 @@ def CATEGORIES():
          xbmctools.addDir('[COLOR purple]BELGESEL iZLE[/COLOR]',"Belgesel()",1,'http://dreamtr.club/resimler/belgeselizle.png',fann)
          xbmctools.addDir('[COLOR grey]ALMAN Sinema[/COLOR]',"Alman()",62,'http://dreamtr.club/resimler/almanlar.png',fann)
          xbmctools.addDir('[COLOR grey]DREAM AYARLAR[/COLOR]',"Ayarlar()",2000,'http://dreamtr.club/resimler/ayarlar.png',fann)
-         xbmctools.addLink('[COLOR grey]* New IPTV-Pro-Platinium* [/COLOR]',"plugin://plugin.video.youtube/?action=play_video&videoid=neXKN4zw0vk",'http://3.bp.blogspot.com/-VpI9h1UREI8/Vkt5vbZh1AI/AAAAAAAAHPM/86_NgwKr42g/s1600/new-sign-ID-33314.png')
+         xbmctools.addDir('[COLOR orange]*IPTV-Pro-Platinium* [/COLOR]',"iptvpro(name,url)",202,'http://dreamtr.club/resimler/iptvpro.png',fann)
          if gizlilik == "false" or gizlilik2 != gizlilik3 or gizlilik4 == "false":
              pass
          else:
@@ -125,7 +125,6 @@ def get_url(url):
         link=response.read()
         response.close()
         return link
-
 #8
 def Dizi1():
     url='http://www.hdsonbolumizleyin.org/'
@@ -820,6 +819,18 @@ def Calcanli6(name,url):
             xbmctools.playlist()
     else:
             xbmctools.playlist2()
+#202   
+def iptvpro(name,url):
+    xbmctools.addDir('[COLOR beige]*** ONLY 80 € / Year ***[/COLOR]',"","","",fann)
+    url='http://guek.ddns.net:1903/get.php?username=dreamtreklenti&password=760psDvBJI&type=m3u&output=ts'
+    link=get_url(url)
+    match=re.compile("#EXTINF:-1,(.*?)\r\nhttp://(.*?)\r").findall(link)
+    for name,url in match:
+        if "ilgilendirme" in name:
+            pass
+        else:
+            name=name.replace('Bein','****').replace('Sky','***').replace('SKY','***').replace('TVBU','****').replace('BEIN','****')
+            xbmctools.addDir('[COLOR gold]>'+name+' - Platinium User[/COLOR]',url,19,'','')
 #99
 def magix_player(name,url):
     if "www.dailymotion.com" in url:
@@ -944,6 +955,7 @@ elif mode==140: Diziara()
 elif mode==199: yenical44(name,url)
 elif mode==200: ayyris(url)
 elif mode==201: a6666(url)
+elif mode==202: iptvpro(name,url)
 elif mode==2000: __settings__.openSettings()
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
