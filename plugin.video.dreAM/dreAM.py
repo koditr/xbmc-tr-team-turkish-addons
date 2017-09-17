@@ -127,27 +127,16 @@ def get_url(url):
         return link
 #8
 def Dizi1():
-    url='http://www.hdsonbolumizleyin.org/'
+    url='http://www.canlihddizi.com/'
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Arama/Search[/COLOR]',url,14,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,19,yeniek,fann)
     link=get_url(url)
-    soup = BeautifulSoup(link)
-    panel = soup.findAll("li", {"id": "menu-item-171"})
-    liste=BeautifulSoup(str(panel))
-    for li in liste.findAll('li'):
-        a=li.find('a')
-        url= a['href']
-        name=li.text
-        name=fix.decode_fix(name)
-        name=name.encode('utf8')
-        thumbnail=""
-        if "Yeni Diziler" in name:
-            pass
-        else:
-            xbmctools.addDir('[COLOR beige]>'+name+'[/COLOR]',url,19,'','')
+    match=re.compile('<li class="cat-item cat-item-.*?"><a href="(.*?)" >(.*?)</a>\n</li>').findall(link)
+    for url,name in match:
+            xbmctools.addDir('[COLOR beige]>'+name+'[/COLOR]',url,28,'','')
 #14
 def Arama():
-        dizi1='http://www.hdsonbolumizleyin.org/'#[::-1]
+        dizi1='http://www.canlihddizi.com/'
         keyboard = xbmc.Keyboard("", 'Search', False)
         keyboard.doModal()
         if keyboard.isConfirmed():
@@ -181,14 +170,23 @@ def de_get(name,url):
 def Yeni(url):
     link=get_url(url)
     soup = BeautifulSoup(link)
-    panel = soup.findAll("div", {"class": "article-list"},smartQuotesTo=None)
-    panel = panel[0].findAll("div", {"class": "film-container"})
+    panel = soup.findAll("div", {"class": "fix-film-v2_item fix_home clearfix list_items"},smartQuotesTo=None)
+    panel = panel[0].findAll("div", {"class": "movie-poster"})
     for i in range (len (panel)):
-            url=panel[i].find('a')['href']
-            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-            xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
-    page=re.compile('<span class=\'current\'>.*?</span><a class="page larger" title=".*?" href="(.*?)">(.*?)</a>').findall(link)
+        url=panel[i].find('a')['href']
+        name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+        thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+        xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
+    page=re.compile('<span class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
+    for Url,name in page:
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
+#28
+def Yeni222(url):
+    link=get_url(url)
+    match=re.compile('href="(.*?)">\n\n\t\t\t<span class=".*?"><span class=".*?" title=".*?"></span><span class=".*?" title=".*?">.*?</span></span><span class=".*?">(.*?)</span>\t\t\t<img src="(.*?)"').findall(link)
+    for url,name,thumbnail in match:
+        xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
+    page=re.compile('<span class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
     for Url,name in page:
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
 #20
@@ -197,14 +195,11 @@ def dizivideolinks(url,name):
     try:
         link=get_url(url)
         soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "pagelinks"})
+        panel = soup.findAll("div", {"class": "keremiya_part"})
         liste=BeautifulSoup(str(panel))
-        match2=re.compile('<a href="(.*?)"><span class=\'safirButton\'>(.*?)</span>').findall(str(liste))
+        match2=re.compile('<a href="(.*?)"><span>(.*?)</span>').findall(str(liste))
         for url,name2 in match2:
-            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,fann,fann)        
-        match3=re.compile('<a href="(.*?)"><span class="safirButton">(.*?)<').findall(str(liste))
-        for url,name2 in match3:
-            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,fann,fann)        
+            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,fann,fann)            
     
     except:
         pass
@@ -910,6 +905,7 @@ elif mode==24: xbmctools.dizividcal(url)
 elif mode==25: Arama2()
 elif mode==26: dizivideolinks2(url,name)
 elif mode==27: Canli4()
+elif mode==28: Yeni222(url)
 elif mode==29: xbmctools.ayrisdirm1(url)
 elif mode==30: yerlidizi3()
 elif mode==31: Yeni3(url)
