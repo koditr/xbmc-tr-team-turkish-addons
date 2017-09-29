@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.dreAM"
        name="[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]"
-       version="0.0.102"
+       version="0.0.103"
        provider-name="[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]">
   <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
         <import version="3.0.8" addon="script.module.beautifulsoup"/> 
         <import addon="script.module.simplejson"/>
+		<import addon="plugin.video.xbmcTRIPTV"/>
         <import addon="script.module.urlresolver"/>
         <import addon="script.module.t0mm0.common"/>
         <import version="0.2.6" addon="script.module.mechanize"/>
         <import version="2.4.3" addon="script.module.requests"/>
+
   
   </requires>
   <extension point="xbmc.python.pluginsource" library="dreAM.py">
@@ -24,4 +26,3 @@
     <platform>all</platform>
   </extension>
 </addon>
-

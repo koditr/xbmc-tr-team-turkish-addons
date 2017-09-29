@@ -68,7 +68,7 @@ def CATEGORIES():
          xbmctools.addDir('[COLOR purple]BELGESEL iZLE[/COLOR]',"Belgesel()",1,'http://dreamtr.club/resimler/belgeselizle.png',fann)
          xbmctools.addDir('[COLOR grey]ALMAN Sinema[/COLOR]',"Alman()",62,'http://dreamtr.club/resimler/almanlar.png',fann)
          xbmctools.addDir('[COLOR grey]DREAM AYARLAR[/COLOR]',"Ayarlar()",2000,'http://dreamtr.club/resimler/ayarlar.png',fann)
-         xbmctools.addDir('[COLOR orange]*IPTV-Pro-Platinium* [/COLOR]',"iptvpro(name,url)",202,'http://dreamtr.club/resimler/iptvpro.png',fann)
+         xbmctools.addDir('[COLOR orange]*IPTV-Pro-icerik REKLAM* [/COLOR]',"iptvpro(name,url)",202,'http://dreamtr.club/resimler/iptvpro.png',fann)
          if gizlilik == "false" or gizlilik2 != gizlilik3 or gizlilik4 == "false":
              pass
          else:
@@ -710,25 +710,26 @@ def ctv1(name,url):
             xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png') 
 #12
 def Canli2():
-    url1='http://www.canlitvlive.co/izle/star-tv-izle.html'
+    url1='http://dreamtr.club/resimler/canlitv1.txt'
     req = urllib2.Request(url1)
-    req.add_header("User-Agent","Dalvik/1.6.0 (Linux; U; Android 4.2.2; A850 Build/JDQ39) Configuration/CLDC-1.1; Opera Mini/att/4.2.")
+    req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
     response = urllib2.urlopen(req)
     link=response.read()
     response.close()
-    match=re.compile('<a href="http://mobile.canlitvlive.co/izle/(.*?)" title=".*?"><img class=".*?" data-src="(.*?)" width="100" height="75"').findall(link)
+    match=re.compile('data-uri=".*?" data-text=".*?"><a href="/izle/(.*?)" title=".*?"><div class=".*?" style="background:url\((.*?)\)').findall(link)
     for url,thumbnail in match:
         name=url
         name=name.replace('.html','').replace('-',' ').replace('canli','').replace('izle','')
         name=fix.decode_fix(name)
-        url='http://mobile.canlitvlive.co/izle/'+url
-        xbmctools.addDir('[COLOR gold]> - '+name+'[/COLOR]',url,100,thumbnail,'')
+        url='http://www.canlitvlive.co/izle/'+url
+        xbmctools.addDir('[COLOR pink]> - '+name+'[/COLOR]',url,100,thumbnail,'')
         #--
     urlM='http://www.mcanlitv.net/'
     link=get_url(urlM)
     match=re.compile('src="(.*?)" class=".*? alt="" /></a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t<div class="post-link">\r\n\t\t\t\t<a href="(.*?)">(.*?)</a>').findall(link)
     for thumbnail,url,name in match:
-        xbmctools.addDir('[COLOR green]> - '+name+'[/COLOR]',url,100,thumbnail,'')
+        name=name.replace('&#8211;','')
+        xbmctools.addDir('[COLOR pink]> - '+name+'[/COLOR]',url,100,thumbnail,'')
     #--
         
 #101
