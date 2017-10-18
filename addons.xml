@@ -106,7 +106,7 @@
 
 <addon id="plugin.video.xbmcTRIPTV"
        name="[COLOR beige]IPTV[/COLOR][COLOR red]TR[/COLOR][COLOR beige]Free-PRO[/COLOR]"
-       version="0.0.21"
+       version="0.0.22"
        provider-name="DreamTR Team">
   <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
