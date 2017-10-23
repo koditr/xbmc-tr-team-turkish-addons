@@ -673,7 +673,7 @@ def frame(url):
         link=get_url(url)
         match=re.compile('file: "(.*?)",\n                label: "(.*?)"').findall(link)
         for url,name in match:
-            url='http://www.ddizi1.com'+url
+            url='http://www.ddizi1.com'+url+tk
             addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
             
     tune=re.compile('src\="http://tune.pk\/player\/embed_player.php\?vid\=(.*?)"').findall(link)#

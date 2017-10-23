@@ -68,7 +68,7 @@ def CATEGORIES():
          xbmctools.addDir('[COLOR purple]BELGESEL iZLE[/COLOR]',"Belgesel()",1,'http://dreamtr.club/resimler/belgeselizle.png',fann)
          xbmctools.addDir('[COLOR grey]ALMAN Sinema[/COLOR]',"Alman()",62,'http://dreamtr.club/resimler/almanlar.png',fann)
          xbmctools.addDir('[COLOR grey]DREAM AYARLAR[/COLOR]',"Ayarlar()",2000,'http://dreamtr.club/resimler/ayarlar.png',fann)
-         xbmctools.addDir('[COLOR orange]*IPTV-Pro-icerik REKLAM* [/COLOR]',"iptvpro(name,url)",202,'http://dreamtr.club/resimler/iptvpro.png',fann)
+         #xbmctools.addDir('[COLOR orange]*IPTV-Pro-icerik REKLAM* [/COLOR]',"iptvpro(name,url)",202,'http://dreamtr.club/resimler/iptvpro.png',fann)
          if gizlilik == "false" or gizlilik2 != gizlilik3 or gizlilik4 == "false":
              pass
          else:
@@ -102,7 +102,7 @@ class windows():
 def Sinema():
         xbmctools.addDir('[COLOR gold]! Sinema 1 * New * ![/COLOR]',"Sinema1()",5,'http://dreamtr.club/resimler/Sinema1.png',fann)
         xbmctools.addDir('[COLOR gold]! Yerlifilmiizle.Net * New * ![/COLOR]',"Sinema2()",6,'http://dreamtr.club/resimler/Sinema2.png',fann)
-        xbmctools.addDir('[COLOR beige]Sinema 3[/COLOR]',"Sinema3()",7,'http://dreamtr.club/resimler/Sinema3.png',fann)
+        #xbmctools.addDir('[COLOR beige]Sinema 3[/COLOR]',"Sinema3()",7,'http://dreamtr.club/resimler/Sinema3.png',fann)
         xbmc.executebuiltin('Container.SetViewMode(500)')
 #3
 def Dizi():
@@ -145,6 +145,14 @@ def Arama():
             Yeni(url)
 #27
 def Canli4():
+    urlD='https://www.canlitv.plus/kanal-d'
+    link=get_url(urlD)
+    match=re.compile('iframe width="100%" height="100%" src="(.*?)" frameborder').findall(link)
+    for url in match:
+        link=get_url(url)
+        match=re.compile("file: \'(.*?)\'").findall(link)
+        for url in match:
+            xbmctools.addLink("[COLOR beige] >> Kanal D TR[/COLOR]",url,"")
     url='txt.nig/kabmaZa/bulc.rtmaerd//:ptth'[::-1]
     link=get_url(url)
     match=re.compile('<title>(.*?)--(.*?)</title>\n.*?<link>(.*?)\?.*?</link>').findall(link)
@@ -179,16 +187,21 @@ def Yeni(url):
         xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
     page=re.compile('<span class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
     for Url,name in page:
-            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
+        xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
 #28
 def Yeni222(url):
     link=get_url(url)
-    match=re.compile('href="(.*?)">\n\n\t\t\t<span class=".*?"><span class=".*?" title=".*?"></span><span class=".*?" title=".*?">.*?</span></span><span class=".*?">(.*?)</span>\t\t\t<img src="(.*?)"').findall(link)
-    for url,name,thumbnail in match:
+    soup = BeautifulSoup(link)
+    panel = soup.findAll("div", {"class": "fix-film_item fix_category clearfix list_items"},smartQuotesTo=None)
+    panel = panel[0].findAll("div", {"class": "movie-poster"})
+    for i in range (len (panel)):
+        url=panel[i].find('a')['href']
+        name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+        thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
         xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
     page=re.compile('<span class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
     for Url,name in page:
-            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
+        xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,28,sonrakii,fann)
 #20
 def dizivideolinks(url,name):
     xbmctools.addDir('[COLOR beige]>>[/COLOR]'+'[COLOR gold]'+'1 . Secenek '+'[/COLOR]',url,22,fann,fann)
@@ -380,7 +393,7 @@ def ayrisdirma2(url):
     soup = BeautifulSoup(link)
     panel=soup.find("ul", {"name": "part-system"})
     liste=BeautifulSoup(str(panel))
-    match=re.compile('<a href="(.*?)"> <i class="fa fa-film"></i>\n (.*?)</a>').findall(str(liste))#src="http://www.ok.ru/videoembed/352586500751"
+    match=re.compile('<a href="(.*?)"> <i class="fa fa-film"></i>\n(.*?)</a>').findall(str(liste))#src="http://www.ok.ru/videoembed/352586500751"
     for url1,name in match:
         xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,68,'','')
 #68
@@ -416,59 +429,59 @@ def Sinema3():
              
 #47
 def Recent3(url):
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "leftC"},smartQuotesTo=None)
-        panel = panel[0].findAll("div", {"class": "moviefilm"})
-        for i in range (len (panel)):
-            url=panel[i].find('a')['href']
-            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-            name=fix.decode_fix(name)
-            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-            name=name.replace('HD','').replace('Izle','')
-            xbmctools.addDir('[COLOR orange]>>[COLOR beige]'+name+'[/COLOR]',url,49,thumbnail,thumbnail)
-        page=re.compile('current\'>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
-        for url,name in page:
-                xbmctools.addDir('[COLOR blue]SAYFA >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',url,47,sonrakii,fann)
-        page2=re.compile('</a><a href=\'(.*?)\' class=\'page smaller\'>.*?</a><span class=\'current\'>.*?</span>').findall(link)
-        for url in page2:
-                xbmctools.addDir('[COLOR red]Onceki Sayfa[/COLOR]',url,47,sonrakii,fann)
+    link=get_url(url)
+    soup = BeautifulSoup(link)
+    panel = soup.findAll("div", {"class": "leftC"},smartQuotesTo=None)
+    panel = panel[0].findAll("div", {"class": "moviefilm"})
+    for i in range (len (panel)):
+        url=panel[i].find('a')['href']
+        name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+        name=fix.decode_fix(name)
+        thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+        name=name.replace('HD','').replace('Izle','')
+        xbmctools.addDir('[COLOR orange]>>[COLOR beige]'+name+'[/COLOR]',url,49,thumbnail,thumbnail)
+    page=re.compile('current\'>.*?</span><a class="page larger" href="(.*?)">(.*?)</a>').findall(link)
+    for url,name in page:
+            xbmctools.addDir('[COLOR blue]SAYFA >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',url,47,sonrakii,fann)
+    page2=re.compile('</a><a href=\'(.*?)\' class=\'page smaller\'>.*?</a><span class=\'current\'>.*?</span>').findall(link)
+    for url in page2:
+            xbmctools.addDir('[COLOR red]Onceki Sayfa[/COLOR]',url,47,sonrakii,fann)
 #48
 def Aramasinema3(): 
-        sinema='http://www.bicaps.net'
-        keyboard = xbmc.Keyboard("", 'Search', False)
-        keyboard.doModal()
-        if keyboard.isConfirmed():
-                query = keyboard.getText()
-                query=query.replace(' ','+')
-                url = (sinema+'/?s='+query)
-                Recent3(url)
-        xbmctools.addDir('[COLOR yellow]YENI ARAMA YAP[/COLOR]',url,48,"","")
+    sinema='http://www.bicaps.net'
+    keyboard = xbmc.Keyboard("", 'Search', False)
+    keyboard.doModal()
+    if keyboard.isConfirmed():
+            query = keyboard.getText()
+            query=query.replace(' ','+')
+            url = (sinema+'/?s='+query)
+            Recent3(url)
+    xbmctools.addDir('[COLOR yellow]YENI ARAMA YAP[/COLOR]',url,48,"","")
 #49
 def videolinks3(url,name):
-        url=url+'15'
-        listeler=[]
-        urller=[]
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel=soup.find("div", {"class": "keremiya_part"})
-        liste=BeautifulSoup(str(panel))
-        match=re.compile('href="(.*?)"><span>(.*?)</span>').findall(str(liste))
-        for url,name in match:
-            if "netu" in name:
-                pass
-            else:
-                listeler.append('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]')
-                urller.append(url)
-        dialog = xbmcgui.Dialog()
-        secenek = dialog.select('Izleme Secenekleri...',listeler)
-        for i in range(len(listeler)):
-         if secenek == i:
-           url=urller[i]
-           xbmctools.VIDEOLINKS1(name,url)
-           return url
-         else:
-             pass
+    url=url+'15'
+    listeler=[]
+    urller=[]
+    link=get_url(url)
+    soup = BeautifulSoup(link)
+    panel=soup.find("div", {"class": "keremiya_part"})
+    liste=BeautifulSoup(str(panel))
+    match=re.compile('href="(.*?)"><span>(.*?)</span>').findall(str(liste))
+    for url,name in match:
+        if "netu" in name:
+            pass
+        else:
+            listeler.append('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]')
+            urller.append(url)
+    dialog = xbmcgui.Dialog()
+    secenek = dialog.select('Izleme Secenekleri...',listeler)
+    for i in range(len(listeler)):
+     if secenek == i:
+       url=urller[i]
+       xbmctools.VIDEOLINKS1(name,url)
+       return url
+     else:
+         pass
 
 
 #1
@@ -481,18 +494,18 @@ def Belgesel():
             xbmctools.addDir('[COLOR beige][COLOR red]>[/COLOR]'+name+'[/COLOR]',url,50,"","")
 #50
 def BRecent(url):
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "solBlok"},smartQuotesTo=None)
-        panel = panel[0].findAll("div", {"class": "film"})
-        for i in range (len (panel)):
-                url=panel[i].find('a')['href']
-                name=panel[i].find('a')['title'].encode('utf-8', 'ignore')
-                thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-                xbmctools.addDir('[COLOR cyan]'+name+'[/COLOR]',url,51,thumbnail,thumbnail)
-        page=re.compile('current\'>.*?</span><a class="page larger" href="(.*?)">.*?</a>').findall(link)
-        for url in page:
-                xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]',url,50,sonrakii,fann)
+    link=get_url(url)
+    soup = BeautifulSoup(link)
+    panel = soup.findAll("div", {"class": "solBlok"},smartQuotesTo=None)
+    panel = panel[0].findAll("div", {"class": "film"})
+    for i in range (len (panel)):
+            url=panel[i].find('a')['href']
+            name=panel[i].find('a')['title'].encode('utf-8', 'ignore')
+            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+            xbmctools.addDir('[COLOR cyan]'+name+'[/COLOR]',url,51,thumbnail,thumbnail)
+    page=re.compile('current\'>.*?</span><a class="page larger" href="(.*?)">.*?</a>').findall(link)
+    for url in page:
+            xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]',url,50,sonrakii,fann)
 #51
 def BELayrisdirma(url):
     xbmctools.addDir('[COLOR blue]Play >>[/COLOR]',url,41,"",fann)
@@ -509,57 +522,57 @@ def sembol_fix(x):
     return x[0].capitalize() + x[1:]
 #16
 def yetiskin():
-        url='http://en.paradisehill.cc/porn/'
-        xbmctools.addDir('[COLOR red]>>[/COLOR][COLOR yellow]Info[/COLOR][COLOR red] <<[/COLOR]',"BILGILENDIRME",56,"","")
-        xbmctools.addDir('[COLOR blue]New Movie>>[/COLOR]',url,78,"","")
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("section", {"class": "bc-list sect-catg"})
-        panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-4 col-xs-6 bc-item"})
-        for i in range (len (panel)):
-            url=panel[i].find("a", {"class": "bci-link"})['href']
-            name=panel[i].find("a", {"class": "bci-link"})['title'].encode('utf-8', 'ignore')
-            thumbnail=panel[i].find("img", {"class": "bci-pic"})['src']
-            url=z+url
-            thumbnail=z+thumbnail
-            xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,53,thumbnail,thumbnail)
+    url='http://en.paradisehill.cc/porn/'
+    xbmctools.addDir('[COLOR red]>>[/COLOR][COLOR yellow]Info[/COLOR][COLOR red] <<[/COLOR]',"BILGILENDIRME",56,"","")
+    xbmctools.addDir('[COLOR blue]New Movie>>[/COLOR]',url,78,"","")
+    link=get_url(url)
+    soup = BeautifulSoup(link)
+    panel = soup.findAll("section", {"class": "bc-list sect-catg"})
+    panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-4 col-xs-6 bc-item"})
+    for i in range (len (panel)):
+        url=panel[i].find("a", {"class": "bci-link"})['href']
+        name=panel[i].find("a", {"class": "bci-link"})['title'].encode('utf-8', 'ignore')
+        thumbnail=panel[i].find("img", {"class": "bci-pic"})['src']
+        url=z+url
+        thumbnail=z+thumbnail
+        xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,53,thumbnail,thumbnail)
 #78
 def RecentyetA(url):
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "row new-collect"})
-        panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-4 col-xs-6 bc-item"})
-        for i in range (len (panel)):
-            url=panel[i].find("a", {"class": "bci-title-link"})['href']
-            name=panel[i].find("a", {"class": "bci-title-link"})['title'].encode('utf-8', 'ignore')
-            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-            thumbnail=z+thumbnail
+    link=get_url(url)
+    soup = BeautifulSoup(link)
+    panel = soup.findAll("div", {"class": "row new-collect"})
+    panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-4 col-xs-6 bc-item"})
+    for i in range (len (panel)):
+        url=panel[i].find("a", {"class": "bci-title-link"})['href']
+        name=panel[i].find("a", {"class": "bci-title-link"})['title'].encode('utf-8', 'ignore')
+        thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+        thumbnail=z+thumbnail
+        url=z+url
+        name=name.replace("Watch porno online","")
+        xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,54,thumbnail,thumbnail)
+    page=re.compile('<li class="page active"><a href=".*?">.*?</a></li>\n<li class="page"><a href="(.*?)">(.*?)</a></li>').findall(link)
+    for url,name in page:
             url=z+url
-            name=name.replace("Watch porno online","")
-            xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,54,thumbnail,thumbnail)
-        page=re.compile('<li class="page active"><a href=".*?">.*?</a></li>\n<li class="page"><a href="(.*?)">(.*?)</a></li>').findall(link)
-        for url,name in page:
-                url=z+url
-                xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,78,sonrakii,fann)
+            xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,78,sonrakii,fann)
 
 #53
 def Recentyet(url):
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("section", {"class": "bc-list sect-catg"})
-        panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-4 col-xs-6 bc-item"})
-        for i in range (len (panel)):
-            url=panel[i].find("a", {"class": "bci-link"})['href']
-            name=panel[i].find("a", {"class": "bci-link"})['title'].encode('utf-8', 'ignore')
-            name=name.replace("Watch porno online","")
-            thumbnail=panel[i].find("img", {"class": "item_img"})['src']
-            thumbnail=z+thumbnail
+    link=get_url(url)
+    soup = BeautifulSoup(link)
+    panel = soup.findAll("section", {"class": "bc-list sect-catg"})
+    panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-4 col-xs-6 bc-item"})
+    for i in range (len (panel)):
+        url=panel[i].find("a", {"class": "bci-link"})['href']
+        name=panel[i].find("a", {"class": "bci-link"})['title'].encode('utf-8', 'ignore')
+        name=name.replace("Watch porno online","")
+        thumbnail=panel[i].find("img", {"class": "item_img"})['src']
+        thumbnail=z+thumbnail
+        url=z+url
+        xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,54,thumbnail,thumbnail)
+    page=re.compile('<li class="page active"><a href=".*?">.*?</a></li>\n<li class="page"><a href="(.*?)">(.*?)</a></li>').findall(link)
+    for url,name in page:
             url=z+url
-            xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,54,thumbnail,thumbnail)
-        page=re.compile('<li class="page active"><a href=".*?">.*?</a></li>\n<li class="page"><a href="(.*?)">(.*?)</a></li>').findall(link)
-        for url,name in page:
-                url=z+url
-                xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,53,sonrakii,fann)
+            xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,53,sonrakii,fann)
 #54
 
 def ayrisdirmayet(url):
@@ -572,19 +585,19 @@ def ayrisdirmayet(url):
         xbmctools.addDir('[COLOR red]Part '+name+'[/COLOR]',url,55,"","")           
 #55
 def VideoLinksyet(name,url):
-        url=url+"|referer=http://www.paradisehill.tv/static/flowplayer/flowplayer.content-3.2.9.swf"  
-        xbmcPlayer = xbmc.Player()
-        playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
-        playList.clear()
-        xbmctools.addLink('RETURN List << ','','')
-        listitem = xbmcgui.ListItem(name)
-        playList.add(url, listitem)
-        xbmcPlayer.play(playList)
-        exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
-        if exec_version < 14.0:
-                xbmctools.playlist()
-        else:
-                xbmctools.playlist2()
+    url=url+"|referer=http://www.paradisehill.tv/static/flowplayer/flowplayer.content-3.2.9.swf"  
+    xbmcPlayer = xbmc.Player()
+    playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+    playList.clear()
+    xbmctools.addLink('RETURN List << ','','')
+    listitem = xbmcgui.ListItem(name)
+    playList.add(url, listitem)
+    xbmcPlayer.play(playList)
+    exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
+    if exec_version < 14.0:
+            xbmctools.playlist()
+    else:
+            xbmctools.playlist2()
 #56
 def INFOyet(url):
   try:
@@ -623,14 +636,14 @@ def a6666(url):
 
 #66
 def Linkleralman1(url):
-        link=get_url(url)
-        match0=re.compile('<img style="margin:0;padding:0;border:0;" src="(.*?)"').findall(link)
-        for thumbnail in match0:
-            xbmctools.addDir("INFO - Picture",url,99,'http://www.szene-streams.com'+thumbnail,'http://www.szene-streams.com'+thumbnail)   
-        match1=re.compile('http\:\/\/(.*?).eu\/(.*?).html').findall(link)
-        for name,url in match1:
-            url='http://streamcloud.eu/'+url+'.html'
-            xbmctools.addDir('Play - > '+name,url,99,"","")
+    link=get_url(url)
+    match0=re.compile('<img style="margin:0;padding:0;border:0;" src="(.*?)"').findall(link)
+    for thumbnail in match0:
+        xbmctools.addDir("INFO - Picture",url,99,'http://www.szene-streams.com'+thumbnail,'http://www.szene-streams.com'+thumbnail)   
+    match1=re.compile('http\:\/\/(.*?).eu\/(.*?).html').findall(link)
+    for name,url in match1:
+        url='http://streamcloud.eu/'+url+'.html'
+        xbmctools.addDir('Play - > '+name,url,99,"","")
 
 #11
 def Canli1():
