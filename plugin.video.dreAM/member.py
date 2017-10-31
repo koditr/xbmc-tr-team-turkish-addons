@@ -1,1 +1,136 @@
-exec("import re;import base64");exec((lambda p,y:(lambda o,b,f:re.sub(o,b,f))(r"([0-9a-f]+)",lambda m:p(m,y),base64.b64decode("IyMjIC0qLSA5YzogZGItOCAtKi0KCmYzIDY4CmYzIDk1LDIxLDJlLDY2CmYzIDE5CmYzIGY0LDkyLGVmLCAyMCwgMjksIDVmCmYzIDI4CmYzIGQ1LDFkCmM4IDZiLmUxLjgzIGYzIDJmCgoxYiA9IDI5LmJiKGVjPSc0ZS41Yy41OScpCjIyICAgID0gMWIuNTAoJ2NjJykKCjQxIDZlKDI1LCA1Yik6Cgk5OToKCQkKCQoJCTI1PVtdCgkJNWI9W10KCQkxNCA9IDI4LjcwKCkKCQk1NSA9IDJlLmViKCc1NzogPGU2PiguKj8pPC9lNj48L2IxPicpLmMoMTQpCgkJMmEgY2IgNDIgNTU6CgkJCSBjYj1jYgoJCTQ3ID0gMmUuZWIoJzYzIDhjOiA8ZTY+KC4qPyk8L2U2PjwvYjE+JykuYygxNCkKCQkyYSA0YiA0MiA0NzoKCQkJNGI9NGIKCQk0NiA9IDJlLmViKCc1NiAyNzogPGU2PiguKj8pPC9lNj48L2IxPicpLmMoMTQpCgkJMmEgMjYgNDIgNDY6CgkJCTI2PTI2CgkJNGYgPSAyZS5lYignYmQgYWIgZjYgY2Q6IDxlNj4oLio/KTwvZTY+Lio/PC9iMT4nKS5jKDE0KQoJCTJhIGQgNDIgNGY6CgkJCWQ9ZAoJCTRkID0gMmUuZWIoJ2M5IDI3OiA8ZTY+KC4qPyk8L2U2PjwvYjE+JykuYygxNCkKCQkyYSAyNCA0MiA0ZDoKCQkJMjQ9MjQKCQk0OCA9IDJlLmViKCcxYyBiYzogPGU2PiguKj8pPC9lNj4uKj88L2VkPicpLmMoMTQpCgkJMmEgMTUgNDIgNDg6CgkJCWMwIDE1ID09ICIiOgoJCQkJMTU9IjkxIgoJCQk3NDoJCQkKCQkJCTE1PTE1CgoJCWQ3ID0nODYvJwoJCQkKCQk2Zj0nM2E9PScKCQkzMyA9IDFkLjFkKCkKCQk1Mj1lZi4xOCgnMzU6Ly83YS85Ny80ZS41Yy41OS82NS83MS8nK2Q3KQoJCTEzID0gMTkuMTcoNmYpCgkJZjEgPSA3ZCg1MisxMywgImYwIikKCSAgCgkJCgkJZjEuZjcoJ2Y4ICIiXGEnKQoJCWYxLmY3KCc3ICIiXGFcYScpCgkJZjEuZjcoJ2ZhICIjOWQiXGEnKQoJCWYxLmY3KCdmOCAiW2Y5IDRhXVtiXTE2IGM3OlsvYl1bL2Y5XSJcYScpCgkJZjEuZjcoJzcgIiJcYVxhJykKCQlmMS5mNygnZmEgIiM5ZSJcYScpCgkJZjEuZjcoJ2Y4ICInKydbZjkgMTBdW2JdJys0YisnWy9iXVsvZjldJysnIlxhJykKCQlmMS5mNygnNyAiIlxhXGEnKQoJCWYxLmY3KCdmYSAiIzlmIlxhJykKCQlmMS5mNygnZjggIltmOSBiOV1bYl0xNiBjZjpbL2JdWy9mOV0iXGEnKQoJCWYxLmY3KCc3ICIiXGFcYScpCgkJZjEuZjcoJ2ZhICIjYTAiXGEnKQoJCWYxLmY3KCdmOCAiJysnW2Y5IDEwXVtiXScrY2IrJ1svYl1bL2Y5XScrJyJcYScpCgkJZjEuZjcoJzcgIiJcYVxhJykKCQlmMS5mNygnZmEgIiNhMSJcYScpCgkJZjEuZjcoJ2Y4ICJbZjkgYWZdW2JdN2IgYzkgODQ6Wy9iXVsvZjldIlxhJykKCQlmMS5mNygnNyAiIlxhXGEnKQoJCWYxLmY3KCdmYSAiI2EyIlxhJykKCQlmMS5mNygnZjggIicrJ1tmOSAxMF1bYl0nKzI0KydbL2JdWy9mOV0nKyciXGEnKQoJCWYxLmY3KCc3ICIiXGFcYScpCgkJZjEuZjcoJ2ZhICIjYTMiXGEnKQoJCWYxLmY3KCdmOCAiW2Y5IDMyXVtiXTdiIDU2OlsvYl1bL2Y5XSJcYScpCgkJZjEuZjcoJzcgIiJcYVxhJykKCQlmMS5mNygnZmEgIiNhNCJcYScpCgkJZjEuZjcoJ2Y4ICInKydbZjkgMTBdW2JdJysyNisnWy9iXVsvZjldJysnIlxhJykKCQlmMS5mNygnNyAiIlxhXGEnKQoJCWYxLmY3KCdmYSAiI2E1IlxhJykKCQlmMS5mNygnZjggIltmOSBhN11bYl0xNiBlNyBkMTpbL2JdWy9mOV0iXGEnKQoJCWYxLmY3KCc3ICIiXGFcYScpCgkJZjEuZjcoJ2ZhICIjYTYiXGEnKQoJCWYxLmY3KCdmOCAiJysnW2Y5IDEwXVtiXScrMTUrJ1svYl1bL2Y5XScrJyJcYScpCgkJZjEuZjcoJzcgIiJcYVxhJykKCQlmMS5mNygnZmEgIiM4OSJcYScpCgkJZjEuZjcoJ2Y4ICJbZjkgYThdW2JdOTMgZWUgYjcgOlsvYl1bL2Y5XSJcYScpCgkJZjEuZjcoJzcgIiJcYVxhJykKCQlmMS5mNygnZmEgIiM4YSJcYScpCgkJZjEuZjcoJ2Y4ICInKydbZjkgMTBdW2JdJytkKydbL2JdWy9mOV0nKyciXGEnKQoJCWYxLmY3KCc3ICIiXGEnKQoJCWYxLmIwKCkKCQlmMS41ZSgpCgoJNDM6CgkJNDUgPSAnZGQuNDkvNjIvZTQuNzIvLzpjZSdbOjotMV0KCQkyYz0zZig0NSkKCQllOSA9IDJlLmMoZTknNGMgPSI3ZiInLDJjKQoJCWMwIGU5OgoJCQlhOSA9IDIwLjNiKCkKCQkJMzYgPSAyMC45MCgpCgkJCTM2LmY1KCdbZjkgMzJdOTQgZWEuZTAuZTMgMWNbL2Y5XScsJ1tmOSA0YV0zOSBlYS5lMC5lMy4gMWMgYjMgZTUgY2EgM2UhISFbL2Y5XScsJ1tmOSAzMl0gZTIgNzcuIDZjIDY5IDQ0ISFbL2Y5XScsJ1tmOSAxMF0xYyBkOCBiZjovLzg1LmQyWy9mOV0nKQoJCTc0OgoJCQkxMignCQkgICBbZjkgMzJdZWEuZTAuZTMgZGMgODggOGJbL2Y5XScsJwkJCQkJCSAgW2Y5IDEwXWI2Wy9mOV1bZjkgMzJdZjJbL2Y5XScpCgkJCTkyLmM2KCkgIAoKCQkJCjQxIDNmKDQ1KToKCQk2MSA9IDIxLjgyKDQ1KQoJCTYxLjYwKCdkNi1iNScsICc4MS81LjAgKGU4OyBiOCBhYzsgODApIDUzLzhkLjExIChiYSwgYzQgYWUpIDliLzIzLjAuZGEuNjQgYWQvOGQuMTEnKSwoJzJiJywgJ2MyLzE0LDFlL2IyKzZiLDFlLzZiO2RlPTAuOSwqLyo7ZGU9MC44JyksKCcyYi03YycsICdkOScpLCgnMmItNzUnLCAnZDQtNixkNDtkZT0wLjgnKSwoJzVkJywgJ2MzLWJlJykKCQkxYSA9IDIxLjg3KDYxKQoJCTJjPTFhLmQzKCkKCQkxYS41ZSgpCgkJOWEgMmMKCgkKCgo0MSA2NygpOgoJCTk2PScyZCcKCQk4Zj0nYjQrNCszKycKCQkzMyA9IDFkLjFkKCkKCQk1YT1lZi4xOCgiMzU6Ly83YS83OS8iKQoJCTMxID0gMmYoKQoJCTdlPTMxLjU0CgkJMzAgPSAzMS40MCgiNmQiKQoJCTMxLjFmKDMwKQoJCTNjID0gMzEuMzgoMTkuMTcoOGYpKQoJCTMwLjFmKDNjKQoJCTEzID0gMTkuMTcoOTYpCgkJZiA9IDdkKDVhKzEzLCAiZjAiKQoJCWYuZjcoMzMuNzMoN2UoYWE9IiIpKSkKCgo0MSAxMigzNz0nMzknLCAzNCA9ICcnLCA1OCA9IGQwLCA3OCA9IDIyKToKCQk5OTogZWYuM2QoJ2M1LjUxKCIlOTgiLCAiJTk4IiwgJTk4LCAiJTk4IiknICUgKDM3LCAzNCwgNTgsIDc4KSkKCQk0MyA2YSwgZToKCQkJZWYuZGYoICdbJTk4XTogMTI6IGMxIDhlIFslOThdJyAlICg3NiwgZSksIDIgKQ==")))(lambda a,b:b[int("0x"+a.group(1),16)],"0|1|2|DQogICAgPGZlZWQgdXBkYXRlaW50ZXJ2YWw9IjEwIj5odHRwOi8vZHJlYW10ci5jbHViL2JpbGlubWV5ZW4vc2luZW1hLnhtbDwvZmVlZD4NCiAgPC9zZXQ|DQogICAgPGZlZWQgdXBkYXRlaW50ZXJ2YWw9IjEwIj5odHRwOi8vZHJlYW10ci5jbHViL2JpbGlubWV5ZW4vZGl6aS54bWw8L2ZlZWQ|5|US|msgstr|8|9|n|B|findall|girissayisi|e|f|beige|11|showMessage|filepath|html|tarih|Membership|b64decode|translatePath|base64|response|__settings__|Uyelik|HTMLParser|application|appendChild|xbmcgui|urllib2|addon_icon|23|ipadd|threadName|email|adresiniz|xbmctools|xbmcaddon|for|Accept|link|UnNzRmVlZHMueG1s|re|Document|liste|doc|red|htmlp|message|special|dialog1|heading|createTextNode|DreamTR|c3RyaW5ncy5wbw|DialogProgress|veri_ad|executebuiltin|Kaldirilmistir|get_url|createElement|def|in|except|Arkasindayiz|url|match3|match2|match6|ylGdrl2UgkmQ|yellow|uye|QmkgU2lrdGly|match5|plugin|match4|getAddonInfo|Notification|pfile1|AppleWebKit|toprettyxml|match|Email|Uyeliginiz|times|dreAM|pfile|delay|video|Connection|close|xbmcplugin|add_header|req|golegnahc|Kullanici|64|resources|cookielib|playlist3|mechanize|Sozumuzun|Exception|xml|Herzaman|rssfeeds|baslamak|test|sifre100|language|enisened|unescape|else|Language|addon_id|Seyirler|pics|userdata|home|Your|Encoding|open|renk|T3Jvc3B1|SmartTV|Mozilla|Request|minidom|Address|dreamtr|English|urlopen|Olmaniz|3500010|3500011|Gerekli|isminiz|537|failed|nos|Dialog|Sonsuz|sys|Number|BEDAVA|urllib|rss|addons|s|try|return|Chrome|coding|350000|350001|350002|350003|350004|350005|350006|350007|350008|350009|orange|purple|dialog|indent|yapmis|x86_64|Safari|Gecko|green|flush|p|xhtml|Belli|ICA8c2V0IGlkPSIxIj4NCiAgICA8ZmVlZCB1cGRhdGVpbnRlcnZhbD0iMjAiPmh0dHA6Ly9kcmVhbXRyLmNsdWIvYmlsaW5tZXllbi9mZWVkLnhtbDwvZmVlZD4NCiAgICA8ZmVlZCB1cGRhdGVpbnRlcnZhbD0iMTAiPmh0dHA6Ly9kcmVhbXRyLmNsdWIvYmlsaW5tZXllbi9jYW5saS54bWw8L2ZlZWQ|agent|Dream|Enter|Linux|brown|KHTML|Addon|Bitis|Giris|alive|http|if|exec|text|keep|like|XBMC|exit|Name|from|IP|Sure|membership|icon|sayi|ptth|Type|5000|Date|club|read|en|time|User|EN|Icin|none|1271|utf|Uye|lmx|q|log|I|dom|Iyi|P|moc|Bir|strong|End|X11|r|V|compile|id|td|of|xbmc|w|f1|TR|import|os|ok|oldugunuz|write|msgid|COLOR|msgctxt".split("|")))
+### -*- coding: utf-8 -*-
+
+import mechanize
+import urllib,urllib2,re,cookielib
+import base64
+import os,sys,xbmc, xbmcgui, xbmcaddon, xbmcplugin
+import xbmctools
+import time,HTMLParser
+from xml.dom.minidom import Document
+
+__settings__ = xbmcaddon.Addon(id='plugin.video.dreAM')
+addon_icon    = __settings__.getAddonInfo('icon')
+
+def baslamak(threadName, delay):
+    try:
+        
+    
+        threadName=[]
+        delay=[]
+        html = xbmctools.sifre100()
+        match = re.compile('Uyeliginiz: <strong>(.*?)</strong></p>').findall(html)
+        for membership in match:
+             membership=membership
+        match2 = re.compile('Kullanici isminiz: <strong>(.*?)</strong></p>').findall(html)
+        for uye in match2:
+            uye=uye
+        match3 = re.compile('Email adresiniz: <strong>(.*?)</strong></p>').findall(html)
+        for email in match3:
+            email=email
+        match4 = re.compile('Giris yapmis oldugunuz sayi: <strong>(.*?)</strong>.*?</p>').findall(html)
+        for girissayisi in match4:
+            girissayisi=girissayisi
+        match5 = re.compile('IP adresiniz: <strong>(.*?)</strong></p>').findall(html)
+        for ipadd in match5:
+            ipadd=ipadd
+        match6 = re.compile('Uyelik Bitis: <strong>(.*?)</strong>.*?</td>').findall(html)
+        for tarih in match6:
+            if tarih == "":
+                tarih="Sonsuz"
+            else:            
+                tarih=tarih
+
+        EN ='English/'
+            
+        test='c3RyaW5ncy5wbw=='
+        htmlp = HTMLParser.HTMLParser()
+        pfile1=xbmc.translatePath('special://home/addons/plugin.video.dreAM/resources/language/'+EN)
+        filepath = base64.b64decode(test)
+        f1 = open(pfile1+filepath, "w")
+      
+        
+        f1.write('msgid ""\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350000"\n')
+        f1.write('msgid "[COLOR yellow][B]Membership Name:[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350001"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+uye+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350002"\n')
+        f1.write('msgid "[COLOR brown][B]Membership Type:[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350003"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+membership+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350004"\n')
+        f1.write('msgid "[COLOR green][B]Your IP Address:[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350005"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+ipadd+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350006"\n')
+        f1.write('msgid "[COLOR red][B]Your Email:[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350007"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+email+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350008"\n')
+        f1.write('msgid "[COLOR orange][B]Membership End Date:[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#350009"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+tarih+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#3500010"\n')
+        f1.write('msgid "[COLOR purple][B]Number of Enter :[/B][/COLOR]"\n')
+        f1.write('msgstr ""\n\n')
+        f1.write('msgctxt "#3500011"\n')
+        f1.write('msgid "'+'[COLOR beige][B]'+girissayisi+'[/B][/COLOR]'+'"\n')
+        f1.write('msgstr ""\n')
+        f1.flush()
+        f1.close()
+
+    except:
+        url = 'lmx.ylGdrl2UgkmQ/golegnahc/ten.nyazidamet.enisened//:ptth'[::-1]
+        link=get_url(url)
+        r = re.findall(r'QmkgU2lrdGly ="T3Jvc3B1"',link)
+        if r:
+            dialog = xbmcgui.DialogProgress()
+            dialog1 = xbmcgui.Dialog()
+            dialog1.ok('[COLOR red]BEDAVA V.I.P Uyelik[/COLOR]','[COLOR yellow]DreamTR V.I.P. Uyelik Belli Bir Sure Kaldirilmistir!!![/COLOR]','[COLOR red] Iyi Seyirler. Herzaman Sozumuzun Arkasindayiz!![/COLOR]','[COLOR beige]Uyelik Icin http://dreamtr.club[/COLOR]')
+        else:
+            showMessage('           [COLOR red]V.I.P Uye Olmaniz Gerekli[/COLOR]','                          [COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]')
+            sys.exit()  
+
+            
+def get_url(url):
+        req = urllib2.Request(url)
+        req.add_header('User-agent', 'Mozilla/5.0 (X11; Linux x86_64; SmartTV) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
+        return link
+
+    
+
+
+def playlist3():
+        rss='UnNzRmVlZHMueG1s'
+        nos='ICA8c2V0IGlkPSIxIj4NCiAgICA8ZmVlZCB1cGRhdGVpbnRlcnZhbD0iMjAiPmh0dHA6Ly9kcmVhbXRyLmNsdWIvYmlsaW5tZXllbi9mZWVkLnhtbDwvZmVlZD4NCiAgICA8ZmVlZCB1cGRhdGVpbnRlcnZhbD0iMTAiPmh0dHA6Ly9kcmVhbXRyLmNsdWIvYmlsaW5tZXllbi9jYW5saS54bWw8L2ZlZWQ+DQogICAgPGZlZWQgdXBkYXRlaW50ZXJ2YWw9IjEwIj5odHRwOi8vZHJlYW10ci5jbHViL2JpbGlubWV5ZW4vZGl6aS54bWw8L2ZlZWQ+DQogICAgPGZlZWQgdXBkYXRlaW50ZXJ2YWw9IjEwIj5odHRwOi8vZHJlYW10ci5jbHViL2JpbGlubWV5ZW4vc2luZW1hLnhtbDwvZmVlZD4NCiAgPC9zZXQ+'
+        htmlp = HTMLParser.HTMLParser()
+        pfile=xbmc.translatePath("special://home/userdata/")
+        doc = Document()
+        renk=doc.toprettyxml
+        liste = doc.createElement("rssfeeds")
+        doc.appendChild(liste)
+        veri_ad = doc.createTextNode(base64.b64decode(nos))
+        liste.appendChild(veri_ad)
+        filepath = base64.b64decode(rss)
+        f = open(pfile+filepath, "w")
+        f.write(htmlp.unescape(renk(indent="")))
+
+
+def showMessage(heading='DreamTR', message = '', times = 5000, pics = addon_icon):
+		try: xbmc.executebuiltin('XBMC.Notification("%s", "%s", %s, "%s")' % (heading, message, times, pics))
+		except Exception, e:
+			xbmc.log( '[%s]: showMessage: exec failed [%s]' % (addon_id, e), 2 )

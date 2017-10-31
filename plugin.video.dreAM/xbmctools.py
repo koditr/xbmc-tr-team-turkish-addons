@@ -23,9 +23,6 @@ __settings__ = xbmcaddon.Addon(id="plugin.video.dreAM")
 tk="|User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')"
 
 
-web1='LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZScjLC0rYjlbNA=='
-web2='LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZSwpOSkkImdDLDR3PCRUIhclVw56'
-web4='LDE4OQlrazgvaEooPT5VQS1WPj1kKyUnZTsgKj0gPmdDLDR3Ly1SKSYpXw4='
 
 __language__ = __settings__.getLocalizedString
 downloadFolder = __settings__.getSetting('downloadFolder')
@@ -39,7 +36,7 @@ sys.path.append(folders)
 insidans=1
 z='http://www.paradisehill.tv'
 f="http://www.tekparthd.org/"
-sinem="aHR0cDovL2ZpbG1pemxlODAuY29tLw=="
+
 xbmcPlayer = xbmc.Player()
 xbmcPlayer.stop()
 playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
@@ -56,10 +53,22 @@ def get_url(url):
     return link
 
 def addLink(name, url, thumbnail=""):
-    liz = xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=thumbnail)
-    liz.setInfo(type="Video", infoLabels={"Title":name})
-    liz.setProperty("IsPlayable", "true")
-    xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
+    if "matplayer/go/" in url:
+        #url=url+tk
+        url=url.replace('http://www.ddizi1.com/matplayer/go/','').replace('.mp4','')
+        url=(base64.b64decode(url))
+        url=url+tk
+        
+        liz = xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=thumbnail)
+        liz.setInfo(type="Video", infoLabels={"Title":name})
+        liz.setProperty("IsPlayable", "true")
+        xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
+    else:
+        liz = xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=thumbnail)
+        liz.setInfo(type="Video", infoLabels={"Title":name})
+        liz.setProperty("IsPlayable", "true")
+        xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
+        
 def addDir(name,url,mode,iconimage,fanart):
     u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
     ok=True
@@ -100,7 +109,7 @@ def sifre100():
     br.set_handle_robots(False)
     br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
     br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')]
-    br.open('http://denesine.com/gizligiris/')
+    br.open('http://denesine.temadizayn.net/gizligiris/')
     br.title()
     br.select_form(nr=0)
     br.form['log']=__settings__.getSetting("Username")
@@ -463,6 +472,9 @@ def radyocal(url):
     match95=re.compile('file: \'(.*?)\',\n\t\t\t\twidth').findall(link)
     for url in match95:
         yenical4(name,url)
+    match96=re.compile('<source src="(.*?)"').findall(link)
+    for url in match96:
+        yenical4(name,url)
 #--
 #42
 def yenical4(name,url):
@@ -626,6 +638,9 @@ def frame(url):
     for url in matcha:
         url='http://www.daily'+url
         dizividcal(url)
+    matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
+    for vid in matchqq:
+        resolve( vid)
     matchaa=re.compile('youtube.*?\/embed\/(.*?)\?').findall(link)
     for url in matchaa:
         url='http://www.youtube.com/embed/'+url
@@ -715,7 +730,7 @@ def frame(url):
     for url in izle7:
         url='http://www.izle7.com/embed-'+url
         link=get_url(url)
-        match=re.compile('src: "(.*?).mp4"').findall(link)
+        match=re.compile("tp_file = '(.*?).mp4'").findall(link)
         for vid in match:
             vid=vid+'.mp4'
             name='Izle7'
