@@ -54,11 +54,10 @@ def get_url(url):
 
 def addLink(name, url, thumbnail=""):
     if "matplayer/go/" in url:
-        #url=url+tk
         url=url.replace('http://www.ddizi1.com/matplayer/go/','').replace('.mp4','')
         url=(base64.b64decode(url))
         url=url+tk
-        
+        url=url.replace('comhttps//','com/https//')
         liz = xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=thumbnail)
         liz.setInfo(type="Video", infoLabels={"Title":name})
         liz.setProperty("IsPlayable", "true")
@@ -638,6 +637,19 @@ def frame(url):
     for url in matcha:
         url='http://www.daily'+url
         dizividcal(url)
+    vidmoly=re.compile('vidmoly.me/(.*?)"').findall(link)
+    for url in vidmoly:
+        url='http://vidmoly.me/'+url
+        link=get_url(url)
+        match=re.compile('\|mp4\|(.*?)\|sources\|').findall(link)
+        for b in match:
+            if match:
+                link=get_url(url)
+                match1=re.compile('var spriteSheetUrl = "(.*?).molyusercontentstage.me/.*?.jpg";\n').findall(link)
+                for a in match1:
+                    url=a+'.molyusercontentstage.me/'+b+'/v.mp4'
+                    addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
+                    
     matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
     for vid in matchqq:
         resolve( vid)

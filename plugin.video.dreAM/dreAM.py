@@ -126,7 +126,7 @@ def get_url(url):
         return link
 #8
 def Dizi1():
-    url='http://www.canlihddizi.com/'
+    url='http://www.canlihddizi.org/'
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Arama/Search[/COLOR]',url,14,aramaa,fann)
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal7[/COLOR]',"http://www.izle7.com/kanal7/hint-dizileri",28,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,19,yeniek,fann)
@@ -459,7 +459,7 @@ def framee(name,url):
         link=get_url(url)
         match=re.compile("tp_file = '(.*?).mp4'").findall(link)
         for vid in match:
-            vid=vid+'.mp4'
+            vid=vid+'.mp4'+"|referer=http://www.izle7.com/kanal7/izle-20967-ah-kalbim-24bolum.html"
             name='Izle7'
             xbmctools.addLink(name,vid,'')
     else:
@@ -727,32 +727,15 @@ def Linkleralman1(url):
 
 #11
 def Canli1():
-    urlF='http://www.fox.com.tr/canli-yayin'
-    link=get_url(urlF)
-    match=re.compile('src \: \\\'(.*?)\\\'').findall(link)
-    for urlS in match:
-        xbmctools.addLink("[COLOR beige] >> FOX TR[/COLOR]",urlS,"")
-    urlO='http://www.onlinetvler.com/'
+    urlO='https://www.canlitv.plus/euro-d'
     link=get_url(urlO)
-    match=re.compile('<a href="(.*?)"><img typeof="foaf:Image" src="(.*?)" width="190" height="120"').findall(link)
-    for url,thumbnail in match:
-        name=url.replace('tag','').replace('-',' ').replace('/','').replace('canli','').replace('izle','').replace('yayin','')
-        url='http://www.onlinetvler.com'+url
-        xbmctools.addDir('[COLOR orange]> - '+name+'[/COLOR]',url,107,thumbnail,'')
-    urlO2='http://www.onlinetvler.com/?page=1'
-    link=get_url(urlO2)
-    match=re.compile('<a href="(.*?)"><img typeof="foaf:Image" src="(.*?)" width="190" height="120"').findall(link)
-    for url,thumbnail in match:
-        name=url.replace('tag','').replace('-',' ').replace('/','').replace('canli','').replace('izle','').replace('yayin','')
-        url='http://www.onlinetvler.com'+url
-        xbmctools.addDir('[COLOR orange]> - '+name+'[/COLOR]',url,107,thumbnail,'')
-    urlO3='http://www.onlinetvler.com/?page=2'
-    link=get_url(urlO3)
-    match=re.compile('<a href="(.*?)"><img typeof="foaf:Image" src="(.*?)" width="190" height="120"').findall(link)
-    for url,thumbnail in match:
-        name=url.replace('tag','').replace('-',' ').replace('/','').replace('canli','').replace('izle','').replace('yayin','')
-        url='http://www.onlinetvler.com'+url
-        xbmctools.addDir('[COLOR orange]> - '+name+'[/COLOR]',url,107,thumbnail,'') 
+    soup = BeautifulSoup(link)
+    panel=soup.find("div", {"id": "kanallarliste"})
+    liste=BeautifulSoup(str(panel))
+    match=re.compile('<li><a href="(.*?)" title=".*?">(.*?)</a></li>').findall(str(liste))
+    for url,name in match:
+        xbmctools.addDir('[COLOR orange]> - '+name+'[/COLOR]',url,101,'','')
+
 #100
 def ctv1(name,url):
     if "mcanlitv" in url:
@@ -776,8 +759,8 @@ def ctv1(name,url):
             match = re.compile('file:"(.*?)"').findall(link)
             for url in match:
                 if url:
-                    url=url.replace('//yayin','http://yayin')
-                    url=url+tk
+                    url=url.replace('//yayin','http://yayin').replace('http:http://','http://')
+                    url=url
                     xbmcPlayer.play(url)
                 xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
             match3 = re.compile('file : "(.*?)"').findall(link)
@@ -799,6 +782,7 @@ def ctv1(name,url):
                     xbmcPlayer.play(url)
                 xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
         except:
+            pass
             showMessage('[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]','[COLOR red]Iyi Seyirler Diler!!![/COLOR]')
             xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png') 
 #12
@@ -827,17 +811,27 @@ def Canli2():
         
 #101
 def ctv2(url):
-    url=url.replace('https','http')
-    req = urllib2.Request(url)
-    req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
-    response = urllib2.urlopen(req)
-    link=response.read()
-    response.close()
-    match=re.compile('src=https://streaming(.*?)\n').findall(link)
-    for url in match:
-        if url:
-            url='https://streaming'+url+tk
-            xbmctools.yenical4(name,url)
+    if ".plus" in url:
+        link=get_url(url)
+        match=re.compile('src="(.*?)" frameborder=').findall(link)
+        for url1 in match:
+            if url1:
+                link=get_url(url1)
+                match=re.compile("file: \'(.*?)\'").findall(link)
+                for url in match:
+                    xbmctools.yenical4(name,url)
+    else:
+        url=url.replace('https','http')
+        req = urllib2.Request(url)
+        req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
+        response = urllib2.urlopen(req)
+        link=response.read()
+        response.close()
+        match=re.compile('src=https://streaming(.*?)\n').findall(link)
+        for url in match:
+            if url:
+                url='https://streaming'+url+tk
+                xbmctools.yenical4(name,url)
 
 #18
 def Canli3():#
@@ -851,7 +845,6 @@ def Canli3():#
             link=get_url(url)
             match=re.compile('src \: \\\'(.*?)\\\'').findall(link)
             for url in match:
-                #del url[-1]
                 xbmctools.addLink('[COLOR blue] >>[/COLOR]'+ '[COLOR beige]'+name+'[/COLOR]',url,'')
         else:
             xbmctools.addDir('[COLOR blue] >>[/COLOR]'+ '[COLOR beige]'+name+'[/COLOR]',url,100,Thumbnail,Thumbnail)
