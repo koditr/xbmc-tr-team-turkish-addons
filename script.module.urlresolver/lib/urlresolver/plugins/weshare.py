@@ -15,35 +15,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
+from __generic_resolver__ import GenericResolver
 
-import re
-from urlresolver import common
-from urlresolver.resolver import UrlResolver, ResolverError
-
-class WeShareResolver(UrlResolver):
+class WeShareResolver(GenericResolver):
     name = "weshare.me"
     domains = ["weshare.me"]
     pattern = '(?://|\.)(weshare\.me)/(?:services/mediaplayer/site/_embed(?:\.max)?\.php\?u=)?([A-Za-z0-9]+)'
 
-    def __init__(self):
-        self.net = common.Net()
-
-    def get_media_url(self, host, media_id):
-        web_url = self.get_url(host, media_id)
-        headers = {'User-Agent': common.FF_USER_AGENT}
-        html = self.net.http_GET(web_url, headers=headers).content
-        match = re.search('''<source[^>]+src=["']([^'"]+)[^>]+type=['"]video''', html)
-        if match:
-            return match.group(1) + '|User-Agent=%s&Referer=%s' % (common.FF_USER_AGENT, web_url)
-        
-        match = re.search('''{\s*file\s*:\s*['"]([^'"]+)''', html, re.DOTALL)
-        if not match:
-            match = re.search('''href="([^"]+)[^>]+>\(download\)''', html, re.DOTALL)
-
-        if match:
-            return match.group(1) + '|User-Agent=%s&Referer=%s' % (common.FF_USER_AGENT, web_url)
-
-        raise ResolverError('Unable to resolve weshare link. Filelink not found.')
-
     def get_url(self, host, media_id):
-        return 'https://weshare.me/services/mediaplayer/site/_embed.max.php?u=%s' % (media_id)
+        return self._default_get_url(host, media_id, 'https://{host}/services/mediaplayer/site/_embed.max.php?u={media_id}')

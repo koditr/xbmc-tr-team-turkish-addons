@@ -15,9 +15,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
-
 import re
-from lib import jsunpack
+from urlparse import urlparse
+from lib import helpers
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
@@ -25,27 +25,27 @@ class VideoBeeResolver(UrlResolver):
     name = "thevideobee.to"
     domains = ["thevideobee.to"]
     pattern = '(?://|\.)(thevideobee\.to)/(?:embed-)?([0-9A-Za-z]+)'
-
+    
     def __init__(self):
         self.net = common.Net()
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
-
-        html = self.net.http_GET(web_url).content
-
-        js_data = re.findall('(eval\(function.*?)</script>', html.replace('\n', ''))
-
-        for i in js_data:
-            try: html += jsunpack.unpack(i)
-            except: pass
-
-        r = re.search('sources:.*file:"(.*?)"', html)
-        if r:
-            return r.group(1)
-
-        raise ResolverError('File Not Found or removed')
+        headers = {'User-Agent': common.RAND_UA}
+        html = self.net.http_GET(web_url, headers=headers).content
+        packed = helpers.get_packed_data(html)
+        
+        try:
+            sources = re.search("""sources:\s*\["(.+?)"\]""", packed).group(1).split('","')
+            sources = [(urlparse(sources[i]).path.split('/')[-1], sources[i]) for i in range(len(sources))]
+        except:
+            sources = helpers.scrape_sources(html, patterns=["""sources:\s*\[["'](?P<url>[^"']+)"""])
+        
+        if sources:
+            headers.update({'Referer': web_url})
+            return helpers.pick_source(sources) + helpers.append_headers(headers)
+        
+        raise ResolverError('File not found')
 
     def get_url(self, host, media_id):
-        return 'https://thevideobee.to/embed-%s.html' % media_id
-
+        return self._default_get_url(host, media_id)
