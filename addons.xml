@@ -29,6 +29,7 @@
         <import version="3.0.8" addon="script.module.beautifulsoup"/>
         <import addon="script.module.simplejson"/>
 		<import addon="plugin.video.xbmcTRIPTV"/>
+		<import addon="plugin.video.temizlik.imandan.gelir"/>
         <import addon="script.module.urlresolver"/>
         <import addon="script.module.t0mm0.common"/>
         <import version="0.2.6" addon="script.module.mechanize"/>
