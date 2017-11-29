@@ -637,11 +637,13 @@ def frame(url):
     for url in matcha:
         url='http://www.daily'+url
         dizividcal(url)
+        
     vidmoly=re.compile('vidmoly.me/(.*?)"').findall(link)
     for url in vidmoly:
+        print url,"ben"
         url='http://vidmoly.me/'+url
         link=get_url(url)
-        match=re.compile('\|mp4\|(.*?)\|sources\|').findall(link)
+        match=re.compile('\|thumbs\|.*?\|.*?\|(.*?)\|').findall(link)
         for b in match:
             if match:
                 link=get_url(url)
