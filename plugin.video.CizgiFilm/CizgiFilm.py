@@ -51,7 +51,6 @@ def CATEGORIES():
                 url='http://www.cizgifilmizlesen.com/'+url
                 name=sembol_fix(name)
                 addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,1,'')
-        magictr()
 def RECENT(url):
         link=get_url(url)
         match=re.compile('<a href="(.*?)" title="(.*?)">\r                                    <img src="(.*?)" width=".*?" height=".*?"').findall(link)
@@ -94,35 +93,7 @@ def RECENT2(url):
             thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
             name=sembol_fix(name)
             addDir('[COLOR orange][B]>>[/B][/COLOR]'+'[COLOR beige][B]'+name+'[/B][/COLOR]',url,44,thumbnail)
-
-from xbmcaddon import Addon
-__YoutubePluginName__ = 'plugin.video.youtube'
-__YoutubeAddon__ = Addon(__YoutubePluginName__)
-youtubeVersion = __YoutubeAddon__.getAddonInfo('version')
-def magictr():
-        videolar = ['3UA8c44TOWE','3UA8c44TOWE','3UA8c44TOWE','3UA8c44TOWE']
-        youtubeadres=random.choice(videolar)
-        url='http://www.youtube.com/embed/'+str(youtubeadres).encode('utf-8', 'ignore')
-        if youtubeVersion == "5":            
-            Youtube_Player(str(url))
-        else:            
-            Youtube_Player2(str(url))
-def Youtube_Player(url):
-        playList.clear()   
-        code=re.match(r"http://www.youtube.com/embed/(.*?)$", url).group(1)
-        url='plugin://plugin.video.youtube/play/?video_id=' + code
-        name='MagicTR Reklam'
-        addLink(name,url,'')
-        playlist_yap(playList,name,url)
-        xbmcPlayer.play(playList)
-def Youtube_Player2(url):
-        playList.clear()   
-        code=re.match(r"http://www.youtube.com/embed/(.*?)$", url).group(1)
-        url='plugin://plugin.video.youtube/?action=play_video&videoid=' + code
-        name='MagicTR Reklam'
-        addLink(name,url,'')
-        playlist_yap(playList,name,url)
-        xbmcPlayer.play(playList)        
+    
 def playlist_yap(playList,name,url):
         listitem = xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage="")
         listitem.setInfo('video', {'name': name } )
