@@ -14,7 +14,6 @@ settings = xbmcaddon.Addon(id='plugin.video.Sinema')
 
 
 def CATEGORIES():
-        cal()
         addDir('[COLOR orange][B]< Full IPTV ACILMISTIR;ALMAK ISTEYENLER http://dreamtr.club den Ogrenebilirler>[/B][/COLOR]','','','http://dreamtr.club/resimler/icon2.png')
         addDir('[COLOR red]<<< [ Film ARA  ] >>>[/COLOR]','Search',3,'http://dreamtr.club/resimler/icon2.png')
         url='http://www.ultrafilmizle.com/'
@@ -28,10 +27,6 @@ def CATEGORIES():
         for url,name in match:
                 name=sembol_fix(name)
                 addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,4,'')
-def cal():
-        url='http://www.youtube.com/embed/neXKN4zw0vk'
-        name='play'
-        xbmctools.magix_player(name,url)
 def RECENT(url):
     link=get_url(url)
     soup = BeautifulSoup(link)
