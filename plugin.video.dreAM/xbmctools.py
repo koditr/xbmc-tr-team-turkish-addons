@@ -640,7 +640,6 @@ def frame(url):
         
     vidmoly=re.compile('vidmoly.me/(.*?)"').findall(link)
     for url in vidmoly:
-        print url,"ben"
         url='http://vidmoly.me/'+url
         link=get_url(url)
         match=re.compile('\|thumbs\|.*?\|.*?\|(.*?)\|').findall(link)
@@ -709,13 +708,9 @@ def frame(url):
     for url in tune:
         url='https://embed.tune.pk/play/'+url
         link=get_url(url)
-        match=re.compile('var requestURL = \'(.*?)\';').findall(link)
+        match=re.compile('contentURL.*?content\="(.*?)\"').findall(link)
         for url in match:
-            link=get_url(url)
-            match=re.compile('file":"(.*?)","bitrate":(.*?),"label"').findall(link)
-            for url,name in match:
-                url=url.replace('\/','/')
-                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+            addLink('[COLOR gold] Tune >>  '+'[COLOR beige]'+'Ply'+'[/COLOR]'+'[/COLOR]',url+tk,'')
                 
         
     ply2=re.compile('/playlist/(.*?).json"').findall(link)

@@ -444,16 +444,16 @@ def ayrisdirma2(url):
     soup = BeautifulSoup(link)
     panel=soup.find("ul", {"name": "part-system"})
     liste=BeautifulSoup(str(panel))
-    match=re.compile('<a href="(.*?)"> <i class="fa fa-film"></i>\n(.*?)</a>').findall(str(liste))#src="http://www.ok.ru/videoembed/352586500751"
+    match=re.compile('<a href="(.*?)"> <i class="fa fa-film"></i>\n(.*?)</a>').findall(str(liste))
     for url1,name in match:
         xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,68,'','')
 #68
 def framee(name,url):
     if "izle7" in url:
         link=get_url(url)
-        match=re.compile("tp_file = '(.*?).mp4'").findall(link)
+        match=re.compile('src\: \"(.*?)\"').findall(link)
         for vid in match:
-            vid=vid+'.mp4'+"|referer=http://www.izle7.com/kanal7/izle-20967-ah-kalbim-24bolum.html"
+            vid=vid+"|referer=http://www.izle7.com/kanal7/izle-20967-ah-kalbim-24bolum.html"
             name='Izle7'
             xbmctools.addLink(name,vid,'')
     else:
@@ -478,17 +478,6 @@ def framee(name,url):
                 pagesa=re.compile('src="(.*?)" frameborder').findall(link)
                 for url in pagesa:
                     magix_player(name,url) 
-            
-#7
-
-             
-#47
-
-#48
-
-#49
-
-
 
 #1
 def Belgesel():
@@ -666,7 +655,7 @@ def Canli1():
             xbmctools.addDir(name,url,101,thumbnail,'')
 
 #100
-def ctv1(name,url):#file: 'http://yayin.canliradyolive.com/power-turk-fm/live/icecast.audio',type
+def ctv1(name,url):#
     if "dinle" in url:
         link=get_url(url)
         match=re.compile("file: \'(.*?)\',type").findall(link)
@@ -910,7 +899,6 @@ elif mode==3: Dizi()
 elif mode==4: canliyayin()
 elif mode==5: Sinema1()
 elif mode==6: Sinema2()
-elif mode==7: Sinema3()
 elif mode==8: Dizi1()
 elif mode==9: Dizi2()
 elif mode==11: Canli1()
@@ -940,9 +928,6 @@ elif mode==43: Yenisinema2(url)
 elif mode==44: Search2()
 elif mode==45: ayrisdirma2(url)
 elif mode==46: Kategoriler2()
-elif mode==47: Recent3(url)
-elif mode==48: Aramasinema3()
-elif mode==49: videolinks3(url,name)
 elif mode==50: BRecent(url)
 elif mode==51: BELayrisdirma(url)
 elif mode==53: Recentyet(url)
