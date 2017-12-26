@@ -190,7 +190,7 @@ def Yeni(url):
     else:
         link=get_url(url)
         soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "fix-film-v2_item fix_home clearfix list_items"},smartQuotesTo=None)
+        panel = soup.findAll("div", {"class": "fix-film_item fix_home clearfix list_items"},smartQuotesTo=None)
         panel = panel[0].findAll("div", {"class": "movie-poster"})
         for i in range (len (panel)):
             url=panel[i].find('a')['href']
