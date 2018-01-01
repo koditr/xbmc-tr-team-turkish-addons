@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import urllib,urllib2,xbmcplugin,xbmcgui,xbmcaddon,xbmc
 import re
-import BeautifulSoup as BS4
+from bs4 import BeautifulSoup as BS4
 import xbmctools,fix
 import os,base64,time
 import mechanize
@@ -121,18 +121,72 @@ def get_url(url):
         req.add_header('User-agent', 'Mozilla/5.0 (X11; Linux x86_64; SmartTV) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')
         response = urllib2.urlopen(req)
         link=response.read()
+        link=link.replace('&#215;',"x").replace('&#231;',"c").replace('&#8217;',"-").replace('&#39;',"'").replace('&#252;',"u").replace('&#199;',"C").replace('&#246;',"o").replace('&#039;',"'")
         response.close()
         return link
 #8
 def Dizi1():
     url='http://www.canlihddizi.org/'
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Arama/Search[/COLOR]',url,14,aramaa,fann)
+    xbmctools.addDir('[COLOR orange]>>>[/COLOR] [COLOR beige]KANAL D Dizileri[/COLOR]',url,13,yeniek,fann)
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal7[/COLOR]',"http://www.izle7.com/kanal7/hint-dizileri",28,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,19,yeniek,fann)
+    
     link=get_url(url)
     match=re.compile('<li class="cat-item cat-item-.*?"><a href="(.*?)" >(.*?)</a>\n</li>').findall(link)
     for url,name in match:
             xbmctools.addDir('[COLOR beige]>'+name+'[/COLOR]',url,28,'','')
+#13
+def Kanalddizi():
+    url= 'https://www.kanald.com.tr/diziler'
+    link=get_url(url)
+    soup = BS4(link, 'html5lib')
+    panel = soup.findAll("div", attrs={"class": "kd-docs-news"},smartQuotesTo=None)
+    panel = panel[0].findAll("div", attrs={"class": "col-sm-6"})
+    for i in range (len (panel)):
+        url=panel[i].find('a')['href']
+        name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+        thumbnail=panel[i].find('img')['data-src'].encode('utf-8', 'ignore')
+        thumbnail='http:'+thumbnail
+        if "gulizar" in url: pass
+        elif "hickirik" in url: pass
+        else:
+            url='http://www.kanald.com.tr'+url+'/bolumler'
+            xbmctools.addDir('[COLOR orange]>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,7,thumbnail,thumbnail)
+#7            
+def Kanalddiziicerik(url):
+        link=get_url(url)
+        soup = BS4(link, 'html5lib')
+        panel = soup.findAll("div", attrs={"class": "kd-docs-section"},smartQuotesTo=None)
+        panel = panel[0].findAll("div", attrs={"class": "col-sm-3 col-xs-6"})
+        for i in range (len (panel)):
+            url=panel[i].find('a')['href']
+            url= 'http://www.kanald.com.tr'+url
+            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+            thumbnail=panel[i].find('img')['data-src'].encode('utf-8', 'ignore')
+            thumbnail='http:'+thumbnail
+            xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,17,thumbnail,thumbnail)
+        page=re.compile('<li class="active"><a href=".*?">.*?</a></li><li class=""><a href="(.*?)">(.*?)</a></li>').findall(link)
+        for Url,name in page:
+            Url='https://www.kanald.com.tr/'+Url
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,7,sonrakii,fann)
+
+#17
+def Kanalddizivideo(url,name):
+        link=get_url(url)
+        match=re.compile('data.*?-id="(.*?)"').findall(link)
+        url2='https://www.kanald.com.tr/actions/content/media/'+match[0]
+        link2=get_url(url2)
+        match2=re.compile('"ServiceUrl":"(.+?)","SecurePath":"(.+?)?key=.+?"').findall(link2)
+        for url,code in match2:
+            url=url+code+'key=93a08dbbdd93b00670860974d0f63a6d'
+            xbmctools.yenical4(name,url+tk)
+            
+
+
+    
+    
+            
 #14
 def Arama():
         dizi1='http://www.canlihddizi.com/'
@@ -451,7 +505,7 @@ def ayrisdirma2(url):
 def framee(name,url):
     if "izle7" in url:
         link=get_url(url)
-        match=re.compile('src\: \"(.*?)\"').findall(link)
+        match=re.compile("tp_file \= \'(.*?)\'").findall(link)
         for vid in match:
             vid=vid+"|referer=http://www.izle7.com/kanal7/izle-20967-ah-kalbim-24bolum.html"
             name='Izle7'
@@ -899,13 +953,16 @@ elif mode==3: Dizi()
 elif mode==4: canliyayin()
 elif mode==5: Sinema1()
 elif mode==6: Sinema2()
+elif mode==7: Kanalddiziicerik(url)
 elif mode==8: Dizi1()
 elif mode==9: Dizi2()
 elif mode==11: Canli1()
 elif mode==12: Canli2()
+elif mode==13: Kanalddizi()
 elif mode==14: Arama()
 elif mode==15: Kategoriler()
 elif mode==16: yetiskin()
+elif mode==17: Kanalddizivideo(url,name)
 elif mode==18: Canli3()
 elif mode==19: Yeni(url)
 elif mode==20: dizivideolinks(url,name)
