@@ -271,7 +271,7 @@ def Yeni222(url):
     else:
         link=get_url(url)
         soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "fix-film_item fix_category clearfix list_items"},smartQuotesTo=None)
+        panel = soup.findAll("div", {"class": "fix-film-v2_item fix_category clearfix list_items"},smartQuotesTo=None)
         panel = panel[0].findAll("div", {"class": "movie-poster"})
         for i in range (len (panel)):
             url=panel[i].find('a')['href']
@@ -707,6 +707,25 @@ def Canli1():
             pass
         else:
             xbmctools.addDir(name,url,101,thumbnail,'')
+    sitegit='https://www.kesintisiztv.com/show-tv-canli/'
+    link=get_url(sitegit)
+    soup = BeautifulSoup(link)
+    panel=soup.findAll("ol", {"class": "tvlistesi"})
+    match1=re.compile('<li><a href="(.*?)" title=".*?">(.*?)</a></li>').findall(str(panel))
+    for url,name in match1:
+        xbmctools.addDir('[COLOR pink] >>'+name+'[/COLOR]',url,101,"",'')
+    url='https://canlitv.co/tum-kanallar'
+    req = urllib2.Request(url)
+    req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
+    response = urllib2.urlopen(req)
+    link=response.read()
+    match=re.compile('<li>\n<a href="(.*?)">\n<img src="(.*?)" alt=".*?" />\n<strong>(.*?)</strong>\n</a>\n</li>').findall(link)
+    for url,thumbnail,name in match:
+        a='https://canlitv.co/'
+        url=a+url
+        thumbnail=a+thumbnail
+        xbmctools.addDir('[COLOR orange] >>'+name+'[/COLOR]',url,101,thumbnail,'')
+        
 
 #100
 def ctv1(name,url):#
@@ -788,6 +807,55 @@ def Canli2():
         
 #101
 def ctv2(url):
+    name='Play'
+    import requests as req
+    if "https://www.kesintisiztv.com/" in url:
+        import requests as req
+        headers = {
+        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+        "Accept":"*/*",
+        "Accept-Language":"en-US,en;q=0.5",
+        "Referer":"https://www.kesintisiztv.com/",
+        "Connection":"keep-alive"
+        }
+        resp = req.get(url, allow_redirects=True, headers=headers)
+        match=re.compile('src="(.*?)" frameborder').findall(resp.text)
+        for url in match:
+            headers = {
+            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+            "Accept":"*/*",
+            "Accept-Language":"en-US,en;q=0.5",
+            "Referer":"https://www.kesintisiztv.com/",
+            "Connection":"keep-alive"
+            }
+            resp = req.get(url, allow_redirects=True, headers=headers)
+            match=re.compile("file: \'(.*?)\'").findall(resp.text)
+            for url in match:
+                xbmctools.yenical4(name,url+tk)
+    if "canlitv.co/" in url:
+        import requests as req
+        headers = {
+        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+        "Accept":"*/*",
+        "Accept-Language":"en-US,en;q=0.5",
+        "Referer":"https://canlitv.co/",
+        "Connection":"keep-alive"
+        }
+        resp = req.get(url, allow_redirects=True, headers=headers)
+        match=re.compile('src="(.*?)" frameborder').findall(resp.text)
+        for url in match:
+            url='https://canlitv.co/'+url
+            headers = {
+            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+            "Accept":"*/*",
+            "Accept-Language":"en-US,en;q=0.5",
+            "Referer":"https://canlitv.co/",
+            "Connection":"keep-alive"
+            }
+            resp = req.get(url, allow_redirects=True, headers=headers)
+            match=re.compile("file: \'(.*?)\'").findall(resp.text)
+            for url in match:
+                xbmctools.yenical4(name,url+tk)
     if "ocanli" in url:
         link=get_url(url)
         match=re.compile("file: \'(.*?)\'").findall(link)

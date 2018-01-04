@@ -637,20 +637,18 @@ def frame(url):
     for url in matcha:
         url='http://www.daily'+url
         dizividcal(url)
-        
     vidmoly=re.compile('vidmoly.me/(.*?)"').findall(link)
     for url in vidmoly:
         url='http://vidmoly.me/'+url
         link=get_url(url)
-        match=re.compile('\|thumbs\|.*?\|.*?\|(.*?)\|').findall(link)
+        match=re.compile('\|100\|(.*?)\|160\|').findall(link)
         for b in match:
             if match:
                 link=get_url(url)
-                match1=re.compile('var spriteSheetUrl = "(.*?).molyusercontentstage.me/.*?.jpg";\n').findall(link)
-                for a in match1:
-                    url=a+'.molyusercontentstage.me/'+b+'/v.mp4'
-                    addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
-                    
+                match1=re.compile('spriteSheetUrl = "(.*?).cdnmoly.cf/(.*?).jpg";\n').findall(link)
+                for a,c in match1:
+                    url=a+'.cdnmoly.cf/'+b+'/v.mp4'
+                    addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')          
     matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
     for vid in matchqq:
         resolve( vid)
