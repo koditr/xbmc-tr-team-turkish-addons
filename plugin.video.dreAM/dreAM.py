@@ -126,16 +126,17 @@ def get_url(url):
         return link
 #8
 def Dizi1():
-    url='http://www.canlihddizi.org/'
+    url='http://www.canlihddiziler.com/'
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Arama/Search[/COLOR]',url,14,aramaa,fann)
     xbmctools.addDir('[COLOR orange]>>>[/COLOR] [COLOR beige]KANAL D Dizileri[/COLOR]',url,13,yeniek,fann)
-    xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal7[/COLOR]',"http://www.izle7.com/kanal7/hint-dizileri",28,aramaa,fann)
+    xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal 7[/COLOR]',"http://www.izle7.com/kanal7/hint-dizileri",28,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,19,yeniek,fann)
     
     link=get_url(url)
-    match=re.compile('<li class="cat-item cat-item-.*?"><a href="(.*?)" >(.*?)</a>\n</li>').findall(link)
-    for url,name in match:
-            xbmctools.addDir('[COLOR beige]>'+name+'[/COLOR]',url,28,'','')
+    match=re.compile('<li class="cat-item cat-item-.*?"><a href="(.*?)"').findall(link)
+    for url in match:
+        name=url.replace('http://www.canlihddiziler.com/sonbolum/','').replace('izle','')
+        xbmctools.addDir('[COLOR beige]>'+name+'[/COLOR]',url,28,'','')
 #13
 def Kanalddizi():
     url= 'https://www.kanald.com.tr/diziler'
@@ -181,12 +182,7 @@ def Kanalddizivideo(url,name):
         for url,code in match2:
             url=url+code+'key=93a08dbbdd93b00670860974d0f63a6d'
             xbmctools.yenical4(name,url+tk)
-            
-
-
-    
-    
-            
+         
 #14
 def Arama():
         dizi1='http://www.canlihddizi.com/'

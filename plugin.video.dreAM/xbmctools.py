@@ -751,6 +751,41 @@ def frame(url):
         for urlA,name in match:
             urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
             addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]','https://redirector.googlevideo.com'+urlA,'')
+    ddizi1=re.compile('ddizim.com/player\/oynat\/(.*?)"').findall(link)
+    import requests as req
+    for url in ddizi1:
+        url='http://ddizim.com/player/oynat/'+url
+        link=get_url(url)
+        headers = {
+        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+        "Accept":"*/*",
+        "Accept-Language":"en-US,en;q=0.5",
+        "Referer":"http://ddizi1.com/",
+        "Connection":"keep-alive"
+        }
+        resp = req.get(url, allow_redirects=True, headers=headers)
+        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(resp.text)
+        for urlA,name in match:
+            urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
+            urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+    ddizi11=re.compile('<iframe src="http://www.hergunizle1.com/player/(.*?)"').findall(link)
+    import requests as req
+    for url in ddizi11:
+        url='http://www.hergunizle1.com/player/'+url
+        headers = {
+        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+        "Accept":"*/*",
+        "Accept-Language":"en-US,en;q=0.5",
+        "Referer":"http://www.hergunizle1.com/",
+        "Connection":"keep-alive"
+        }
+        resp = req.get(url, allow_redirects=True, headers=headers)
+        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(resp.text)
+        for urlA,name in match:
+            urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
+            urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
         
         
 #24   
