@@ -109,8 +109,8 @@ def Dizi():
     xbmc.executebuiltin('Container.SetViewMode(500)')
 #4
 def canliyayin():
-        xbmctools.addDir('[COLOR beige]Canli Tv 1[/COLOR]',"Canli1()",11,'http://dreamtr.club/resimler/Canlitv1.png',fann)
-        xbmctools.addDir('[COLOR pink]Canli Tv 2* New *[/COLOR]',"Canli2()",12,'http://dreamtr.club/resimler/Canlitv2.png',fann)
+        xbmctools.addDir('[COLOR pink]New* 2018 / Canli Tv 1*[/COLOR]',"Canli1()",11,'http://dreamtr.club/resimler/Canlitv1.png',fann)
+        xbmctools.addDir('[COLOR pink]New* 2018 / Canli Tv 2*[/COLOR]',"Canli2()",12,'http://dreamtr.club/resimler/Canlitv2.png',fann)
         xbmctools.addDir('[COLOR beige]Canli Tv 3[/COLOR]',"Canli3()",18,'http://dreamtr.club/resimler/Canlitv3.png',fann)
         xbmctools.addDir('[COLOR orange]* Canli Tv 4 * New *[/COLOR]',"Canli4()",27,'http://dreamtr.club/resimler/Canlitv4.png',fann)
         xbmc.executebuiltin('Container.SetViewMode(500)')
@@ -306,16 +306,12 @@ def Dizi2():
         url1='http://www.ddizi1.com'
         link=get_url(url1)
         soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "blok-alt"},smartQuotesTo=None)
-        liste=BeautifulSoup(str(panel))
-        for li in liste.findAll('li'):
-            a=li.find('a')
-            url= a['href']
-            name=li.text
+        panel = soup.findAll("div", {"class": "blok-orta"},smartQuotesTo=None)
+        match1=re.compile('<li><a href="http://www.ddizi1.com/diziler/(.*?)/(.*?)-son-bolum-izle"').findall(str(panel))
+        for url,name in match1:
+            url='http://www.ddizi1.com/diziler/'+url+"/"+name+'-son-bolum-izle'
             name=fix.decode_fix(name)
-            name=name.encode('ascii', 'ignore')
-            thumbnail=""
-            xbmctools.addDir('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,23,thumbnail,thumbnail)
+            xbmctools.addDir('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,23,'','')
 #25
 def Arama2():
         dizi2='moc.2dhizidilnac.www//:ptth'[::-1]
@@ -781,16 +777,29 @@ def ctv1(name,url):#
                 xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png') 
 #12
 def Canli2():
-    url1='http://www.canlitvlive.io/tum-kanallar.html'
-    link=get_url(url1)
-    match=re.compile('<a href="(.*?)" title=".*?"><div class="chn_lg"><img src="(.*?)" width="100" height="75" alt="(.*?)">').findall(link)       
-    for url,Thumbnail,name in match:
-        if "izle" in url:
-            url='http://www.canlitvlive.io'+url
-            name=fix.decode_fix(name)
-            xbmctools.addDir('[COLOR pink]> - '+name+'[/COLOR]',url,100,Thumbnail,'')
+    sitegit='http://www.canlitvlive.io/tum-kanallar.html'
+    link=get_url(sitegit)
+    soup = BeautifulSoup(link)
+    panel=soup.findAll("div", {"class": "tv-body"})
+    match1=re.compile('<a href="(.*?)" title="(.*?)">').findall(str(panel))
+    for url,name in match1:
+        url=url.replace('/izle/','http://www.canlitvlive.io/izle/')
+        name=fix.decode_fix(name)
+        name=name.replace('Izle','')
+        if "Canl" in name:
+            pass
+        elif "Tum" in name:
+            pass
+        elif "Alfabe" in name:
+            pass
+        elif "Kanal  D" in name:
+            pass
+        elif "CNN" in name:
+            pass
+        elif "Teve" in name:
+            pass
         else:
-            xbmctools.addDir('[COLOR pink]> - '+name+'[/COLOR]',url,100,Thumbnail,'')
+            xbmctools.addDir('[COLOR pink]> - '+name+'[/COLOR]',url,100,'','')
             
         #--
     urlM='http://www.mcanlitv.net/'
@@ -856,7 +865,7 @@ def ctv2(url):
         link=get_url(url)
         match=re.compile("file: \'(.*?)\'").findall(link)
         for url in match:
-            xbmctools.yenical4(name,url)
+            xbmctools.yenical4(name,url+tk)
     if ".plus" in url:
         link=get_url(url)
         match=re.compile('src="(.*?)" frameborder=').findall(link)
