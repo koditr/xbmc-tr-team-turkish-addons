@@ -623,7 +623,10 @@ def ayrisdirm1(url):
 #22
 def frame(url):
     name='Play'
-    link=get_url(url)
+    req = urllib2.Request(url)
+    req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
+    response = urllib2.urlopen(req)
+    link=response.read()
     match=re.compile('class="c5"><p><iframe src="(.*?)"').findall(link)
     for url in match:
         dizividcal(url)
@@ -633,7 +636,7 @@ def frame(url):
             pass
         else:
             dizividcal(url)
-    matcha=re.compile('src="http://www.daily(.*?)\?').findall(link)
+    matcha=re.compile('src\=\".*?daily(.*?)\?').findall(link)
     for url in matcha:
         url='http://www.daily'+url
         dizividcal(url)
@@ -641,14 +644,15 @@ def frame(url):
     for url in vidmoly:
         url='http://vidmoly.me/'+url
         link=get_url(url)
-        match=re.compile('\|100\|(.*?)\|160\|').findall(link)
+        match=re.compile('maxBufferLength\|thumbs\|60\|01\|100\|(.*?)\|').findall(link)
         for b in match:
             if match:
                 link=get_url(url)
-                match1=re.compile('spriteSheetUrl = "(.*?).cdnmoly.cf/(.*?).jpg";\n').findall(link)
-                for a,c in match1:
-                    url=a+'.cdnmoly.cf/'+b+'/v.mp4'
-                    addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')          
+                match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
+                for a in match1:
+                    url='http:'+a+b+'/v.mp4'
+                    addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
+                   
     matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
     for vid in matchqq:
         resolve( vid)
@@ -778,6 +782,24 @@ def frame(url):
         "Accept":"*/*",
         "Accept-Language":"en-US,en;q=0.5",
         "Referer":"http://www.hergunizle1.com/",
+        "Connection":"keep-alive"
+        }
+        resp = req.get(url, allow_redirects=True, headers=headers)
+        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(resp.text)
+        for urlA,name in match:
+            urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
+            urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+            
+    canlii1=re.compile('src="http://www.canlidizihd6.com/playerv5/oynat/(.*?)"').findall(link)
+    import requests as req
+    for url in canlii1:
+        url='http://www.canlidizihd6.com/playerv5/oynat/'+url
+        headers = {
+        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+        "Accept":"*/*",
+        "Accept-Language":"en-US,en;q=0.5",
+        "Referer":"http://www.canlidizihd6.com/",
         "Connection":"keep-alive"
         }
         resp = req.get(url, allow_redirects=True, headers=headers)
