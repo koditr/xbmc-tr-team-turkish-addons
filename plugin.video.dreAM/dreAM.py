@@ -712,35 +712,45 @@ def Linkleralman1(url):
 
 #11
 def Canli1():
-    urlD='http://www.mcanlitv.net/kanal-d/'
-    name='Kanal D'
-    xbmctools.addDir(name,urlD,100,'','')
-    url='http://www.ocanlitv.net/'
-    link=get_url(url)
-    match=re.compile('<a href="(.*?)">\r\n\t<img src="(.*?)" alt=".*?" width="100" height="93">\r\n\t<div>(.*?)</div>').findall(link)
-    for url,thumbnail,name in match:
-        if "Kanal D" in name:
-            pass
-        else:
-            xbmctools.addDir(name,url,101,thumbnail,'')
-    sitegit='https://www.kesintisiztv.com/show-tv-canli/'
-    link=get_url(sitegit)
-    soup = BeautifulSoup(link)
-    panel=soup.findAll("ol", {"class": "tvlistesi"})
-    match1=re.compile('<li><a href="(.*?)" title=".*?">(.*?)</a></li>').findall(str(panel))
-    for url,name in match1:
-        xbmctools.addDir('[COLOR pink] >>'+name+'[/COLOR]',url,101,"",'')
-    url='https://canlitv.co/tum-kanallar'
-    req = urllib2.Request(url)
-    req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
-    response = urllib2.urlopen(req)
-    link=response.read()
-    match=re.compile('<li>\n<a href="(.*?)">\n<img src="(.*?)" alt=".*?" />\n<strong>(.*?)</strong>\n</a>\n</li>').findall(link)
-    for url,thumbnail,name in match:
-        a='https://canlitv.co/'
-        url=a+url
-        thumbnail=a+thumbnail
-        xbmctools.addDir('[COLOR orange] >>'+name+'[/COLOR]',url,101,thumbnail,'')
+    try:
+        urlD='http://www.mcanlitv.net/kanal-d/'
+        name='Kanal D'
+        xbmctools.addDir(name,urlD,100,'','')
+        url='http://www.ocanlitv.net/'
+        link=get_url(url)
+        match=re.compile('<a href="(.*?)">\r\n\t<img src="(.*?)" alt=".*?" width="100" height="93">\r\n\t<div>(.*?)</div>').findall(link)
+        for url,thumbnail,name in match:
+            if "Kanal D" in name:
+                pass
+            else:
+                xbmctools.addDir(name,url,101,thumbnail,'')
+    except:
+        print"kanald yok"
+    try:
+        sitegit='https://www.kesintisiztv.com/show-tv-canli/'
+        link=get_url(sitegit)
+        soup = BeautifulSoup(link)
+        panel=soup.findAll("ol", {"class": "tvlistesi"})
+        match1=re.compile('<li><a href="(.*?)" title=".*?">(.*?)</a></li>').findall(str(panel))
+        for url,name in match1:
+            xbmctools.addDir('[COLOR pink] >>'+name+'[/COLOR]',url,101,"",'')
+    except:
+        print"kesintisiz yok"
+    try:
+        
+        url='https://canlitv.co/tum-kanallar'
+        req = urllib2.Request(url)
+        req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
+        response = urllib2.urlopen(req)
+        link=response.read()
+        match=re.compile('<li>\n<a href="(.*?)">\n<img src="(.*?)" alt=".*?" />\n<strong>(.*?)</strong>\n</a>\n</li>').findall(link)
+        for url,thumbnail,name in match:
+            a='https://canlitv.co/'
+            url=a+url
+            thumbnail=a+thumbnail
+            xbmctools.addDir('[COLOR orange] >>'+name+'[/COLOR]',url,101,thumbnail,'')
+    except:
+        print"canli.co yok"
         
 
 #100
