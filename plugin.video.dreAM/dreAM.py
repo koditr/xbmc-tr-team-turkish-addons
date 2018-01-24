@@ -65,7 +65,7 @@ def CATEGORIES():
          xbmctools.addDir('[COLOR pink]DiZiLER[/COLOR]',"Dizi()",3,'http://dreamtr.club/resimler/Diziler.png',fann)
          xbmctools.addDir('[COLOR yellow]CANLI YAYINLAR[/COLOR]',"canliyayin()",4,'http://dreamtr.club/resimler/CanliTVler.png',fann)
          xbmctools.addDir('[COLOR yellow]DreamTR Radyolar[/COLOR]',"radyo()",105,'http://dreamtr.club/resimler/Radyo.png',fann)
-         xbmctools.addDir('[COLOR purple]BELGESEL iZLE[/COLOR]',"Belgesel()",1,'http://dreamtr.club/resimler/belgeselizle.png',fann)
+         #xbmctools.addDir('[COLOR purple]BELGESEL iZLE[/COLOR]',"Belgesel()",1,'http://dreamtr.club/resimler/belgeselizle.png',fann)
          xbmctools.addDir('[COLOR grey]ALMAN Sinema[/COLOR]',"Alman()",62,'http://dreamtr.club/resimler/almanlar.png',fann)
          xbmctools.addDir('[COLOR grey]DREAM AYARLAR[/COLOR]',"Ayarlar()",2000,'http://dreamtr.club/resimler/ayarlar.png',fann)
          if gizlilik == "false" or gizlilik2 != gizlilik3 or gizlilik4 == "false":
@@ -440,7 +440,10 @@ def sinema1recent(url):
         thumbnail=panel[i].find('img')['src']
         name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
         name=name.replace('&#8211;','&').replace('&#8217;','')
-        xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,200,thumbnail,thumbnail)
+        if "evrenselfilm-sosyal" in url:
+            pass
+        else:
+            xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,200,thumbnail,thumbnail)
     page=re.compile('current\'>.*?</span><a href=\'(.*?)\' class=\'inactive\' >(.*?)</a>').findall(link)
     for url1,name in page:
         xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url1,203,sonrakii,fann)
@@ -550,34 +553,11 @@ def framee(name,url):
                     magix_player(name,url) 
 
 #1
-def Belgesel():
-    sinema ='http://www.belgun.tv/'
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Belgeseller[/COLOR]',sinema,50,yeniek,fann)
-    link=get_url(sinema)
-    match=re.compile('category menu-item-.*?"><a href="(.*?)">(.*?)</a>').findall(link)
-    for url,name in match:
-            xbmctools.addDir('[COLOR beige][COLOR red]>[/COLOR]'+name+'[/COLOR]',url,50,"","")
+
 #50
-def BRecent(url):
-    link=get_url(url)
-    soup = BeautifulSoup(link)
-    panel = soup.findAll("div", {"class": "solBlok"},smartQuotesTo=None)
-    panel = panel[0].findAll("div", {"class": "film"})
-    for i in range (len (panel)):
-            url=panel[i].find('a')['href']
-            name=panel[i].find('a')['title'].encode('utf-8', 'ignore')
-            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-            xbmctools.addDir('[COLOR cyan]'+name+'[/COLOR]',url,51,thumbnail,thumbnail)
-    page=re.compile('current\'>.*?</span><a class="page larger" href="(.*?)">.*?</a>').findall(link)
-    for url in page:
-            xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]',url,50,sonrakii,fann)
+
 #51
-def BELayrisdirma(url):
-    xbmctools.addDir('[COLOR blue]Play >>[/COLOR]',url,41,"",fann)
-    link=get_url(url)
-    match=re.compile(' <a href="(.*?)"><span>(.*?)</span></a>').findall(link)
-    for url,name in match:
-        xbmctools.addDir('[COLOR blue]'+name+'[/COLOR]',url,41,"",fann)
+
  
 def sembol_fix(x):
     try:
@@ -785,8 +765,8 @@ def ctv1(name,url):#
                     if url:
                         url=url.replace('//yayin','http://yayin').replace('http:http://','http://')
                         url=url
-                        xbmcPlayer.play(url)
-                    xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                        yenical44(name,url)
+                        return canli3()    
                 match3 = re.compile('file : "(.*?)"').findall(link)
                 for url in match3:
                     if url:
@@ -951,6 +931,7 @@ def yenical44(name,url):
             listitem = xbmcgui.ListItem(name) 
             playList.add(url, listitem) 
             xbmcPlayer.play(playList)
+        
  
   
 
@@ -1054,7 +1035,7 @@ except:
 if mode==None or url==None or len(url)<1:
 
     CATEGORIES()
-elif mode==1: Belgesel()        
+#elif mode==1: Belgesel()        
 elif mode==2: Sinema()
 elif mode==3: Dizi()
 elif mode==4: canliyayin()
@@ -1092,8 +1073,8 @@ elif mode==43: Yenisinema2(url)
 elif mode==44: Search2()
 elif mode==45: ayrisdirma2(url)
 elif mode==46: Kategoriler2()
-elif mode==50: BRecent(url)
-elif mode==51: BELayrisdirma(url)
+#elif mode==50: BRecent(url)
+#elif mode==51: BELayrisdirma(url)
 elif mode==53: Recentyet(url)
 elif mode==54: ayrisdirmayet(url)
 elif mode==55: VideoLinksyet(name,url)

@@ -67,6 +67,7 @@ def addLink(name, url, thumbnail=""):
         liz.setInfo(type="Video", infoLabels={"Title":name})
         liz.setProperty("IsPlayable", "true")
         xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=False)
+        return()
         
 def addDir(name,url,mode,iconimage,fanart):
     u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
