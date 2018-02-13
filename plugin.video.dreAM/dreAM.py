@@ -439,7 +439,7 @@ def sinema1recent(url):
         url=panel[i].find('a')['href']
         thumbnail=panel[i].find('img')['src']
         name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-        name=name.replace('&#8211;','&').replace('&#8217;','')
+        name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
         if "evrenselfilm-sosyal" in url:
             pass
         else:
@@ -524,7 +524,7 @@ def ayrisdirma2(url):
 def framee(name,url):
     if "izle7" in url:
         link=get_url(url)
-        match=re.compile("tp_file \= \'(.*?)\'").findall(link)
+        match=re.compile('video-source="(.*?)"').findall(link)
         for vid in match:
             vid=vid+"|referer=http://www.izle7.com/kanal7/izle-20967-ah-kalbim-24bolum.html"
             name='Izle7'
