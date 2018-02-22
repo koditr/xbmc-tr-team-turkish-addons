@@ -394,7 +394,7 @@ def dizivideolinks2(url,name):
           
 #5
 def Sinema1():
-    urlY="http://evrenselfilmler.org/"
+    urlY="http://evrenselfilmlerim.com/"
     xbmctools.addDir('[COLOR yellow]Arama/Search[/COLOR]',urlY,38,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',urlY,203,yeniek,fann)
     link=get_url(urlY)
@@ -523,7 +523,9 @@ def ayrisdirma2(url):
 def framee(name,url):
     if "izle7" in url:
         link=get_url(url)
-        match=re.compile('video-source="(.*?)"').findall(link)
+        import re
+        match=re.compile("var video = '(.*?)'").findall(link)
+                         #http://two.inxy.co/mb_files/0354a9a5-Kordugum-136-Bolum.m3u8
         for vid in match:#http://two.inxy.co/360p
             vid=vid.replace('http://two.inxy.co','http://one.inxy.co/360p').replace('mb_files/','')
             vid=vid+"|referer=http://www.izle7.com/kanal7/izle-20967-ah-kalbim-24bolum.html"
@@ -531,20 +533,38 @@ def framee(name,url):
             xbmctools.addLink(name,vid,'')
     else:
         
-        if "evrenselfilmler" in url:
+        if "evrensel" in url:
             link=get_url(url)
             soup = BeautifulSoup(link)
             panel=soup.find("div", {"class": "tab-content"})
             liste=BeautifulSoup(str(panel))
+            import re
             match1=re.compile('\="(.*?)\"').findall(str(panel))
             for url in match1:
                 if "javascript" in url:
                     pass
                 else:
-                    magix_player(name,url)
+                    if "/evrenselplayer/oynat/" in url:
+                        import requests as req
+                        
+                        headers = {
+                        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+                        "Accept":"*/*",
+                        "Accept-Language":"en-US,en;q=0.5",
+                        "Referer":"http://evrenselfilmlerim.com/",
+                        "Connection":"keep-alive"
+                        }
+                        resp = req.get(url, allow_redirects=True, headers=headers)
+                        import re
+                        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(resp.text)
+                        for urlA,name in match:
+                            xbmctools.addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+                    else:
+                        magix_player(name,url)
         else:
             if "yerlifilmiizle" in url:
                 link=get_url(url)
+                import re
                 pages=re.compile('<iframe src="(.*?)"').findall(link)
                 for url in pages:
                     magix_player(name,url)
@@ -554,7 +574,7 @@ def framee(name,url):
 
 #1
 
-#50
+0
 
 #51
 
@@ -593,7 +613,7 @@ def RecentyetA(url):
         thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
         thumbnail=z+thumbnail
         url=z+url
-        name=name.replace("Watch porno online","")
+        name=name.replace("Watch porn online","")
         xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,54,thumbnail,thumbnail)
     page=re.compile('<li class="page active"><a href=".*?">.*?</a></li>\n<li class="page"><a href="(.*?)">(.*?)</a></li>').findall(link)
     for url,name in page:
@@ -613,6 +633,7 @@ def Recentyet(url):
         thumbnail=panel[i].find("img", {"class": "item_img"})['src']
         thumbnail=z+thumbnail
         url=z+url
+        name=name.replace("Watch porn online","")
         xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,54,thumbnail,thumbnail)
     page=re.compile('<li class="page active"><a href=".*?">.*?</a></li>\n<li class="page"><a href="(.*?)">(.*?)</a></li>').findall(link)
     for url,name in page:
@@ -671,6 +692,7 @@ def Yeni2alman1(url):
     page=re.compile('<b class="swchItemA1"><span>.*?</span></b> <a class="swchItem1" href="(.*?)" onclick').findall(link)
     for url1 in page:
         url='http://view4u.co/'+url1
+        url=url.replace('//','/').replace(':/','://')
         xbmctools.addDir('[COLOR purple]>>'+'NeXt PaGe -> [/COLOR]',url,65,sonrakii,fann)
 #201
 def a6666(url):
