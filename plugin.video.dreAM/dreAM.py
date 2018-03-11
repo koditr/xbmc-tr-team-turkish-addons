@@ -301,7 +301,7 @@ def dizivideolinks(url,name):
             url='http://www.izle7.com/embed-'+url
             xbmctools.addDir('[COLOR beige]>>[/COLOR]'+'[COLOR gold]'+'Play'+'[/COLOR]',url,68,'','')
     xbmctools.addDir('[COLOR beige]>>[/COLOR]'+'[COLOR gold]'+'1 . Secenek '+'[/COLOR]',url,22,fann,fann)
-    if "canlidizihd6" in url:
+    if "http://www.canlihddiziler.net/" in url:
         link=get_url(url)
         soup = BeautifulSoup(link)
         panel = soup.findAll("div", {"id": "part"})
@@ -478,7 +478,7 @@ def ayrisdirma1(url):
             Baglanvideo(url,name,pid)
 #6
 def Sinema2():
-    url='http://www.yerlifilmiizle.net/'
+    url='http://www.yerlifilmiizle.org/'
     xbmctools.addDir('[COLOR yellow]Arama/Search[/COLOR]',url,44,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',url,43,yeniek,fann)
     link=get_url(url)

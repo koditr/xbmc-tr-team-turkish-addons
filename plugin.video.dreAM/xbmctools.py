@@ -628,6 +628,32 @@ def frame(url):
     req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
     response = urllib2.urlopen(req)
     link=response.read()
+    #--
+    link=get_url(url)
+    ply23=re.compile('src="https://oload.tv/embed/(.*?)"').findall(link)
+    for name in ply23:
+        name='https://oload.tv/embed/'+name
+        url=name
+        magix_player(name,url)
+    #--
+    ddizi11=re.compile('src="http://www.hergunizle1.com/player/oynat/(.*?)"').findall(link)
+    import requests as req
+    for url in ddizi11:
+        url='http://www.hergunizle1.com/player/oynat/'+url
+        import requests as req
+        headers = {
+        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+        "Accept":"*/*",
+        "Accept-Language":"en-US,en;q=0.5",
+        "Referer":"http://www.hergunizle1.com/",
+        "Connection":"keep-alive"
+        }
+        resp = req.get(url, allow_redirects=True, headers=headers)
+        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(resp.text)
+        for urlA,name in match:
+            urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
+            urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
     match=re.compile('class="c5"><p><iframe src="(.*?)"').findall(link)
     for url in match:
         dizividcal(url)
@@ -652,6 +678,7 @@ def frame(url):
                 match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
                 for a in match1:
                     url=a+'hls/,'+b+',.urlset/master.m3u8'
+                    url=url.replace('//','http://')
                     addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
                    
     matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
@@ -713,8 +740,7 @@ def frame(url):
         link=get_url(url)
         match=re.compile('contentURL.*?content\="(.*?)\"').findall(link)
         for url in match:
-            addLink('[COLOR gold] Tune >>  '+'[COLOR beige]'+'Ply'+'[/COLOR]'+'[/COLOR]',url+tk,'')
-                
+            addLink('[COLOR gold] Tune >>  '+'[COLOR beige]'+'Ply'+'[/COLOR]'+'[/COLOR]',url+tk,'')        
         
     ply2=re.compile('/playlist/(.*?).json"').findall(link)
     for url in ply2:
@@ -766,23 +792,6 @@ def frame(url):
         "Accept":"*/*",
         "Accept-Language":"en-US,en;q=0.5",
         "Referer":"http://ddizi1.com/",
-        "Connection":"keep-alive"
-        }
-        resp = req.get(url, allow_redirects=True, headers=headers)
-        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(resp.text)
-        for urlA,name in match:
-            urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
-            urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
-    ddizi11=re.compile('<iframe src="http://www.hergunizle1.com/player/(.*?)"').findall(link)
-    import requests as req
-    for url in ddizi11:
-        url='http://www.hergunizle1.com/player/'+url
-        headers = {
-        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
-        "Accept":"*/*",
-        "Accept-Language":"en-US,en;q=0.5",
-        "Referer":"http://www.hergunizle1.com/",
         "Connection":"keep-alive"
         }
         resp = req.get(url, allow_redirects=True, headers=headers)
