@@ -312,7 +312,7 @@ def dizivideolinks(url,name):
     try:
         link=get_url(url)
         soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "keremiya_part"})
+        panel = soup.findAll("div", {"id": "action-parts"})
         liste=BeautifulSoup(str(panel))
         match2=re.compile('<a href="(.*?)"><span>(.*?)</span>').findall(str(liste))
         for url,name2 in match2:
@@ -323,14 +323,14 @@ def dizivideolinks(url,name):
 
 #9
 def Dizi2():
-        url='http://www.ddizi1.com'
+        url='http://www.ddizim.com/'
         xbmctools.addDir('[COLOR red]>>>>>>>[/COLOR] [COLOR orange]Arama/Search[/COLOR]',url,25,aramaa,fann)
         xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,21,yeniek,fann)
         url1='http://www.ddizi1.com'
         link=get_url(url1)
         soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "blok-orta"},smartQuotesTo=None)
-        match1=re.compile('<li><a href="http://www.ddizi1.com/diziler/(.*?)/(.*?)-son-bolum-izle"').findall(str(panel))
+        panel = soup.findAll("div", {"class": "blok-liste"},smartQuotesTo=None)
+        match1=re.compile('<a href="http://www.ddizim.com/diziler\/(.*?)\/(.*?)\-son-bolum-izle"').findall(str(panel))
         for url,name in match1:
             url='http://www.ddizi1.com/diziler/'+url+"/"+name+'-son-bolum-izle'
             name=fix.decode_fix(name)
