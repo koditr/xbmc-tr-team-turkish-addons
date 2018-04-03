@@ -624,6 +624,7 @@ def ayrisdirm1(url):
 #22
 def frame(url):
     name='Play'
+    print "geldim"
     req = urllib2.Request(url)
     req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
     response = urllib2.urlopen(req)
@@ -667,18 +668,24 @@ def frame(url):
     for url in matcha:
         url='http://www.daily'+url
         dizividcal(url)
+    matchab=re.compile('src\="http://www.ddizi1.com/dm.php\?git\=(.*?)\?').findall(link)
+    for url in matchab:
+        url='http://www.dailymotion.com/embed/video/'+url
+        dizividcal(url)
     vidmoly=re.compile('vidmoly.me/(.*?)"').findall(link)
     for url in vidmoly:
         url='http://vidmoly.me/'+url
-        link=get_url(url)
-        match=re.compile('\|thumbs\|100\|(.*?)\|vid\|').findall(link)
+        link=get_url(url)#|thumbs.*?100\|xqx2odjilzokjiqbtexcnlavvokpjdpdrh4wppb3tffor6vxdampkuzgxihq|vid|
+        match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
         for b in match:
+            print b
             if match:
                 link=get_url(url)
                 match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                for a in match1:
+                                  #var spriteSheetUrl = "(.*?)i/01/00044/eazx3crm8io0_p.jpg"
+                for a in match1:#//64.wintercoole.tk/xqx2odjilzokjiqbtexcnlavvokpjdpdrh4wppb3tffor6vxdampkuzgxihq/v.mp4 #01|100|
                     url=a+b+'/v.mp4'
-                    url=url.replace('//','http://').replace('https:http://','https://')
+                    url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
                     addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
                    
     matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)

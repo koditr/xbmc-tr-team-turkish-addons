@@ -304,7 +304,7 @@ def dizivideolinks(url,name):
     if "http://www.canlihddiziler.net/" in url:
         link=get_url(url)
         soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"id": "part"})
+        panel = soup.findAll("div", {"class": "keremiya_part"})
         liste=BeautifulSoup(str(panel))
         match2=re.compile('a href="(.*?)"><span>(.*?)</span></a>').findall(str(liste))
         for url,name2 in match2:
@@ -312,7 +312,7 @@ def dizivideolinks(url,name):
     try:
         link=get_url(url)
         soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"id": "action-parts"})
+        panel = soup.findAll("div", {"id": "part"})
         liste=BeautifulSoup(str(panel))
         match2=re.compile('<a href="(.*?)"><span>(.*?)</span>').findall(str(liste))
         for url,name2 in match2:
@@ -326,7 +326,7 @@ def Dizi2():
         url='http://www.ddizim.com/'
         xbmctools.addDir('[COLOR red]>>>>>>>[/COLOR] [COLOR orange]Arama/Search[/COLOR]',url,25,aramaa,fann)
         xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,21,yeniek,fann)
-        url1='http://www.ddizi1.com'
+        url1='http://www.ddizim.com/'
         link=get_url(url1)
         soup = BeautifulSoup(link)
         panel = soup.findAll("div", {"class": "blok-liste"},smartQuotesTo=None)
@@ -478,11 +478,11 @@ def ayrisdirma1(url):
             Baglanvideo(url,name,pid)
 #6
 def Sinema2():
-    url='http://www.yerlifilmiizle.org/'
+    url='https://www.yerlifilmiizle.org/'
     xbmctools.addDir('[COLOR yellow]Arama/Search[/COLOR]',url,44,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',url,43,yeniek,fann)
     link=get_url(url)
-    match=re.compile('<a href="(.*?)" class="btn btn-outline term-button category"><i class=\'icon icon-hash\'></i><strong>(.*?)</strong> Fimleri</a>').findall(link)
+    match=re.compile('<li class="cat-item cat-item-.*?"><a href="(.*?)" title=".*?">(.*?)</a>\n</li>').findall(link)
     for url,name in match:
             xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',url,43,"",fann)
 #44
@@ -496,28 +496,25 @@ def Search2():
         Yenisinema2(url)                                                  
 #43
 def Yenisinema2(url):
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"calss": "col1 pull-left"},smartQuotesTo=None)
-        panel = soup.findAll("li", {"class": "yerlifilmlist film-filmleri"})
-        for i in range (len (panel)):
-                url=panel[i].find('a')['href']
-                thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-                name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-                name=name.replace('&#8211;',' - ').replace('&#8217;',' ').replace('&#038;',' ')
-                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
-        pages=re.compile('page-numbers current\'>.*?</span>\n<a class=\'page-numbers\' href=\'(.*?)\'>(.*?)</a>').findall(link)
-        for url,name in pages:
-            xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
+    link=get_url(url)
+    match1=re.compile('<img src="(.*?)" alt="(.*?)" /></a>\r\n</div>\r\n\r\n<div class="movie-details existing-details">\r\n<span class="movie-title">\r\n<a href="(.*?)"').findall(link)
+    for thumbnail,name,url in match1:
+        xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
+    pages=re.compile('<span class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
+    for url,name in pages:
+        xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
 
 #45
 def ayrisdirma2(url):
+    print url
+    urla=url
+    urla=urla.replace('-2/','/')
+    xbmctools.addDir('[COLOR lightyellow]'+'Tek Parca'+'[/COLOR]',urla,68,'','')
     link=get_url(url)
-    soup = BeautifulSoup(link)
-    panel=soup.find("ul", {"name": "part-system"})
-    liste=BeautifulSoup(str(panel))
-    match=re.compile('<a href="(.*?)"> <i class="fa fa-film"></i>\n(.*?)</a>').findall(str(liste))
+    match=re.compile('<a href="(.*?)"><div class="part ">\r\n.*?<div class=".*?">(.*?)</div>').findall(link)
     for url1,name in match:
+        print url
+        
         xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,68,'','')
 #68
 def framee(name,url):
@@ -525,8 +522,7 @@ def framee(name,url):
         link=get_url(url)
         import re
         match=re.compile("var video = '(.*?)'").findall(link)
-                         #http://two.inxy.co/mb_files/0354a9a5-Kordugum-136-Bolum.m3u8
-        for vid in match:#http://two.inxy.co/360p
+        for vid in match:
             vid=vid.replace('http://two.inxy.co','http://one.inxy.co/360p').replace('mb_files/','')
             vid=vid+"|referer=http://www.izle7.com/kanal7/izle-20967-ah-kalbim-24bolum.html"
             name='Izle7'
@@ -562,11 +558,13 @@ def framee(name,url):
                     else:
                         magix_player(name,url)
         else:
+            print url,"BB"
             if "yerlifilmiizle" in url:
                 link=get_url(url)
-                import re
-                pages=re.compile('<iframe src="(.*?)"').findall(link)
+                import re         #iframe src="(.*?)"
+                pages=re.compile('iframe src="(.*?)" width').findall(link)
                 for url in pages:
+                    print url
                     magix_player(name,url)
                 pagesa=re.compile('src="(.*?)" frameborder').findall(link)
                 for url in pagesa:
