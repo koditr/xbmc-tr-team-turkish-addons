@@ -506,15 +506,12 @@ def Yenisinema2(url):
 
 #45
 def ayrisdirma2(url):
-    print url
     urla=url
     urla=urla.replace('-2/','/')
     xbmctools.addDir('[COLOR lightyellow]'+'Tek Parca'+'[/COLOR]',urla,68,'','')
     link=get_url(url)
     match=re.compile('<a href="(.*?)"><div class="part ">\r\n.*?<div class=".*?">(.*?)</div>').findall(link)
     for url1,name in match:
-        print url
-        
         xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,68,'','')
 #68
 def framee(name,url):
@@ -558,23 +555,16 @@ def framee(name,url):
                     else:
                         magix_player(name,url)
         else:
-            print url,"BB"
             if "yerlifilmiizle" in url:
                 link=get_url(url)
-                import re         #iframe src="(.*?)"
+                import re
                 pages=re.compile('iframe src="(.*?)" width').findall(link)
                 for url in pages:
-                    print url
                     magix_player(name,url)
                 pagesa=re.compile('src="(.*?)" frameborder').findall(link)
                 for url in pagesa:
                     magix_player(name,url) 
 
-#1
-
-0
-
-#51
 
  
 def sembol_fix(x):
@@ -1075,9 +1065,9 @@ def magix_player(name,url):
         url=url.replace('&amp;autoplay=no','').replace('https://hqq.tv/player/embed_player.php?vid=','')
         vid=url
         xbmctools.resolve( vid)
-    elif "ok." in url:
-        url=url.replace('//','http://').replace('http:http://','http://')
-        xbmctools.magix_player(name,url)
+##    elif "ok." in url:
+##        url=url.replace('//','http://').replace('http:http://','http://')
+##        xbmctools.magix_player(name,url)
     else:
         UrlResolverPlayer = url
         playList.clear()
