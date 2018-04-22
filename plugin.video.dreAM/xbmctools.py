@@ -823,15 +823,15 @@ def frame(url):
             urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
             addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]','http://ddizim.com'+urlA+tk,'')
             
-    canlii1=re.compile('src="http://www.canlidizihd6.com/playerv5/oynat/(.*?)"').findall(link)
+    canlii1=re.compile('src="http://www.canlidizihd6.net/playerv5/oynat/(.*?)"').findall(link)
     import requests as req
     for url in canlii1:
-        url='http://www.canlidizihd6.com/playerv5/oynat/'+url
+        url='http://www.canlidizihd6.net/playerv5/oynat/'+url
         headers = {
         "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
         "Accept":"*/*",
         "Accept-Language":"en-US,en;q=0.5",
-        "Referer":"http://www.canlidizihd6.com/",
+        "Referer":"http://www.canlidizihd6.net/",
         "Connection":"keep-alive"
         }
         resp = req.get(url, allow_redirects=True, headers=headers)
@@ -840,6 +840,22 @@ def frame(url):
             urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
             urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
             addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+    canlii22=re.compile('src="http://www.canlidizihd6.net/playerv5/oynat/(.*?)"').findall(link)
+    import requests as req
+    for url in canlii22:
+        url='http://www.canlidizihd6.net/playerv5/oynat/'+url
+        headers = {
+        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+        "Accept":"*/*",
+        "Accept-Language":"en-US,en;q=0.5",
+        "Referer":"http://www.canlidizihd6.net/",
+        "Connection":"keep-alive"
+        }
+        resp = req.get(url, allow_redirects=True, headers=headers)
+        match=re.compile('file":"(.*?).m3u8", "type": "hls"').findall(resp.text)
+        for urlA in match:
+            name='M3-PLY'
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+'.m3u8'+tk,'')
     canlii2=re.compile('src="http://trdizi.tv/player/oynat/(.*?)"').findall(link)
     import requests as req
     for url in canlii2:

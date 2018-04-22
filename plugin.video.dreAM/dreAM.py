@@ -130,7 +130,7 @@ def Dizi1():
     xbmctools.addDir('[COLOR orange]>>>[/COLOR] [COLOR beige]KANAL D Dizileri[/COLOR]',url,13,yeniek,fann)
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal 7[/COLOR]',"http://www.izle7.com/kanal7/hint-dizileri",28,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,19,yeniek,fann)
-    xbmctools.addDir('[COLOR pink]>>[/COLOR] [COLOR pink]New * Enson Eklenen Diziler * New [/COLOR]',"http://www.canlidizihd6.com",19,yeniek,fann)
+    xbmctools.addDir('[COLOR pink]>>[/COLOR] [COLOR pink]New * Enson Eklenen Diziler * New [/COLOR]',"http://www.canlidizihd6.net/",19,yeniek,fann)
     
     link=get_url(url)
     match=re.compile('<li class="cat-item cat-item-.*?"><a href="(.*?)"').findall(link)
@@ -220,7 +220,7 @@ def de_get(name,url):
     xbmctools.yenical4(name,url)
 #19
 def Yeni(url):
-    if "http://www.canlidizihd6.com" in url:
+    if "http://www.canlidizihd6.net/" in url:
         link=get_url(url)
         soup = BeautifulSoup(link)
         panel = soup.findAll("div", {"class": "orta-ici"},smartQuotesTo=None)
