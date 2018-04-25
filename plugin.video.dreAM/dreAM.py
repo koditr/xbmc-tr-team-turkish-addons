@@ -99,7 +99,7 @@ class windows():
 #2
 def Sinema():
         xbmctools.addDir('[COLOR gold]! EvrenselFilm * New * ![/COLOR]',"Sinema1()",5,'http://dreamtr.club/resimler/Sinema1.png',fann)
-        xbmctools.addDir('[COLOR gold]! Yerlifilmiizle.Net * New * ![/COLOR]',"Sinema2()",6,'http://dreamtr.club/resimler/Sinema2.png',fann)
+        xbmctools.addDir('[COLOR gold]! yerlifilmiizle.org * New * ![/COLOR]',"Sinema2()",6,'http://dreamtr.club/resimler/Sinema2.png',fann)
         xbmc.executebuiltin('Container.SetViewMode(500)')
 #3
 def Dizi():
@@ -149,9 +149,6 @@ def Kanalddizi():
         name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
         thumbnail=panel[i].find('img')['data-src'].encode('utf-8', 'ignore')
         thumbnail='http:'+thumbnail
-##        if "gulizar" in url: pass
-##        elif "hickirik" in url: pass
-##        else:
         url='http://www.kanald.com.tr'+url+'/bolumler'
         xbmctools.addDir('[COLOR orange]>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,7,thumbnail,thumbnail)
 #7            
@@ -487,7 +484,7 @@ def Sinema2():
             xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',url,43,"",fann)
 #44
 def Search2():
-    sinema="http://www.yerlifilmiizle.net/?s="
+    sinema="http://www.yerlifilmiizle.org/?s="
     keyboard = xbmc.Keyboard("", 'Search', False)
     keyboard.doModal()
     if keyboard.isConfirmed():

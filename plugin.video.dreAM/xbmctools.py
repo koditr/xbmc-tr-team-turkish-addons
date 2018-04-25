@@ -667,7 +667,7 @@ def frame(url):
     for url in matcha:
         url='http://www.daily'+url
         dizividcal(url)
-    matchab=re.compile('src\="http://www.ddizi1.com/dm.php\?git\=(.*?)\?').findall(link)
+    matchab=re.compile('\/dm.php\?git\=(.*?)\?').findall(link)
     for url in matchab:
         url='http://www.dailymotion.com/embed/video/'+url
         dizividcal(url)
@@ -804,6 +804,13 @@ def frame(url):
             urlA=urlA.replace("http:\\/\\/redirector.googlevideo.com\\",'')
             urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
             addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+        matchA=re.compile('src="(.*?).m3u8" type="').findall(resp.text)
+        for urlA in matchA:
+            link=get_url(urlA+'.m3u8')
+            match1=re.compile('RESOLUTION=1280x720,NAME="720"\n(.*?)\#cell=core\n\#').findall(link)
+            for urlAA in match1:
+                name='720 PxL Player'
+                addLink('[COLOR gold]'+name+'[/COLOR]',urlAA,'')
     ddizi12=re.compile('src="\/matplayer\/neez\/(.*?)"').findall(link)
     import requests as req
     for url in ddizi12:
@@ -854,8 +861,12 @@ def frame(url):
         resp = req.get(url, allow_redirects=True, headers=headers)
         match=re.compile('file":"(.*?).m3u8", "type": "hls"').findall(resp.text)
         for urlA in match:
-            name='M3-PLY'
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+'.m3u8'+tk,'')
+            urlA=urlA+'.m3u8'
+            link=get_url(urlA)
+            match1=re.compile('1280x720,NAME="720"\n(.*?)\#cell=core&ab_nme=2\n').findall(link)
+            for urlAA in match1:
+                name='720 PxL Player'
+                addLink('[COLOR gold]'+name+'[/COLOR]',urlAA,'')
     canlii2=re.compile('src="http://trdizi.tv/player/oynat/(.*?)"').findall(link)
     import requests as req
     for url in canlii2:
