@@ -1,6 +1,6 @@
-'''
-    urlresolver XBMC Addon
-    Copyright (C) 2016 Gujal
+"""
+urlresolver XBMC Addon
+Copyright (C) 2011 t0mm0
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -14,17 +14,17 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 from lib import helpers
-from urlresolver.resolver import UrlResolver, ResolverError
+from __generic_resolver__ import GenericResolver
 
-class HDvidResolver(UrlResolver):
-    name = 'HDvid'
-    domains = ['hdvid.tv']
-    pattern = '(?://|\.)(hdvid\.tv)/(?:embed-)?([0-9a-zA-Z]+)'
-    
+class GetviResolver(GenericResolver):
+    name = "getvi"
+    domains = ["getvi.tv"]
+    pattern = '(?://|\.)(getvi\.tv)/embed/([0-9A-Za-z]+)'
+
     def get_media_url(self, host, media_id):
-        return helpers.get_media_url(self.get_url(host, media_id), patterns=['''file:\s*["'](?P<url>[^"']+)''']).replace(' ', '%20')
+        return helpers.get_media_url(self.get_url(host, media_id),patterns=['''\[(?P<label>[0-9p]+)\](?P<url>https://www.getvi.tv/(?:[^'",]+).mp4/)'''], generic_patterns=False).replace(' ', '%20')
 
     def get_url(self, host, media_id):
-        return self._default_get_url(host, media_id)
+        return self._default_get_url(host, media_id, template='https://www.{host}/embed/{media_id}/')

@@ -1,6 +1,9 @@
 """
+    OVERALL CREDIT TO:
+        t0mm0, Eldorado, VOINAGE, BSTRDMKR, tknorris, smokdpi, TheHighway
+
     urlresolver XBMC Addon
-    Copyright (C) 2011 t0mm0
+    Copyright (C) 2018 jsergio
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +20,11 @@
 """
 from __generic_resolver__ import GenericResolver
 
-class Mp4EngineResolver(GenericResolver):
-    name = "mp4engine"
-    domains = ["mp4engine.com"]
-    pattern = '(?://|\.)(mp4engine\.com)/(?:embed-)?([0-9a-zA-Z]+)(?:-[0-9]x[0-9].html)?'
+
+class FileBeboResolver(GenericResolver):
+    name = 'filebebo'
+    domains = ['filebebo.com']
+    pattern = '(?://|\.)(filebebo\.com)/(?:e/|d/)?([a-zA-Z0-9]{12})'
+
+    def get_url(self, host, media_id):
+        return self._default_get_url(host, media_id, template='https://{host}/e/{media_id}')
