@@ -488,22 +488,18 @@ def yenical4(name,url):
 #--
 #99
 def magix_player(name,url):
-        if "www.dailymotion.com" in url:
-            fix.daily_sec(name,url)
-##        elif "mail." in url:
-##            MailRu_Player(url)
-##        elif "ok." in url:
-##            ok_ru(url)
-        else:
-            UrlResolverPlayer = url
-            playList.clear()
-            media = urlresolver.HostedMediaFile(UrlResolverPlayer)
-            source = media
-            if source:
-                url = source.resolve()
-                addLink(name,url,'')
-                playlist_yap(playList,name,url)
-                xbmcPlayer.play(playList)
+    if "www.dailymotion.com" in url:
+        fix.daily_sec(name,url)
+    else:
+        UrlResolverPlayer = url
+        playList.clear()
+        media = urlresolver.HostedMediaFile(UrlResolverPlayer)
+        source = media
+        if source:
+            url = source.resolve()
+            addLink(name,url,'')
+            playlist_yap(playList,name,url)
+            xbmcPlayer.play(playList)
 #--
 #29
 def ayrisdirm1(url):
@@ -621,6 +617,16 @@ def ayrisdirm1(url):
         name='Play'
         url=url.replace('&amp;', '&').replace('&#038;', '&').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/') 
         addDir('[COLOR yellow]'+name+'[/COLOR]',url,1030,"",'')
+#17
+def Kanalddizivideo(url,name):
+    link=get_url(url)
+    match=re.compile('data.*?-id="(.*?)"').findall(link)
+    url2='https://www.kanald.com.tr/actions/content/media/'+match[0]
+    link2=get_url(url2)
+    match2=re.compile('"ServiceUrl":"(.+?)","SecurePath":"(.+?)?key=.+?"').findall(link2)
+    for url,code in match2:
+        url=url+code+'key=93a08dbbdd93b00670860974d0f63a6d'
+        yenical4(name,url+tk)
 #22
 def frame(url):
     name='Play'
@@ -629,12 +635,36 @@ def frame(url):
     response = urllib2.urlopen(req)
     link=response.read()
     #--
-    link=get_url(url)
-    ply23=re.compile('src="https://oload.tv/embed/(.*?)"').findall(link)
-    for name in ply23:
-        name='https://oload.tv/embed/'+name
-        url=name
-        magix_player(name,url)
+    #--
+    if "dizihd3" in url:
+        
+        link=get_url(url)
+        matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
+        for vid in matchqq:
+            resolve( vid)
+        ply22=re.compile("<iframe src\='(.*?)'").findall(link)
+        for name in ply22:
+            if "hqq" in name:
+                pass
+            else:
+                
+                url=name
+                magix_player(name,url)
+        ply222=re.compile('<iframe src\="(.*?)"').findall(link)
+        for name in ply222:
+            if "hqq" in name:
+                pass
+            else:
+                
+                url=name
+                magix_player(name,url)
+        ply223=re.compile('href="https://www.kanald.com.tr/(.*?)">').findall(link)
+        for name in ply223:
+            name='https://www.kanald.com.tr/'+name
+            url=name
+            Kanalddizivideo(url,name)
+    else:
+        print "cikis"
     #--
     ddizi11=re.compile('src="http://www.hergunizle1.com/player/oynat/(.*?)"').findall(link)
     import requests as req
@@ -681,7 +711,7 @@ def frame(url):
                 link=get_url(url)
                 match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
                 for a in match1:
-                    url=a+b+'/v.mp4'
+                    url=a+'hls/,'+b+',.urlset/master.m3u8'
                     url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
                     addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
                    
@@ -777,15 +807,10 @@ def frame(url):
             vid=vid+'.mp4'
             name='Izle7'
             addLink(name,vid,'')
-    itt=re.compile('src="https:\/\/ittir.in\/v\/(.*?)"').findall(link)
+    itt=re.compile('src="https://www.rapidvideo.com/e/(.*?)"').findall(link)
     for url in itt:
-        url=url.replace('https://ittir.in/v/','')
-        url='http://dreamtr.club/a_n_d/ornek.php?no='+url
-        link=get_url(url)
-        match=re.compile('file": ".*?\.googlevideo.com(.*?)",\n                "label": "(.*?)",\n                "type": "mp4"').findall(link)
-        for urlA,name in match:
-            urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]','https://redirector.googlevideo.com'+urlA,'')
+        url='https://www.rapidvideo.com/e/'+url
+        magix_player(name,url)
     ddizi1=re.compile('ddizim.com/player\/oynat\/(.*?)"').findall(link)
     import requests as req
     for url in ddizi1:
@@ -887,6 +912,11 @@ def frame(url):
     ply2=re.compile('openload.co/embed/(.*?)"').findall(link)
     for name in ply2:
         name='https://openload.co/embed/'+name
+        url=name
+        magix_player(name,url)
+    ply22=re.compile('src="https://oload.site/embed/(.*?)"').findall(link)
+    for name in ply22:
+        name='https://oload.site/embed/'+name
         url=name
         magix_player(name,url)
         
