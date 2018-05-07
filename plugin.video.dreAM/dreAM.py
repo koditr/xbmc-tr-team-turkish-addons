@@ -485,46 +485,46 @@ def dizivideolinks2(url,name):
           
 #5
 def Sinema1():
-    urlY="http://evrenselfilmlerim.com/"
-    xbmctools.addDir('[COLOR yellow]Arama/Search[/COLOR]',urlY,38,aramaa,fann)
+    urlY="http://evrenselfilmlerim.net/"
+    xbmctools.addDir('[COLOR pink]# Film Ara / Search NEW #[/COLOR]',urlY,38,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',urlY,203,yeniek,fann)
     link=get_url(urlY)
     soup = BeautifulSoup(link)
-    panel = soup.findAll("div", {"class": "widget categories"})
+    panel = soup.findAll("ul", {"class": "children"})
     liste=BeautifulSoup(str(panel))
-    match2=re.compile('class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-.*?"><a href="(.*?)"><i style=".*?" class=".*?"></i>(.*?)</a></li>').findall(str(liste))
+    match2=re.compile('<li class="cat-item cat-item-.*?"><a href="http://evrenselfilmlerim.net/kategori/turler/(.*?)">(.*?)</a>').findall(str(liste))
     for url,name in match2:
-        xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,67,'','')  
+        xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',"http://evrenselfilmlerim.net/kategori/turler/"+url,203,'','')  
 #38
 def Aramasinema1():#
-    sinema="http://evrenselfilmler.org"
+    sinema="http://evrenselfilmlerim.net"
     keyboard = xbmc.Keyboard("", 'Search', False)
     keyboard.doModal()
     if keyboard.isConfirmed():
         query = keyboard.getText()
         url = (sinema+'/?s='+query)
-        sinemaRecent12(url)
+        sinema1recent(url)
 #67
-def sinemaRecent12(url):
-    link=get_url(url)
-    soup = BeautifulSoup(link)
-    panel = soup.findAll("article", {"class": "films"},smartQuotesTo=None)
-    panel = soup.findAll("div", {"class": "m-box"})
-    for i in range (len (panel)):
-        url=panel[i].find('a')['href']
-        thumbnail=panel[i].find('img')['src']
-        name=panel[i].find('img')['title'].encode('utf-8', 'ignore')
-        name=name.replace('&#8211;','&').replace('&#8217;','')
-        xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,200,thumbnail,thumbnail)
-    page=re.compile('current\'>.*?</span><a href=\'(.*?)\' class=\'inactive\' >(.*?)</a>').findall(link)
-    for url1,name in page:
-        xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url1,67,sonrakii,fann)
+##def sinemaRecent12(url):
+##    link=get_url(url)
+##    soup = BeautifulSoup(link)
+##    panel = soup.findAll("article", {"class": "films"},smartQuotesTo=None)
+##    panel = soup.findAll("div", {"class": "m-box"})
+##    for i in range (len (panel)):
+##        url=panel[i].find('a')['href']
+##        thumbnail=panel[i].find('img')['src']
+##        name=panel[i].find('img')['title'].encode('utf-8', 'ignore')
+##        name=name.replace('&#8211;','&').replace('&#8217;','')
+##        xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,200,thumbnail,thumbnail)
+##    page=re.compile('current\'>.*?</span><a href=\'(.*?)\' class=\'inactive\' >(.*?)</a>').findall(link)
+##    for url1,name in page:
+##        xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url1,67,sonrakii,fann)
 #203       
 def sinema1recent(url):
     link=get_url(url)
     soup = BeautifulSoup(link)
-    panel = soup.findAll("article", {"class": "films"},smartQuotesTo=None)
-    panel = soup.findAll("div", {"class": "m-box"})
+    panel = soup.findAll("article", {"class": "fix-film-v2_item fix_home clearfix list_items"},smartQuotesTo=None)
+    panel = soup.findAll("div", {"class": "movie-poster"})
     for i in range (len (panel)):
         url=panel[i].find('a')['href']
         thumbnail=panel[i].find('img')['src']
@@ -534,7 +534,7 @@ def sinema1recent(url):
             pass
         else:
             xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,200,thumbnail,thumbnail)
-    page=re.compile('current\'>.*?</span><a href=\'(.*?)\' class=\'inactive\' >(.*?)</a>').findall(link)
+    page=re.compile('class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
     for url1,name in page:
         xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url1,203,sonrakii,fann)
         
@@ -542,12 +542,12 @@ def sinema1recent(url):
 def ayyris(url):
     link=get_url(url)
     soup = BeautifulSoup(link)
-    panel=soup.find("section", {"class": "film-quailty"})
+    panel=soup.find("div", {"class": "keremiya_part"})
     liste=BeautifulSoup(str(panel))
     name="Secenek - 1"
     url=url
     xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,68,"","")
-    match=re.compile('<a href="(.*?)">(.*?)</a>').findall(str(liste))
+    match=re.compile('<a href="(.*?)"><span>(.*?)</span>').findall(str(liste))
     for url,name in match:
         if "javascript" in url:
             pass
@@ -620,10 +620,10 @@ def framee(name,url):
         if "evrensel" in url:
             link=get_url(url)
             soup = BeautifulSoup(link)
-            panel=soup.find("div", {"class": "tab-content"})
+            panel=soup.find("div", {"class": "autosize-container"})
             liste=BeautifulSoup(str(panel))
             import re
-            match1=re.compile('\="(.*?)\"').findall(str(panel))
+            match1=re.compile('\="(.*?)"').findall(str(panel))
             for url in match1:
                 if "javascript" in url:
                     pass
@@ -634,15 +634,10 @@ def framee(name,url):
                         if "vidmoly" in url:
                             url=url.replace('//','http://')
                             link=get_url(url)
-                            match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
-                            for b in match:
-                                if match:
-                                    link=get_url(url)
-                                    match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                                    for a in match1:
-                                        url=a+'hls/,'+b+',.urlset/master.m3u8'
-                                        url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                                        xbmctools.addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
+                            match1=re.compile('var player \= new Clappr.Player\(\{\n  sources\: \["(.*?)"\,').findall(link)
+                            for url in match1:
+                                url=url.replace('//','http://')
+                                xbmctools.addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
                         else:
                             magix_player(name,url)
         else:
@@ -1237,7 +1232,7 @@ elif mode==60: INFOyet2(url)
 elif mode==62: AlmanS()
 elif mode==65: Yeni2alman1(url)
 elif mode==66: Linkleralman1(url)
-elif mode==67: sinemaRecent12(url)
+##elif mode==67: sinemaRecent12(url)
 elif mode==68: framee(name,url)
 elif mode==76: genelarama()
 elif mode==78: RecentyetA(url)

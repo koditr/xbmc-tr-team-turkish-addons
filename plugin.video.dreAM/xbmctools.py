@@ -705,15 +705,9 @@ def frame(url):
     for url in vidmoly:
         url='http://vidmoly.me/'+url
         link=get_url(url)
-        match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
-        for b in match:
-            if match:
-                link=get_url(url)
-                match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                for a in match1:
-                    url=a+'hls/,'+b+',.urlset/master.m3u8'
-                    url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                    addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
+        match1=re.compile('var player \= new Clappr.Player\(\{\n  sources\: \["(.*?)"\,').findall(link)
+        for url in match1:
+            addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
                    
     matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
     for vid in matchqq:
