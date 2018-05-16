@@ -488,6 +488,7 @@ def yenical4(name,url):
 #--
 #99
 def magix_player(name,url):
+    print "Magix"
     if "www.dailymotion.com" in url:
         fix.daily_sec(name,url)
     else:
@@ -713,7 +714,8 @@ def frame(url):
                 for a in match1:
                     url=a+'hls/,'+b+',.urlset/master.m3u8'
                     url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                    addLink('[COLOR gold]>  '+'[COLOR beige]'+'Vidmoly'+'[/COLOR]'+'[/COLOR]',url,'')
+                    name='ViDmOlY'
+                    yenical4(name,url)
                    
     matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
     for vid in matchqq:
@@ -722,8 +724,8 @@ def frame(url):
     for url in matchaa:
         url='http://www.youtube.com/embed/'+url
         name='Play-Youtube'
-        magix_player(name,url)
-    matchaa=re.compile('youtube.com\/embed\/(.*?)"').findall(link)
+        magix_player(name,url)#https://www.youtube.com/embed/4IsivLe6nd8
+    matchaa=re.compile('src="https://www.youtube.com/embed/(.*?)"').findall(link)
     for url in matchaa:
         url='http://www.youtube.com/embed/'+url
         name='Play-Youtube'
@@ -804,9 +806,9 @@ def frame(url):
         link=get_url(url)
         match=re.compile("tp_file = '(.*?).mp4'").findall(link)
         for vid in match:
-            vid=vid+'.mp4'
+            url=vid+'.mp4'
             name='Izle7'
-            addLink(name,vid,'')
+            yenical4(name,url)
     itt=re.compile('src="https://www.rapidvideo.com/e/(.*?)"').findall(link)
     for url in itt:
         url='https://www.rapidvideo.com/e/'+url
@@ -1125,12 +1127,13 @@ def resolve( vid):
                 headers['x-requested-with'] = 'XMLHttpRequest'
                 data = request("http://hqq.watch/player/get_md5.php?" + urllib.urlencode(get_data), headers)
                 jsonData = json.loads(data)
-                encodedm3u = jsonData['file']
+                encodedm3u = jsonData#['file']
                 decodedm3u = _decode2(encodedm3u.replace('#', ''))
                 decodedm3u = decodedm3u.replace("?socket", ".mp4.m3u8")
                 fake_agent = user_agent
                 name='Hqq_Player'
                 url=decodedm3u  + '|' + fake_agent
+                print url,"WW"
                 addLink(name,url,'')
                     
 
