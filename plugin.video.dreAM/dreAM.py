@@ -115,7 +115,7 @@ def canliyayin():
         xbmctools.addDir('[COLOR pink]New* 2018 / Canli Tv 1*[/COLOR]',"Canli1()",11,'http://dreamtr.club/resimler/Canlitv1.png',fann)
         xbmctools.addDir('[COLOR pink]New* 2018 / Canli Tv 2*[/COLOR]',"Canli2()",12,'http://dreamtr.club/resimler/Canlitv2.png',fann)
         xbmctools.addDir('[COLOR yellow]New* 2018 / Canli Tv 3*[/COLOR]',"Canli3()",18,'http://dreamtr.club/resimler/Canlitv3.png',fann)
-        xbmctools.addDir('[COLOR orange]* Canli Tv 4 * New *[/COLOR]',"Canli4()",27,'http://dreamtr.club/resimler/Canlitv4.png',fann)
+        xbmctools.addDir('[COLOR orange]# 2018 year * Canli Tv 4 * New *[/COLOR]',"Canli4()",27,'http://dreamtr.club/resimler/Canlitv4.png',fann)
         xbmc.executebuiltin('Container.SetViewMode(500)')
 
 #--#
@@ -225,8 +225,8 @@ def Ddizi12():
 #27
 def Canli4():
     urlD='http://212.224.109.109/S2/HLS_LIVE/kanald/500/prog_index.m3u8'
-    name='>> Kanal D'
-    xbmctools.addLink(name,urlD,'')
+    name='Kanal D'
+    xbmctools.addLink('[COLOR beige][COLOR orange]>>[/COLOR]  '+name+'[/COLOR]',urlD,'')
     url='txt.nig/kabmaZa/bulc.rtmaerd//:ptth'[::-1]
     link=get_url(url)
     match=re.compile('<title>(.*?)--(.*?)</title>\n.*?<link>(.*?)\?.*?</link>').findall(link)
@@ -241,9 +241,10 @@ def de_get(name,url):
     xbmcPlayer = xbmc.Player()
     xbmcPlayer.stop()
     import requests as requests#halktv
-    url1='882=di?php.hctaw/moc.okinig.www//:ptth'[::-1]
+    url1='822=di?php.hctaw/moc.okinig.www//:ptth'[::-1]
+    print url1
     link=get_url(url1)
-    match=re.compile('src=".*?\?wmsAuthSign\=(.*?)">').findall(link)
+    match=re.compile('source:".*?\?wmsAuthSign\=(.*?)"').findall(link)
     for cd in match:
         print "hosgeldin"
     url=url+'?wmsAuthSign='+cd
@@ -511,6 +512,7 @@ def Sinema1():
     urlY="http://evrenselfilmlerim.net/"
     xbmctools.addDir('[COLOR pink]# Film Ara / Search NEW #[/COLOR]',urlY,38,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',urlY,203,yeniek,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR gold]BollyWood Filmleri [/COLOR]',"http://evrenselfilmlerim.net/kategori/turler/hindistan-filmleri",203,yeniek,fann)
     link=get_url(urlY)
     soup = BeautifulSoup(link)
     panel = soup.findAll("ul", {"class": "children"})
@@ -635,7 +637,7 @@ def Yenisinema2(url):
         panel = soup.findAll("div", {"class": "col-md-6"})
         for i in range (len (panel)):
             url=panel[i].find('a')['href']
-            thumbnail=panel[i].find('img')['src']
+            thumbnail=panel[i].find('img')['data-src']
             name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
             name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
             xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
@@ -710,8 +712,129 @@ def framee(name,url):
             if "jetfilm" in url:
                 link=get_url(url)
                 import re
+                match1q=re.compile('https\://estream.to\/embed(.*?)"').findall(link)
+                for url in match1q:
+                    url='https://estream.to/embed'+url
+                    magix_player(name,url)
+                match1qq=re.compile('https://watchvideo15.us/embed(.*?)"').findall(link)
+                for url in match1qq:
+                    url='https://watchvideo15.us/embed'+url
+                    magix_player(name,url)
+                match1=re.compile('src=\'//ok.ru/(.*?)\'').findall(link)
+                for url in match1:
+                    url='http://ok.ru/videoembed/'+url
+                    magix_player(name,url)
+                match1b=re.compile(' src="//ok.ru/videoembed/(.*?)" ').findall(link)
+                for url in match1b:
+                    url='http://ok.ru/videoembed/'+url
+                    magix_player(name,url)
+                match1a=re.compile('src=\'https://openload.co/(.*?)\'').findall(link)
+                for url in match1a:
+                    url='https://openload.co/'+url
+                    magix_player(name,url)
+                match1aa=re.compile('src=\'https://streamango.com/(.*?)\'').findall(link)
+                for url in match1aa:
+                    url='https://streamango.com/'+url
+                    magix_player(name,url)
+                match1aaa=re.compile('src=\'https://estream.to/(.*?)\'').findall(link)
+                for url in match1aaa:
+                    url='https://estream.to/'+url
+                    magix_player(name,url)
+                match1aaaa=re.compile('src=\'https://streamplay.to/(.*?)\'').findall(link)
+                for url in match1aaaa:
+                    url='https://streamplay.to/'+url
+                    magix_player(name,url)
                 pages=re.compile("<iframe src='(.*?)'").findall(link)
                 for url in pages:
+                    if "cdn.com" in url:
+                        import requests as req
+                        headers = {
+                        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+                        "Accept":"*/*",
+                        "Accept-Language":"en-US,en;q=0.5",
+                        "Referer":"https://jetfilmizle.biz",
+                        "Connection":"keep-alive"
+                        } 
+                        resp = req.get(url, allow_redirects=True, headers=headers)
+                        import re
+                        match=re.compile('file": "(.*?)"').findall(resp.text)
+                        for url in match:
+                            xbmctools.addLink('[COLOR gold] Play MP4 >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+                        matchbb=re.compile('file:"(.*?)"').findall(resp.text)
+                        for url in matchbb:
+                            xbmctools.addLink('[COLOR gold] Play MP4 >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+                        matchaa=re.compile('src="(.*?)"').findall(resp.text)
+                        for url in matchaa:
+                            if "vidmoly" in url:
+                                
+                                url=url.replace('//vidmoly','http://vidmoly')
+                                link=get_url(url)
+                                match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
+                                for b in match:
+                                    if match:
+                                        link=get_url(url)
+                                        match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
+                                        for a in match1:
+                                            url=a+'hls/,'+b+',.urlset/master.m3u8'
+                                            url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
+                                            yenical44(name,url)
+                            if "assets/js" in url:
+                                pass
+                            else:
+                                if "vidlo" in url:
+                                    magix_player(name,url)
+                                else:
+                                    if "rapid" in url:
+                                        magix_player(name,url)
+                                    else:
+                                        if "google" in url:
+                                            magix_player(name,url)
+                                        else:
+                                            if "my.mail" in url:
+                                                magix_player(name,url)
+                                            else:
+                                                if "cdn.com" in url:
+                                                    link=get_url(url)
+                                                    match1=re.compile('file: "(.*?).mp4"').findall(link)
+                                                    for url in match1:
+                                                        yenical44(name,url+'.mp4'+tk)
+                        matchaa=re.compile("src='(.*?)'").findall(resp.text)
+                        for url in matchaa:
+                            if "vidmoly" in url:
+                                
+                                url=url.replace('//vidmoly','http://vidmoly')
+                                link=get_url(url)
+                                match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
+                                for b in match:
+                                    if match:
+                                        link=get_url(url)
+                                        match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
+                                        for a in match1:
+                                            url=a+'hls/,'+b+',.urlset/master.m3u8'
+                                            url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
+                                            yenical44(name,url)
+                            if "assets/js" in url:
+                                pass
+                            else:
+                                if "vidlo" in url:
+                                    magix_player(name,url)
+                                else:
+                                    if "rapid" in url:
+                                        magix_player(name,url)
+                                    else:
+                                        if "google" in url:
+                                            magix_player(name,url)
+                                        else:
+                                            if "my.mail" in url:
+                                                magix_player(name,url)
+                                            else:
+                                                if "cdn.com" in url:
+                                                    link=get_url(url)
+                                                    match1=re.compile('file: "(.*?).mp4"').findall(link)
+                                                    for url in match1:
+                                                        yenical44(name,url+'.mp4'+tk)
+                pages1=re.compile('<iframe src="(.*?)"').findall(link)
+                for url in pages1:
                     if "cdn.com" in url:
                         import requests as req
                         headers = {
@@ -756,31 +879,49 @@ def framee(name,url):
                                         if "google" in url:
                                             magix_player(name,url)
                                         else:
-                                            if "cdn.com" in url:
-                                                link=get_url(url)
-                                                match1=re.compile('file: "(.*?).mp4"').findall(link)
-                                                for url in match1:
-                                                    yenical44(name,url+'.mp4'+tk)
-                match1=re.compile('src=\'//ok.ru/(.*?)\'').findall(link)
-                for url in match1:
-                    url='http://ok.ru/'+url
-                    magix_player(name,url)
-                match1a=re.compile('src=\'https://openload.co/(.*?)\'').findall(link)
-                for url in match1a:
-                    url='https://openload.co/'+url
-                    magix_player(name,url)
-                match1aa=re.compile('src=\'https://streamango.com/(.*?)\'').findall(link)
-                for url in match1aa:
-                    url='https://streamango.com/'+url
-                    magix_player(name,url)
-                match1aaa=re.compile('src=\'https://estream.to/(.*?)\'').findall(link)
-                for url in match1aaa:
-                    url='https://estream.to/'+url
-                    magix_player(name,url)
-                match1aaaa=re.compile('src=\'https://streamplay.to/(.*?)\'').findall(link)
-                for url in match1aaaa:
-                    url='https://streamplay.to/'+url
-                    magix_player(name,url)
+                                            if "my.mail" in url:
+                                                magix_player(name,url)
+                                            else:
+                                                if "cdn.com" in url:
+                                                    link=get_url(url)
+                                                    match1=re.compile('file: "(.*?).mp4"').findall(link)
+                                                    for url in match1:
+                                                        yenical44(name,url+'.mp4'+tk)
+                        matchaa=re.compile("src='(.*?)'").findall(resp.text)
+                        for url in matchaa:
+                            if "vidmoly" in url:
+                                
+                                url=url.replace('//vidmoly','http://vidmoly')
+                                link=get_url(url)
+                                match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
+                                for b in match:
+                                    if match:
+                                        link=get_url(url)
+                                        match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
+                                        for a in match1:
+                                            url=a+'hls/,'+b+',.urlset/master.m3u8'
+                                            url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
+                                            yenical44(name,url)
+                            if "assets/js" in url:
+                                pass
+                            else:
+                                if "vidlo" in url:
+                                    magix_player(name,url)
+                                else:
+                                    if "rapid" in url:
+                                        magix_player(name,url)
+                                    else:
+                                        if "google" in url:
+                                            magix_player(name,url)
+                                        else:
+                                            if "my.mail" in url:
+                                                magix_player(name,url)
+                                            else:
+                                                if "cdn.com" in url:
+                                                    link=get_url(url)
+                                                    match1=re.compile('file: "(.*?).mp4"').findall(link)
+                                                    for url in match1:
+                                                        yenical44(name,url+'.mp4'+tk)
 
 
 
