@@ -52,26 +52,26 @@ def acilis():
         pass
     
 def CATEGORIES():
-         acilis()
-         threadName=[]
-         delay=[]
-         mem.baslamak(threadName, delay)
-         mem.playlist3()
-         gizlilik = __settings__.getSetting( "adult" )
-         gizlilik2 = __settings__.getSetting( "code" )
-         gizlilik3 = __settings__.getSetting( "code2" )
-         gizlilik4 = __settings__.getSetting( "adult2" )
-         xbmctools.addDir('[COLOR blue]SiNEMALAR[/COLOR]',"Sinema()",2,'http://dreamtr.club/resimler/Sinemalar.png',fann)
-         xbmctools.addDir('[COLOR pink]DiZiLER[/COLOR]',"Dizi()",3,'http://dreamtr.club/resimler/Diziler.png',fann)
-         xbmctools.addDir('[COLOR yellow]CANLI YAYINLAR[/COLOR]',"canliyayin()",4,'http://dreamtr.club/resimler/CanliTVler.png',fann)
-         xbmctools.addDir('[COLOR yellow]DreamTR Radyolar[/COLOR]',"radyo()",105,'http://dreamtr.club/resimler/Radyo.png',fann)
-         xbmctools.addDir('[COLOR grey]ALMAN Sinema[/COLOR]',"Alman()",62,'http://dreamtr.club/resimler/almanlar.png',fann)
-         xbmctools.addDir('[COLOR grey]DREAM AYARLAR[/COLOR]',"Ayarlar()",2000,'http://dreamtr.club/resimler/ayarlar.png',fann)
-         if gizlilik == "false" or gizlilik2 != gizlilik3 or gizlilik4 == "false":
-             pass
-         else:
-             xbmctools.addDir('[COLOR red]+18[/COLOR]',"yetiskin()",16,'http://dreamtr.club/resimler/adult1.png',fann)
-         xbmc.executebuiltin('Container.SetViewMode(500)')
+     acilis()
+     threadName=[]
+     delay=[]
+     mem.baslamak(threadName, delay)
+     mem.playlist3()
+     gizlilik = __settings__.getSetting( "adult" )
+     gizlilik2 = __settings__.getSetting( "code" )
+     gizlilik3 = __settings__.getSetting( "code2" )
+     gizlilik4 = __settings__.getSetting( "adult2" )
+     xbmctools.addDir('[COLOR blue]SiNEMALAR[/COLOR]',"Sinema()",2,'http://dreamtr.club/resimler/Sinemalar.png',fann)
+     xbmctools.addDir('[COLOR pink]DiZiLER[/COLOR]',"Dizi()",3,'http://dreamtr.club/resimler/Diziler.png',fann)
+     xbmctools.addDir('[COLOR yellow]CANLI YAYINLAR[/COLOR]',"canliyayin()",4,'http://dreamtr.club/resimler/CanliTVler.png',fann)
+     xbmctools.addDir('[COLOR yellow]DreamTR Radyolar[/COLOR]',"radyo()",105,'http://dreamtr.club/resimler/Radyo.png',fann)
+     xbmctools.addDir('[COLOR grey]ALMAN Sinema[/COLOR]',"Alman()",62,'http://dreamtr.club/resimler/almanlar.png',fann)
+     xbmctools.addDir('[COLOR grey]DREAM AYARLAR[/COLOR]',"Ayarlar()",2000,'http://dreamtr.club/resimler/ayarlar.png',fann)
+     if gizlilik == "false" or gizlilik2 != gizlilik3 or gizlilik4 == "false":
+         pass
+     else:
+         xbmctools.addDir('[COLOR red]+18[/COLOR]',"yetiskin()",16,'http://dreamtr.club/resimler/adult1.png',fann)
+     xbmc.executebuiltin('Container.SetViewMode(500)')
 url = 'txt.2maerd/golegnahc/ten.nyazidamet.enisened//:ptth'[::-1]
 link=xbmctools.get_url(url)
 konumuz=link
@@ -98,9 +98,9 @@ class windows():
         return "DUYURU ",txt
 #2
 def Sinema():
-        xbmctools.addDir('[COLOR gold]! EvrenselFilm * New * ![/COLOR]',"Sinema1()",5,'http://dreamtr.club/resimler/Sinema1.png',fann)
-        xbmctools.addDir('[COLOR pink]! Jetfilmizle.Biz * New 2018 * ![/COLOR]',"Sinema2()",6,'http://dreamtr.club/resimler/Sinema2.png',fann)
-        xbmc.executebuiltin('Container.SetViewMode(500)')
+    xbmctools.addDir('[COLOR gold]! EvrenselFilm * New * ![/COLOR]',"Sinema1()",5,'http://dreamtr.club/resimler/Sinema1.png',fann)
+    xbmctools.addDir('[COLOR pink]! Jetfilmizle.Org * New 2018 * ![/COLOR]',"Sinema2()",6,'http://dreamtr.club/resimler/Sinema2.png',fann)
+    xbmc.executebuiltin('Container.SetViewMode(500)')
 #3
 def Dizi():
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR gold]'+'1-> Site - Canlihddiziler'+'[/COLOR]',url,1789,'http://dreamtr.club/resimler/Dizi1.png',fann)
@@ -112,21 +112,21 @@ def Dizi():
     xbmc.executebuiltin('Container.SetViewMode(500)')
 #4
 def canliyayin():
-        xbmctools.addDir('[COLOR pink]New* 2018 / Canli Tv 1*[/COLOR]',"Canli1()",11,'http://dreamtr.club/resimler/Canlitv1.png',fann)
-        xbmctools.addDir('[COLOR pink]New* 2018 / Canli Tv 2*[/COLOR]',"Canli2()",12,'http://dreamtr.club/resimler/Canlitv2.png',fann)
-        xbmctools.addDir('[COLOR yellow]New* 2018 / Canli Tv 3*[/COLOR]',"Canli3()",18,'http://dreamtr.club/resimler/Canlitv3.png',fann)
-        xbmctools.addDir('[COLOR orange]# 2018 year * Canli Tv 4 * New *[/COLOR]',"Canli4()",27,'http://dreamtr.club/resimler/Canlitv4.png',fann)
-        xbmc.executebuiltin('Container.SetViewMode(500)')
+    xbmctools.addDir('[COLOR pink]New* 2018 / Canli Tv 1*[/COLOR]',"Canli1()",11,'http://dreamtr.club/resimler/Canlitv1.png',fann)
+    xbmctools.addDir('[COLOR pink]New* 2018 / Canli Tv 2*[/COLOR]',"Canli2()",12,'http://dreamtr.club/resimler/Canlitv2.png',fann)
+    xbmctools.addDir('[COLOR yellow]New* 2018 / Canli Tv 3*[/COLOR]',"Canli3()",18,'http://dreamtr.club/resimler/Canlitv3.png',fann)
+    xbmctools.addDir('[COLOR orange]# 2018 year * Canli Tv 4 * New *[/COLOR]',"Canli4()",27,'http://dreamtr.club/resimler/Canlitv4.png',fann)
+    xbmc.executebuiltin('Container.SetViewMode(500)')
 
 #--#
 def get_url(url):
-        req = urllib2.Request(url)
-        req.add_header('User-agent', 'Mozilla/5.0 (X11; Linux x86_64; SmartTV) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')
-        response = urllib2.urlopen(req)
-        link=response.read()
-        link=link.replace('&#215;',"x").replace('&#231;',"c").replace('&#8217;',"-").replace('&#39;',"'").replace('&#252;',"u").replace('&#199;',"C").replace('&#246;',"o").replace('&#039;',"'")
-        response.close()
-        return link
+    req = urllib2.Request(url)
+    req.add_header('User-agent', 'Mozilla/5.0 (X11; Linux x86_64; SmartTV) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')
+    response = urllib2.urlopen(req)
+    link=response.read()
+    link=link.replace('&#215;',"x").replace('&#231;',"c").replace('&#8217;',"-").replace('&#39;',"'").replace('&#252;',"u").replace('&#199;',"C").replace('&#246;',"o").replace('&#039;',"'")
+    response.close()
+    return link
 #8
 def Dizi1():
     url='http://www.canlihddiziler.net/'
@@ -157,42 +157,42 @@ def Kanalddizi():
         xbmctools.addDir('[COLOR orange]>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,7,thumbnail,thumbnail)
 #7            
 def Kanalddiziicerik(url):
-        link=get_url(url)
-        soup = BS4(link, 'html5lib')
-        panel = soup.findAll("div", attrs={"class": "kd-docs-section"},smartQuotesTo=None)
-        panel = panel[0].findAll("div", attrs={"class": "col-sm-3 col-xs-6"})
-        for i in range (len (panel)):
-            url=panel[i].find('a')['href']
-            url= 'http://www.kanald.com.tr'+url
-            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-            thumbnail=panel[i].find('img')['data-src'].encode('utf-8', 'ignore')
-            thumbnail='http:'+thumbnail
-            xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,17,thumbnail,thumbnail)
-        page=re.compile('<li class="active"><a href=".*?">.*?</a></li><li class=""><a href="(.*?)">(.*?)</a></li>').findall(link)
-        for Url,name in page:
-            Url='https://www.kanald.com.tr/'+Url
-            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,7,sonrakii,fann)
+    link=get_url(url)
+    soup = BS4(link, 'html5lib')
+    panel = soup.findAll("div", attrs={"class": "kd-docs-section"},smartQuotesTo=None)
+    panel = panel[0].findAll("div", attrs={"class": "col-sm-3 col-xs-6"})
+    for i in range (len (panel)):
+        url=panel[i].find('a')['href']
+        url= 'http://www.kanald.com.tr'+url
+        name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+        thumbnail=panel[i].find('img')['data-src'].encode('utf-8', 'ignore')
+        thumbnail='http:'+thumbnail
+        xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,17,thumbnail,thumbnail)
+    page=re.compile('<li class="active"><a href=".*?">.*?</a></li><li class=""><a href="(.*?)">(.*?)</a></li>').findall(link)
+    for Url,name in page:
+        Url='https://www.kanald.com.tr/'+Url
+        xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,7,sonrakii,fann)
 
 #17
 def Kanalddizivideo(url,name):
-        link=get_url(url)
-        match=re.compile('data.*?-id="(.*?)"').findall(link)
-        url2='https://www.kanald.com.tr/actions/content/media/'+match[0]
-        link2=get_url(url2)
-        match2=re.compile('"ServiceUrl":"(.+?)","SecurePath":"(.+?)?key=.+?"').findall(link2)
-        for url,code in match2:
-            url=url+code+'key=93a08dbbdd93b00670860974d0f63a6d'
-            xbmctools.yenical4(name,url+tk)
+    link=get_url(url)
+    match=re.compile('data.*?-id="(.*?)"').findall(link)
+    url2='https://www.kanald.com.tr/actions/content/media/'+match[0]
+    link2=get_url(url2)
+    match2=re.compile('"ServiceUrl":"(.+?)","SecurePath":"(.+?)?key=.+?"').findall(link2)
+    for url,code in match2:
+        url=url+code+'key=93a08dbbdd93b00670860974d0f63a6d'
+        xbmctools.yenical4(name,url+tk)
          
 #14
 def Arama():
-        dizi1='http://www.canlihddizi.com/'
-        keyboard = xbmc.Keyboard("", 'Search', False)
-        keyboard.doModal()
-        if keyboard.isConfirmed():
-            query = keyboard.getText()
-            url = (dizi1+'/?s='+query)
-            Yeni(url)
+    dizi1='http://www.canlihddizi.com/'
+    keyboard = xbmc.Keyboard("", 'Search', False)
+    keyboard.doModal()
+    if keyboard.isConfirmed():
+        query = keyboard.getText()
+        url = (dizi1+'/?s='+query)
+        Yeni(url)
 #1789
 def Ddizi11():    
     url='http://www.canlihddiziler.net/'
@@ -242,7 +242,6 @@ def de_get(name,url):
     xbmcPlayer.stop()
     import requests as requests#halktv
     url1='822=di?php.hctaw/moc.okinig.www//:ptth'[::-1]
-    print url1
     link=get_url(url1)
     match=re.compile('source:".*?\?wmsAuthSign\=(.*?)"').findall(link)
     for cd in match:
@@ -594,18 +593,18 @@ def ayrisdirma1(url):
             Baglanvideo(url,name,pid)
 #6
 def Sinema2():
-    url='https://jetfilmizle.biz/'
+    url='https://jetfilmizle.org/'
     xbmctools.addDir('[COLOR yellow]## Film Ara / Search ##[/COLOR]',url,44,aramaa,fann)
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]Yerli Filmler [/COLOR]',"https://jetfilmizle.biz/yerli-filmleri-izle",43,yeniek,fann)
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]BoolyWood Filmleri [/COLOR]',"https://jetfilmizle.biz/kategoriler/bollywood-filmleri",43,yeniek,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]Yerli Filmler [/COLOR]',"https://jetfilmizle.org/yerli-filmleri-izle",43,yeniek,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]BoolyWood Filmleri [/COLOR]',"https://jetfilmizle.org/kategoriler/bollywood-filmleri",43,yeniek,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',url,43,yeniek,fann)
     link=get_url(url)
-    match=re.compile('class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-.*?"><a title=".*?" href="https://jetfilmizle.biz/filmin-turu/(.*?)">(.*?)</a>').findall(link)
+    match=re.compile('class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-.*?"><a title=".*?" href="https://jetfilmizle.org/filmin-turu/(.*?)">(.*?)</a>').findall(link)
     for url,name in match:
-        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',"https://jetfilmizle.biz/filmin-turu/"+url,43,"",fann)
+        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',"https://jetfilmizle.org/filmin-turu/"+url,43,"",fann)
 #44
 def Search2():
-    sinema="https://jetfilmizle.biz/filmara.php?s="
+    sinema="https://jetfilmizle.org/filmara.php?s="
     keyboard = xbmc.Keyboard("", 'Search', False)
     keyboard.doModal()
     if keyboard.isConfirmed():
@@ -752,7 +751,7 @@ def framee(name,url):
                         "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
                         "Accept":"*/*",
                         "Accept-Language":"en-US,en;q=0.5",
-                        "Referer":"https://jetfilmizle.biz",
+                        "Referer":"https://jetfilmizle.org",
                         "Connection":"keep-alive"
                         } 
                         resp = req.get(url, allow_redirects=True, headers=headers)
@@ -841,7 +840,7 @@ def framee(name,url):
                         "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
                         "Accept":"*/*",
                         "Accept-Language":"en-US,en;q=0.5",
-                        "Referer":"https://jetfilmizle.biz",
+                        "Referer":"https://jetfilmizle.org",
                         "Connection":"keep-alive"
                         }
                         resp = req.get(url, allow_redirects=True, headers=headers)
@@ -934,35 +933,41 @@ def sembol_fix(x):
     return x[0].capitalize() + x[1:]
 #16
 def yetiskin():
-    url='http://en.paradisehill.cc/porn/'
+    url1='http://en.paradisehill.cc/categories/'
     xbmctools.addDir('[COLOR red]>>[/COLOR][COLOR yellow]Info[/COLOR][COLOR red] <<[/COLOR]',"BILGILENDIRME",56,"","")
-    xbmctools.addDir('[COLOR blue]New Movie>>[/COLOR]',url,78,"","")
-    link=get_url(url)
+    xbmctools.addDir('[COLOR blue]New Movie>>[/COLOR]',"http://en.paradisehill.cc/all/",53,"","")
+    link=get_url(url1)
     soup = BeautifulSoup(link)
-    panel = soup.findAll("section", {"class": "bc-list sect-catg"})
-    panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-4 col-xs-6 bc-item"})
+    panel = soup.findAll("div", {"class": "content"})
+    panel = panel[0].findAll("div", {"class": "item"})
     for i in range (len (panel)):
-        url=panel[i].find("a", {"class": "bci-link"})['href']
-        name=panel[i].find("a", {"class": "bci-link"})['title'].encode('utf-8', 'ignore')
-        thumbnail=panel[i].find("img", {"class": "bci-pic"})['src']
-        url=z+url
+        url=panel[i].find('a')['href']
+        thumbnail=panel[i].find('img')['src']
+        name=url.replace('/',' ').replace('-',' ')
         thumbnail=z+thumbnail
+        url=z+url
+        name=name.replace("category","")
+        name=fix.decode_fix(name)
+        from operator import methodcaller
+        capitalize = methodcaller('capitalize')
+        capitalize(name)
         xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,53,thumbnail,thumbnail)
 #78
 def RecentyetA(url):
     link=get_url(url)
     soup = BeautifulSoup(link)
-    panel = soup.findAll("div", {"class": "row new-collect"})
-    panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-4 col-xs-6 bc-item"})
+    panel = soup.findAll("div", {"class": "content"})
+    panel = panel[0].findAll("div", {"class": "item list-film-item"})
     for i in range (len (panel)):
-        url=panel[i].find("a", {"class": "bci-title-link"})['href']
-        name=panel[i].find("a", {"class": "bci-title-link"})['title'].encode('utf-8', 'ignore')
-        thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+        url=panel[i].find('a')['href']
+        thumbnail=panel[i].find('img')['src']
+        name=url.replace('/',' ').replace('-',' ')
         thumbnail=z+thumbnail
         url=z+url
         name=name.replace("Watch porn online","")
+        name=fix.decode_fix(name)
         xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,54,thumbnail,thumbnail)
-    page=re.compile('<li class="page active"><a href=".*?">.*?</a></li>\n<li class="page"><a href="(.*?)">(.*?)</a></li>').findall(link)
+    page=re.compile('<li class="active"><a href=".*?" data-page=".*?">.*?</a></li>\n<li><a href="(.*?)" data-page=".*?">(.*?)</a></li>').findall(link)
     for url,name in page:
             url=z+url
             xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,78,sonrakii,fann)
@@ -971,18 +976,18 @@ def RecentyetA(url):
 def Recentyet(url):
     link=get_url(url)
     soup = BeautifulSoup(link)
-    panel = soup.findAll("section", {"class": "bc-list sect-catg"})
-    panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-4 col-xs-6 bc-item"})
+    panel = soup.findAll("div", {"class": "content"})
+    panel = panel[0].findAll("div", {"class": "item list-film-item"})
     for i in range (len (panel)):
-        url=panel[i].find("a", {"class": "bci-link"})['href']
-        name=panel[i].find("a", {"class": "bci-link"})['title'].encode('utf-8', 'ignore')
-        name=name.replace("Watch porno online","")
-        thumbnail=panel[i].find("img", {"class": "item_img"})['src']
+        url=panel[i].find('a')['href']
+        thumbnail=panel[i].find('img')['src']
+        name=url.replace('/',' ').replace('-',' ')
         thumbnail=z+thumbnail
         url=z+url
         name=name.replace("Watch porn online","")
+        name=sembol_fix(name)
         xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,54,thumbnail,thumbnail)
-    page=re.compile('<li class="page active"><a href=".*?">.*?</a></li>\n<li class="page"><a href="(.*?)">(.*?)</a></li>').findall(link)
+    page=re.compile('<li class="active"><a href=".*?" data-page=".*?">.*?</a></li>\n<li><a href="(.*?)" data-page=".*?">(.*?)</a></li>').findall(link)
     for url,name in page:
             url=z+url
             xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,53,sonrakii,fann)
@@ -990,12 +995,12 @@ def Recentyet(url):
 
 def ayrisdirmayet(url):
     link=get_url(url)
-    match1=re.compile("http:(.*?).mp4").findall(link)
+    match1=re.compile('="(.*?).mp4"').findall(link)
     for url in match1:
         url=url.replace('\\',"")
         name="Watch Now"
         url='http:'+url+'.mp4'
-        xbmctools.addDir('[COLOR red]Part '+name+'[/COLOR]',url,55,"","")           
+        xbmctools.addDir('[COLOR gold]Part '+name+'[/COLOR]',url,55,"","")           
 #55
 def VideoLinksyet(name,url):
     url=url+"|referer=http://www.paradisehill.tv/static/flowplayer/flowplayer.content-3.2.9.swf"  
@@ -1013,21 +1018,31 @@ def VideoLinksyet(name,url):
             xbmctools.playlist2()
 #56
 def INFOyet(url):
-  try:
+    try:
         yetiskin()
         dialog = xbmcgui.Dialog()
-        i = dialog.ok(url, "[COLOR beige]Uyeler icindir[/COLOR],[COLOR yellow]Turkiyeden Izlenemeyebilir[/COLOR] ","[COLOR yellow]DNS Ayarlariyla girilebilir[/COLOR]")
-  except:
+        i = dialog.ok(url, "[COLOR beige]Uyeler icindir[/COLOR],[COLOR yellow]Turkiyeden ve Bazi Ülkelerden izlenemeyebilir[/COLOR] ","[COLOR yellow]DNS Ayarlariyla girilebilir[/COLOR]")
+    except:
         pass
 #62
 def AlmanS():
     sinema='http://view4u.co/'
+    xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Filme Suche/Search[/COLOR]',sinema,655,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR gold] ! Neue Filme ![/COLOR]',sinema,65,yeniek,fann)
     link=get_url(sinema)
     match=re.compile('<li><a href="/load(.*?)">(.*?)</a></li>').findall(link)
     for url,name in match:
         url='http://view4u.co/load'+url
-        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]'+name+'[/COLOR]',url,65,"",fann)                   
+        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]'+name+'[/COLOR]',url,65,"",fann)
+#655
+def Almanara():
+    url='http://view4u.co/search'
+    keyboard = xbmc.Keyboard("", 'Search', False)
+    keyboard.doModal()
+    if keyboard.isConfirmed():
+        query = keyboard.getText()
+        url = (url+'/?q='+query)
+        Yeni2alman1(url)
 #65
 def Yeni2alman1(url):
     link=get_url(url)
@@ -1035,6 +1050,8 @@ def Yeni2alman1(url):
     for thumbnail,url,name in match:
         thumbnail='http://view4u.co'+thumbnail
         url='http://view4u.co'+url
+        url=url.replace('http://view4u.cohttp://view4u.co','http://view4u.co')
+        name=name.replace('<b>',' ').replace('</b>',' ')
         xbmctools.addDir('[COLOR orange]>>[COLOR beige]'+name+'[/COLOR]',url,201,thumbnail,thumbnail)
     page=re.compile('<b class="swchItemA1"><span>.*?</span></b> <a class="swchItem1" href="(.*?)" onclick').findall(link)
     for url1 in page:
@@ -1173,12 +1190,18 @@ def Canli2():
             xbmctools.addDir('[COLOR pink]> - '+name+'[/COLOR]',url,100,'','')
             
         #--
-    urlM='http://www.mcanlitv.net/'
-    link=get_url(urlM)
-    match=re.compile('src="(.*?)" class=".*? alt="" /></a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t<div class="post-link">\r\n\t\t\t\t<a href="(.*?)">(.*?)</a>').findall(link)
-    for thumbnail,url,name in match:
-        name=name.replace('&#8211;','')
-        xbmctools.addDir('[COLOR orange]> - '+name+'[/COLOR]',url,101,thumbnail,'')
+##    urlM='http://www.mcanlitv.net/'
+##    link=get_url(urlM)
+##    match=re.compile('src="(.*?)" class=".*? alt="" /></a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t<div class="post-link">\r\n\t\t\t\t<a href="(.*?)">(.*?)</a>').findall(link)
+##    for thumbnail,url,name in match:
+##        name=name.replace('&#8211;','')
+##        xbmctools.addDir('[COLOR orange]> - '+name+'[/COLOR]',url,101,thumbnail,'')
+##    urlM='http://karwan.tv/'
+##    link=get_url(urlM)
+##    match=re.compile('href="(.*?)">\r\n\t\t\t\t\t\t   <img class= "hovereffect" width="170" height="80" src="(.*?)" alt="(.*?)" style').findall(link)
+##    for url,thumbnail,name in match:
+##        name=name.replace('&#8211;','')
+##        xbmctools.addDir('[COLOR orange]> - '+name+'[/COLOR]','http://karwan.tv'+url,101,thumbnail,'')
     #--
         
 #101
@@ -1265,7 +1288,7 @@ def ctv2(url):
                     for url in match:
                         url=url+tk
                         yenical44(name,url)
-                else:
+                else:#
                     if "mcanlitv" in url:
                         import re
                         link=get_url(url)
@@ -1277,63 +1300,74 @@ def ctv2(url):
                             for url in match:
                                 url=url+tk
                                 yenical44(name,url)
-                    else:
-                        if "ocanli" in url:
-                            link=get_url(url)
+                    else:#
+                        if "karwan.tv" in url:
                             import re
-                            match=re.compile("file: \'(.*?)\'").findall(link)
+                            link=get_url(url)
+                            match=re.compile('src="(.*?)" style="border:0px #FFFFFF none;" width="100%"></iframe>').findall(link)
                             for url in match:
-                                xbmctools.yenical4(name,url+tk)
+                                url='http://karwan.tv/'+url
+                                link=get_url(url)
+                                match=re.compile("hls: \'(.*?)\'").findall(link)
+                                for url in match:
+                                    url=url+tk
+                                    yenical44(name,url)
+                                matcha=re.compile('image: ".*?",\r\nimage: ".*?", file: "(.*?)"').findall(link)
+                                for url in matcha:
+                                    url=url+tk
+                                    yenical44(name,url)
+                                matchab=re.compile('playlist: \[\{\r\n          logo:\'\',\r\nimage: ".*?", file: "(.*?)"').findall(link)
+                                for url in matchab:
+                                    url=url+tk
+                                    yenical44(name,url)
                         else:
-                            if ".plus" in url:
+                            if "ocanli" in url:
                                 link=get_url(url)
                                 import re
-                                match=re.compile('src="(.*?)" frameborder=').findall(link)
-                                for url1 in match:
-                                    if url1:
-                                        link=get_url(url1)
-                                        match=re.compile("file: \'(.*?)\'").findall(link)
-                                        for url in match:
-                                            xbmctools.yenical4(name,url)
+                                match=re.compile("file: \'(.*?)\'").findall(link)
+                                for url in match:
+                                    xbmctools.yenical4(name,url+tk)
                             else:
-                                import re
-                                url=url.replace('https','http')
-                                req = urllib2.Request(url)
-                                req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
-                                response = urllib2.urlopen(req)
-                                link=response.read()
-                                response.close()
-                                match=re.compile('src=https://streaming(.*?)\n').findall(link)
-                                for url in match:
-                                    if url:
-                                        url='https://streaming'+url+tk
-                                        xbmctools.yenical4(name,url)
-                                url=url.replace('https','http')
-                                req = urllib2.Request(url)
-                                req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
-                                response = urllib2.urlopen(req)
-                                link=response.read()
-                                response.close()
-                                match=re.compile("hls: '(.*?)'").findall(link)
-                                for url in match:
-                                    if url:
-                                        url=url+tk
-                                        xbmctools.yenical4(name,url)
+                                if ".plus" in url:
+                                    link=get_url(url)
+                                    import re
+                                    match=re.compile('src="(.*?)" frameborder=').findall(link)
+                                    for url1 in match:
+                                        if url1:
+                                            link=get_url(url1)
+                                            match=re.compile("file: \'(.*?)\'").findall(link)
+                                            for url in match:
+                                                xbmctools.yenical4(name,url)
+                                else:
+                                    import re
+                                    url=url.replace('https','http')
+                                    req = urllib2.Request(url)
+                                    req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
+                                    response = urllib2.urlopen(req)
+                                    link=response.read()
+                                    response.close()
+                                    match=re.compile('src=https://streaming(.*?)\n').findall(link)
+                                    for url in match:
+                                        if url:
+                                            url='https://streaming'+url+tk
+                                            xbmctools.yenical4(name,url)
+                                    url=url.replace('https','http')
+                                    req = urllib2.Request(url)
+                                    req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
+                                    response = urllib2.urlopen(req)
+                                    link=response.read()
+                                    response.close()
+                                    match=re.compile("hls: '(.*?)'").findall(link)
+                                    for url in match:
+                                        if url:
+                                            url=url+tk
+                                            xbmctools.yenical4(name,url)
 
 #18
 def Canli3():#
     urlD='http://212.224.109.109/S2/HLS_LIVE/kanald/500/prog_index.m3u8'
     name='>> Kanal D'
     xbmctools.addLink(name,urlD,'')
-##    url='http://www.canlitvlive.site/tum-kanallar.html'
-##    link=get_url(url)
-##    match=re.compile('<a href="(.*?)" title=".*?"><div class="chn_lg"><img src="(.*?)" width="100" height="75" alt=".*?"><div><h2>(.*?)</h2></div></div>').findall(link)       
-##    for url,Thumbnail,name in match:
-##        Thumbnail='http:'+Thumbnail
-##        url='httppppp://www.canlitvlive.site'+url
-##        print url
-##        name=fix.decode_fix(name)
-##        xbmctools.addDir('[COLOR blue] >>[/COLOR]'+ '[COLOR beige]'+name+'[/COLOR]',url,100,Thumbnail,Thumbnail)
     urla='https://www.ecanlitvizle.live/kanal-7-izle/'
     link=get_url(urla)
     match1=re.compile('<a href="https://www.ecanlitvizle.live/(.*?)/">(.*?)</a></li>').findall(link)      
@@ -1354,22 +1388,22 @@ def Canli3():#
 
 #199
 def yenical44(name,url):
-        if "mail." in url:
-            xbmctools.MailRu_Player(url)
-        elif "vk."in url:
-            magix_player(name,url)
-        elif "ok." in url:
-            xbmctools.ok_ru(url)
-        elif "vid."in  url:
-            magix_player(name,url)
-        else:
-            xbmcPlayer = xbmc.Player() 
-            playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO) 
-            playList.clear() 
-            xbmctools.addLink(name,url,'')
-            listitem = xbmcgui.ListItem(name) 
-            playList.add(url, listitem) 
-            xbmcPlayer.play(playList)
+    if "mail." in url:
+        xbmctools.MailRu_Player(url)
+    elif "vk."in url:
+        magix_player(name,url)
+    elif "ok." in url:
+        xbmctools.ok_ru(url)
+    elif "vid."in  url:
+        magix_player(name,url)
+    else:
+        xbmcPlayer = xbmc.Player() 
+        playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO) 
+        playList.clear() 
+        xbmctools.addLink(name,url,'')
+        listitem = xbmcgui.ListItem(name) 
+        playList.add(url, listitem) 
+        xbmcPlayer.play(playList)
         
  
   
@@ -1385,9 +1419,9 @@ def radyo():
 
         
 def showMessage(heading='IPTV', message = '', times = 5000, pics = addon_icon):
-		try: xbmc.executebuiltin('XBMC.Notification("%s", "%s", %s, "%s")' % (heading, message, times, pics))
-		except Exception, e:
-			xbmc.log( '[%s]: showMessage: exec failed [%s]' % (addon_id, e), 2 )
+    try: xbmc.executebuiltin('XBMC.Notification("%s", "%s", %s, "%s")' % (heading, message, times, pics))
+    except Exception, e:
+            xbmc.log( '[%s]: showMessage: exec failed [%s]' % (addon_id, e), 2 )
 
 #116
 def Calcanli6(name,url):
@@ -1406,7 +1440,7 @@ def Calcanli6(name,url):
             xbmctools.playlist2()
 #202   
 def iptvpro(name,url):
-    xbmctools.addDir('[COLOR beige]*** ONLY 80 € / Year ***[/COLOR]',"","","",fann)
+    xbmctools.addDir('[COLOR beige]*** ONLY 100 € / Year ***[/COLOR]',"","","",fann)
     url='http://guek.ddns.net:1903/get.php?username=dreamtreklenti&password=760psDvBJI&type=m3u&output=ts'
     link=get_url(url)
     match=re.compile("#EXTINF:-1,(.*?)\r\nhttp://(.*?)\r").findall(link)
@@ -1439,21 +1473,21 @@ def magix_player(name,url):
                 xbmcPlayer.play(playList)
 
 def get_params():
-        param=[]
-        paramstring=sys.argv[2]
-        if len(paramstring)>=2:
-                params=sys.argv[2]
-                cleanedparams=params.replace('?','')
-                if (params[len(params)-1]=='/'):
-                        params=params[0:len(params)-2]
-                pairsofparams=cleanedparams.split('&')
-                param={}
-                for i in range(len(pairsofparams)):
-                        splitparams={}
-                        splitparams=pairsofparams[i].split('=')
-                        if (len(splitparams))==2:
-                                param[splitparams[0]]=splitparams[1]
-        return param
+    param=[]
+    paramstring=sys.argv[2]
+    if len(paramstring)>=2:
+            params=sys.argv[2]
+            cleanedparams=params.replace('?','')
+            if (params[len(params)-1]=='/'):
+                    params=params[0:len(params)-2]
+            pairsofparams=cleanedparams.split('&')
+            param={}
+            for i in range(len(pairsofparams)):
+                    splitparams={}
+                    splitparams=pairsofparams[i].split('=')
+                    if (len(splitparams))==2:
+                            param[splitparams[0]]=splitparams[1]
+    return param
 params=get_params()
 url=None
 name=None
@@ -1543,6 +1577,7 @@ elif mode==201: a6666(url)
 elif mode==202: iptvpro(name,url)
 elif mode==203: sinema1recent(url)
 elif mode==255: Arama22()
+elif mode==655: Almanara()
 elif mode==1788: Ddizi12()
 elif mode==1789: Ddizi11()
 elif mode==1898: Dizi288()
