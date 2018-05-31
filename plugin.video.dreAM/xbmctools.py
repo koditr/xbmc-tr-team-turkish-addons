@@ -666,6 +666,12 @@ def frame(url):
             Kanalddizivideo(url,name)
     else:
         print "cikis"
+    link=get_url(url)
+    ply22=re.compile('src=".*?oload(.*?)"').findall(link)
+    for name in ply22:
+        name='https://oload'+name
+        url=name
+        magix_player(name,url)
     #--
     ddizi11=re.compile('src="http://www.hergunizle1.com/player/oynat/(.*?)"').findall(link)
     import requests as req
@@ -706,8 +712,10 @@ def frame(url):
     for url in vidmoly:
         url='http://vidmoly.me/'+url
         link=get_url(url)
-        match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
+        match=re.compile('\|thumbs\|\|01\|\|100\|(.*?)\|data\|').findall(link)
+        
         for b in match:
+            print b
             if match:
                 link=get_url(url)
                 match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
@@ -752,14 +760,14 @@ def frame(url):
 ##                for url,name in match:
 ##                    url=url.replace('\/','/')
 ##                    addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
-        match1=re.compile('dailymotion.com\/embed\/video\/(.*?)\?').findall(link)
-        for url in match1:
-            url='http://www.dailymotion.com/embed/video/'+url
-            magix_player(name,url)
-        match33=re.compile('file: "(.*?)",\n                label: "(.*?)"').findall(link)
-        for url,name in match33:
-            url='http://www.ddizi1.com'+url
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+    match1=re.compile('dailymotion.com\/embed\/video\/(.*?)\?').findall(link)
+    for url in match1:
+        url='http://www.dailymotion.com/embed/video/'+url
+        magix_player(name,url)
+    match33=re.compile('file: "(.*?)",\n                label: "(.*?)"').findall(link)
+    for url,name in match33:
+        url='http://www.ddizi1.com'+url
+        addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
             
     mazz2=re.compile('src="http://www.ddizi1.com/matplayer/neez/(.*?)"').findall(link)#
     for url in mazz2:
@@ -858,6 +866,7 @@ def frame(url):
             addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]','http://ddizim.com'+urlA+tk,'')
             
     canlii1=re.compile('src="http://www.canlidizihd6.net/playerv5/oynat/(.*?)"').findall(link)
+                            #http://www.canlidizihd6.net/playerv5/oynat/4cdddb4df37729d2bddcb8a5b0185537
     import requests as req
     for url in canlii1:
         url='http://www.canlidizihd6.net/playerv5/oynat/'+url
@@ -869,7 +878,7 @@ def frame(url):
         "Connection":"keep-alive"
         }
         resp = req.get(url, allow_redirects=True, headers=headers)
-        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(resp.text)
+        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": ".*?"').findall(resp.text)
         for urlA,name in match:
             urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
             urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
@@ -916,9 +925,10 @@ def frame(url):
         name='https://openload.co/embed/'+name
         url=name
         magix_player(name,url)
-    ply22=re.compile('src="https://oload.site/embed/(.*?)"').findall(link)
+    link=get_url(url)
+    ply22=re.compile('src=".*?oload(.*?)"').findall(link)
     for name in ply22:
-        name='https://oload.site/embed/'+name
+        name='https://oload'+name
         url=name
         magix_player(name,url)
         
@@ -996,7 +1006,7 @@ def request( url, headers={}):
     print('len(data) %s' % len(data))
     return data
 
-def _decode2( file_url):
+def _decode2(file_url):
     def K12K(a, typ='b'):
         codec_a = ["G", "L", "M", "N", "Z", "o", "I", "t", "V", "y", "x", "p", "R", "m", "z", "u",
                    "D", "7", "W", "v", "Q", "n", "e", "0", "b", "="]
@@ -1038,9 +1048,9 @@ def _decode2( file_url):
             _local5 += 4
         return _local2
 
-    return _xc13(K12K(file_url, 'e'))               
+    return _xc13(K12K(file_url, 'e'))              
 
-def _decode3( w, i, s, e):
+def _decode3(w, i, s, e):
     var1 = 0
     var2 = 0
     var3 = 0
@@ -1078,10 +1088,24 @@ def _decode3( w, i, s, e):
             var2 = 0
     return ''.join(result)
 
-def _decode_data( data):
+def _decode_data(data):
     valuesPattern = r";}\('(\w+)','(\w*)','(\w*)','(\w*)'\)\)"
     values = re.search(valuesPattern, data, re.DOTALL)
     return _decode3(values.group(1), values.group(2), values.group(3), values.group(4))
+def decodeUN(a):
+    a = a[1:]
+    s2 = ""
+
+    i = 0
+    while i < len(a):
+        s2 += ('\u0' + a[i:i+3])
+        i = i + 3
+    
+    s3 = s2.decode('unicode-escape')
+    if not s3.startswith('http'):
+        s3 = 'http:' + s3
+        
+    return s3
 
 def resolve( vid):
     user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_3 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/57.0.2987.137 Mobile/13G34 Safari/601.1.46'
@@ -1127,13 +1151,13 @@ def resolve( vid):
                 headers['x-requested-with'] = 'XMLHttpRequest'
                 data = request("http://hqq.watch/player/get_md5.php?" + urllib.urlencode(get_data), headers)
                 jsonData = json.loads(data)
-                encodedm3u = jsonData#['file']
-                decodedm3u = _decode2(encodedm3u.replace('#', ''))
-                decodedm3u = decodedm3u.replace("?socket", ".mp4.m3u8")
-                fake_agent = user_agent
-                name='Hqq_Player'
-                url=decodedm3u  + '|' + fake_agent
-                print url,"WW"
-                addLink(name,url,'')
+                file_url = jsonData['obf_link']
+                if file_url:
+                    list_url = decodeUN(file_url.replace('\\', ''))
+                    decodedm3u = list_url + ".mp4.m3u8"
+                    fake_agent = user_agent
+                    url=decodedm3u  + '|' + fake_agent
+                    name='Hqq_Player'
+                    yenical4(name,url)
                     
 

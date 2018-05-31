@@ -518,7 +518,10 @@ def Sinema1():
     liste=BeautifulSoup(str(panel))
     match2=re.compile('<li class="cat-item cat-item-.*?"><a href="http://evrenselfilmlerim.net/kategori/turler/(.*?)">(.*?)</a>').findall(str(liste))
     for url,name in match2:
-        xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',"http://evrenselfilmlerim.net/kategori/turler/"+url,203,'','')  
+        if "hindistan" in url:
+            pass
+        else:
+            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',"http://evrenselfilmlerim.net/kategori/turler/"+url,203,'','')  
 #38
 def Aramasinema1():#
     sinema="http://evrenselfilmlerim.net"
@@ -601,6 +604,7 @@ def Sinema2():
     link=get_url(url)
     match=re.compile('class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-.*?"><a title=".*?" href="https://jetfilmizle.org/filmin-turu/(.*?)">(.*?)</a>').findall(link)
     for url,name in match:
+        
         xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',"https://jetfilmizle.org/filmin-turu/"+url,43,"",fann)
 #44
 def Search2():
@@ -628,21 +632,35 @@ def Yenisinema2(url):
         for url,name in pages:
             xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
     else:
-        
-        
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "row"},smartQuotesTo=None)
-        panel = soup.findAll("div", {"class": "col-md-6"})
-        for i in range (len (panel)):
-            url=panel[i].find('a')['href']
-            thumbnail=panel[i].find('img')['data-src']
-            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-            name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
-            xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
-        pages=re.compile('class="active_page"><a href=".*?">.*?</a></li><li><a href="(.*?)">(.*?)</a></li').findall(link)
-        for url,name in pages:
-            xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
+        if "filmin-turu" in url:
+            link=get_url(url)
+            soup = BeautifulSoup(link)
+            panel = soup.findAll("div", {"class": "tab-content"},smartQuotesTo=None)
+            panel = soup.findAll("div", {"class": "col-md-6"})
+            for i in range (len (panel)):
+                url=panel[i].find('a')['href']
+                thumbnail=panel[i].find('img')['src']
+                name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+                name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
+                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
+            pages=re.compile('<li class="active_page"><a href=".*?">.*?</a></li>\n<li><a href="(.*?)">(.*?)</a></li>').findall(link)
+            for url,name in pages:
+                xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
+        else:
+            link=get_url(url)
+            soup = BeautifulSoup(link)
+            panel = soup.findAll("div", {"class": "row"},smartQuotesTo=None)
+            panel = soup.findAll("div", {"class": "col-md-6"})
+            for i in range (len (panel)):
+                url=panel[i].find('a')['href']
+                thumbnail=panel[i].find('img')['src']
+                name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+                name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
+                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
+            pages=re.compile('<li class="active_page"><a href=".*?">.*?</a></li>\n<li><a href="(.*?)">(.*?)</a></li>').findall(link)
+            for url,name in pages:
+                xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
+
 
 #45
 def ayrisdirma2(url):
@@ -696,7 +714,7 @@ def framee(name,url):
                         if "vidmoly" in url:
                             url=url.replace('//','http://')
                             link=get_url(url)
-                            match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
+                            match=re.compile('\|thumbs\|\|01\|\|100\|(.*?)\|data\|').findall(link)
                             for b in match:
                                 if match:
                                     link=get_url(url)
