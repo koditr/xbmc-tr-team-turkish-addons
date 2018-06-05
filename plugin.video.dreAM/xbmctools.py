@@ -490,6 +490,7 @@ def yenical4(name,url):
 def magix_player(name,url):
     print "Magix"
     if "www.dailymotion.com" in url:
+        print "daily"
         fix.daily_sec(name,url)
     else:
         UrlResolverPlayer = url
@@ -712,10 +713,8 @@ def frame(url):
     for url in vidmoly:
         url='http://vidmoly.me/'+url
         link=get_url(url)
-        match=re.compile('\|thumbs\|\|01\|\|100\|(.*?)\|data\|').findall(link)
-        
+        match=re.compile('\|thumbs\|\|01\|\|100\|(.*?)\|data\|').findall(link)        
         for b in match:
-            print b
             if match:
                 link=get_url(url)
                 match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
@@ -945,7 +944,7 @@ def dizividcal(url):
         for a,name2,c in match:
             urlA=a+"/H264-"+name2+"/video"+c
             urlA=urlA.replace('\/','/')
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name2+'[/COLOR]'+'[/COLOR]',urlA,'')
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name2+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
     if "itti" in url:
         url=url.replace('https://ittir.in/v/','')
         url='http://dreamtr.club/a_n_d/ornek.php?no='+url
