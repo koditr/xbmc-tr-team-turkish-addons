@@ -54,7 +54,7 @@ def get_url(url):
 
 def addLink(name, url, thumbnail=""):
     if "bbbmatplayer/go/" in url:
-        url=url.replace('http://www.ddizi1.com/matplayer/go/','').replace('.mp4','')
+        url=url.replace('http://www.ddizim.com/matplayer/go/','').replace('.mp4','')
         url=(base64.b64decode(url))
         url=url+tk
         url=url.replace('comhttps//','com/https//')
@@ -418,8 +418,10 @@ def VIDEOLINKS1(name,url):
         magix_player(name,url)
     dm=re.compile('www.dailymotion.com/embed/video/(.*?)\?').findall(link)
     for url in dm:
-        url = 'http://www.dailymotion.com/embed/video/'+url
-        magix_player(name,url)
+        urla=url
+        urla=urla.replace('motion.com/embed/video/','')
+        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
+        addLink('Play-DM',urla,'')
     if not urlList:
         match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)
         if match:
@@ -489,9 +491,11 @@ def yenical4(name,url):
 #99
 def magix_player(name,url):
     print "Magix"
-    if "www.dailymotion.com" in url:
-        print "daily"
-        fix.daily_sec(name,url)
+    if "dailymotion" in url:
+        urla=url
+        urla=urla.replace('motion.com/embed/video/','')
+        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
+        addLink('Play-DM',urla,'')
     else:
         UrlResolverPlayer = url
         playList.clear()
@@ -632,10 +636,7 @@ def Kanalddizivideo(url,name):
 #22
 def frame(url):
     name='Play'
-    req = urllib2.Request(url)
-    req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
-    response = urllib2.urlopen(req)
-    link=response.read()
+    link=get_url(url)
     #--
     #--
     if "dizihd3" in url:
@@ -687,11 +688,15 @@ def frame(url):
         "Connection":"keep-alive"
         }
         resp = req.get(url, allow_redirects=True, headers=headers)
-        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(resp.text)
+        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": ".*?"').findall(resp.text)
         for urlA,name in match:
             urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
             urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
             addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+        matcha=re.compile('src="https://www.dailymotion.com/embed/video/(.*?)"').findall(resp.text)
+        for url in matcha:
+            url = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+url
+            addLink('Play-DM',url,'')
     match=re.compile('class="c5"><p><iframe src="(.*?)"').findall(link)
     for url in match:
         dizividcal(url)
@@ -702,13 +707,20 @@ def frame(url):
         else:
             dizividcal(url)
     matcha=re.compile('src\=\".*?daily(.*?)\?').findall(link)
-    for url in matcha:
-        url='http://www.daily'+url
-        dizividcal(url)
+    for urla in matcha:
+        urla=urla.replace('motion.com/embed/video/','')
+        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
+        addLink('Play-DM',urla,'')
     matchab=re.compile('\/dm.php\?git\=(.*?)\?').findall(link)
-    for url in matchab:
-        url='http://www.dailymotion.com/embed/video/'+url
-        dizividcal(url)
+    for urlzz in matchab:
+        urla=url
+        urla=urla.replace('motion.com/embed/video/','')
+        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
+        addLink('Play-DM',urla,'')
+    matcharb=re.compile('src="http://www.imdizi.com/dm.php\?video\=(.*?)"').findall(link)
+    for urlss in matcharb:
+        urlss = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urlss
+        addLink('Play-DM',urlss,'')
     vidmoly=re.compile('vidmoly.me/(.*?)"').findall(link)
     for url in vidmoly:
         url='http://vidmoly.me/'+url
@@ -723,7 +735,6 @@ def frame(url):
                     url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
                     name='ViDmOlY'
                     yenical4(name,url)
-                   
     matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
     for vid in matchqq:
         resolve( vid)
@@ -731,7 +742,7 @@ def frame(url):
     for url in matchaa:
         url='http://www.youtube.com/embed/'+url
         name='Play-Youtube'
-        magix_player(name,url)#https://www.youtube.com/embed/4IsivLe6nd8
+        magix_player(name,url)
     matchaa=re.compile('src="https://www.youtube.com/embed/(.*?)"').findall(link)
     for url in matchaa:
         url='http://www.youtube.com/embed/'+url
@@ -744,207 +755,183 @@ def frame(url):
     ply1=re.compile("videoseyredin.net/embed/(.*?)'").findall(link)
     for url in ply1:
         dizividcal(url)
-##    mazz=re.compile('<iframe src="/matplayer/neez/(.*?)"').findall(link)
-##    for url in mazz:
-##        url='http://www.ddizi1.com/matplayer/neez/'+url
-##        link=get_url(url)
-##        match=re.compile('src="https://embed.tune.pk/play/(.*?)\?').findall(link)
-##        for url in match:
-##            url='https://embed.tune.pk/play/'+url
-##            link=get_url(url)
-##            match=re.compile('var requestURL = \'(.*?)\';').findall(link)
-##            for url in match:
-##                link=get_url(url)
-##                match=re.compile('file":"(.*?)","bitrate":(.*?),"label"').findall(link)
-##                for url,name in match:
-##                    url=url.replace('\/','/')
-##                    addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
-    match1=re.compile('dailymotion.com\/embed\/video\/(.*?)\?').findall(link)
-    for url in match1:
-        url='http://www.dailymotion.com/embed/video/'+url
-        magix_player(name,url)
-    match33=re.compile('file: "(.*?)",\n                label: "(.*?)"').findall(link)
-    for url,name in match33:
-        url='http://www.ddizi1.com'+url
-        addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
-            
-    mazz2=re.compile('src="http://www.ddizi1.com/matplayer/neez/(.*?)"').findall(link)#
-    for url in mazz2:
-        url='http://www.ddizi1.com/matplayer/neez/'+url
+    if "ddizim" in url:
+        url=url.replace('com//','com/')
         link=get_url(url)
-        match=re.compile('file: "(.*?)",\n                label: "(.*?)"').findall(link)
-        for url,name in match:
-            url='http://www.ddizi1.com'+url+tk
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
-            
-    tune=re.compile('src\="http://tune.pk\/player\/embed_player.php\?vid\=(.*?)"').findall(link)#
-    for url in tune:
-        url='https://embed.tune.pk/play/'+url
+        mazz=re.compile('src="/matplayer/neez/(.*?)"').findall(link)
+        for url in mazz:
+            url='http://www.ddizim.com/matplayer/neez/'+url
+            link=get_url(url)
+            match=re.compile('src="https://embed.tune.pk/play/(.*?)\?').findall(link)
+            for url in match:
+                url='https://embed.tune.pk/play/'+url
+                link=get_url(url)
+                match=re.compile('var requestURL = \'(.*?)\';').findall(link)
+                for url in match:
+                    link=get_url(url)
+                    match=re.compile('file":"(.*?)","bitrate":(.*?),"label"').findall(link)
+                    for url,name in match:
+                        url=url.replace('\/','/')
+                        addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+            match1=re.compile('file: "(.*?)",\n                label: "(.*?)"').findall(link)
+            for url,name in match1:
+                url='http://www.ddizim.com'+url+tk
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+            matcha=re.compile("src='http://www.dailymotion.com/embed/video/(.*?)\?").findall(link)
+            for urla in matcha:
+                urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
+                addLink('Play-DM',urla,'')
+            matchb=re.compile('src="(.*?)" type=".*?" label="(.*?)"').findall(link)
+            for url,name in matchb:
+                url='http://www.ddizim.com'+url+tk
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+    else:
+        print "Cikalim"
         link=get_url(url)
-        match=re.compile('contentURL.*?content\="(.*?)\"').findall(link)
-        for url in match:
-            addLink('[COLOR gold] Tune >>  '+'[COLOR beige]'+'Ply'+'[/COLOR]'+'[/COLOR]',url+tk,'')        
         
-    ply2=re.compile('/playlist/(.*?).json"').findall(link)
-    for url in ply2:
-        url='https://www.videoseyredin.net/playlist/'+url+'.json'
-        dizividcal(url)
-    vk=re.compile('vk.com\/(.*?)"').findall(link)
-    for url in vk:
-        url='http://vk.com/'+url
-        url=url.replace('&#038;','&')
-        magix_player(name,url)
-    okru2=re.compile('".*?\/player\/ok\/1.*?\.php\?v\=(.*?)"').findall(link)
-    for url in okru2:
-      url=(base64.b64decode(url))
-      url=url.replace("http://ok.ru/video/","")
-      url='http://ok.ru/videoembed/'+str(url)
-      magix_player(name,url)
-    hqq1=re.compile('goo.gl/(.*?)"').findall(link)
-    for url in hqq1:
-        url='https://goo.gl/'+url
-        link=get_url(url)
-        match=re.compile('videokeyorig = "(.*?)"').findall(link)
-        for vid in match:
-            resolve( vid)
-    izle7=re.compile('izle7.com\/embed\-(.*?)"').findall(link)
-    for url in izle7:
-        url='http://www.izle7.com/embed-'+url
-        link=get_url(url)
-        match=re.compile("tp_file = '(.*?).mp4'").findall(link)
-        for vid in match:
-            url=vid+'.mp4'
-            name='Izle7'
-            yenical4(name,url)
-    itt=re.compile('src="https://www.rapidvideo.com/e/(.*?)"').findall(link)
-    for url in itt:
-        url='https://www.rapidvideo.com/e/'+url
-        magix_player(name,url)
-    ddizi1=re.compile('ddizim.com/player\/oynat\/(.*?)"').findall(link)
-    import requests as req
-    for url in ddizi1:
-        url='http://ddizim.com/player/oynat/'+url
-        link=get_url(url)
-        headers = {
-        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
-        "Accept":"*/*",
-        "Accept-Language":"en-US,en;q=0.5",
-        "Referer":"http://www.ddizim.com/",
-        "Connection":"keep-alive"
-        }
-        resp = req.get(url, allow_redirects=True, headers=headers)
-        match=re.compile('src="(.*?)" type="video/mp4" label="(.*?)"').findall(resp.text)
-        for urlA,name in match:
-            urlA=urlA.replace("http:\\/\\/redirector.googlevideo.com\\",'')
-            urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
-        matchA=re.compile('src="(.*?).m3u8" type="').findall(resp.text)
-        for urlA in matchA:
-            link=get_url(urlA+'.m3u8')
-            match1=re.compile('RESOLUTION=1280x720,NAME="720"\n(.*?)\#cell=core\n\#').findall(link)
-            for urlAA in match1:
-                name='720 PxL Player'
-                addLink('[COLOR gold]'+name+'[/COLOR]',urlAA,'')
-    ddizi12=re.compile('src="\/matplayer\/neez\/(.*?)"').findall(link)
-    import requests as req
-    for url in ddizi12:
-        url='http://ddizim.com/matplayer/neez/'+url
-        link=get_url(url)
-        headers = {
-        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
-        "Accept":"*/*",
-        "Accept-Language":"en-US,en;q=0.5",
-        "Referer":"http://www.ddizim.com/",
-        "Connection":"keep-alive"
-        }
-        resp = req.get(url, allow_redirects=True, headers=headers)
-        match=re.compile('src="(.*?)" type="video/mp4" label="(.*?)"').findall(resp.text)
-        for urlA,name in match:
-            urlA=urlA.replace("http:\\/\\/redirector.googlevideo.com\\",'')
-            urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]','http://ddizim.com'+urlA+tk,'')
+        tune=re.compile('src\="http://tune.pk\/player\/embed_player.php\?vid\=(.*?)"').findall(link)#
+        for url in tune:
+            url='https://embed.tune.pk/play/'+url
+            link=get_url(url)
+            match=re.compile('contentURL.*?content\="(.*?)\"').findall(link)
+            for url in match:
+                addLink('[COLOR gold] Tune >>  '+'[COLOR beige]'+'Ply'+'[/COLOR]'+'[/COLOR]',url+tk,'')        
             
-    canlii1=re.compile('src="http://www.canlidizihd6.net/playerv5/oynat/(.*?)"').findall(link)
-                            #http://www.canlidizihd6.net/playerv5/oynat/4cdddb4df37729d2bddcb8a5b0185537
-    import requests as req
-    for url in canlii1:
-        url='http://www.canlidizihd6.net/playerv5/oynat/'+url
-        headers = {
-        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
-        "Accept":"*/*",
-        "Accept-Language":"en-US,en;q=0.5",
-        "Referer":"http://www.canlidizihd6.net/",
-        "Connection":"keep-alive"
-        }
-        resp = req.get(url, allow_redirects=True, headers=headers)
-        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": ".*?"').findall(resp.text)
-        for urlA,name in match:
-            urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
-            urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
-    canlii22=re.compile('src="http://www.canlidizihd6.net/playerv5/oynat/(.*?)"').findall(link)
-    import requests as req
-    for url in canlii22:
-        url='http://www.canlidizihd6.net/playerv5/oynat/'+url
-        headers = {
-        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
-        "Accept":"*/*",
-        "Accept-Language":"en-US,en;q=0.5",
-        "Referer":"http://www.canlidizihd6.net/",
-        "Connection":"keep-alive"
-        }
-        resp = req.get(url, allow_redirects=True, headers=headers)
-        match=re.compile('file":"(.*?).m3u8", "type": "hls"').findall(resp.text)
-        for urlA in match:
-            urlA=urlA+'.m3u8'
-            link=get_url(urlA)
-            match1=re.compile('1280x720,NAME="720"\n(.*?)\#cell=core&ab_nme=2\n').findall(link)
-            for urlAA in match1:
-                name='720 PxL Player'
-                addLink('[COLOR gold]'+name+'[/COLOR]',urlAA,'')
-    canlii2=re.compile('src="http://trdizi.tv/player/oynat/(.*?)"').findall(link)
-    import requests as req
-    for url in canlii2:
-        url='http://trdizi.tv/player/oynat/'+url
-        headers = {
-        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
-        "Accept":"*/*",
-        "Accept-Language":"en-US,en;q=0.5",
-        "Referer":"http://trdizi.tv/",
-        "Connection":"keep-alive"
-        }
-        resp = req.get(url, allow_redirects=True, headers=headers)
-        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(resp.text)
-        for urlA,name in match:
-            urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
-            urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
-    ply2=re.compile('openload.co/embed/(.*?)"').findall(link)
-    for name in ply2:
-        name='https://openload.co/embed/'+name
-        url=name
-        magix_player(name,url)
-    link=get_url(url)
-    ply22=re.compile('src=".*?oload(.*?)"').findall(link)
-    for name in ply22:
-        name='https://oload'+name
-        url=name
-        magix_player(name,url)
+        ply2=re.compile('/playlist/(.*?).json"').findall(link)
+        for url in ply2:
+            url='https://www.videoseyredin.net/playlist/'+url+'.json'
+            dizividcal(url)
+        vk=re.compile('vk.com\/(.*?)"').findall(link)
+        for url in vk:
+            url='http://vk.com/'+url
+            url=url.replace('&#038;','&')
+            magix_player(name,url)
+        okru2=re.compile('".*?\/player\/ok\/1.*?\.php\?v\=(.*?)"').findall(link)
+        for url in okru2:
+          url=(base64.b64decode(url))
+          url=url.replace("http://ok.ru/video/","")
+          url='http://ok.ru/videoembed/'+str(url)
+          magix_player(name,url)
+        hqq1=re.compile('goo.gl/(.*?)"').findall(link)
+        for url in hqq1:
+            url='https://goo.gl/'+url
+            link=get_url(url)
+            match=re.compile('videokeyorig = "(.*?)"').findall(link)
+            for vid in match:
+                resolve( vid)
+        izle7=re.compile('izle7.com\/embed\-(.*?)"').findall(link)
+        for url in izle7:
+            url='http://www.izle7.com/embed-'+url
+            link=get_url(url)
+            match=re.compile("tp_file = '(.*?).mp4'").findall(link)
+            for vid in match:
+                url=vid+'.mp4'
+                name='Izle7'
+                yenical4(name,url)
+        itt=re.compile('src="https://www.rapidvideo.com/e/(.*?)"').findall(link)
+        for url in itt:
+            url='https://www.rapidvideo.com/e/'+url
+            magix_player(name,url)
+        ddizi1=re.compile('ddizim.com/player\/oynat\/(.*?)"').findall(link)
+        import requests as req
+        for url in ddizi1:
+            url='http://ddizim.com/player/oynat/'+url
+            link=get_url(url)
+            headers = {
+            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+            "Accept":"*/*",
+            "Accept-Language":"en-US,en;q=0.5",
+            "Referer":"http://www.ddizim.com/",
+            "Connection":"keep-alive"
+            }
+            resp = req.get(url, allow_redirects=True, headers=headers)
+            match=re.compile('src="(.*?)" type="video/mp4" label="(.*?)"').findall(resp.text)
+            for urlA,name in match:
+                urlA=urlA.replace("http:\\/\\/redirector.googlevideo.com\\",'')
+                urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+            matchA=re.compile('src="(.*?).m3u8" type="').findall(resp.text)
+            for urlA in matchA:
+                link=get_url(urlA+'.m3u8')
+                match1=re.compile('RESOLUTION=1280x720,NAME="720"\n(.*?)\#cell=core\n\#').findall(link)
+                for urlAA in match1:
+                    name='720 PxL Player'
+                    addLink('[COLOR gold]'+name+'[/COLOR]',urlAA,'')
+               
+        canlii1=re.compile('src="http://www.canlidizihd6.net/playerv5/oynat/(.*?)"').findall(link)
+        import requests as req
+        for url in canlii1:
+            url='http://www.canlidizihd6.net/playerv5/oynat/'+url
+            headers = {
+            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+            "Accept":"*/*",
+            "Accept-Language":"en-US,en;q=0.5",
+            "Referer":"http://www.canlidizihd6.net/",
+            "Connection":"keep-alive"
+            }
+            resp = req.get(url, allow_redirects=True, headers=headers)
+            match=re.compile('file":"(.*?)", "label":"(.*?)", "type": ".*?"').findall(resp.text)
+            for urlA,name in match:
+                urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
+                urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+        canlii22=re.compile('src="http://www.canlidizihd6.net/playerv5/oynat/(.*?)"').findall(link)
+        import requests as req
+        for url in canlii22:
+            url='http://www.canlidizihd6.net/playerv5/oynat/'+url
+            headers = {
+            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+            "Accept":"*/*",
+            "Accept-Language":"en-US,en;q=0.5",
+            "Referer":"http://www.canlidizihd6.net/",
+            "Connection":"keep-alive"
+            }
+            resp = req.get(url, allow_redirects=True, headers=headers)
+            match=re.compile('file":"(.*?).m3u8", "type": "hls"').findall(resp.text)
+            for urlA in match:
+                urlA=urlA+'.m3u8'
+                link=get_url(urlA)
+                match1=re.compile('1280x720,NAME="720"\n(.*?)\#cell=core&ab_nme=2\n').findall(link)
+                for urlAA in match1:
+                    name='720 PxL Player'
+                    addLink('[COLOR gold]'+name+'[/COLOR]',urlAA,'')
+        canlii2=re.compile('src="http://trdizi.tv/player/oynat/(.*?)"').findall(link)
+        import requests as req
+        for url in canlii2:
+            url='http://trdizi.tv/player/oynat/'+url
+            headers = {
+            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+            "Accept":"*/*",
+            "Accept-Language":"en-US,en;q=0.5",
+            "Referer":"http://trdizi.tv/",
+            "Connection":"keep-alive"
+            }
+            resp = req.get(url, allow_redirects=True, headers=headers)
+            match=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(resp.text)
+            for urlA,name in match:
+                urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
+                urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+        ply2=re.compile('openload.co/embed/(.*?)"').findall(link)
+        for name in ply2:
+            name='https://openload.co/embed/'+name
+            url=name
+            magix_player(name,url)
+        link=get_url(url)
+        ply22=re.compile('src=".*?oload(.*?)"').findall(link)
+        for name in ply22:
+            name='https://oload'+name
+            url=name
+            magix_player(name,url)
         
         
 #24   
 def dizividcal(url):
     if "daily" in url:
-        req = urllib2.Request(url)
-        req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
-        response = urllib2.urlopen(req)
-        link=response.read()
-        response.close()
-        match=re.compile('"video\\\/mp4","url"\:"(.*?)\/H264\-(.*?)\\\/video(.*?)"').findall(link)
-        for a,name2,c in match:
-            urlA=a+"/H264-"+name2+"/video"+c
-            urlA=urlA.replace('\/','/')
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name2+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+        urla=url
+        urla=urla.replace('motion.com/embed/video/','')
+        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
+        addLink('Play-DM',urla,'')
     if "itti" in url:
         url=url.replace('https://ittir.in/v/','')
         url='http://dreamtr.club/a_n_d/ornek.php?no='+url
@@ -1151,9 +1138,11 @@ def resolve( vid):
                 data = request("http://hqq.watch/player/get_md5.php?" + urllib.urlencode(get_data), headers)
                 jsonData = json.loads(data)
                 file_url = jsonData['obf_link']
+
                 if file_url:
                     list_url = decodeUN(file_url.replace('\\', ''))
                     decodedm3u = list_url + ".mp4.m3u8"
+
                     fake_agent = user_agent
                     url=decodedm3u  + '|' + fake_agent
                     name='Hqq_Player'

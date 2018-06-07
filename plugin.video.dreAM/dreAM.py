@@ -105,7 +105,7 @@ def Sinema():
 def Dizi():
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR gold]'+'1-> Site - Canlihddiziler'+'[/COLOR]',url,1789,'http://dreamtr.club/resimler/Dizi1.png',fann)
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR gold]'+'2-> Site - Canlidizihd6'+'[/COLOR]',url,1788,'http://dreamtr.club/resimler/Dizi2.png',fann)
-    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'3-> Site - Ddizi'+'[/COLOR]',url,1899,'http://dreamtr.club/resimler/Dizi3.png',fann)
+    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'3-> Site - Ddizim'+'[/COLOR]',url,1899,'http://dreamtr.club/resimler/Dizi3.png',fann)
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'4-> Site - Dizihd3'+'[/COLOR]',url,1898,'http://dreamtr.club/resimler/Dizi4.png',fann)
     xbmctools.addDir('[COLOR orange]>>>[/COLOR] [COLOR beige]KANAL D Dizileri[/COLOR]',url,13,'https://vignette.wikia.nocookie.net/logopedia/images/a/a8/Kanal_D_Logo_%281994-2011%29.png',fann)
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal 7[/COLOR]',"http://www.izle7.com/kanal7/hint-dizileri",28,'http://www.canlimobeseizle.com/wp-content/uploads/kanal7hd.png',fann)
@@ -388,7 +388,7 @@ def ddizi2():
     panel = soup.findAll("div", {"class": "blok-liste"},smartQuotesTo=None)
     match1=re.compile('<a href="http://www.ddizim.com/diziler\/(.*?)\/(.*?)\-son-bolum-izle"').findall(str(panel))
     for url,name in match1:
-        url='http://www.ddizi1.com/diziler/'+url+"/"+name+'-son-bolum-izle'
+        url='http://www.ddizim.com/diziler/'+url+"/"+name+'-son-bolum-izle'
         name=fix.decode_fix(name)
         xbmctools.addDir('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,23,'','')
 #25
@@ -419,7 +419,7 @@ def Yeni2dizi(url):
         url=panel[i].find('a')['href']
         name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
         thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-        thumbnail='http://www.ddizi1.com/'+thumbnail
+        thumbnail='http://www.ddizim.com/'+thumbnail
         name=name.replace('&#8211','').replace('&','')
         xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,26,thumbnail,thumbnail)
     page=re.compile('class="active"><a href=".*?">.*?</a></li><li ><a href="(.*?)">(.*?)</a>').findall(link)
@@ -436,7 +436,7 @@ def Yeni2(url):
             url=panel[i].find('a')['href']
             name=panel[i].find('img')['alt'].encode('ascii', 'ignore')
             thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-            thumbnail='http://www.ddizi1.com/'+thumbnail
+            thumbnail='http://www.ddizim.com/'+thumbnail
             name=name.replace('&#8211','').replace('&','')
             xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,26,thumbnail,thumbnail)
         page=re.compile('class="active"><a href=".*?">.*?</a></li><li ><a href="(.*?)">(.*?)</a>').findall(link)
@@ -485,7 +485,7 @@ def dizivideolinks2(url,name):
         liste=BeautifulSoup(str(panel))
         match2=re.compile('<a href="(.*?)">(.*?)</a></li>').findall(str(liste))
         for url,name in match2:
-            url='http://www.ddizi1.com/'+url
+            url='http://www.ddizim.com/'+url
             name=name.replace('\xe0\xb8\xa3\xe0\xb8\x87','c')
             xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,22,fann,fann)
     else:
@@ -1430,8 +1430,11 @@ def iptvpro(name,url):
             xbmctools.addDir('[COLOR gold]>'+name+' - Platinium User[/COLOR]',url,19,'','')
 #99
 def magix_player(name,url):
-    if "www.dailymotion.com" in url:
-        xbmctools.daily_sec(name,url)
+    if "dailymotion" in url:
+        urla=url
+        urla=urla.replace('motion.com/embed/video/','')
+        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
+        addLink('Play-DM',urla,'')
     elif "hqq" in url:
         url=url.replace('&amp;autoplay=no','').replace('https://hqq.tv/player/embed_player.php?vid=','')
         vid=url
