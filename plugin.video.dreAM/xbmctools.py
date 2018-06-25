@@ -45,7 +45,7 @@ playList.clear()
 
 def get_url(url):
     req = urllib2.Request(url)
-    req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+    req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
     response = urllib2.urlopen(req)
     link=response.read()
     link=fix.decode_fix(link)
@@ -1104,56 +1104,133 @@ def decodeUN(a):
 def resolve( vid):
     user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_3 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/57.0.2987.137 Mobile/13G34 Safari/601.1.46'
     headers = { 'User-Agent': user_agent,
-                'Referer': 'https://hqq.watch/player/embed_player.php?vid=' + vid}
-    player_url = "https://hqq.watch/player/embed_player.php?vid=%s" % vid
-    data = request(player_url, headers)
-    data = _decode_data(data)
-    data = _decode_data(data)
+                'Referer': 'https://hqq.tv/player/embed_player.php?vid=' + vid}
+    web_url = "https://hqq.tv/player/embed_player.php?vid=%s" % vid
+    html = request(web_url, headers)
     
-    code_crypt = data.split(';; ')
-    data = _decode_data(code_crypt[1])
+    if html:
+        try:
+            wise = re.search('''<script type=["']text/javascript["']>\s*;?(eval.*?)</script>''', html,
+                             re.DOTALL | re.I).groups()[0]
+            data_unwise = jswise(wise).replace("\\", "")
+            try:
+                at = re.search('at=(\w+)', data_unwise, re.I).groups()[0]
+            except:
+                at = ""
+            try:
+                http_referer = re.search('http_referer=(.*?)&', data_unwise, re.I).groups()[0]
+            except:
+                http_referer = ""
 
-    if data:
-        jsonInfo = request("http://hqq.watch/player/ip.php?type=json", headers)
-        jsonIp = json.loads(jsonInfo)['ip']
+            player_url = "http://hqq.tv/sec/player/embed_player.php?iss=&vid=%s&at=%s&autoplayed=yes&referer=on&http_referer=%s&pass=&embed_from=&need_captcha=0&hash_from=&secured=0" % (
+            vid, at, http_referer)
+            headers.update({'Referer': web_url})
+            data_player = request(player_url, headers=headers)
+            data_unescape = re.findall('document.write\(unescape\("([^"]+)"', data_player)
+            data = ""
+            for d in data_unescape:
+                data += urllib.unquote(d)
 
-        at = re.search(r'var at *= *"(\w+)";', data, re.DOTALL)
-        http_referer = re.search('var http_referer *= *"([^"]*)";', data, re.DOTALL)
+            data_unwise_player = ""
+            wise = ""
+            wise = re.search('''<script type=["']text/javascript["']>\s*;?(eval.*?)</script>''', data_player,
+                             re.DOTALL | re.I)
+            if wise:
+                data_unwise_player = jswise(wise.group(1)).replace("\\", "")
 
-        if jsonIp and at:
-            get_data = {'iss': jsonIp, 'vid': vid, 'at': at.group(1), 'autoplayed': 'on', 'referer': 'on',
-                        'http_referer': http_referer.group(1), 'pass': '', 'embed_from' : '', 'need_captcha' : '0',
-                        'hash_from' : ''
-                        }
-            data = urllib.unquote(request("http://hqq.watch/sec/player/embed_player.php?" +
-                                               urllib.urlencode(get_data), headers))
-            
-            at = re.search(r'var\s*at\s*=\s*"([^"]*?)"', data)
-            l = re.search(r'link_1: ([a-zA-Z]+), server_1: ([a-zA-Z]+)', data)
-            
-            data = _decode_data(data)
-            data = _decode_data(data)
-            code_crypt = data.split(';; ')
-            data = _decode_data(code_crypt[1])
-            
-            vid_server = re.search(r'var ' + l.group(2) + ' = "([^"]+)"', data).group(1)
-            vid_link = re.search(r'var ' + l.group(1) + ' = "([^"]+)"', data).group(1)
+            try:
+                vars_data = re.search('/player/get_md5.php",\s*\{(.*?)\}', data, re.DOTALL | re.I).groups()[0]
+            except:
+                vars_data = ""
+            matches = re.findall('\s*([^:]+):\s*([^,]*)[,"]', vars_data)
+            params = {}
+            for key, value in matches:
+                if key == "adb":
+                    params[key] = "0/"
+                elif '"' in value:
+                    params[key] = value.replace('"', '')
+                else:
+                    try:
+                        value_var = re.search('var\s*%s\s*=\s*"([^"]+)"' % value, data, re.I).groups()[0]
+                    except:
+                        value_var = ""
+                    if not value_var and data_unwise_player:
+                        try:
+                            value_var = \
+                            re.search('var\s*%s\s*=\s*"([^"]+)"' % value, data_unwise_player, re.I).groups()[0]
+                        except:
+                            value_var = ""
+                    params[key] = value_var
 
-            if vid_server and vid_link and at:
-                get_data = {'server_1': vid_server, 'link_1': vid_link, 'at': at.group(1), 'adb': '0/',
-                            'b': '1', 'vid': vid }
-                headers['x-requested-with'] = 'XMLHttpRequest'
-                data = request("http://hqq.watch/player/get_md5.php?" + urllib.urlencode(get_data), headers)
-                jsonData = json.loads(data)
-                file_url = jsonData['obf_link']
+            params = urllib.urlencode(params)
+            headers.update({'X-Requested-With': 'XMLHttpRequest', 'Referer': player_url})
+            data = ""
+            data = request("http://hqq.tv/player/get_md5.php?" + params, headers=headers)
+            url_data = json.loads(data)
+            media_url = "https:" + tb(url_data["obf_link"].replace("#", "")) + ".mp4.m3u8"
 
-                if file_url:
-                    list_url = decodeUN(file_url.replace('\\', ''))
-                    decodedm3u = list_url + ".mp4.m3u8"
+            if media_url:
+                del headers['X-Requested-With']
+                headers.update({'Origin': 'https://hqq.tv'})
+                name='Hqq_Player'
+                url=media_url
+                yenical4(name,url)
+        except Exception as e:
+            print str(e)
 
-                    fake_agent = user_agent
-                    url=decodedm3u  + '|' + fake_agent
-                    name='Hqq_Player'
-                    yenical4(name,url)
-                    
+def tb( b_m3u8_2):
+    j = 0
+    s2 = ""
+    while j < len(b_m3u8_2):
+        s2 += "\\u0" + b_m3u8_2[j:(j + 3)]
+        j += 3
 
+    return s2.decode('unicode-escape').encode('ASCII', 'ignore')
+def jswise( wise):
+    while True:
+        wise = re.search("var\s.+?\('([^']+)','([^']+)','([^']+)','([^']+)'\)", wise, re.DOTALL)
+        if not wise: break
+        ret = wise = js_wise(wise.groups())
+
+    return ret
+
+def js_wise( wise):
+    w, i, s, e = wise
+
+    v0 = 0;
+    v1 = 0;
+    v2 = 0
+    v3 = [];
+    v4 = []
+
+    while True:
+        if v0 < 5:
+            v4.append(w[v0])
+        elif v0 < len(w):
+            v3.append(w[v0])
+        v0 += 1
+        if v1 < 5:
+            v4.append(i[v1])
+        elif v1 < len(i):
+            v3.append(i[v1])
+        v1 += 1
+        if v2 < 5:
+            v4.append(s[v2])
+        elif v2 < len(s):
+            v3.append(s[v2])
+        v2 += 1
+        if len(w) + len(i) + len(s) + len(e) == len(v3) + len(v4) + len(e): break
+
+    v5 = "".join(v3);
+    v6 = "".join(v4)
+    v1 = 0
+    v7 = []
+
+    for v0 in range(0, len(v3), 2):
+        v8 = -1
+        if ord(v6[v1]) % 2: v8 = 1
+        v7.append(chr(int(v5[v0:v0 + 2], 36) - v8))
+        v1 += 1
+        if v1 >= len(v4): v1 = 0
+
+    return "".join(v7)

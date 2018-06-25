@@ -121,7 +121,7 @@ def canliyayin():
 #--#
 def get_url(url):
     req = urllib2.Request(url)
-    req.add_header('User-agent', 'Mozilla/5.0 (X11; Linux x86_64; SmartTV) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),('Accept-Encoding', 'none'),('Accept-Language', 'en-US,en;q=0.8'),('Connection', 'keep-alive')
+    req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
     response = urllib2.urlopen(req)
     link=response.read()
     link=link.replace('&#215;',"x").replace('&#231;',"c").replace('&#8217;',"-").replace('&#39;',"'").replace('&#252;',"u").replace('&#199;',"C").replace('&#246;',"o").replace('&#039;',"'")
@@ -183,12 +183,10 @@ def Kanalddizivideo(url,name):
         match2=re.compile('"ServiceUrl":"(.+?)","SecurePath":"(.+?)?key=.+?"').findall(link2)
         for url,code in match2:
             url=url+code+'key=93a08dbbdd93b00670860974d0f63a6d'+tk
-            xbmcPlayer.play(url)
-            xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',7,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+            xbmctools.yenical4(name,url)
     except:
         pass
-        showMessage('[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]','[COLOR red]Iyi Seyirler Diler!!![/COLOR]')
-        xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',7,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+        
          
 #14
 def Arama():
@@ -363,11 +361,14 @@ def Dizi2():
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'2-> Site - Dizihd3'+'[/COLOR]',url,1898,fann,fann)
 #1898
 def Dizi288():
-    url='http://www.dizihd3.com/'
+    url='http://www.dizihd3.net/'
     xbmctools.addDir('[COLOR red]>> [/COLOR] [COLOR orange]Dizi ARA / Search[/COLOR]',url,255,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,21,yeniek,fann)
-    url='http://www.dizihd3.com/'
-    link=get_url(url)
+    url='http://www.dizihd3.net/'
+    req = urllib2.Request(url)
+    req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
+    response = urllib2.urlopen(req)
+    link=response.read()
     match1=re.compile('<li class="cat-item cat-item-.*?"><a href="(.*?)" >(.*?)</a>\n</li>').findall(link)
     for url,name in match1:
         if "eski-diziler" in url:
@@ -408,7 +409,7 @@ def Arama2():
         Yeni2(url)
 #255
 def Arama22():
-    dizi2='http://www.dizihd3.com'
+    dizi2='http://www.dizihd3.net'
     keyboard = xbmc.Keyboard("", 'Search', False)
     keyboard.doModal()
     if keyboard.isConfirmed():
@@ -1077,13 +1078,14 @@ def Canli1():
     except:
         print"kanald yok"
     try:
-        sitegit='https://www.kumanda.tv/show-tv-canli/'
+        sitegit='https://web.kumanda.tv/show-tv-canli/'
         link=get_url(sitegit)
         soup = BeautifulSoup(link)
         panel=soup.findAll("ol", {"class": "tvlistesi"})
         match1=re.compile('<li><a href="(.*?)" title=".*?">(.*?)</a></li>').findall(str(panel))
         for url,name in match1:
-            xbmctools.addDir('[COLOR pink] >>'+name+'[/COLOR]',url,101,"",'')
+            xbmctools.addDir('[COLOR beige][COLOR purple]>>[/COLOR]  '+name+'[/COLOR]',url,101,"","")
+            #xbmctools.addDir('[COLOR pink] >>'+name+'[/COLOR]',url,101,"",'')
     except:
         print"kesintisiz yok"
     try:
@@ -1093,10 +1095,9 @@ def Canli1():
         req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
         response = urllib2.urlopen(req)
         link=response.read()
-        match1=re.compile('<li>\n<a href="http://www.canlitvizle.com/(.*?)" title="(.*?)">\n<span>.*?</span>').findall(link)
+        match1=re.compile('<li>\n<a href="http://canlitvizle.com/(.*?)" title="(.*?)">\n<span>.*?</span>').findall(link)
         for url,name in match1:
-            print name,"BB"
-            a='http://www.canlitvizle.com/'
+            a='http://canlitvizle.com/'
             url=a+url
             xbmctools.addDir('[COLOR orange] >>'+name+'[/COLOR]',url,101,'','')
     except:
@@ -1192,14 +1193,14 @@ def Canli2():
 def ctv2(url):
     name='Play'
     import requests as req
-    if "https://www.kumanda.tv/" in url:
+    if "https://web.kumanda.tv/" in url:
         try:
             import requests as req
             headers = {
             "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
             "Accept":"*/*",
             "Accept-Language":"en-US,en;q=0.5",
-            "Referer":"https://www.kumanda.tv/",
+            "Referer":"https://web.kumanda.tv/",
             "Connection":"keep-alive"
             }
             resp = req.get(url, allow_redirects=True, headers=headers)
@@ -1210,22 +1211,20 @@ def ctv2(url):
                 "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
                 "Accept":"*/*",
                 "Accept-Language":"en-US,en;q=0.5",
-                "Referer":"https://www.kumanda.tv/",
+                "Referer":"https://web.kumanda.tv/",
                 "Connection":"keep-alive"
                 }
                 resp = req.get(url, allow_redirects=True, headers=headers)
                 import re
                 match=re.compile("file: \'(.*?)\'").findall(resp.text)
                 for url in match:
-                    xbmcPlayer.play(url+tk)
-                    xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                    xbmctools.yenical4(name,url+tk)
         except:
             pass
-            showMessage('[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]','[COLOR red]Iyi Seyirler Diler!!![/COLOR]')
-            xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+
     else:
         
-        if "http://www.canlitvizle.com/" in url:
+        if "http://canlitvizle.com/" in url:
             try:
                 
                 import requests as req
@@ -1233,7 +1232,7 @@ def ctv2(url):
                 "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
                 "Accept":"*/*",
                 "Accept-Language":"en-US,en;q=0.5",
-                "Referer":"http://www.canlitvizle.com//",
+                "Referer":"http://canlitvizle.com/",
                 "Connection":"keep-alive"
                 }
                 resp = req.get(url, allow_redirects=True, headers=headers)
@@ -1244,19 +1243,15 @@ def ctv2(url):
                     "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
                     "Accept":"*/*",
                     "Accept-Language":"en-US,en;q=0.5",
-                    "Referer":"http://www.canlitvizle.com/",
+                    "Referer":"http://canlitvizle.com/",
                     "Connection":"keep-alive"
                     }
                     resp = req.get(url, allow_redirects=True, headers=headers)
                     match=re.compile("file: '(.*?)'").findall(resp.text)
                     for url in match:
-                        #xbmctools.addLink(name,url+tk,'')
-                        xbmcPlayer.play(url+tk)
-                        xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                        xbmctools.yenical4(name,url+tk)
             except:
                 pass
-                showMessage('[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]','[COLOR red]Iyi Seyirler Diler!!![/COLOR]')
-                xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
 
         else:
             
@@ -1276,13 +1271,9 @@ def ctv2(url):
                     import re
                     match=re.compile("file: '(.*?)'").findall(resp.text)
                     for url in match:
-                        url=url+tk
-                        xbmcPlayer.play(url+tk)
-                        xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',18,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                        xbmctools.yenical4(name,url+tk)
                 except:
                     pass
-                    showMessage('[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]','[COLOR red]Iyi Seyirler Diler!!![/COLOR]')
-                    xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',18,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
             else:
                 
 
@@ -1331,12 +1322,9 @@ def ctv2(url):
                                     import re
                                     match=re.compile("file: \'(.*?)\'").findall(link)
                                     for url in match:
-                                        xbmcPlayer.play(url+tk)
-                                        xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                                        xbmctools.yenical4(name,url+tk)
                             except:
                                 pass
-                                showMessage('[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]','[COLOR red]Iyi Seyirler Diler!!![/COLOR]')
-                                xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
                             else:
                                 if ".plus" in url:
                                     link=get_url(url)
@@ -1349,29 +1337,7 @@ def ctv2(url):
                                             for url in match:
                                                 xbmctools.addLink(name,url,'')
                                 else:
-                                    import re
-                                    url=url.replace('https','http')
-                                    req = urllib2.Request(url)
-                                    req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
-                                    response = urllib2.urlopen(req)
-                                    link=response.read()
-                                    response.close()
-                                    match=re.compile('src=https://streaming(.*?)\n').findall(link)
-                                    for url in match:
-                                        if url:
-                                            url='https://streaming'+url+tk
-                                            xbmctools.addLink(name,url,'')
-                                    url=url.replace('https','http')
-                                    req = urllib2.Request(url)
-                                    req.add_header("User-Agent","Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36")
-                                    response = urllib2.urlopen(req)
-                                    link=response.read()
-                                    response.close()
-                                    match=re.compile("hls: '(.*?)'").findall(link)
-                                    for url in match:
-                                        if url:
-                                            url=url+tk
-                                            xbmctools.addLink(name,url,'')
+                                    pass
 
 #18
 def Canli3():#
