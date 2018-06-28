@@ -1120,34 +1120,26 @@ def ctv1(name,url):#
         match3 = re.compile('file : "(.*?)"').findall(link)
         for url in match3:
             if url:
-                url=url+tk
-                xbmcPlayer.play(url)
-            xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                xbmctools.yenical4(name,url+tk)
         link=get_url(url)
         match99 = re.compile("file: '(.*?)',type").findall(link)
         for url in match99:
             if url:
-                url=url+tk
-                xbmcPlayer.play(url)
-            xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                xbmctools.yenical4(name,url+tk)
         link=get_url(url)
         match1= re.compile("file: \'http(.*?)m3u8\.'").findall(link)
         for url in match1:
             if url:
-                url='http'+url+'m3u8'+tk
-                xbmcPlayer.play(url)
-            xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                url='http'+url+'m3u8'
+                xbmctools.yenical4(name,url+tk)
         link=get_url(url)
         match2= re.compile('filexxx= "(.*?)"').findall(link)
         for url in match2:
             if url:
-                url=url+tk
-                xbmcPlayer.play(url)
-            xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+                xbmctools.yenical4(name,url+tk)
     except:
         pass
-        showMessage('[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]','[COLOR red]Iyi Seyirler Diler!!![/COLOR]')
-        xbmctools.addDir('[COLOR red]RETURN List << [/COLOR]','',11,'http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
+
 #12
 def Canli2():
     sitegit='http://www.canlitvlive.io/tum-kanallar.html'
@@ -1193,7 +1185,7 @@ def Canli2():
 def ctv2(url):
     name='Play'
     import requests as req
-    if "https://web.kumanda.tv/" in url:
+    if "kumanda" in url:
         try:
             import requests as req
             headers = {
@@ -1388,9 +1380,9 @@ def yenical44(name,url):
 def radyo():
     url="http://dreamtr.club/aZambak/Rdy.txt"
     link=get_url(url)
-    match=re.compile('<a href="(.*?)" target=".*?"><img alt="(.*?)" border=".*?" width=".*?" height=".*?" src="(.*?)" title=".*?"').findall(link)
-    for url,name,thumbnail in match:
-        xbmctools.addDir('[COLOR beige]>>'+name+'[/COLOR]',url,107,thumbnail,thumbnail)
+    match=re.compile('<li><a href=\'(.*?)\'>(.*?)</a></li>').findall(link)
+    for url,name in match:
+        xbmctools.addDir('[COLOR beige]>>'+name+'[/COLOR]',url,107,'','')
 
 
         
