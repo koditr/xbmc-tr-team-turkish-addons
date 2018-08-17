@@ -99,7 +99,7 @@ class windows():
 #2
 def Sinema():
     xbmctools.addDir('[COLOR gold]! EvrenselFilm * New * ![/COLOR]',"Sinema1()",5,'http://dreamtr.club/resimler/Sinema1.png',fann)
-    xbmctools.addDir('[COLOR pink]! Jetfilmizle.Org * New 2018 * ![/COLOR]',"Sinema2()",6,'http://dreamtr.club/resimler/Sinema2.png',fann)
+    xbmctools.addDir('[COLOR pink]! Jetfilmizle.info * New 2018 * ![/COLOR]',"Sinema2()",6,'http://dreamtr.club/resimler/Sinema2.png',fann)
     xbmc.executebuiltin('Container.SetViewMode(500)')
 #3
 def Dizi():
@@ -245,7 +245,7 @@ def de_get(name,url):
     xbmcPlayer = xbmc.Player()
     xbmcPlayer.stop()
     import requests as requests#halktv
-    url1='822=di?php.hctaw/moc.okinig.www//:ptth'[::-1]
+    url1='48=di?php.hctaw/moc.okinig.www//:ptth'[::-1]
     link=get_url(url1)
     match=re.compile('source:".*?\?wmsAuthSign\=(.*?)"').findall(link)
     for cd in match:
@@ -607,19 +607,21 @@ def ayrisdirma1(url):
             Baglanvideo(url,name,pid)
 #6
 def Sinema2():
-    url='https://jetfilmizle.org/'
+    url='https://jetfilmizle.info/'
     xbmctools.addDir('[COLOR yellow]## Film Ara / Search ##[/COLOR]',url,44,aramaa,fann)
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]Yerli Filmler [/COLOR]',"https://jetfilmizle.org/yerli-filmleri-izle",43,yeniek,fann)
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]BoolyWood Filmleri [/COLOR]',"https://jetfilmizle.org/kategoriler/bollywood-filmleri",43,yeniek,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]Yerli Filmler [/COLOR]',"https://jetfilmizle.info/yerli-filmleri-izle",43,yeniek,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]BoolyWood Filmleri [/COLOR]',"https://jetfilmizle.info/kategoriler/bollywood-filmleri",43,yeniek,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',url,43,yeniek,fann)
     link=get_url(url)
-    match=re.compile('class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-.*?"><a title=".*?" href="https://jetfilmizle.org/filmin-turu/(.*?)">(.*?)</a>').findall(link)
+    match=re.compile('class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-.*?"><a title=".*?" href="(.*?)">(.*?)</a>').findall(link)
     for url,name in match:
-        
-        xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',"https://jetfilmizle.org/filmin-turu/"+url,43,"",fann)
+        if "<" in name:
+            pass
+        else:
+            xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',url,43,"",fann)
 #44
 def Search2():
-    sinema="https://jetfilmizle.org/filmara.php?s="
+    sinema="https://jetfilmizle.info/filmara.php?s="
     keyboard = xbmc.Keyboard("", 'Search', False)
     keyboard.doModal()
     if keyboard.isConfirmed():
@@ -638,7 +640,7 @@ def Yenisinema2(url):
             thumbnail=panel[i].find('img')['src']
             name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
             name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
-            xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
+            xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,'https://jetfilmizle.info/'+thumbnail,'https://jetfilmizle.info/'+thumbnail)
         pages=re.compile('class="active_page"><a href=".*?">.*?</a></li><li><a href="(.*?)">(.*?)</a></li').findall(link)
         for url,name in pages:
             xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
@@ -653,7 +655,7 @@ def Yenisinema2(url):
                 thumbnail=panel[i].find('img')['src']
                 name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
                 name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
-                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
+                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,'https://jetfilmizle.info/'+thumbnail,'https://jetfilmizle.info/'+thumbnail)
             pages=re.compile('<li class="active_page"><a href=".*?">.*?</a></li>\n<li><a href="(.*?)">(.*?)</a></li>').findall(link)
             for url,name in pages:
                 xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
@@ -667,8 +669,8 @@ def Yenisinema2(url):
                 thumbnail=panel[i].find('img')['src']
                 name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
                 name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
-                thumbnail='https://jetfilmizle.org/'+thumbnail
-                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
+                #thumbnail='https://jetfilmizle.info/'+thumbnail
+                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,'https://jetfilmizle.info/'+thumbnail,'https://jetfilmizle.info/'+thumbnail)
             pages=re.compile('<li class="active_page"><a href=".*?">.*?</a></li><li><a href="(.*?)">(.*?)</a></li>').findall(link)
             for url,name in pages:
                 xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
@@ -784,7 +786,7 @@ def framee(name,url):
                         "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
                         "Accept":"*/*",
                         "Accept-Language":"en-US,en;q=0.5",
-                        "Referer":"https://jetfilmizle.org",
+                        "Referer":"https://jetfilmizle.info",
                         "Connection":"keep-alive"
                         } 
                         resp = req.get(url, allow_redirects=True, headers=headers)
@@ -873,7 +875,7 @@ def framee(name,url):
                         "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
                         "Accept":"*/*",
                         "Accept-Language":"en-US,en;q=0.5",
-                        "Referer":"https://jetfilmizle.org",
+                        "Referer":"https://jetfilmizle.info",
                         "Connection":"keep-alive"
                         }
                         resp = req.get(url, allow_redirects=True, headers=headers)
@@ -1314,7 +1316,7 @@ def ctv2(url):
                                     import re
                                     match=re.compile("file: \'(.*?)\'").findall(link)
                                     for url in match:
-                                        xbmctools.yenical4(name,url+tk)
+                                        yenical44(name,url+tk)
                             except:
                                 pass
                             else:
