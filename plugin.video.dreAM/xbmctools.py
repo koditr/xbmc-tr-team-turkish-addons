@@ -798,24 +798,22 @@ def frame(url):
             "Connection":"keep-alive"
             }
             resp = req.get(url, allow_redirects=True, headers=headers)
-##            match=re.compile('src="(.*?)" type="video/mp4" label="(.*?)"').findall(resp.text)
-##            for urlA,name in match:
-##                urlA=urlA.replace("http:\\/\\/redirector.googlevideo.com\\",'')
-##                urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-##                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
-##            matchA=re.compile('src="(.*?).m3u8" type="').findall(resp.text)
-##            for urlA in matchA:
-                #print urlA
-##                link=get_url(urlA+'.m3u8')
-##                match1=re.compile('RESOLUTION=1280x720,NAME="720"\n(.*?)\#cell=core\n\#').findall(link)
-##                for urlAA in match1:
-##                    name='720 PxL Player'
-##                    addLink('[COLOR gold]'+name+'[/COLOR]',urlAA,'')
-            matchAA=re.compile('src="(.*?)" type="application/x-mpegURL">').findall(resp.text)
+            match=re.compile('src="(.*?)" type="video/mp4" label="(.*?)"').findall(resp.text)
+            for urlA,name in match:
+                urlA=urlA.replace("http:\\/\\/redirector.googlevideo.com\\",'')
+                urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+            matchA=re.compile('src="(.*?).m3u8" type="').findall(resp.text)
+            for urlA in matchA:
+                link=get_url(urlA+'.m3u8')
+                match1=re.compile('RESOLUTION=1280x720,NAME="720"\n(.*?)\#cell=core\n\#').findall(link)
+                for urlAA in match1:
+                    name='720 PxL Player'
+                    addLink('[COLOR gold]'+name+'[/COLOR]',urlAA,'')
+            matchAA=re.compile('src="(.*?).m3u8" type="application/x-mpegURL"').findall(resp.text)
             for urlA in matchAA:
-                print urlA,"BBB"
                 name='720 PxL Player'
-                yenical4(name,url+tk)
+                yenical4(name,urlA+'.m3u8')
         tune=re.compile('src\="http://tune.pk/player/embed_player.php\?vid\=(.*?)"').findall(link)#
         for url in tune:
             url='http://tune.pk/player/embed_player.php?vid='+url
@@ -868,15 +866,15 @@ def frame(url):
             url='https://www.rapidvideo.com/e/'+url
             magix_player(name,url)
                
-        canlii1=re.compile('src="http://www.canlidizihd6.net/(.*?)"').findall(link)
+        canlii1=re.compile('src="http://www.canlidizihd7.com/(.*?)"').findall(link)
         import requests as req
         for url in canlii1:
-            url='http://www.canlidizihd6.net/'+url
+            url='http://www.canlidizihd7.com/'+url
             headers = {
             "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
             "Accept":"*/*",
             "Accept-Language":"en-US,en;q=0.5",
-            "Referer":"http://www.canlidizihd6.net/",
+            "Referer":"http://www.canlidizihd7.com/",
             "Connection":"keep-alive"
             }
             resp = req.get(url, allow_redirects=True, headers=headers)
@@ -885,15 +883,15 @@ def frame(url):
                 urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
                 urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
-        canlii22=re.compile('src="http://www.canlidizihd6.net/(.*?)"').findall(link)
+        canlii22=re.compile('src="http://www.canlidizihd7.com/(.*?)"').findall(link)
         import requests as req
         for url in canlii22:
-            url='http://www.canlidizihd6.net/'+url
+            url='http://www.canlidizihd7.com/'+url
             headers = {
             "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
             "Accept":"*/*",
             "Accept-Language":"en-US,en;q=0.5",
-            "Referer":"http://www.canlidizihd6.net/",
+            "Referer":"http://www.canlidizihd7.com/",
             "Connection":"keep-alive"
             }
             resp = req.get(url, allow_redirects=True, headers=headers)
@@ -931,6 +929,12 @@ def frame(url):
         ply22=re.compile('src=".*?oload(.*?)"').findall(link)
         for name in ply22:
             name='https://oload'+name
+            url=name
+            magix_player(name,url)
+        link=get_url(url)
+        ply222=re.compile('src="https://www.rapidvideo(.*?)"').findall(link)
+        for name in ply222:
+            name='https://www.rapidvideo'+name
             url=name
             magix_player(name,url)
         
