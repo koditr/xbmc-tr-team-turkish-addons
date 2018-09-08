@@ -609,7 +609,7 @@ def ayrisdirma1(url):
 def Sinema2():
     url='https://jetfilmizle.info/'
     xbmctools.addDir('[COLOR yellow]## Film Ara / Search ##[/COLOR]',url,44,aramaa,fann)
-    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]Yerli Filmler [/COLOR]',"https://jetfilmizle.info/yerli-filmleri-izle",43,yeniek,fann)
+    xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]Yerli Filmler [/COLOR]',"https://jetfilmizle.info/yerli-filmler",43,yeniek,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR pink]BoolyWood Filmleri [/COLOR]',"https://jetfilmizle.info/kategoriler/bollywood-filmleri",43,yeniek,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]Yeni Eklenen Filmler [/COLOR]',url,43,yeniek,fann)
     link=get_url(url)
@@ -618,7 +618,10 @@ def Sinema2():
         if "<" in name:
             pass
         else:
-            xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',url,43,"",fann)
+            if "Telif" in name:
+                pass
+            else:
+                xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR orange]'+name+'[/COLOR]',url,43,"",fann)
 #44
 def Search2():
     sinema="https://jetfilmizle.info/filmara.php?s="
@@ -648,14 +651,15 @@ def Yenisinema2(url):
         if "filmin-turu" in url:
             link=get_url(url)
             soup = BeautifulSoup(link)
-            panel = soup.findAll("div", {"class": "tab-content"},smartQuotesTo=None)
+            panel = soup.findAll("div", {"role": "tabpanel"},smartQuotesTo=None)
             panel = soup.findAll("div", {"class": "col-md-6"})
             for i in range (len (panel)):
                 url=panel[i].find('a')['href']
                 thumbnail=panel[i].find('img')['src']
                 name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
                 name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
-                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,'https://jetfilmizle.info/'+thumbnail,'https://jetfilmizle.info/'+thumbnail)
+                thumbnail=thumbnail.replace('wp-content','https://jetfilmizle.info/wp-content')
+                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
             pages=re.compile('<li class="active_page"><a href=".*?">.*?</a></li>\n<li><a href="(.*?)">(.*?)</a></li>').findall(link)
             for url,name in pages:
                 xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
@@ -666,12 +670,26 @@ def Yenisinema2(url):
             panel = soup.findAll("div", {"class": "col-md-6"})
             for i in range (len (panel)):
                 url=panel[i].find('a')['href']
-                thumbnail=panel[i].find('img')['data-src']
+                thumbnail=panel[i].find('img')['src']
                 name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
                 name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
-                thumbnail='https://jetfilmizle.info/'+thumbnail
-                thumbanil=thumbnail.replace('https://jetfilmizle.info/https://cdn.jetfilmizle.info/','https://jetfilmizle.info/').replace('https://jetfilmizle.info/https://cdn.jetfilmizle.info/','https://cdn.jetfilmizle.info/')
+                thumbnail=thumbnail.replace('wp-content','https://jetfilmizle.info/wp-content')
                 xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
+            pages=re.compile('<li class="active_page"><a href=".*?">.*?</a></li>\n<li><a href="(.*?)">(.*?)</a></li>').findall(link)
+            for url,name in pages:
+                xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
+##            link=get_url(url)
+##            soup = BeautifulSoup(link)
+##            panel = soup.findAll("div", {"class": "row"},smartQuotesTo=None)
+##            panel = soup.findAll("div", {"class": "col-md-6"})
+##            for i in range (len (panel)):
+##                url=panel[i].find('a')['href']
+##                thumbnail=panel[i].find('article')['class']
+##                name=panel[i].find('img')['title'].encode('utf-8', 'ignore')
+##                name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
+##                thumbnail='https://jetfilmizle.info/'+thumbnail
+##                thumbanil=thumbnail.replace('https://jetfilmizle.info/https://cdn.jetfilmizle.info/','https://jetfilmizle.info/').replace('https://jetfilmizle.info/https://cdn.jetfilmizle.info/','https://cdn.jetfilmizle.info/')
+##                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
             pages=re.compile('<li class="active_page"><a href=".*?">.*?</a></li><li><a href="(.*?)">(.*?)</a></li>').findall(link)
             for url,name in pages:
                 xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
@@ -734,6 +752,7 @@ def framee(name,url):
                             link=get_url(url)
                             match=re.compile('\|thumbs\|\|01\|\|100\|(.*?)\|data\|').findall(link)
                             for b in match:
+                                print b
                                 if match:
                                     link=get_url(url)
                                     match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
@@ -742,6 +761,7 @@ def framee(name,url):
                                         url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
                                         yenical44(name,url)
                         else:
+                            print url,"BBB"
                             magix_player(name,url)
         else:
             if "jetfilm" in url:
@@ -762,6 +782,7 @@ def framee(name,url):
                 match1b=re.compile(' src="//ok.ru/videoembed/(.*?)" ').findall(link)
                 for url in match1b:
                     url='http://ok.ru/videoembed/'+url
+                    print url
                     magix_player(name,url)
                 match1a=re.compile('src=\'https://openload.co/(.*?)\'').findall(link)
                 for url in match1a:

@@ -786,9 +786,11 @@ def frame(url):
                 url='http://www.ddizim.com'+url+tk
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
         ddizi1=re.compile('ddizim.com/player/oynat/(.*?)"').findall(link)
+        #print link
         import requests as req
         for url in ddizi1:
             url='http://ddizim.com/player/oynat/'+url
+            print url
             link=get_url(url)
             headers = {
             "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
@@ -810,10 +812,10 @@ def frame(url):
                 for urlAA in match1:
                     name='720 PxL Player'
                     addLink('[COLOR gold]'+name+'[/COLOR]',urlAA,'')
-            matchAA=re.compile('src="(.*?).m3u8" type="application/x-mpegURL"').findall(resp.text)
+            matchAA=re.compile('src="(.*?)master-playlist.m3u8" type="application/x-mpegURL').findall(resp.text)
             for urlA in matchAA:
                 name='720 PxL Player'
-                yenical4(name,urlA+'.m3u8')
+                yenical4(name,urlA+'master-playlist.m3u8')
         tune=re.compile('src\="http://tune.pk/player/embed_player.php\?vid\=(.*?)"').findall(link)#
         for url in tune:
             url='http://tune.pk/player/embed_player.php?vid='+url
