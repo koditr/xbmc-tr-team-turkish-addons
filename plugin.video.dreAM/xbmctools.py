@@ -490,22 +490,36 @@ def yenical4(name,url):
 #--
 #99
 def magix_player(name,url):
-    print "Magix"
+    print "Magix"+url
     if "dailymotion" in url:
         urla=url
         urla=urla.replace('motion.com/embed/video/','')
         urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
         addLink('Play-DM',urla,'')
     else:
-        UrlResolverPlayer = url
-        playList.clear()
-        media = urlresolver.HostedMediaFile(UrlResolverPlayer)
-        source = media
-        if source:
-            url = source.resolve()
-            addLink(name,url,'')
-            playlist_yap(playList,name,url)
-            xbmcPlayer.play(playList)
+        if "vidmol" in url:
+            link=get_url(url)
+            match=re.compile('\|thumbs\|\|01\|\|100\|(.*?)\|data\|').findall(link)        
+            for b in match:
+                if match:
+                    link=get_url(url)
+                    match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
+                    for a in match1:
+                        url=a+'hls/,'+b+',.urlset/master.m3u8'
+                        url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
+                        name='ViDmOlY'
+                        yenical4(name,url)
+        else:
+            
+            UrlResolverPlayer = url
+            playList.clear()
+            media = urlresolver.HostedMediaFile(UrlResolverPlayer)
+            source = media
+            if source:
+                url = source.resolve()
+                addLink(name,url,'')
+                playlist_yap(playList,name,url)
+                xbmcPlayer.play(playList)
 #--
 #29
 def ayrisdirm1(url):
@@ -652,6 +666,7 @@ def frame(url):
             else:
                 
                 url=name
+                url=url.replace('//vidmoly','http://vidmoly')
                 magix_player(name,url)
         ply222=re.compile('<iframe src\="(.*?)"').findall(link)
         for name in ply222:
@@ -660,6 +675,7 @@ def frame(url):
             else:
                 
                 url=name
+                url=url.replace('//vidmoly','http://vidmoly')
                 magix_player(name,url)
         ply223=re.compile('href="https://www.kanald.com.tr/(.*?)">').findall(link)
         for name in ply223:
@@ -786,11 +802,9 @@ def frame(url):
                 url='http://www.ddizim.com'+url+tk
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
         ddizi1=re.compile('ddizim.com/player/oynat/(.*?)"').findall(link)
-        #print link
         import requests as req
         for url in ddizi1:
             url='http://ddizim.com/player/oynat/'+url
-            print url
             link=get_url(url)
             headers = {
             "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
