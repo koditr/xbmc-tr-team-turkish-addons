@@ -226,6 +226,7 @@ def Ddizi12():
                     pass
                 else:
                     xbmctools.addDir('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,19,'','')
+       ##xbmctools.addDir('[COLOR orange]>>[/COLOR] [COLOR orange]New * Enson Eklenen Diziler * New [/COLOR]',"http://www.diziizlesen1.com/bolumler/",19,yeniek,fann)
 #27
 def Canli4():
     urlD='http://212.224.109.109/S2/HLS_LIVE/kanald/500/prog_index.m3u8'
@@ -268,37 +269,44 @@ def Yeni(url):
         for Url,name in page:
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
     
-    else:  
-        if "izle7" in url:
-            urla=url
+    else:
+        if "diziizlesen1" in url:
             link=get_url(url)
-            soup = BeautifulSoup(link)
-            panel = soup.findAll("div", {"class": "videos"},smartQuotesTo=None)
-            panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-6"})
-            for i in range (len (panel)):
-                url=panel[i].find('a')['href']
-                name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-                name=name.replace('B&ouml;l&uuml;m','Bolum').replace('K&ouml;rd&uuml;\xc4\x9f&uuml;m','Kordugum')
-                thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-                xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,68,thumbnail,thumbnail)
-            
-            page=re.compile('<li class=" active">\n                                    <a href=".*?" title=".*?">.*?</a>\n                                </li>\n                                                            <li class="">\n                                    <a href="(.*?)" title=".*?">(.*?)</a>').findall(link)
-            for Url,name in page:
-                Url=urla+Url
-                xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
-        else:
-            link=get_url(url)
-            soup = BeautifulSoup(link)
-            panel = soup.findAll("div", {"class": "fix-film_item fix_home clearfix list_items"},smartQuotesTo=None)
-            panel = panel[0].findAll("div", {"class": "movie-poster"})
-            for i in range (len (panel)):
-                url=panel[i].find('a')['href']
-                name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-                thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-                xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
-            page=re.compile('<span class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
-            for Url,name in page:
-                xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
+            match1=re.compile('<a href="(.*?)" title=".*?" class="postifit">\n<img class="" src="(.*?)-50x50.jpg" width="50" height="50" alt="(.*?)" />').findall(link)
+            for url,thumbnail,name in match1:
+                xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail+'.jpg',thumbnail+'.jpg')
+    
+        else:  
+            if "izle7" in url:
+                urla=url
+                link=get_url(url)
+                soup = BeautifulSoup(link)
+                panel = soup.findAll("div", {"class": "videos"},smartQuotesTo=None)
+                panel = panel[0].findAll("div", {"class": "col-md-3 col-sm-6"})
+                for i in range (len (panel)):
+                    url=panel[i].find('a')['href']
+                    name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+                    name=name.replace('B&ouml;l&uuml;m','Bolum').replace('K&ouml;rd&uuml;\xc4\x9f&uuml;m','Kordugum')
+                    thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+                    xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,68,thumbnail,thumbnail)
+                
+                page=re.compile('<li class=" active">\n                                    <a href=".*?" title=".*?">.*?</a>\n                                </li>\n                                                            <li class="">\n                                    <a href="(.*?)" title=".*?">(.*?)</a>').findall(link)
+                for Url,name in page:
+                    Url=urla+Url
+                    xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
+            else:
+                link=get_url(url)
+                soup = BeautifulSoup(link)
+                panel = soup.findAll("div", {"class": "fix-film_item fix_home clearfix list_items"},smartQuotesTo=None)
+                panel = panel[0].findAll("div", {"class": "movie-poster"})
+                for i in range (len (panel)):
+                    url=panel[i].find('a')['href']
+                    name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+                    thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+                    xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
+                page=re.compile('<span class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
+                for Url,name in page:
+                    xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
 #28
 def Yeni222(url):
     if "izle7.com" in url:
@@ -342,7 +350,12 @@ def dizivideolinks(url,name):
         liste=BeautifulSoup(str(panel))
         match2=re.compile('a href="(.*?)"><span>(.*?)</span></a>').findall(str(liste))
         for url,name2 in match2:
-            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,fann,fann)  
+            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,fann,fann)
+    if "diziizlesen1" in url:
+        link=get_url(url)
+        match=re.compile('<a href="(.*?)">PART(.*?)</a>').findall(link)
+        for url,name in match:
+            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+"PART "+name+'[/COLOR]',url,22,fann,fann)
     try:
         link=get_url(url)
         soup = BeautifulSoup(link)
@@ -361,10 +374,10 @@ def Dizi2():
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'2-> Site - Dizihd3'+'[/COLOR]',url,1898,fann,fann)
 #1898
 def Dizi288():
-    url='http://www.dizihd3.net/'
+    url='http://www.dizihd3.org/'
     xbmctools.addDir('[COLOR red]>> [/COLOR] [COLOR orange]Dizi ARA / Search[/COLOR]',url,255,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,21,yeniek,fann)
-    url='http://www.dizihd3.net/'
+    url='http://www.dizihd3.org/'
     req = urllib2.Request(url)
     req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
     response = urllib2.urlopen(req)
@@ -409,7 +422,7 @@ def Arama2():
         Yeni2(url)
 #255
 def Arama22():
-    dizi2='http://www.dizihd3.net'
+    dizi2='http://www.dizihd3.org'
     keyboard = xbmc.Keyboard("", 'Search', False)
     keyboard.doModal()
     if keyboard.isConfirmed():
@@ -475,7 +488,7 @@ def Yeni2(url):
                 thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
                 name=name.replace('&#8211','').replace('&','')
                 xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,26,thumbnail,thumbnail)
-            page=re.compile('<span class=\'current\'>.*?</span><a class="page larger" title=".*?" href="(.*?)">(.*?)</a>').findall(link)
+            page=re.compile('class=\'current\'>.*?</span><a class="page larger" title=".*?" href="(.*?)">(.*?)</a>').findall(link)
             for Url,name in page:
                     xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,21,sonrakii,fann)
 
@@ -707,19 +720,16 @@ def ayrisdirma2(url):
         if "Download" in name:
             pass
         else:
-            if "ViMed" in name:
+            if "FTU" in name:
                 pass
             else:
-                if "FTU" in name:
+                if "BDM" in name:
                     pass
                 else:
-                    if "BDM" in name:
+                    if "STM" in name:
                         pass
                     else:
-                        if "STM" in name:
-                            pass
-                        else:
-                            xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,68,'','')
+                        xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,68,'','')
 #68
 def framee(name,url):
     if "izle7" in url:
@@ -798,10 +808,21 @@ def framee(name,url):
                 for url in match1aaa:
                     url='https://estream.to/'+url
                     magix_player(name,url)
+                match11aaa=re.compile('vshare.io\/(.*?)\"').findall(link)
+                for url in match11aaa:
+                    url='https://vshare.io/'+url
+                    magix_player(name,url)
                 match1aaaa=re.compile('src=\'https://streamplay.to/(.*?)\'').findall(link)
                 for url in match1aaaa:
                     url='https://streamplay.to/'+url
                     magix_player(name,url)
+                match1aaaq=re.compile('src=\'https://vidtodo.com/(.*?)\'').findall(link)
+                for url in match1aaaq:
+                    url='https://vidtodo.com/'+url
+                    link=get_url(url)
+                    matchaa=re.compile('file\:\"(.*?)\"\,label').findall(link)
+                    for url in matchaa:
+                        yenical44(name,url)
                 pages=re.compile("<iframe src='(.*?)'").findall(link)
                 for url in pages:
                     if "https://api.jetcdn.co/cl/" in url:
@@ -1158,14 +1179,14 @@ def Canli1():
         urlD='http://212.224.109.109/S2/HLS_LIVE/kanald/500/prog_index.m3u8'
         name='>> Kanal D'
         xbmctools.addLink(name,urlD,'')
-        url='http://www.ocanlitv.net/'
-        link=get_url(url)
-        match=re.compile('<div class="item">\n\t<a href="(.*?)">\n\t<img src="(.*?)" alt="(.*?)" width="100" height="93">').findall(link)
-        for url,thumbnail,name in match:
-            if "Kanal D" in name:
-                pass
-            else:
-                xbmctools.addDir(name,url,101,thumbnail,'')
+##        url='http://www.ocanlitv.net/'
+##        link=get_url(url)
+##        match=re.compile('<div class="item">\n\t<a href="(.*?)">\n\t<img src="(.*?)" alt="(.*?)" width="100" height="93">').findall(link)
+##        for url,thumbnail,name in match:
+##            if "Kanal D" in name:
+##                pass
+##            else:
+##                xbmctools.addDir(name,url,101,thumbnail,'')
     except:
         print"kanald yok"
     try:
@@ -1303,6 +1324,36 @@ def ctv2(url):
                     xbmctools.yenical4(name,url+tk)
         except:
             pass
+    if "http://canliyayin.im" in url:
+        try:
+            import requests as req
+            headers = {
+            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+            "Accept":"*/*",
+            "Accept-Language":"en-US,en;q=0.5",
+            "Referer":"http://canliyayin.im",
+            "Connection":"keep-alive"
+            }
+            resp = req.get(url, allow_redirects=True, headers=headers)
+            import re
+            match=re.compile('<iframe src="//embedlive(.*?)"').findall(resp.text)
+            for url in match:
+                url='https://embedlive'+url
+                headers = {
+                "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+                "Accept":"*/*",
+                "Accept-Language":"en-US,en;q=0.5",
+                "Referer":"https://embedlive.flexmmp.com/",
+                "Connection":"keep-alive"
+                }
+                resp = req.get(url, allow_redirects=True, headers=headers)
+                import re
+                match=re.compile("hls: '(.*?)'").findall(resp.text)
+                for url in match:
+                    url='http:'+url
+                    xbmctools.yenical4(name,url+tk)
+        except:
+            pass
 
     else:
         
@@ -1426,23 +1477,28 @@ def Canli3():#
     urlD='http://212.224.109.109/S2/HLS_LIVE/kanald/500/prog_index.m3u8'
     name='>> Kanal D'
     xbmctools.addLink(name,urlD,'')
-    urla='https://www.ecanlitvizle.live/kanal-7-izle/'
+##    urla='https://www.ecanlitvizle.live/kanal-7-izle/'
+##    link=get_url(urla)
+##    match1=re.compile('<a href="https://www.ecanlitvizle.live/(.*?)/">(.*?)</a></li>').findall(link)      
+##    for url,name in match1:
+##        url='https://www.ecanlitvizle.live/embed.php?kanal='+url
+##        if "<i" in name:
+##            pass
+##        else:
+##            
+##            if "ullan" in name:
+##                pass
+##            else:
+##                
+##                if "leti" in name:
+##                    pass
+##                else:
+##                    xbmctools.addDir('[COLOR blue] >>[/COLOR]'+ '[COLOR pink]'+name+'[/COLOR]',url,101,'','')
+    urla='http://canliyayin.im/'
     link=get_url(urla)
-    match1=re.compile('<a href="https://www.ecanlitvizle.live/(.*?)/">(.*?)</a></li>').findall(link)      
-    for url,name in match1:
-        url='https://www.ecanlitvizle.live/embed.php?kanal='+url
-        if "<i" in name:
-            pass
-        else:
-            
-            if "ullan" in name:
-                pass
-            else:
-                
-                if "leti" in name:
-                    pass
-                else:
-                    xbmctools.addDir('[COLOR blue] >>[/COLOR]'+ '[COLOR pink]'+name+'[/COLOR]',url,101,'','')
+    match1=re.compile('<li><a href="(.*?)" title=".*?"><img src="(.*?)" alt="(.*?)" class="aligncenter" width="80" height="80"/>\n<span>.*?</span></a></li>').findall(link)      
+    for url,thumbnail,name in match1:
+        xbmctools.addDir('[COLOR blue] >>[/COLOR]'+ '[COLOR pink]'+name+'[/COLOR]',url,101,thumbnail,'')
 
 #199
 def yenical44(name,url):

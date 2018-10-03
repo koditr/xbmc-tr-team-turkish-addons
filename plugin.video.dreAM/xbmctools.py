@@ -499,16 +499,20 @@ def magix_player(name,url):
     else:
         if "vidmol" in url:
             link=get_url(url)
-            match=re.compile('\|thumbs\|\|01\|\|100\|(.*?)\|data\|').findall(link)        
-            for b in match:
-                if match:
-                    link=get_url(url)
-                    match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                    for a in match1:
-                        url=a+'hls/,'+b+',.urlset/master.m3u8'
-                        url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                        name='ViDmOlY'
-                        yenical4(name,url)
+            match=re.compile("src='(.*?).m3u8' type='video/mp4'>").findall(link)
+            for url in match:
+                yenical4(name,url+'.m3u8')
+            
+##            for b in match:
+##                print b
+##                if match:
+##                    link=get_url(url)
+##                    match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
+##                    for a in match1:
+##                        url=a+'hls/,'+b+',.urlset/master.m3u8'
+##                        url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
+##                        name='ViDmOlY'
+##                        yenical4(name,url)
         else:
             
             UrlResolverPlayer = url
@@ -654,12 +658,25 @@ def frame(url):
     #--
     #--
     if "dizihd3" in url:
-        
         link=get_url(url)
+        ply223=re.compile('href="https://www.kanald.com.tr/(.*?)">').findall(link)
+        for name in ply223:
+            name='https://www.kanald.com.tr/'+name
+            url=name
+            Kanalddizivideo(url,name)
+        ply223a=re.compile('href="https://www.fox.com.tr/(.*?)">').findall(link)
+        for name in ply223a:
+            name='https://www.fox.com.tr/'+name
+            url=name
+            link=get_url(url)
+            ply223ab=re.compile("videoSrc : '(.*?)'").findall(link)
+            for url in ply223ab:
+                yenical4(name,url)
+            
         matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
         for vid in matchqq:
             resolve( vid)
-        ply22=re.compile("<iframe src\='(.*?)'").findall(link)
+        ply22=re.compile('<iframe src="(.*?)"').findall(link)
         for name in ply22:
             if "hqq" in name:
                 pass
@@ -677,11 +694,6 @@ def frame(url):
                 url=name
                 url=url.replace('//vidmoly','http://vidmoly')
                 magix_player(name,url)
-        ply223=re.compile('href="https://www.kanald.com.tr/(.*?)">').findall(link)
-        for name in ply223:
-            name='https://www.kanald.com.tr/'+name
-            url=name
-            Kanalddizivideo(url,name)
     else:
         print "cikis"
     link=get_url(url)
@@ -722,6 +734,21 @@ def frame(url):
             pass
         else:
             dizividcal(url)
+    matchcA=re.compile('<iframe src="https://tubevs.com/(.*?)"').findall(link)
+    for url in matchcA:
+        url='https://tubevs.com/'+url
+        print url
+        import requests as req
+        headers = {
+        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+        "Accept":"*/*",
+        "Accept-Language":"en-US,en;q=0.5",
+        "Referer":"http://www.hergunizle1.com/",
+        "Connection":"keep-alive"
+        }
+        resp = req.get(url, allow_redirects=True, headers=headers)
+        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": ".*?"').findall(resp.text)
+        
     matcha=re.compile('src\=\".*?daily(.*?)\?').findall(link)
     for urla in matcha:
         urla=urla.replace('motion.com/embed/video/','')
@@ -894,10 +921,12 @@ def frame(url):
             "Connection":"keep-alive"
             }
             resp = req.get(url, allow_redirects=True, headers=headers)
-            match=re.compile('file":"(.*?)", "label":"(.*?)", "type": ".*?"').findall(resp.text)
+            match=re.compile('file:"(.*?)",label:"(.*?)",type:"video/mp4"').findall(resp.text)
             for urlA,name in match:
+                urlA=urlA.replace('{file:"','')
                 urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
-                urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+                urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/').replace('", position:"top-right" },sources:[','')
+                print urlA,"AAA"
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
         canlii22=re.compile('src="http://www.canlidizihd7.com/(.*?)"').findall(link)
         import requests as req
