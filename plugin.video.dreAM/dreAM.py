@@ -246,7 +246,7 @@ def de_get(name,url):
     xbmcPlayer = xbmc.Player()
     xbmcPlayer.stop()
     import requests as requests#halktv
-    url1='48=di?php.hctaw/moc.okinig.www//:ptth'[::-1]
+    url1='064=di?php.hctaw/moc.okinig.www//:ptth'[::-1]
     link=get_url(url1)
     match=re.compile('source:".*?\?wmsAuthSign\=(.*?)"').findall(link)
     for cd in match:

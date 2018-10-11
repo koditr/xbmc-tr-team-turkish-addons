@@ -420,8 +420,9 @@ def VIDEOLINKS1(name,url):
     for url in dm:
         urla=url
         urla=urla.replace('motion.com/embed/video/','')
-        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
-        addLink('Play-DM',urla,'')
+        url = 'https://dailymotion.com/embed/video/'+urla
+        name="Daily-M"
+        fix.daily_sec(name,url)
     if not urlList:
         match=re.compile('flashvars="file=(.*?)%3F.*?" />').findall(link)
         if match:
@@ -494,8 +495,9 @@ def magix_player(name,url):
     if "dailymotion" in url:
         urla=url
         urla=urla.replace('motion.com/embed/video/','')
-        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
-        addLink('Play-DM',urla,'')
+        url = 'https://dailymotion.com/embed/video/'+urla
+        name="Daily-M"
+        fix.daily_sec(name,url)
     else:
         if "vidmol" in url:
             link=get_url(url)
@@ -723,8 +725,11 @@ def frame(url):
             addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
         matcha=re.compile('src="https://www.dailymotion.com/embed/video/(.*?)"').findall(resp.text)
         for url in matcha:
-            url = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+url
-            addLink('Play-DM',url,'')
+            urla=url
+            urla=urla.replace('motion.com/embed/video/','')
+            url = 'https://dailymotion.com/embed/video/'+urla
+            name="Daily-M"
+            fix.daily_sec(name,url)
     match=re.compile('class="c5"><p><iframe src="(.*?)"').findall(link)
     for url in match:
         dizividcal(url)
@@ -734,35 +739,25 @@ def frame(url):
             pass
         else:
             dizividcal(url)
-    matchcA=re.compile('<iframe src="https://tubevs.com/(.*?)"').findall(link)
-    for url in matchcA:
-        url='https://tubevs.com/'+url
-        print url
-        import requests as req
-        headers = {
-        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
-        "Accept":"*/*",
-        "Accept-Language":"en-US,en;q=0.5",
-        "Referer":"http://www.hergunizle1.com/",
-        "Connection":"keep-alive"
-        }
-        resp = req.get(url, allow_redirects=True, headers=headers)
-        match=re.compile('file":"(.*?)", "label":"(.*?)", "type": ".*?"').findall(resp.text)
         
     matcha=re.compile('src\=\".*?daily(.*?)\?').findall(link)
     for urla in matcha:
         urla=urla.replace('motion.com/embed/video/','')
-        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
-        addLink('Play-DM',urla,'')
+        url = 'https://dailymotion.com/embed/video/'+urla
+        name="Daily-M"
+        fix.daily_sec(name,url)
+        #addLink('Play-DM',urla,'')
+        
     matchab=re.compile('\/dm.php\?git\=(.*?)\?').findall(link)
     for urlzz in matchab:
         urla=url
         urla=urla.replace('motion.com/embed/video/','')
-        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
-        addLink('Play-DM',urla,'')
+        url = 'https://dailymotion.com/embed/video/'+urla
+        name="Daily-M"
+        fix.daily_sec(name,url)
     matcharb=re.compile('src="http://www.imdizi.com/dm.php\?video\=(.*?)"').findall(link)
     for urlss in matcharb:
-        urlss = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urlss
+        urlss = 'plugin://plugin.video.motion_com/?mode=playVideo&url='+urlss
         addLink('Play-DM',urlss,'')
     vidmoly=re.compile('vidmoly.me/(.*?)"').findall(link)
     for url in vidmoly:
@@ -822,8 +817,10 @@ def frame(url):
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
             matcha=re.compile("src='http://www.dailymotion.com/embed/video/(.*?)\?").findall(link)
             for urla in matcha:
-                urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
-                addLink('Play-DM',urla,'')
+                urla=urla.replace('motion.com/embed/video/','')
+                url = 'https://dailymotion.com/embed/video/'+urla
+                name="Daily-M"
+                fix.daily_sec(name,url)
             matchb=re.compile('src="(.*?)" type=".*?" label="(.*?)"').findall(link)
             for url,name in matchb:
                 url='http://www.ddizim.com'+url+tk
@@ -926,7 +923,6 @@ def frame(url):
                 urlA=urlA.replace('{file:"','')
                 urlA=urlA.replace("u'http:\\/\\/redirector.googlevideo.com\\",'')
                 urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/').replace('", position:"top-right" },sources:[','')
-                print urlA,"AAA"
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
         canlii22=re.compile('src="http://www.canlidizihd7.com/(.*?)"').findall(link)
         import requests as req
@@ -989,8 +985,9 @@ def dizividcal(url):
     if "daily" in url:
         urla=url
         urla=urla.replace('motion.com/embed/video/','')
-        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
-        addLink('Play-DM',urla,'')
+        url = 'https://dailymotion.com/embed/video/'+urla
+        name="Daily-M"
+        fix.daily_sec(name,url)
     if "itti" in url:
         url=url.replace('https://ittir.in/v/','')
         url='http://dreamtr.club/a_n_d/ornek.php?no='+url
