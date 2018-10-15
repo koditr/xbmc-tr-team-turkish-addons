@@ -760,15 +760,11 @@ def framee(name,url):
                         if "vidmoly" in url:
                             url=url.replace('//','http://')
                             link=get_url(url)
-                            match=re.compile('\|thumbs\|\|01\|\|100\|(.*?)\|data\|').findall(link)
-                            for b in match:
-                                if match:
-                                    link=get_url(url)
-                                    match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                                    for a in match1:
-                                        url=a+'hls/,'+b+',.urlset/master.m3u8'
-                                        url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                                        yenical44(name,url)
+                            match=re.compile("src='(.*?).m3u8' type='video/mp4'>").findall(link)
+                            for urlA in match:
+                                urlA=urlA.replace('//','http://').replace('http:http://','http://')
+                                yenical44(name,urlA+'.m3u8')
+                                        
                             
                         else:
                             magix_player(name,url)
@@ -913,15 +909,10 @@ def framee(name,url):
                                                         
                                                         url=url.replace('//vidmoly','http://vidmoly')
                                                         link=get_url(url)
-                                                        match=re.compile('\|thumbs\|\|01\|\|100\|(.*?)\|data\|').findall(link)
-                                                        for b in match:
-                                                            if match:
-                                                                link=get_url(url)
-                                                                match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                                                                for a in match1:
-                                                                    url=a+'hls/,'+b+',.urlset/master.m3u8'
-                                                                    url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                                                                    yenical44(name,url)
+                                                        match=re.compile("src='(.*?).m3u8' type='video/mp4'>").findall(link)
+                                                        for urlA in match:
+                                                            urlA=urlA.replace('//','http://').replace('http:http://','http://')
+                                                            yenical44(name,urlA+'.m3u8')
                                                     if "assets/js" in url:
                                                         pass
                                                     else:
@@ -945,18 +936,12 @@ def framee(name,url):
                                                 matchaa=re.compile("src='(.*?)'").findall(resp.text)
                                                 for url in matchaa:
                                                     if "vidmoly" in url:
-                                                        
                                                         url=url.replace('//vidmoly','http://vidmoly')
                                                         link=get_url(url)
-                                                        match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
-                                                        for b in match:
-                                                            if match:
-                                                                link=get_url(url)
-                                                                match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                                                                for a in match1:
-                                                                    url=a+'hls/,'+b+',.urlset/master.m3u8'
-                                                                    url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                                                                    yenical44(name,url)
+                                                        match=re.compile("src='(.*?).m3u8' type='video/mp4'>").findall(link)
+                                                        for urlA in match:
+                                                            urlA=urlA.replace('//','http://').replace('http:http://','http://')
+                                                            yenical44(name,urlA+'.m3u8')
                                                     if "assets/js" in url:
                                                         pass
                                                     else:
@@ -1002,15 +987,10 @@ def framee(name,url):
                                                         
                                                         url=url.replace('//vidmoly','http://vidmoly')
                                                         link=get_url(url)
-                                                        match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
-                                                        for b in match:
-                                                            if match:
-                                                                link=get_url(url)
-                                                                match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                                                                for a in match1:
-                                                                    url=a+'hls/,'+b+',.urlset/master.m3u8'
-                                                                    url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                                                                    yenical44(name,url)
+                                                        match=re.compile("src='(.*?).m3u8' type='video/mp4'>").findall(link)
+                                                        for urlA in match:
+                                                            urlA=urlA.replace('//','http://').replace('http:http://','http://')
+                                                            yenical44(name,urlA+'.m3u8')
                                                     if "assets/js" in url:
                                                         pass
                                                     else:
@@ -1037,15 +1017,10 @@ def framee(name,url):
                                                         
                                                         url=url.replace('//vidmoly','http://vidmoly')
                                                         link=get_url(url)
-                                                        match=re.compile('\|thumbs.*?\|(.*?)\|vid\|').findall(link)
-                                                        for b in match:
-                                                            if match:
-                                                                link=get_url(url)
-                                                                match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                                                                for a in match1:
-                                                                    url=a+'hls/,'+b+',.urlset/master.m3u8'
-                                                                    url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                                                                    yenical44(name,url)
+                                                        match=re.compile("src='(.*?).m3u8' type='video/mp4'>").findall(link)
+                                                        for urlA in match:
+                                                            urlA=urlA.replace('//','http://').replace('http:http://','http://')
+                                                            yenical44(name,urlA+'.m3u8')
                                                     if "assets/js" in url:
                                                         pass
                                                     else:
@@ -1179,14 +1154,6 @@ def Canli1():
         urlD='http://212.224.109.109/S2/HLS_LIVE/kanald/500/prog_index.m3u8'
         name='>> Kanal D'
         xbmctools.addLink(name,urlD,'')
-##        url='http://www.ocanlitv.net/'
-##        link=get_url(url)
-##        match=re.compile('<div class="item">\n\t<a href="(.*?)">\n\t<img src="(.*?)" alt="(.*?)" width="100" height="93">').findall(link)
-##        for url,thumbnail,name in match:
-##            if "Kanal D" in name:
-##                pass
-##            else:
-##                xbmctools.addDir(name,url,101,thumbnail,'')
     except:
         print"kanald yok"
     try:
@@ -1197,7 +1164,6 @@ def Canli1():
         match1=re.compile('<li><a href="(.*?)" title=".*?">(.*?)</a></li>').findall(str(panel))
         for url,name in match1:
             xbmctools.addDir('[COLOR beige][COLOR purple]>>[/COLOR]  '+name+'[/COLOR]',url,101,"","")
-            #xbmctools.addDir('[COLOR pink] >>'+name+'[/COLOR]',url,101,"",'')
     except:
         print"kesintisiz yok"
     try:
