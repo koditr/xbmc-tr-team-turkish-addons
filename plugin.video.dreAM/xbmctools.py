@@ -503,6 +503,7 @@ def magix_player(name,url):
             link=get_url(url)
             match=re.compile("src='(.*?).m3u8' type='video/mp4'>").findall(link)
             for url in match:
+                url=url.replace('//','http://').replace('http:http://','http://').replace('https:http://','https://')
                 yenical4(name,url+'.m3u8')
         else:
             
@@ -754,7 +755,7 @@ def frame(url):
         link=get_url(url)
         match=re.compile("src='(.*?).m3u8' type='video/mp4'>").findall(link)
         for urlA in match:
-            urlA=urlA.replace('//','http://').replace('http:http://','http://')
+            urlA=urlA.replace('//','http://').replace('http:http://','http://').replace('https:http://','https://')
             yenical4(name,urlA+'.m3u8')
     matchqq=re.compile('src="https://hqq.tv/player/embed_player.php\?vid\=(.*?)\&#038\;autoplay\=no"').findall(link)
     for vid in matchqq:
