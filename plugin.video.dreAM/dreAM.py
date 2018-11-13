@@ -146,12 +146,15 @@ def Kanalddizi():
     url= 'https://www.kanald.com.tr/diziler'
     link=get_url(url)
     soup = BS4(link, 'html5lib')
-    panel = soup.findAll("div", attrs={"class": "kd-docs-news"},smartQuotesTo=None)
-    panel = panel[0].findAll("div", attrs={"class": "col-sm-6"})
+    panel = soup.findAll("div", {"class": "kd-docs-news"},smartQuotesTo=None)
+    panel = panel[0].findAll("div", {"class": "col-md-4 col-sm-4 col-xs-12 series-container-item clearfix"})
+##    panel = soup.findAll("div", attrs={"class": "row"},smartQuotesTo=None)
+##    print panel
+##    panel = panel[0].findAll("div", attrs={"class": "col-md-4 col-sm-4 col-xs-12 series-container-item clearfix"})
     for i in range (len (panel)):
         url=panel[i].find('a')['href']
         name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-        thumbnail=panel[i].find('img')['data-src'].encode('utf-8', 'ignore')
+        thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
         thumbnail='http:'+thumbnail
         url='http://www.kanald.com.tr'+url+'/bolumler'
         xbmctools.addDir('[COLOR orange]>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,7,thumbnail,thumbnail)
@@ -683,11 +686,13 @@ def Yenisinema2(url):
             panel = soup.findAll("div", {"class": "col-md-6"})
             for i in range (len (panel)):
                 url=panel[i].find('a')['href']
-                thumbnail=panel[i].find('img')['src']
+                thumbnail=panel[i].find('img')['data-src']
                 name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
                 name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
                 thumbnail=thumbnail.replace('wp-content','https://jetfilmizle.info/wp-content')
-                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)
+                url=url.replace('https://jetfilmizle.info/','')
+                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]','https://jetfilmizle.info/'+url,45,thumbnail,thumbnail)
+                
             pages=re.compile('<li class="active_page"><a href=".*?">.*?</a></li>\n<li><a href="(.*?)">(.*?)</a></li>').findall(link)
             for url,name in pages:
                 xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
@@ -1148,13 +1153,13 @@ def Canli1():
     except:
         print"kanald yok"
     try:
-        sitegit='https://kumanda.tv/show-tv-kesintisiz/'
+        sitegit='https://www.kesintisiztv.com/show-tv-kesintisiz'
         link=get_url(sitegit)
         soup = BeautifulSoup(link)
         panel=soup.findAll("ol", {"class": "tvlistesi"})
-        match1=re.compile(' href="https://kumanda.tv/(.*?)" title=".*?">(.*?)</a>').findall(str(panel))
+        match1=re.compile('<a href="https://www.kesintisiztv.com/(.*?)" title="(.*?)">.*?</a>').findall(str(panel))
         for url,name in match1:
-            url='https://kumanda.tv/'+url
+            url='https://www.kesintisiztv.com/'+url
             xbmctools.addDir('[COLOR beige][COLOR purple]>>[/COLOR]  '+name+'[/COLOR]',url,101,"","")
     except:
         print"kesintisiz yok"
@@ -1241,14 +1246,14 @@ def Canli2():
 def ctv2(url):
     name='Play'
     import requests as req
-    if "kumanda" in url:
+    if "kesintisiz" in url:
         try:
             import requests as req
             headers = {
             "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
             "Accept":"*/*",
             "Accept-Language":"en-US,en;q=0.5",
-            "Referer":"https://kumanda.tv/",
+            "Referer":"https://www.kesintisiztv.com/",
             "Connection":"keep-alive"
             }
             resp = req.get(url, allow_redirects=True, headers=headers)
@@ -1259,7 +1264,7 @@ def ctv2(url):
                 "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
                 "Accept":"*/*",
                 "Accept-Language":"en-US,en;q=0.5",
-                "Referer":"https://web.kumanda.tv/",
+                "Referer":"https://www.kesintisiztv.com/",
                 "Connection":"keep-alive"
                 }
                 resp = req.get(url, allow_redirects=True, headers=headers)
@@ -1269,7 +1274,7 @@ def ctv2(url):
                     xbmctools.yenical4(name,url+tk)
         except:
             pass
-    if "http://canliyayin.im" in url:
+    if "canliyayin.im" in url:
         try:
             import requests as req
             headers = {
@@ -1281,14 +1286,14 @@ def ctv2(url):
             }
             resp = req.get(url, allow_redirects=True, headers=headers)
             import re
-            match=re.compile('<iframe src="//embedlive(.*?)"').findall(resp.text)
+            match=re.compile('src="//embedlive(.*?)"').findall(resp.text)#http://embedlive.flexmmp.com/live/livestream.php?ch=trt1&id=2
             for url in match:
-                url='https://embedlive'+url
+                url='http://embedlive'+url
                 headers = {
                 "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
                 "Accept":"*/*",
                 "Accept-Language":"en-US,en;q=0.5",
-                "Referer":"https://embedlive.flexmmp.com/",
+                "Referer":"http://embedlive.flexmmp.com/",
                 "Connection":"keep-alive"
                 }
                 resp = req.get(url, allow_redirects=True, headers=headers)
