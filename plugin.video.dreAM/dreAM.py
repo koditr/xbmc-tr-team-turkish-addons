@@ -691,6 +691,7 @@ def Yenisinema2(url):
                 name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
                 thumbnail=thumbnail.replace('wp-content','https://jetfilmizle.info/wp-content')
                 url=url.replace('https://jetfilmizle.info/','')
+                name=fix.decode_fix(name)
                 xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]','https://jetfilmizle.info/'+url,45,thumbnail,thumbnail)
                 
             pages=re.compile('<li class="active_page"><a href=".*?">.*?</a></li>\n<li><a href="(.*?)">(.*?)</a></li>').findall(link)
@@ -720,7 +721,7 @@ def Yenisinema2(url):
 def ayrisdirma2(url):
     link=get_url(url)
     xbmctools.addDir('[COLOR lightyellow]'+'Secenek 1'+'[/COLOR]',url,68,'','')
-    match=re.compile('<a href="(.*?)"><span>(.*?)</span></a>').findall(link)
+    match=re.compile('<a href="(.*?)"><span class="rad3">(.*?)</span></a>').findall(link)
     for url1,name in match:
         if "Download" in name:
             pass
@@ -734,7 +735,11 @@ def ayrisdirma2(url):
                     if "STM" in name:
                         pass
                     else:
-                        xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,68,'','')
+                        if "Plat" in name:
+                            pass
+                        else:
+                            name=fix.decode_fix(name)
+                            xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,68,'','')
 #68
 def framee(name,url):
     if "izle7" in url:
