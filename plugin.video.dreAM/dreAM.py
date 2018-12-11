@@ -249,7 +249,7 @@ def de_get(name,url):
     xbmcPlayer = xbmc.Player()
     xbmcPlayer.stop()
     import requests as requests#halktv
-    url1='064=di?php.hctaw/moc.okinig.www//:ptth'[::-1]
+    url1='849=di?php.hctaw/moc.okinig.www//:ptth'[::-1]
     link=get_url(url1)
     match=re.compile('source:".*?\?wmsAuthSign\=(.*?)"').findall(link)
     for cd in match:
@@ -748,9 +748,9 @@ def framee(name,url):
         match=re.compile("var video = '(.*?)'").findall(link)
         for vid in match:
             vid=vid.replace('http://two.inxy.co','http://one.inxy.co/360p').replace('mb_files/','')
-            vid=vid+"|referer=http://www.izle7.com/kanal7/izle-20967-ah-kalbim-24bolum.html"
+            vid=vid#+"|referer=https://www.izle7.com/kanal7/izle-28787-prens-dilek-hakkini-kimin-icin-kullandi.html"
             name='Izle7'
-            xbmctools.addLink(name,vid,'')
+            xbmctools.addLink(name,vid+tk,'')
     else:
         
         if "evrensel" in url:
@@ -1099,55 +1099,44 @@ def INFOyet(url):
         pass
 #62
 def AlmanS():
-    sinema='http://view4u.co/'
+    sinema='https://filmpalast.to/movies/new'
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Filme Suche/Search[/COLOR]',sinema,655,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR gold] ! Neue Filme ![/COLOR]',sinema,65,yeniek,fann)
     link=get_url(sinema)
-    match=re.compile('<li><a href="/load(.*?)">(.*?)</a></li>').findall(link)
+    match=re.compile('<li> <a href="https://filmpalast.to/search/genre/(.*?)">(.*?)</a></li>').findall(link)
     for url,name in match:
-        url='http://view4u.co/load'+url
+        url='https://filmpalast.to/search/genre/'+url
         xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR lightblue]'+name+'[/COLOR]',url,65,"",fann)
 #655
 def Almanara():
-    url='http://view4u.co/search'
+    url='https://filmpalast.to/search/title/'
     keyboard = xbmc.Keyboard("", 'Search', False)
     keyboard.doModal()
     if keyboard.isConfirmed():
         query = keyboard.getText()
-        url = (url+'/?q='+query)
+        url = (url+query)
         Yeni2alman1(url)
 #65
 def Yeni2alman1(url):
     link=get_url(url)
-    match=re.compile('<div class="s_poster">\n <a href=".*?"><img src="(.*?)" alt=""></a>\n </div>\n <div class="s_info">\n <h2><a href="(.*?)">(.*?)</a>').findall(link)
-    for thumbnail,url,name in match:
-        thumbnail='http://view4u.co'+thumbnail
-        url='http://view4u.co'+url
-        url=url.replace('http://view4u.cohttp://view4u.co','http://view4u.co')
-        name=name.replace('<b>',' ').replace('</b>',' ')
+    match=re.compile('<a href="(.*?)" title=".*?"> <img width="236px" height="338px" src="(.*?)" class="cover-opacity" alt="(.*?)" /></a>\n</article>\n<article class="liste glowliste  rb">\n<cite>\n<h2 class="rb">').findall(link)
+    for url,thumbnail,name in match:
+        thumbnail='https://filmpalast.to'+thumbnail
+        url='https:'+url
+        name=name.replace('stream ',' ')
         xbmctools.addDir('[COLOR orange]>>[COLOR beige]'+name+'[/COLOR]',url,201,thumbnail,thumbnail)
-    page=re.compile('<b class="swchItemA1"><span>.*?</span></b> <a class="swchItem1" href="(.*?)" onclick').findall(link)
-    for url1 in page:
-        url='http://view4u.co/'+url1
-        url=url.replace('//','/').replace(':/','://')
-        xbmctools.addDir('[COLOR purple]>>'+'NeXt PaGe -> [/COLOR]',url,65,sonrakii,fann)
+    page=re.compile('active">.*?</a> <a class="pageing button-small rb" href=\'(.*?)\'>(.*?)</a>').findall(link)
+    for url1,name in page:
+        xbmctools.addDir('[COLOR purple]>>'+'NeXt PaGe -> [/COLOR]'+name,url1,65,sonrakii,fann)
 #201
 def a6666(url):
     link=get_url(url)
-    match=re.compile('src="http://view4u.co/anbieter01/(.*?).png" height=".*?" width=".*?"></font></b></legend><br><div class=".*?">\n <input onclick=".*?" value=".*?" type="b.*?">\n <div class=".*?" style=".*?">\n\n<a target=".*?" href="\n\n(.*?)\n\n">').findall(link)
+    match=re.compile('hostName">(.*?)</p></li>\n<li class="streamPlayBtn clearfix rb">\n\n<a class="button rb iconPlay" target="_blank" href="(.*?)">').findall(link)
     for name,url in match:
         xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url,99,'','')
 
 #66
-def Linkleralman1(url):
-    link=get_url(url)
-    match0=re.compile('<img style="margin:0;padding:0;border:0;" src="(.*?)"').findall(link)
-    for thumbnail in match0:
-        xbmctools.addDir("INFO - Picture",url,99,'http://www.szene-streams.com'+thumbnail,'http://www.szene-streams.com'+thumbnail)   
-    match1=re.compile('http\:\/\/(.*?).eu\/(.*?).html').findall(link)
-    for name,url in match1:
-        url='http://streamcloud.eu/'+url+'.html'
-        xbmctools.addDir('Play - > '+name,url,99,"","")
+
 
 #11
 def Canli1():
@@ -1182,7 +1171,7 @@ def ctv1(name,url):#
                 url=url
                 xbmcPlayer.play(url)
                 return canli3() 
-        link=get_url(url)
+        link=get_url(url)   #file: "(.*?)"
         match3 = re.compile('file : "(.*?)"').findall(link)
         for url in match3:
             if url:
@@ -1203,12 +1192,17 @@ def ctv1(name,url):#
         for url in match2:
             if url:
                 xbmctools.yenical4(name,url+tk)
+        link=get_url(url)   #file: "(.*?)"
+        match3a = re.compile('ile: "(.*?)"').findall(link)
+        for url in match3a:
+            if url:
+                xbmctools.yenical4(name,url+tk)
     except:
         pass
 
 #12
 def Canli2():
-    sitegit='http://www.canlitvlive.io/tum-kanallar.html'
+    sitegit='http://www.livetvs.io/tum-kanallar.html'
     link=get_url(sitegit)
     soup = BeautifulSoup(link)
     panel=soup.findAll("div", {"class": "tv-body"})
@@ -1584,7 +1578,7 @@ elif mode==59: VideoLinksyet2(name,url)
 elif mode==60: INFOyet2(url)
 elif mode==62: AlmanS()
 elif mode==65: Yeni2alman1(url)
-elif mode==66: Linkleralman1(url)
+##elif mode==66: Linkleralman1(url)
 elif mode==67: sinemaRecent12(url)
 elif mode==68: framee(name,url)
 elif mode==76: genelarama()
