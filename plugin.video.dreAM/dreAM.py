@@ -106,7 +106,7 @@ def Dizi():
     ##xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR gold]'+'1-> Site - Canlihddiziler'+'[/COLOR]',url,1789,'http://dreamtr.club/resimler/Dizi1.png',fann)
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR gold]'+'2-> Site - Canlidizihd7'+'[/COLOR]',url,1788,'http://dreamtr.club/resimler/Dizi2.png',fann)
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'3-> Site - Ddizim'+'[/COLOR]',url,1899,'http://dreamtr.club/resimler/Dizi3.png',fann)
-    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'4-> Site - Dizihd3'+'[/COLOR]',url,1898,'http://dreamtr.club/resimler/Dizi4.png',fann)
+    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'4-> Site - Dizihd4'+'[/COLOR]',url,1898,'http://dreamtr.club/resimler/Dizi4.png',fann)
     xbmctools.addDir('[COLOR orange]>>>[/COLOR] [COLOR beige]KANAL D Dizileri[/COLOR]',url,13,'https://vignette.wikia.nocookie.net/logopedia/images/a/a8/Kanal_D_Logo_%281994-2011%29.png',fann)
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal 7[/COLOR]',"http://www.izle7.com/kanal7/hint-dizileri",28,'http://www.canlimobeseizle.com/wp-content/uploads/kanal7hd.png',fann)
     xbmc.executebuiltin('Container.SetViewMode(500)')
@@ -377,10 +377,10 @@ def Dizi2():
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'2-> Site - Dizihd3'+'[/COLOR]',url,1898,fann,fann)
 #1898
 def Dizi288():
-    url='http://www.dizihd3.org/'
+    url='http://www.dizihd4.com/'
     xbmctools.addDir('[COLOR red]>> [/COLOR] [COLOR orange]Dizi ARA / Search[/COLOR]',url,255,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,21,yeniek,fann)
-    url='http://www.dizihd3.org/'
+    url='http://www.dizihd4.com/'
     req = urllib2.Request(url)
     req.add_header('User-Agent','Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13')
     response = urllib2.urlopen(req)
@@ -480,7 +480,7 @@ def Yeni2(url):
 ##        for Url,name in page:
 ##                xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,21,sonrakii,fann)
     else:
-        if "dizihd3" in url:
+        if "dizihd4" in url:
             link=get_url(url)
             soup = BeautifulSoup(link)
             panel = soup.findAll("div", {"class": "orta-ici"},smartQuotesTo=None)
@@ -512,7 +512,7 @@ def dizivideolinks2(url,name):
             name=name.replace('\xe0\xb8\xa3\xe0\xb8\x87','c')
             xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,22,fann,fann)
     else:
-        if "dizihd3" in url:
+        if "dizihd4" in url:
             urlList=''
             ok=True
             url=url
@@ -1131,7 +1131,7 @@ def Yeni2alman1(url):
 #201
 def a6666(url):
     link=get_url(url)
-    match=re.compile('hostName">(.*?)</p></li>\n<li class="streamPlayBtn clearfix rb">\n\n<a class="button rb iconPlay" target="_blank" href="(.*?)">').findall(link)
+    match=re.compile('<p class="hostName">(.*?)</p></li>\n<li class=".*?">\n\n<a  class=".*?" target=".*?" href="(.*?)">').findall(link)
     for name,url in match:
         xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url,99,'','')
 
