@@ -694,6 +694,40 @@ def frame(url):
         name='https://oload'+name
         url=name
         magix_player(name,url)
+#--------#
+        
+#-------#
+    link=get_url(url)    
+    ply22r=re.compile('data-wpfc-original-src="http://www.canlidizihd(.*?)"').findall(link)
+    for url in ply22r:
+        name='http://www.canlidizihd'+url
+        url=name
+        
+        import requests as req
+        import requests# as req
+        org_url=url
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15',
+            'X-Requested-With': 'XMLHttpRequest',
+            'Referer': org_url
+        }
+        data = {
+            'MIME Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'hash': url.split('/')[-1],
+            'r': org_url
+        }
+        s = requests.Session()
+        req = requests.Request('POST', url+'?do=getVideo', data=data, headers=headers)
+        prepped = s.prepare_request(req)
+        prepped.headers = headers
+        resp = s.send(prepped)
+        if resp.text:
+            match=re.compile('"file":"(.*?),"label":"(.*?)"').findall(resp.text)#%20
+            for url,name in match:
+                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
+            
     #--
     ddizi11=re.compile('src="http://www.hergunizle1.com/player/oynat/(.*?)"').findall(link)
     import requests as req
@@ -736,8 +770,6 @@ def frame(url):
         url = 'https://dailymotion.com/embed/video/'+urla
         name="Daily-M"
         fix.daily_sec(name,url)
-        #addLink('Play-DM',urla,'')
-        
     matchab=re.compile('\/dm.php\?git\=(.*?)\?').findall(link)
     for urlzz in matchab:
         urla=url
@@ -962,7 +994,33 @@ def frame(url):
             name='https://www.rapidvideo'+name
             url=name
             magix_player(name,url)
-        
+        link=get_url(url)
+        ply22rr=re.compile('src="https://tubevs(.*?)"').findall(link)
+        for url in ply22rr:
+            url='https://tubevs'+url
+            org_url=url
+            import requests as req
+            import requests
+            headers = {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15',
+                'X-Requested-With': 'XMLHttpRequest',
+                'Referer': org_url
+            }
+            data = {
+                'MIME Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'hash': url.split('/')[-1],
+                'r': org_url
+            }
+            s = requests.Session()
+            req = requests.Request('POST', url+'?do=getVideo', data=data, headers=headers)
+            prepped = s.prepare_request(req)
+            prepped.headers = headers
+            resp = s.send(prepped)
+            match=re.compile('file"\:"(.*?)","label"\:"(.*?)","type"').findall(resp.text)
+            for url,name in match:
+                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
         
 #24   
 def dizividcal(url):
