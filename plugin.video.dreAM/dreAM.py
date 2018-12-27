@@ -582,7 +582,9 @@ def sinema1recent(url):
     soup = BeautifulSoup(link)
     panel = soup.findAll("article", {"class": "fix-film-v2_item fix_home clearfix list_items"},smartQuotesTo=None)
     panel = soup.findAll("div", {"class": "movie-poster"})
+    panela = soup.findAll("span", {"class": "center-icons"})
     for i in range (len (panel)):
+        name2=panela[i].find('span')['title'].encode('utf-8', 'ignore')
         url=panel[i].find('a')['href']
         thumbnail=panel[i].find('img')['src']
         name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
@@ -590,7 +592,7 @@ def sinema1recent(url):
         if "evrenselfilm-sosyal" in url:
             pass
         else:
-            xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,200,thumbnail,thumbnail)
+            xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]'+'[COLOR gold]'+ name2+'[/COLOR]',url,200,thumbnail,thumbnail)
     page=re.compile('class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
     for url1,name in page:
         xbmctools.addDir('[COLOR blue]Sonraki Sayfa >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url1,203,sonrakii,fann)
@@ -678,7 +680,7 @@ def ayrisdirma2(url):
 #68
 def framee(name,url):
     if "hdfilmcehennemi" in url:
-        #import re
+        import re
         link=get_url(url)
         match1q=re.compile('moviesone.net(.*?)"').findall(link)
         for url in match1q:
