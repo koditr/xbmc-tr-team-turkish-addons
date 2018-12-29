@@ -512,16 +512,40 @@ def magix_player(name,url):
                         name='ViDmOlY'
                         yenical4(name,url)
         else:
-            
-            UrlResolverPlayer = url
-            playList.clear()
-            media = urlresolver.HostedMediaFile(UrlResolverPlayer)
-            source = media
-            if source:
-                url = source.resolve()
-                addLink(name,url,'')
-                playlist_yap(playList,name,url)
-                xbmcPlayer.play(playList)
+            if "videowm" in url:
+                url=url.replace('www.','')
+                org_url=url
+                headers = {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Referer': org_url
+                }
+                data = {
+                    'MIME Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'hash': url.split('/')[-1],
+                    'r': org_url
+                }
+                s = requests.Session()
+                req = requests.Request('POST', url+'?do=getVideo', data=data, headers=headers)
+                prepped = s.prepare_request(req)
+                prepped.headers = headers
+                resp = s.send(prepped)
+                if resp.text:
+                    match1=re.compile('file":"(.*?)","label":"(.*?)"').findall(resp.text)
+                    for url,name in match1:
+                        url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&')
+                        addLink(name,url,'')
+            else:
+                UrlResolverPlayer = url
+                playList.clear()
+                media = urlresolver.HostedMediaFile(UrlResolverPlayer)
+                source = media
+                if source:
+                    url = source.resolve()
+                    addLink(name,url,'')
+                    playlist_yap(playList,name,url)
+                    xbmcPlayer.play(playList)
 #--
 #29
 def ayrisdirm1(url):
@@ -684,12 +708,17 @@ def frame(url):
                 magix_player(name,url)
         ply222=re.compile('<iframe src\="(.*?)"').findall(link)
         for name in ply222:
+            print name
             if "hqq" in name:
                 pass
             else:
                 url=name
                 url=url.replace('//vidmoly','http://vidmoly')
                 magix_player(name,url)
+        mlr=re.compile("src='https://my.mail.ru/video/embed/(.*?)'").findall(link)
+        for url in mlr:
+            url='http://videoapi.my.mail.ru/videos/embed/mail/'+url+'.html'
+            magix_player(name,url)
     else:
         print "cikis"
     link=get_url(url)
@@ -1032,6 +1061,10 @@ def frame(url):
             for url,name in matcha:
                 url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
+    videowm=re.compile('src="https://www.videowm.com/w/video/(.*?)"').findall(link)
+    for url in videowm:
+        url='https://www.videowm.com/w/video/'+url
+        magix_player(name,url)
         
 #24   
 def dizividcal(url):
