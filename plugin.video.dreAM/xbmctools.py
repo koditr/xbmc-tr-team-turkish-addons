@@ -708,7 +708,6 @@ def frame(url):
                 magix_player(name,url)
         ply222=re.compile('<iframe src\="(.*?)"').findall(link)
         for name in ply222:
-            print name
             if "hqq" in name:
                 pass
             else:

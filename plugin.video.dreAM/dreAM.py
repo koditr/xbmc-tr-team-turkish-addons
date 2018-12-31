@@ -718,7 +718,8 @@ def Yenisinema2(url):
 
 #45
 def ayrisdirma2(url):
-    link=get_url(url+'/2')
+    link=get_url(url+'/')
+    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+"1.Player"+'[/COLOR]',url,68,'','') 
     match=re.compile('href="(.*?)"><span>(.*?)</span>').findall(link)
     for url1,name in match:
         xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url1,68,'','')
@@ -739,7 +740,6 @@ def framee(name,url):
                 else:
                     print " yok"
             url=url
-            print url,"SSS"
             org_url=url
             headers = {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
