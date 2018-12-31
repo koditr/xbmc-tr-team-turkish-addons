@@ -56,7 +56,7 @@
 
 <addon id="plugin.video.dreAM"
        name="[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]"
-       version="0.0.159"
+       version="0.0.160"
        provider-name="[COLOR beige]Dream[/COLOR][COLOR red]TR[/COLOR]">
   <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
@@ -251,7 +251,7 @@
   </extension>
 </addon>
 
-<addon id="script.module.urlresolver" name="URLResolver" version="5.0.15" provider-name="tvaddons">
+<addon id="script.module.urlresolver" name="URLResolver" version="5.0.30" provider-name="tvaddons">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 		<import addon="plugin.video.youtube" optional="true" />
