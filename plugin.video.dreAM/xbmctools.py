@@ -736,7 +736,7 @@ def frame(url):
         url=name
         
         import requests as req
-        import requests# as req
+        import requests# as req #data-wpfc-original-src="http://www.canlidizihd7.com/f
         org_url=url
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -754,10 +754,14 @@ def frame(url):
         prepped = s.prepare_request(req)
         prepped.headers = headers
         resp = s.send(prepped)
-        if resp.text:
+        if resp.text:        #"file":"(.*?)","label":"(.*?)","type":"mp4"
             match=re.compile('"file":"(.*?),"label":"(.*?)"').findall(resp.text)#%20
             for url,name in match:
-                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&')
+                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
+            matcha=re.compile('"file":"(.*?)","label":"(.*?)","type"').findall(resp.text)#%20
+            for url,name in matcha:
+                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
     match=re.compile('class="c5"><p><iframe src="(.*?)"').findall(link)
     for url in match:
@@ -1030,37 +1034,64 @@ def frame(url):
             for url,name in matcha:
                 url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
-        ply22rra=re.compile('src="http://www.canlidizihd7.com/fireplayer/(.*?)" ').findall(link)
-        for url in ply22rra:
-            url='http://www.canlidizihd7.com/fireplayer/'+url
-            org_url=url
-            import requests as req
-            import requests
-            headers = {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15',
-                'X-Requested-With': 'XMLHttpRequest',
-                'Referer': org_url
-            }
-            data = {
-                'MIME Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'hash': url.split('/')[-1],
-                'r': org_url
-            }
-            s = requests.Session()
-            req = requests.Request('POST', url+'?do=getVideo', data=data, headers=headers)
-            prepped = s.prepare_request(req)
-            prepped.headers = headers
-            resp = s.send(prepped)
-            match=re.compile('file"\:"(.*?)","label"\:"(.*?)","type"').findall(resp.text)
-            for url,name in match:
-                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
-                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
-            matcha=re.compile('src="(.*?)" type="video/mp4" label="(.*?)"').findall(resp.text)
-            for url,name in matcha:
-                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
-                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
-    videowm=re.compile('src="https://www.videowm.com/w/video/(.*?)"').findall(link)
+    ply22rra=re.compile('src="http://www.canlidizihd7.com/fireplayer/(.*?)" ').findall(link)
+    for url in ply22rra:
+        url='http://www.canlidizihd7.com/fireplayer/'+url
+        org_url=url
+        import requests as req
+        import requests
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15',
+            'X-Requested-With': 'XMLHttpRequest',
+            'Referer': org_url
+        }
+        data = {
+            'MIME Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'hash': url.split('/')[-1],
+            'r': org_url
+        }
+        s = requests.Session()
+        req = requests.Request('POST', url+'?do=getVideo', data=data, headers=headers)
+        prepped = s.prepare_request(req)
+        prepped.headers = headers
+        resp = s.send(prepped)
+        match=re.compile('file"\:"(.*?)","label"\:"(.*?)","type"').findall(resp.text)
+        for url,name in match:
+            url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+        matcha=re.compile('src="(.*?)" type="video/mp4" label="(.*?)"').findall(resp.text)
+        for url,name in matcha:
+            url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+    ply22rrab=re.compile('src=".*?e-video.live/e/vid/(.*?)"').findall(link)
+    for url in ply22rrab:
+        url='https://e-video.live/e/vid/'+url
+        org_url=url
+        import requests as req
+        import requests
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15',
+            'X-Requested-With': 'XMLHttpRequest',
+            'Referer': org_url
+        }
+        data = {
+            'MIME Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'hash': url.split('/')[-1],
+            'r': org_url
+        }
+        s = requests.Session()
+        req = requests.Request('POST', url, data=data, headers=headers)
+        prepped = s.prepare_request(req)
+        prepped.headers = headers
+        resp = s.send(prepped)
+        match=re.compile('source src="(.*?)" type=').findall(resp.text)
+        for url in match:
+            name='e-VIDEO-PLY'
+            url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
+            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+    videowm=re.compile('src="https://www.videowm.com/w/video/(.*?)"').findall(link)#src="https://e-video.live/e/vid/7c988d1e1c0d674dd1a855c1e6f20edb"
     for url in videowm:
         url='https://www.videowm.com/w/video/'+url
         magix_player(name,url)

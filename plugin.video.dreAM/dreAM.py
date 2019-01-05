@@ -108,8 +108,9 @@ def Dizi():
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'3-> Site - Ddizim'+'[/COLOR]',url,1899,'http://dreamtr.club/resimler/Dizi3.png',fann)
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'4-> Site - Dizihd4'+'[/COLOR]',url,1898,'http://dreamtr.club/resimler/Dizi4.png',fann)
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR pink]'+'1.1-> Site - HdDiziIzle.Org'+'[/COLOR]','https://www.hddiziizle.org/',19,'https://www.hddiziizle.org/wp-content/uploads/2018/08/hdd.png',fann)
+    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR pink]'+'1.2-> Site - DiziizleOnline.Net'+'[/COLOR]','https://www.diziizleonline.net/',19,'https://i.pinimg.com/originals/b9/a8/e7/b9a8e745dc7c86519b6c14a90e991430.png',fann)
     xbmctools.addDir('[COLOR orange]>>>[/COLOR] [COLOR beige]KANAL D Dizileri[/COLOR]',url,13,'https://vignette.wikia.nocookie.net/logopedia/images/a/a8/Kanal_D_Logo_%281994-2011%29.png',fann)
-    xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal 7[/COLOR]',"http://www.izle7.com/kanal7/hint-dizileri",28,'http://www.canlimobeseizle.com/wp-content/uploads/kanal7hd.png',fann)
+    xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal 7[/COLOR]',"https://www.izle7.com/kanal7/hint-dizileri",28,'http://www.canlimobeseizle.com/wp-content/uploads/kanal7hd.png',fann)
     xbmc.executebuiltin('Container.SetViewMode(500)')
 #4
 def canliyayin():
@@ -146,15 +147,11 @@ def Dizi1():
 def Kanalddizi():
     url= 'https://www.kanald.com.tr/diziler'
     link=get_url(url)
-    soup = BS4(link, 'html5lib')
-    panel = soup.findAll("div", {"class": "kd-docs-news"},smartQuotesTo=None)
-    panel = panel[0].findAll("div", {"class": "col-md-4 col-sm-4 col-xs-12 series-container-item clearfix"})
-    for i in range (len (panel)):
-        url=panel[i].find('a')['href']
-        name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-        thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+    match=re.compile('<a href="(.*?)" title=".*?">\n    <img src="(.*?)" alt="(.*?)" title=".*?" class="img-responsive" itemprop="" />').findall(link)
+    for url,thumbnail,name in match:
         thumbnail='http:'+thumbnail
         url='http://www.kanald.com.tr'+url+'/bolumler'
+        #name=name.encode('utf-8', 'ignore')
         xbmctools.addDir('[COLOR orange]>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,7,thumbnail,thumbnail)
 #7            
 def Kanalddiziicerik(url):
@@ -340,18 +337,35 @@ def Yeni(url):
                         Url='https://www.hddiziizle.org/page/'+name+'/'
                         xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
                 else:
-                    link=get_url(url)
-                    soup = BeautifulSoup(link)
-                    panel = soup.findAll("div", {"class": "fix-film_item fix_home clearfix list_items"},smartQuotesTo=None)
-                    panel = panel[0].findAll("div", {"class": "movie-poster"})
-                    for i in range (len (panel)):
-                        url=panel[i].find('a')['href']
-                        name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-                        thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-                        xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
-                    page=re.compile('<span class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
-                    for Url,name in page:
-                        xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
+                    if "diziizleonline" in url:
+                        urla=url
+                        link=get_url(url)
+                        soup = BeautifulSoup(link)
+                        panel = soup.findAll("div", {"class": "fix-film-v2_item fix_home clearfix list_items"},smartQuotesTo=None)
+                        panel = panel[0].findAll("div", {"class": "movie-poster"})
+                        for i in range (len (panel)):
+                            url=panel[i].find('a')['href']
+                            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+                            name=name.replace('B&ouml;l&uuml;m','Bolum').replace('K&ouml;rd&uuml;\xc4\x9f&uuml;m','Kordugum')
+                            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+                            xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
+                        
+                        page=re.compile('<span class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
+                        for Url,name in page:
+                            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
+                    else:
+                        link=get_url(url)
+                        soup = BeautifulSoup(link)
+                        panel = soup.findAll("div", {"class": "fix-film_item fix_home clearfix list_items"},smartQuotesTo=None)
+                        panel = panel[0].findAll("div", {"class": "movie-poster"})
+                        for i in range (len (panel)):
+                            url=panel[i].find('a')['href']
+                            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+                            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+                            xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
+                        page=re.compile('<span class="current">.*?</span><a href="(.*?)" class="single_page" title=".*?">(.*?)</a>').findall(link)
+                        for Url,name in page:
+                            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
 #28
 def Yeni222(url):
     if "izle7.com" in url:
@@ -387,7 +401,7 @@ def dizivideolinks(url,name):
         for url in match:
             url='http://www.izle7.com/embed-'+url
             xbmctools.addDir('[COLOR beige]>>[/COLOR]'+'[COLOR gold]'+'Play'+'[/COLOR]',url,68,'','')
-    if "http://www.canlihddiziler.net/" in url:
+    if "canlihddiziler.net" in url:
         link=get_url(url)
         soup = BeautifulSoup(link)
         panel = soup.findAll("div", {"class": "keremiya_part"})
@@ -412,6 +426,8 @@ def dizivideolinks(url,name):
             xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,fann,fann)
     if "hddiziizle.org" in url:
         xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+"1. SeceneK"+'[/COLOR]',url,22,fann,fann)
+    if "diziizleonline.net" in url:
+        xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+"1. SeCeneK"+'[/COLOR]',url,22,fann,fann)
 ##        link=get_url(url)
 ##        soup = BeautifulSoup(link)
 ##        panel = soup.findAll("div", {"id": "part"})
@@ -499,21 +515,45 @@ def Yeni2dizi(url):
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,23,sonrakii,fann)
 #21
 def Yeni2(url):
-    if "www.ddizim.com" in url:
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"id": "ortaicerik"},smartQuotesTo=None)
-        panel = panel[0].findAll("div", {"class": "dizi-box"})
-        for i in range (len (panel)):
-            url=panel[i].find('a')['href']
-            name=panel[i].find('img')['alt'].encode('ascii', 'ignore')
-            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-            thumbnail='http://www.ddizim.com/'+thumbnail
-            name=name.replace('&#8211','').replace('&','')
-            xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,26,thumbnail,thumbnail)
-        page=re.compile('class="active"><a href=".*?">.*?</a></li><li ><a href="(.*?)">(.*?)</a>').findall(link)
-        for Url,name in page:
+    if "ddizim" in url: 
+        if "l.php?sayfa=" in url:
+            link=get_url(url)
+            match=re.compile('<a href="(.*?)" title=".*?"><img src="(.*?)" width=".*?" height=".*?" alt=".*?" /><span class="dizi-adi">(.*?)</span>').findall(link)
+            for url,thumbnail,name in match:
+                xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,26,thumbnail,thumbnail)
+            Url='http://www.ddizim.com/l.php?sayfa=3'
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'3'+'[/COLOR]',Url,21,sonrakii,fann)
+            Urla='http://www.ddizim.com/l.php?sayfa=4'
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'4'+'[/COLOR]',Urla,21,sonrakii,fann)
+            Urlb='http://www.ddizim.com/l.php?sayfa=5'
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'5'+'[/COLOR]',Urlb,21,sonrakii,fann)
+            Urlba='http://www.ddizim.com/l.php?sayfa=6'
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'6'+'[/COLOR]',Urlba,21,sonrakii,fann)
+            Urlb7='http://www.ddizim.com/l.php?sayfa=7'
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'7'+'[/COLOR]',Urlb7,21,sonrakii,fann)
+            Urlb8='http://www.ddizim.com/l.php?sayfa=8'
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'8'+'[/COLOR]',Urlb8,21,sonrakii,fann)
+            Urlb9='http://www.ddizim.com/l.php?sayfa=9'
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'9'+'[/COLOR]',Urlb9,21,sonrakii,fann)
+            Urlb10='http://www.ddizim.com/l.php?sayfa=10'
+            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'10'+'[/COLOR]',Urlb10,21,sonrakii,fann)
+        else:
+            link=get_url(url)
+            soup = BeautifulSoup(link)
+            panel = soup.findAll("div", {"id": "ortaicerik"},smartQuotesTo=None)
+            panel = panel[0].findAll("div", {"class": "dizi-box"})
+            for i in range (len (panel)):
+                url=panel[i].find('a')['href']
+                name=panel[i].find('img')['alt'].encode('ascii', 'ignore')
+                thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+                thumbnail='http://www.ddizim.com/'+thumbnail
+                name=name.replace('&#8211','').replace('&','')
+                xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,26,thumbnail,thumbnail)
+            page=re.compile('<li class="active"><a href="javascript.*?" rel=".*?">.*?</a></li>\r\n              <li ><a href="javascript.*?" rel=".*?">(.*?)</a></li>').findall(link)
+            for name in page:
+                Url='http://www.ddizim.com/l.php?sayfa='+name
                 xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,21,sonrakii,fann)
+            
     else:
         if "dizihd4" in url:
             link=get_url(url)
@@ -683,7 +723,7 @@ def Search2():
         Yenisinema2(url)                                                  
 #43
 def Yenisinema2(url):
-    if "/tag" in url:
+    if "/tag"  in url:
         link=get_url(url)
         soup = BeautifulSoup(link)
         panel = soup.findAll("div", {"class": "tabpanel"},smartQuotesTo=None)
@@ -698,22 +738,40 @@ def Yenisinema2(url):
         pages=re.compile('current\'>.*?</span><a class="page larger" title=".*?" href="(.*?)">(.*?)</a>').findall(link)
         for url,name in pages:
             xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
+
     else:
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "tabpanel"},smartQuotesTo=None)
-        panel = soup.findAll("div", {"class": "moviefilm"})
-        for i in range (len (panel)):
-            url=panel[i].find('a')['href']
-            name2=panel[i].find('span')['class'].encode('utf-8', 'ignore')
-            thumbnail=panel[i].find('img')['src']
-            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-            name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
-            name=fix.decode_fix(name)
-            xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]'+'[COLOR gold]'+ name2+'[/COLOR]',url,45,thumbnail,thumbnail)       
-        pages=re.compile('current\'>.*?</span><a class="page larger" title=".*?" href="(.*?)">(.*?)</a>').findall(link)
-        for url,name in pages:
-            xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
+        if "?arama"  in url:
+            link=get_url(url)
+            soup = BeautifulSoup(link)
+            panel = soup.findAll("div", {"class": "tabpanel"},smartQuotesTo=None)
+            panel = soup.findAll("div", {"class": "moviefilm"})
+            for i in range (len (panel)):
+                url=panel[i].find('a')['href']
+                thumbnail=panel[i].find('img')['src']
+                name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+                name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
+                name=fix.decode_fix(name)
+                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]',url,45,thumbnail,thumbnail)       
+            pages=re.compile('current\'>.*?</span><a class="page larger" title=".*?" href="(.*?)">(.*?)</a>').findall(link)
+            for url,name in pages:
+                xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
+        else:
+            
+            link=get_url(url)
+            soup = BeautifulSoup(link)
+            panel = soup.findAll("div", {"class": "tabpanel"},smartQuotesTo=None)
+            panel = soup.findAll("div", {"class": "moviefilm"})
+            for i in range (len (panel)):
+                url=panel[i].find('a')['href']
+                name2=panel[i].find('span')['class'].encode('utf-8', 'ignore')
+                thumbnail=panel[i].find('img')['src']
+                name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+                name=name.replace('&#8211;','&').replace('&#8217;','').replace('izle','')
+                name=fix.decode_fix(name)
+                xbmctools.addDir('[COLOR beige][COLOR red]>>[/COLOR]'+name+'[/COLOR]'+'[COLOR gold]'+ name2+'[/COLOR]',url,45,thumbnail,thumbnail)       
+            pages=re.compile('current\'>.*?</span><a class="page larger" title=".*?" href="(.*?)">(.*?)</a>').findall(link)
+            for url,name in pages:
+                xbmctools.addDir('[COLOR blue]>> Sayfa - [/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,43,sonrakii,fann)
 
 
 #45
@@ -769,8 +827,10 @@ def framee(name,url):
             import re
             match=re.compile("var video = '(.*?)'").findall(link)
             for vid in match:
-                vid=vid.replace('http://two.inxy.co','http://one.inxy.co/360p').replace('mb_files/','')
-                vid=vid#+"|referer=https://www.izle7.com/kanal7/izle-28787-prens-dilek-hakkini-kimin-icin-kullandi.html"
+                vid=vid.replace('https://two.inxy.co','https://one.inxy.co/360p').replace('mb_files/','')
+                #https://two.inxy.co/mb_files/c6ad677e-Ikimizin-Yerine-119-Bolum-Test-4-Ocak-Cuma.m3u8
+                #https://one.inxy.co/360p/c6ad677e-Ikimizin-Yerine-119-Bolum-Test-4-Ocak-Cuma.m3u8
+                vid=vid#+"|referer=https://www.izle7.com/kanal7/izle-29435-ikimizin-yerine-119-bolum-izle-4-ocak-2018.html"
                 name='Izle7'
                 xbmctools.addLink(name,vid+tk,'')
         else:
