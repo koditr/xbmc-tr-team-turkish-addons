@@ -721,6 +721,7 @@ def frame(url):
     else:
         print "cikis"
     link=get_url(url)
+    import re
     ply22=re.compile('src=".*?oload(.*?)"').findall(link)
     for name in ply22:
         name='https://oload'+name
@@ -736,7 +737,7 @@ def frame(url):
         url=name
         
         import requests as req
-        import requests# as req #data-wpfc-original-src="http://www.canlidizihd7.com/f
+        import requests
         org_url=url
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -754,12 +755,12 @@ def frame(url):
         prepped = s.prepare_request(req)
         prepped.headers = headers
         resp = s.send(prepped)
-        if resp.text:        #"file":"(.*?)","label":"(.*?)","type":"mp4"
-            match=re.compile('"file":"(.*?),"label":"(.*?)"').findall(resp.text)#%20
+        if resp.text:
+            match=re.compile('"file":"(.*?),"label":"(.*?)"').findall(resp.text)
             for url,name in match:
                 url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
-            matcha=re.compile('"file":"(.*?)","label":"(.*?)","type"').findall(resp.text)#%20
+            matcha=re.compile('"file":"(.*?)","label":"(.*?)","type"').findall(resp.text)
             for url,name in matcha:
                 url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
