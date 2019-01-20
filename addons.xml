@@ -85,6 +85,32 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.hintfilmkeyfi"
+       name="[COLOR pink][B]Hint Film Keyfi[/B][/COLOR]"
+       version="0.0.1"
+       provider-name="DreamTR Team">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.urlresolver"/>
+	<import version="3.0.8" addon="script.module.beautifulsoup"/>
+	<import addon="script.module.t0mm0.common"/>
+	<import addon="script.module.simplejson"/>
+    <import version="0.2.6" addon="script.module.mechanize"/>
+    <import version="2.18.4" addon="script.module.requests"/>
+    <import addon="script.module.beautifulsoup4" version="4.5.3"/>
+    <import addon="script.module.html5lib" version="0.999.0"/>
+	  </requires>
+  <extension point="xbmc.python.pluginsource" provides="video" library="sinema.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>DreamTR Team </summary>
+    <description>[COLOR orange]~~~http://dreamtr.club  ~~~Free Demo eklentidir
+	* Demo Eklentidir ,Tavsiyemiz DreamTR 2019 Eklentisi *[/COLOR]</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.Sinema"
        name="[COLOR orange]Sinema[/COLOR]"
        version="0.0.14"
