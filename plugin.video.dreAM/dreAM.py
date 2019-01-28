@@ -122,6 +122,7 @@ def canliyayin():
     xbmctools.addDir('[COLOR yellow]# New * CanliTv.Cafe 1.2 * New *[/COLOR]',"Canli1a()",1199,'https://www.canlitv.cafe/wp-content/uploads/2017/05/logo-1.png',fann)
     xbmctools.addDir('[COLOR yellow]# New * Web.CanliTvlivE.io 1.3 * New *[/COLOR]',"Canli1c()",1197,'https://pbs.twimg.com/profile_images/525770668541886464/OBCEWb5b.png',fann)
     xbmctools.addDir('[COLOR yellow]# New * Kesintisiz.TV 1.4 * New *[/COLOR]',"Canli1d()",1196,'https://www.kesintisiztv.com/images/kesintisiztv.png',fann)
+    xbmctools.addDir('[COLOR yellow]# New * EcanliTVizle.Live 1.5 * New *[/COLOR]',"Canli1e()",1195,'https://www.ecanlitvizle.live/images/logo.png',fann)
     xbmc.executebuiltin('Container.SetViewMode(500)')
 
 #--#
@@ -917,6 +918,17 @@ def a6666(url):
     match=re.compile('<p class="hostName">(.*?)</p></li>\n<li class=".*?">\n\n<a  class=".*?" target=".*?" href="(.*?)">').findall(link)
     for name,url in match:
         xbmctools.addDir('[COLOR lightyellow]'+name+'[/COLOR]',url,99,'','')
+#1195
+def Canli1e():
+    url='https://www.ecanlitvizle.live/trt-1-izle/'
+    link=get_url(url)
+    match=re.compile('<li><a href="https://www.ecanlitvizle.live/(.*?)">(.*?)</a></li>').findall(link)
+    for url,name in match:
+        if ('category' in url) or ('kullanim' in url) or ('iletisim' in url) or ('sitene' in url) or ('Kanallar' in url):
+            pass
+        else:
+            url='https://www.ecanlitvizle.live/'+url
+            xbmctools.addDir('[COLOR pink][COLOR beige]>>[/COLOR]  '+name+'[/COLOR]',url,101,'',"")
 #1196
 def Canli1d():
     url='https://www.kesintisiztv.com/trt-1'
@@ -1104,6 +1116,34 @@ def ctv2(url):
                 "Accept":"*/*",
                 "Accept-Language":"en-US,en;q=0.5",
                 "Referer":"https://www.kesintisiztv.com/",
+                "Connection":"keep-alive"
+                }
+                resp = req.get(url, allow_redirects=True, headers=headers)
+                import re
+                match=re.compile("file: \'(.*?)\'").findall(resp.text)
+                for url in match:
+                    xbmctools.yenical4(name,url+tk)
+        except:
+            pass
+    if "ecanlitvizle" in url:
+        try:
+            import requests as req
+            headers = {
+            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+            "Accept":"*/*",
+            "Accept-Language":"en-US,en;q=0.5",
+            "Referer":"https://www.ecanlitvizle.live/",
+            "Connection":"keep-alive"
+            }
+            resp = req.get(url, allow_redirects=True, headers=headers)
+            import re
+            match=re.compile('src="(.*?)" frameborder').findall(resp.text)
+            for url in match:
+                headers = {
+                "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+                "Accept":"*/*",
+                "Accept-Language":"en-US,en;q=0.5",
+                "Referer":"https://www.ecanlitvizle.live/",
                 "Connection":"keep-alive"
                 }
                 resp = req.get(url, allow_redirects=True, headers=headers)
@@ -1379,6 +1419,7 @@ elif mode==1199: Canli1a()
 elif mode==1198: Canli1b()
 elif mode==1197: Canli1c()
 elif mode==1196: Canli1d()
+elif mode==1195: Canli1e()
 elif mode==12: Canli2()
 elif mode==13: Kanalddizi()
 elif mode==14: Arama()
