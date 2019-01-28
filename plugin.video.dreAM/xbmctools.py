@@ -504,7 +504,7 @@ def magix_player(name,url):
             match=re.compile('mp4\|(.*?)\|sources\|').findall(link)        
             for b in match:
                 if match:
-                    link=get_url(url)#https://user-content-hot-142.molyusercontentstage.me/xqx2osfolnokjiqbtfmcnisdxzftizef5aofciunixy2nngqbvc2q2pvh54a/v.mp4
+                    link=get_url(url)
                     match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
                     for a in match1:
                         url=a+b+'/v.mp4'
@@ -680,6 +680,7 @@ def frame(url):
     #--
     #--
     if "dizihd4" in url:
+        import re
         link=get_url(url)
         ply223=re.compile('href="https://www.kanald.com.tr/(.*?)">').findall(link)
         for name in ply223:
@@ -864,11 +865,15 @@ def frame(url):
             "Connection":"keep-alive"
             }
             resp = req.get(url, allow_redirects=True, headers=headers)
-            match=re.compile('src="(.*?)" type="video/mp4" label="(.*?)"').findall(resp.text)
-            for urlA,name in match:
-                urlA=urlA.replace("http:\\/\\/redirector.googlevideo.com\\",'')
-                urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
-                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
+            match=re.compile('src="(.*?)"').findall(resp.text)
+            for urlA in match:
+                name="Play"
+                if "hola" in urlA:
+                    pass
+                else:
+                    urlA=urlA.replace("http:\\/\\/redirector.googlevideo.com\\",'')
+                    urlA=urlA.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('%2F','/')
+                    addLink('[COLOR gold]SEC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',urlA+tk,'')
             matchA=re.compile('src="(.*?).m3u8" type="').findall(resp.text)
             for urlA in matchA:
                 link=get_url(urlA+'.m3u8')
@@ -1035,36 +1040,37 @@ def frame(url):
             for url,name in matcha:
                 url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
                 addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
-    ply22rra=re.compile('src="http://www.canlidizihd7.com/fireplayer/(.*?)" ').findall(link)
-    for url in ply22rra:
-        url='http://www.canlidizihd7.com/fireplayer/'+url
-        org_url=url
-        import requests as req
-        import requests
-        headers = {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15',
-            'X-Requested-With': 'XMLHttpRequest',
-            'Referer': org_url
-        }
-        data = {
-            'MIME Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'hash': url.split('/')[-1],
-            'r': org_url
-        }
-        s = requests.Session()
-        req = requests.Request('POST', url+'?do=getVideo', data=data, headers=headers)
-        prepped = s.prepare_request(req)
-        prepped.headers = headers
-        resp = s.send(prepped)
-        match=re.compile('file"\:"(.*?)","label"\:"(.*?)","type"').findall(resp.text)
-        for url,name in match:
-            url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
-        matcha=re.compile('src="(.*?)" type="video/mp4" label="(.*?)"').findall(resp.text)
-        for url,name in matcha:
-            url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
-            addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+    if "canlidizihd7" in url:
+        ply22rra=re.compile('src="https://www.canlidizihd7.com/fireplayer/(.*?)" ').findall(link)
+        for url in ply22rra:
+            url='http://www.canlidizihd7.com/fireplayer/'+url
+            org_url=url
+            import requests as req
+            import requests
+            headers = {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15',
+                'X-Requested-With': 'XMLHttpRequest',
+                'Referer': org_url
+            }
+            data = {
+                'MIME Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'hash': url.split('/')[-1],
+                'r': org_url
+            }
+            s = requests.Session()
+            req = requests.Request('POST', url+'?do=getVideo', data=data, headers=headers)
+            prepped = s.prepare_request(req)
+            prepped.headers = headers
+            resp = s.send(prepped)
+            match=re.compile('file"\:"(.*?)","label"\:"(.*?)","type"').findall(resp.text)
+            for url,name in match:
+                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
+            matcha=re.compile('src="(.*?)" type="video/mp4" label="(.*?)"').findall(resp.text)
+            for url,name in matcha:
+                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
+                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url,'')
     ply22rrab=re.compile('src=".*?e-video.live/e/vid/(.*?)"').findall(link)
     for url in ply22rrab:
         url='https://e-video.live/e/vid/'+url
