@@ -12,13 +12,13 @@ import re,requests
 
 xbmcPlayer = xbmc.Player()
 playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
-settings = xbmcaddon.Addon(id='plugin.video.Sinema')
+settings = xbmcaddon.Addon(id='plugin.video.hintfilmkeyfi')
 
 
 
 def CATEGORIES():#
         addDir('[COLOR orange][B]< Full IPTV ACILMISTIR;ALMAK ISTEYENLER http://dreamtr.club den Ogrenebilirler>[/B][/COLOR]','','','https://raw.githubusercontent.com/koditr/xbmc-tr-team-turkish-addons/master/duyuru/icon2.png')
-        url='https://www.hintfilmkeyfi.com/son-eklenen-filmler'
+        url='http://www.hintfilmkeyfi.com/son-eklenen-filmler'
         addDir('[COLOR pink][B]< ! Yeni EKLENENLER  ! >[/B][/COLOR]',url,1,'https://raw.githubusercontent.com/koditr/xbmc-tr-team-turkish-addons/master/duyuru/icon2.png')
         addDir('[COLOR pink][B]< ! POPULER FILMLER  ! >[/B][/COLOR]','https://www.hintfilmkeyfi.com/populer-filmler',1,'https://raw.githubusercontent.com/koditr/xbmc-tr-team-turkish-addons/master/duyuru/icon2.png')
         link=get_url(url)
@@ -36,16 +36,13 @@ def RECENT(url):
     panel = panel[0].findAll("div", {"class": "film-k kutu-icerik kat"})
     for i in range (len (panel)):
             div2=panel[i].findAll("div", {"class": "imdb"},smartQuotesTo=None)
-            #print div2
             match=re.compile('<div class="imdb"><b>(.*?)</b><span>IMDb</span></div>').findall(str (div2))
             for name2 in match:
-                    #print name2
                     name2='[COLOR gold][B]..IMDB [/B][/COLOR]'+'[COLOR beige][B]'+name2+'[/B][/COLOR]'
             div3=panel[i].findAll("div", {"class": "lisan"},smartQuotesTo=None)
             print div3
             matcha=re.compile('</i>(.*?)</span><b>').findall(str (div3))
             for name3 in matcha:
-                    #print name3
                     name3='[COLOR pink][B]..DiL [/B][/COLOR]'+'[COLOR beige][B]'+name3+'[/B][/COLOR]'
             url=panel[i].find('a')['href']
             name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')

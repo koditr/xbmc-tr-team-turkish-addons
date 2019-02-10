@@ -1,5 +1,5 @@
-===0.0.14===
+===0.0.2===
 .............
-Tarih: 13.02.2018
+Tarih: 10.02.2019
 
-* Demo Eklentidir ,Tavsiyemiz DreamTR 2018 Eklentisi *
+* Demo Eklentidir ,Tavsiyemiz DreamTR 2019 Eklentisi *

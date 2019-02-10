@@ -4,7 +4,7 @@ import sys,os,base64,time
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urlresolver,json
 
-__settings__ = xbmcaddon.Addon(id="plugin.video.Sinema")
+__settings__ = xbmcaddon.Addon(id="plugin.video.hintfilmkeyfi")
 #----------------------------------------------------------------------
 xbmcPlayer = xbmc.Player()
 playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
