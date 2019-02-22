@@ -4,6 +4,7 @@ import urllib,urllib2,xbmcplugin,xbmcgui,xbmcaddon,xbmc
 import re
 from bs4 import BeautifulSoup as BS4
 import xbmctools,fix
+from fix import AADecoder
 import os,base64,time
 import mechanize
 import sys
@@ -141,7 +142,7 @@ def Dizi1():
     xbmctools.addDir('[COLOR orange]>>>[/COLOR] [COLOR beige]KANAL D Dizileri[/COLOR]',url,13,yeniek,fann)
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal 7[/COLOR]',"http://www.izle7.com/kanal7/hint-dizileri",28,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,19,yeniek,fann)
-    xbmctools.addDir('[COLOR pink]>>[/COLOR] [COLOR pink]New * Enson Eklenen Diziler * New [/COLOR]',"http://www.canlidizihd7.com/",19,yeniek,fann)
+    xbmctools.addDir('[COLOR pink]>>[/COLOR] [COLOR pink]New * Enson Eklenen Diziler * New [/COLOR]',"http://www.canlidizihd7.net/",19,yeniek,fann)
     
     link=get_url(url)
     match=re.compile('<li class="cat-item cat-item-.*?"><a href="(.*?)"').findall(link)
@@ -158,6 +159,7 @@ def Kanalddizi():
         url='http://www.kanald.com.tr'+url+'/bolumler'
         #name=name.encode('utf-8', 'ignore')
         xbmctools.addDir('[COLOR orange]>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,7,thumbnail,thumbnail)
+
 #7            
 def Kanalddiziicerik(url):
     link=get_url(url)
@@ -236,8 +238,8 @@ def Arama():
 
 #1788
 def Ddizi12():
-    xbmctools.addDir('[COLOR pink]>>[/COLOR] [COLOR pink]New * Enson Eklenen Diziler * New [/COLOR]',"http://www.canlidizihd7.com/",19,yeniek,fann)
-    url="http://www.canlidizihd7.com/"
+    xbmctools.addDir('[COLOR pink]>>[/COLOR] [COLOR pink]New * Enson Eklenen Diziler * New [/COLOR]',"http://www.canlidizihd7.net/",19,yeniek,fann)
+    url="http://www.canlidizihd7.net/"
     link=get_url(url)
     match1=re.compile('<li class="cat-item cat-item-.*?"><a href="(.*?)" title=".*?">(.*?)</a> </li>').findall(link)
     for url,name in match1:
@@ -252,6 +254,7 @@ def Ddizi12():
                 if ">Genel</a> " in url:
                     pass
                 else:
+                    print url
                     xbmctools.addDir('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,19,'','')
 #27
 def Canli4():
@@ -281,7 +284,7 @@ def de_get(name,url):
     xbmctools.yenical4(name,url)
 #19
 def Yeni(url):
-    if "http://www.canlidizihd7.com/" in url:
+    if "canlidizihd7.net" in url:
         link=get_url(url)
         soup = BeautifulSoup(link)
         panel = soup.findAll("div", {"class": "orta-ici"},smartQuotesTo=None)
@@ -1030,6 +1033,7 @@ def ctv1(name,url):#
             for url in match:
                 xbmctools.yenical4(name,url+tk)
     else:
+        import re
         url=url
         link=get_url(url)
         match = re.compile('file:"(.*?)"').findall(link)
@@ -1069,7 +1073,7 @@ def ctv1(name,url):#
 
 #12
 def Canli2():
-    sitegit='http://www.livetvs.io/tum-kanallar.html'
+    sitegit='http://web.canlitvlive.io/tv-tum-kanallar.html'
     link=get_url(sitegit)
     soup = BeautifulSoup(link)
     panel=soup.findAll("div", {"class": "tv-body"})
