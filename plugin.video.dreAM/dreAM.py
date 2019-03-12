@@ -104,26 +104,26 @@ def Sinema():
     xbmc.executebuiltin('Container.SetViewMode(500)')
 #3
 def Dizi():
-    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR pink]'+'1-> Site - Dizikolik.Org'+'[/COLOR]','https://www.dizikolik.org/bolumler',19,'http://dreamtr.club/resimler/Dizi1.png',fann)
-    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR gold]'+'2-> Site - Canlidizihd7'+'[/COLOR]',url,1788,'http://dreamtr.club/resimler/Dizi2.png',fann)
+    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR pink]'+'1-> Site - dizikolik1.com'+'[/COLOR]','https://www.dizikolik1.com/bolumler',19,'http://dreamtr.club/resimler/Dizi1.png',fann)
+    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR gold]'+'2-> Site - Sdiziizle.Com'+'[/COLOR]',url,1788,'https://www.sdiziizle.com/wp-content/uploads/2019/01/sdiziizle.fw_.png',fann)
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'3-> Site - Ddizim'+'[/COLOR]',url,1899,'http://dreamtr.club/resimler/Dizi3.png',fann)
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+'4-> Site - Dizihd4'+'[/COLOR]',url,1898,'http://dreamtr.club/resimler/Dizi4.png',fann)
     xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR pink]'+'1.1-> Site - HdDiziIzle.Org'+'[/COLOR]','https://www.hddiziizle.org/',19,'https://www.hddiziizle.org/wp-content/uploads/2018/08/hdd.png',fann)
-    xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR pink]'+'1.2-> Site - DiziizleOnline.Net'+'[/COLOR]','https://www.diziizleonline.net/',19,'https://i.pinimg.com/originals/b9/a8/e7/b9a8e745dc7c86519b6c14a90e991430.png',fann)
+   # xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR pink]'+'1.2-> Site - DiziizleOnline.Net'+'[/COLOR]','https://www.diziizleonline.net/',19,'https://i.pinimg.com/originals/b9/a8/e7/b9a8e745dc7c86519b6c14a90e991430.png',fann)
     xbmctools.addDir('[COLOR orange]>>>[/COLOR] [COLOR beige]KANAL D Dizileri[/COLOR]',url,13,'https://vignette.wikia.nocookie.net/logopedia/images/a/a8/Kanal_D_Logo_%281994-2011%29.png',fann)
     xbmctools.addDir('[COLOR red]>>>[/COLOR] [COLOR orange]Hint Dizileri Kanal 7[/COLOR]',"https://www.izle7.com/kanal7/hint-dizileri",28,'http://www.canlimobeseizle.com/wp-content/uploads/kanal7hd.png',fann)
     xbmc.executebuiltin('Container.SetViewMode(500)')
 #4
 def canliyayin():
-    xbmctools.addDir('[COLOR pink]New* 2019 / Canli Tv 1*[/COLOR]',"Canli1()",11,'http://dreamtr.club/resimler/Canlitv1.png',fann)
+    #xbmctools.addDir('[COLOR pink]New* 2019 / Canli Tv 1*[/COLOR]',"Canli1()",11,'http://dreamtr.club/resimler/Canlitv1.png',fann)
     xbmctools.addDir('[COLOR pink]New* 2019 / Canli Tv 2*[/COLOR]',"Canli2()",12,'http://dreamtr.club/resimler/Canlitv2.png',fann)
-    xbmctools.addDir('[COLOR yellow]New* 2019 / Canli Tv 3*[/COLOR]',"Canli3()",18,'http://dreamtr.club/resimler/Canlitv3.png',fann)
+    #xbmctools.addDir('[COLOR yellow]New* 2019 / Canli Tv 3*[/COLOR]',"Canli3()",18,'http://dreamtr.club/resimler/Canlitv3.png',fann)
     xbmctools.addDir('[COLOR orange]# 2019 year * Canli Tv 4 * New *[/COLOR]',"Canli4()",27,'http://dreamtr.club/resimler/Canlitv4.png',fann)
-    xbmctools.addDir('[COLOR yellow]# New * CanliTv.App 1.1* New *[/COLOR]',"Canli1b()",1198,'https://www.canlitv.app/images/logo.png',fann)
-    xbmctools.addDir('[COLOR yellow]# New * CanliTv.Cafe 1.2 * New *[/COLOR]',"Canli1a()",1199,'https://www.canlitv.cafe/wp-content/uploads/2017/05/logo-1.png',fann)
+   # xbmctools.addDir('[COLOR yellow]# New * CanliTv.App 1.1* New *[/COLOR]',"Canli1b()",1198,'https://www.canlitv.app/images/logo.png',fann)
+    #xbmctools.addDir('[COLOR yellow]# New * CanliTv.Cafe 1.2 * New *[/COLOR]',"Canli1a()",1199,'https://www.canlitv.cafe/wp-content/uploads/2017/05/logo-1.png',fann)
     xbmctools.addDir('[COLOR yellow]# New * Web.CanliTvlivE.io 1.3 * New *[/COLOR]',"Canli1c()",1197,'https://pbs.twimg.com/profile_images/525770668541886464/OBCEWb5b.png',fann)
     xbmctools.addDir('[COLOR yellow]# New * Kesintisiz.TV 1.4 * New *[/COLOR]',"Canli1d()",1196,'https://www.kesintisiztv.com/images/kesintisiztv.png',fann)
-    xbmctools.addDir('[COLOR yellow]# New * EcanliTVizle.Live 1.5 * New *[/COLOR]',"Canli1e()",1195,'https://www.ecanlitvizle.live/images/logo.png',fann)
+   # xbmctools.addDir('[COLOR yellow]# New * EcanliTVizle.Live 1.5 * New *[/COLOR]',"Canli1e()",1195,'https://www.ecanlitvizle.live/images/logo.png',fann)
     xbmc.executebuiltin('Container.SetViewMode(500)')
 
 #--#
@@ -238,24 +238,12 @@ def Arama():
 
 #1788
 def Ddizi12():
-    xbmctools.addDir('[COLOR pink]>>[/COLOR] [COLOR pink]New * Enson Eklenen Diziler * New [/COLOR]',"http://www.canlidizihd7.net/",19,yeniek,fann)
-    url="http://www.canlidizihd7.net/"
+    xbmctools.addDir('[COLOR pink]>>[/COLOR] [COLOR pink]New * Enson Eklenen Diziler * New [/COLOR]',"https://www.sdiziizle.com/",19,yeniek,fann)
+    url="https://www.sdiziizle.com/"
     link=get_url(url)
-    match1=re.compile('<li class="cat-item cat-item-.*?"><a href="(.*?)" title=".*?">(.*?)</a> </li>').findall(link)
+    match1=re.compile('class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-.*?"><a href="(.*?)"><div class="icon"><span></span></div>(.*?)</a></li>').findall(link)
     for url,name in match1:
-        if "eski-yeni" in url:
-            pass
-        else:
-            
-            if "show-programlar" in url:
-                pass
-            else:
-                
-                if ">Genel</a> " in url:
-                    pass
-                else:
-                    print url
-                    xbmctools.addDir('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,19,'','')
+        xbmctools.addDir('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,19,'','')
 #27
 def Canli4():
     urlD='http://212.224.109.109/S2/HLS_LIVE/kanald/500/prog_index.m3u8'
@@ -284,19 +272,33 @@ def de_get(name,url):
     xbmctools.yenical4(name,url)
 #19
 def Yeni(url):
-    if "canlidizihd7.net" in url:
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "orta-ici"},smartQuotesTo=None)
-        panel = panel[0].findAll("div", {"class": "kutu-resim"})
-        for i in range (len (panel)):
-            url=panel[i].find('a')['href']
-            name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
-            thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-            xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
-        page=re.compile('class=\'current\'>.*?</span><a class="page larger" title=".*?" href="(.*?)">(.*?)</a>').findall(link)
-        for Url,name in page:
-            xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
+    if "sdiziizle" in url:
+        if '/izle/' in url:
+            link=get_url(url)
+            soup = BeautifulSoup(link)
+            panel = soup.findAll("div", {"class": "listing standard  safirHover video"},smartQuotesTo=None)
+            panel = panel[0].findAll("div", {"class": "thumb"})
+            for i in range (len (panel)):
+                url=panel[i].find('a')['href']
+                name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+                thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+                xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
+            page=re.compile('<span class="current">.*?</span><a href=\'(.*?)\' class="inactive">(.*?)</a>').findall(link)
+            for Url,name in page:
+                xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
+        else:
+            link=get_url(url)
+            soup = BeautifulSoup(link)
+            panel = soup.findAll("div", {"class": "listing double"},smartQuotesTo=None)
+            panel = panel[0].findAll("div", {"class": "thumb"})
+            for i in range (len (panel)):
+                url=panel[i].find('a')['href']
+                name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
+                thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
+                xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,20,thumbnail,thumbnail)
+            page=re.compile('<span class="current">.*?</span><a href=\'(.*?)\' class="inactive">(.*?)</a>').findall(link)
+            for Url,name in page:
+                xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,19,sonrakii,fann)
     
     else:
         if "dizikolik" in url:
@@ -409,14 +411,8 @@ def dizivideolinks(url,name):
         for url in match:
             url='http://www.izle7.com/embed-'+url
             xbmctools.addDir('[COLOR beige]>>[/COLOR]'+'[COLOR gold]'+'Play'+'[/COLOR]',url,68,'','')
-    if "canlihddiziler.net" in url:
-        link=get_url(url)
-        soup = BeautifulSoup(link)
-        panel = soup.findAll("div", {"class": "keremiya_part"})
-        liste=BeautifulSoup(str(panel))
-        match2=re.compile('a href="(.*?)"><span>(.*?)</span></a>').findall(str(liste))
-        for url,name2 in match2:
-            xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name2+'[/COLOR]',url,22,fann,fann)
+    if "sdiziizle" in url:
+        xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,22,fann,fann)
     if "dizikolik" in url:
         xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+"1."+name+'[/COLOR]',url,22,fann,fann)
         link=get_url(url)
@@ -468,21 +464,21 @@ def Dizi288():
 
 #1899
 def ddizi2():
-    url='http://www.ddizim.com/'
+    url='http://www.ddizim.net/'
     #xbmctools.addDir('[COLOR red]>>>>>>>[/COLOR] [COLOR beige]Dizi Ara / Search[/COLOR]',url,25,aramaa,fann)
     xbmctools.addDir('[COLOR blue]>>[/COLOR] [COLOR yellow]Enson Eklenen Diziler [/COLOR]',url,21,yeniek,fann)
-    url1='http://www.ddizim.com/'
+    url1='http://www.ddizim.net/'
     link=get_url(url1)
     soup = BeautifulSoup(link)
     panel = soup.findAll("div", {"class": "blok-liste"},smartQuotesTo=None)
-    match1=re.compile('<a href="http://www.ddizim.com/diziler\/(.*?)\/(.*?)\-son-bolum-izle"').findall(str(panel))
+    match1=re.compile('<a href="http://www.ddizim.net/diziler\/(.*?)\/(.*?)\-son-bolum-izle"').findall(str(panel))
     for url,name in match1:
-        url='http://www.ddizim.com/diziler/'+url+"/"+name+'-son-bolum-izle'
+        url='http://www.ddizim.net/diziler/'+url+"/"+name+'-son-bolum-izle'
         name=fix.decode_fix(name)
         xbmctools.addDir('[COLOR beige][COLOR orange]>[/COLOR]'+name+'[/COLOR]',url,23,'','')
 #25
 def Arama2():
-    dizi2='http://www.ddizim.com'
+    dizi2='http://www.ddizim.net'
     keyboard = xbmc.Keyboard("", 'Search', False)
     keyboard.doModal()
     if keyboard.isConfirmed():
@@ -508,7 +504,7 @@ def Yeni2dizi(url):
         url=panel[i].find('a')['href']
         name=panel[i].find('img')['alt'].encode('utf-8', 'ignore')
         thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-        thumbnail='http://www.ddizim.com/'+thumbnail
+        thumbnail='http://www.ddizim.net/'+thumbnail
         name=name.replace('&#8211','').replace('&','')
         xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,26,thumbnail,thumbnail)
     page=re.compile('class="active"><a href=".*?">.*?</a></li><li ><a href="(.*?)">(.*?)</a>').findall(link)
@@ -522,21 +518,21 @@ def Yeni2(url):
             match=re.compile('<a href="(.*?)" title=".*?"><img src="(.*?)" width=".*?" height=".*?" alt=".*?" /><span class="dizi-adi">(.*?)</span>').findall(link)
             for url,thumbnail,name in match:
                 xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,26,thumbnail,thumbnail)
-            Url='http://www.ddizim.com/l.php?sayfa=3'
+            Url='http://www.ddizim.net/l.php?sayfa=3'
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'3'+'[/COLOR]',Url,21,sonrakii,fann)
-            Urla='http://www.ddizim.com/l.php?sayfa=4'
+            Urla='http://www.ddizim.net/l.php?sayfa=4'
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'4'+'[/COLOR]',Urla,21,sonrakii,fann)
-            Urlb='http://www.ddizim.com/l.php?sayfa=5'
+            Urlb='http://www.ddizim.net/l.php?sayfa=5'
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'5'+'[/COLOR]',Urlb,21,sonrakii,fann)
-            Urlba='http://www.ddizim.com/l.php?sayfa=6'
+            Urlba='http://www.ddizim.net/l.php?sayfa=6'
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'6'+'[/COLOR]',Urlba,21,sonrakii,fann)
-            Urlb7='http://www.ddizim.com/l.php?sayfa=7'
+            Urlb7='http://www.ddizim.net/l.php?sayfa=7'
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'7'+'[/COLOR]',Urlb7,21,sonrakii,fann)
-            Urlb8='http://www.ddizim.com/l.php?sayfa=8'
+            Urlb8='http://www.ddizim.net/l.php?sayfa=8'
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'8'+'[/COLOR]',Urlb8,21,sonrakii,fann)
-            Urlb9='http://www.ddizim.com/l.php?sayfa=9'
+            Urlb9='http://www.ddizim.net/l.php?sayfa=9'
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'9'+'[/COLOR]',Urlb9,21,sonrakii,fann)
-            Urlb10='http://www.ddizim.com/l.php?sayfa=10'
+            Urlb10='http://www.ddizim.net/l.php?sayfa=10'
             xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+'10'+'[/COLOR]',Urlb10,21,sonrakii,fann)
         else:
             link=get_url(url)
@@ -547,12 +543,12 @@ def Yeni2(url):
                 url=panel[i].find('a')['href']
                 name=panel[i].find('img')['alt'].encode('ascii', 'ignore')
                 thumbnail=panel[i].find('img')['src'].encode('utf-8', 'ignore')
-                thumbnail='http://www.ddizim.com/'+thumbnail
+                thumbnail='http://www.ddizim.net/'+thumbnail
                 name=name.replace('&#8211','').replace('&','')
                 xbmctools.addDir('[COLOR beige][COLOR blue]>[/COLOR]'+name+'[/COLOR]',url,26,thumbnail,thumbnail)
             page=re.compile('<li class="active"><a href="javascript.*?" rel=".*?">.*?</a></li>\r\n              <li ><a href="javascript.*?" rel=".*?">(.*?)</a></li>').findall(link)
             for name in page:
-                Url='http://www.ddizim.com/l.php?sayfa='+name
+                Url='http://www.ddizim.net/l.php?sayfa='+name
                 xbmctools.addDir('[COLOR blue]Sayfa >>[/COLOR]'+'[COLOR red]'+name+'[/COLOR]',Url,21,sonrakii,fann)
             
     else:
@@ -584,7 +580,7 @@ def dizivideolinks2(url,name):
         liste=BeautifulSoup(str(panel))
         match2=re.compile('<a href="(.*?)">(.*?)</a></li>').findall(str(liste))
         for url,name in match2:
-            url='http://www.ddizim.com/'+url
+            url='http://www.ddizim.net/'+url
             name=name.replace('\xe0\xb8\xa3\xe0\xb8\x87','c')
             xbmctools.addDir('[COLOR gold]>>[/COLOR]'+'[COLOR beige]'+name+'[/COLOR]',url,22,fann,fann)
     else:
@@ -841,9 +837,9 @@ def sembol_fix(x):
     return x[0].capitalize() + x[1:]
 #16
 def yetiskin():
-    url1='http://lubetube.com/categories'
+    url1='https://lubetube.com/categories'
     xbmctools.addDir('[COLOR red]>>[/COLOR][COLOR yellow]Info[/COLOR][COLOR red] <<[/COLOR]',"BILGILENDIRME",56,"","")
-    xbmctools.addDir('[COLOR blue]New Movie>>[/COLOR]',"http://lubetube.com/",53,"","")
+    xbmctools.addDir('[COLOR blue]New Movie>>[/COLOR]',"https://lubetube.com/search/title/new/",53,"","")
     link=get_url(url1)
     match1=re.compile('</strong></span><a class="frame" href="(.*?)"><img src=".*?" alt="(.*?)" />').findall(link)
     for url,name in match1:
@@ -859,11 +855,13 @@ def Recentyet(url):
     for i in range (len (panel)):
         url=panel[i].find('a')['href']
         thumbnail=panel[i].find('img')['src']
+        #thumbnail=thumbnail.replace('https','http')
+        print thumbnail
         name=panel[i].find('a')['title']
         xbmctools.addDir('[COLOR beige][COLOR blue]>>[/COLOR]'+name+'[/COLOR]',url,54,thumbnail,thumbnail)
     page=re.compile('<span class="onpage">.*?</span>  <a href="(.*?)">(.*?)</a>').findall(link)
     for url,name in page:
-            url='http://lubetube.com'+url
+            url='https://lubetube.com'+url
             xbmctools.addDir('[COLOR blue]NEXT Page >>[/COLOR]'+ '[COLOR red]'+name+'[/COLOR]',url,53,sonrakii,fann)
 #54
 
@@ -872,7 +870,7 @@ def ayrisdirmayet(url):
     match1=re.compile('id="video-high" href="(.*?)" data-conten').findall(link)
     for urla in match1:
         name="Watch Now"
-        xbmctools.addLink(name,urla,'')
+        xbmctools.addLink(name,urla+tk,'')
       
 #55
 
@@ -1031,7 +1029,8 @@ def ctv1(name,url):#
             resp = req.get(url, allow_redirects=True, headers=headers)
             match=re.compile("file: '(.*?)'").findall(resp.text)
             for url in match:
-                xbmctools.yenical4(name,url+tk)
+                url=url.replace('playlist','chunks')
+                xbmctools.yenical4(name,url)
     else:
         import re
         url=url
@@ -1131,6 +1130,7 @@ def ctv2(url):
             pass
     if "ecanlitvizle" in url:
         try:
+            print url
             import requests as req
             headers = {
             "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
@@ -1341,38 +1341,72 @@ def iptvpro(name,url):
             xbmctools.addDir('[COLOR gold]>'+name+' - Platinium User[/COLOR]',url,19,'','')
 #99
 def magix_player(name,url):
-    if "vidmol" in url:
-        link=get_url(url)
-        match=re.compile('mp4\|(.*?)\|sources\|').findall(link)        
-        for b in match:
-            if match:
-                link=get_url(url)#https://user-content-hot-142.molyusercontentstage.me/xqx2osfolnokjiqbtfmcnisdxzftizef5aofciunixy2nngqbvc2q2pvh54a/v.mp4
-                match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                for a in match1:
-                    url=a+b+'/v.mp4'
-                    url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                    name='ViDmOlY'
-                    xbmctools.yenical4(name,url)
-    if "dailymotion" in url:
-        urla=url
-        urla=urla.replace('motion.com/embed/video/','')
-        urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
-        addLink('Play-DM',urla,'')
-    elif "hqq" in url:
-        url=url.replace('&amp;autoplay=no','').replace('https://hqq.tv/player/embed_player.php?vid=','')
-        vid=url
-        xbmctools.resolve( vid)
+    print "MAGIX"+url
+    if "oloadin" in url:
+        import requests as req
+        headers = {
+        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/201 ...",
+        "Accept":"*/*",
+        "Accept-Language":"en-US,en;q=0.5",
+        "Referer":"https://oloadin.xyz/",
+        "Connection":"keep-alive"
+        }
+        resp = req.get(url, allow_redirects=True, headers=headers)
+        print resp.text#<title>b110d_Blue.My.Mind.2018.1080P.Amzn.Web-Dl.Ddp5.1.H.264-Ntg-1-1-direkizleyin-com.mp4 HLS Player</title>
+                       #<title>8b249_Alita-Battle-Angel-2019-720P-Hdtc-1Xbet-1-direkizleyin-com.mp4 HLS Player</title>
+        matcha=re.compile('<title>(.*?)</title>').findall(resp.text)
+        print matcha
+        for pxl in matcha:
+            if "720" in pxl:
+                pxl=''
+                pxl="720"
+            else:
+                if "1080" in pxl:
+                    pxl=''
+                    pxl="1080"
+                    
+        match=re.compile('sayi\=.*?\&user_id=(.*?)\&date\=.*?\&count\=.*?\&movie_id=(.*?)"').findall(resp.text)
+        for a,b in match:
+            #var params = "sayi=1&user_id=16&date=2019-03-12&count=1&views=0&movie_id=1edb7156cf5966bd5927fd7414620e45"
+            #print match#https://user16p2.fvsvideo.com/hls/1edb7156cf5966bd5927fd7414620e45/720p.m3u8
+            url='http://user'+a+'p2.fvsvideo.com/hls/'+b+'/'+pxl+'p.m3u8'
+            print url
+            name='OloAdin-PLY'
+            xbmctools.yenical4(name,url)
     else:
-        
-        UrlResolverPlayer = url
-        playList.clear()
-        media = urlresolver.HostedMediaFile(UrlResolverPlayer)
-        source = media
-        if source:
-                url = source.resolve()
-                xbmctools.addLink(name,url,'')
-                xbmctools.playlist_yap(playList,name,url)
-                xbmcPlayer.play(playList)
+            
+        if "vidmol" in url:
+            link=get_url(url)
+            match=re.compile('mp4\|(.*?)\|sources\|').findall(link)        
+            for b in match:
+                if match:
+                    link=get_url(url)#https://user-content-hot-142.molyusercontentstage.me/xqx2osfolnokjiqbtfmcnisdxzftizef5aofciunixy2nngqbvc2q2pvh54a/v.mp4
+                    match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
+                    for a in match1:
+                        url=a+b+'/v.mp4'
+                        url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
+                        name='ViDmOlY'
+                        xbmctools.yenical4(name,url)
+        if "dailymotion" in url:
+            urla=url
+            urla=urla.replace('motion.com/embed/video/','')
+            urla = 'plugin://plugin.video.dailymotion_com/?mode=playVideo&url='+urla
+            addLink('Play-DM',urla,'')
+        elif "hqq" in url:
+            url=url.replace('&amp;autoplay=no','').replace('https://hqq.tv/player/embed_player.php?vid=','')
+            vid=url
+            xbmctools.resolve( vid)
+        else:
+            
+            UrlResolverPlayer = url
+            playList.clear()
+            media = urlresolver.HostedMediaFile(UrlResolverPlayer)
+            source = media
+            if source:
+                    url = source.resolve()
+                    xbmctools.addLink(name,url,'')
+                    xbmctools.playlist_yap(playList,name,url)
+                    xbmcPlayer.play(playList)
 
 def get_params():
     param=[]
