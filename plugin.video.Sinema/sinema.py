@@ -16,7 +16,7 @@ settings = xbmcaddon.Addon(id='plugin.video.Sinema')
 def CATEGORIES():
         addDir('[COLOR orange][B]< Full IPTV ACILMISTIR;ALMAK ISTEYENLER http://dreamtr.club den Ogrenebilirler>[/B][/COLOR]','','','https://raw.githubusercontent.com/koditr/xbmc-tr-team-turkish-addons/master/duyuru/icon2.png')
         addDir('[COLOR red]<<< [ Film ARA  ] >>>[/COLOR]','Search',3,'https://raw.githubusercontent.com/koditr/xbmc-tr-team-turkish-addons/master/duyuru/icon2.png')
-        url='http://www.ultrafilmizle.co/'
+        url='https://ultrafilmizle.tv/'
         addDir('[COLOR blue]<<< [ Yeni EKLENENLER  ] >>>[/COLOR]',url,1,'https://raw.githubusercontent.com/koditr/xbmc-tr-team-turkish-addons/master/duyuru/icon2.png')
         req = urllib2.Request(url)
         req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
@@ -25,8 +25,18 @@ def CATEGORIES():
         response.close()
         match=re.compile('category menu-item-.*?"><a href="(.*?)">(.*?)</a>').findall(link)
         for url,name in match:
-                name=sembol_fix(name)
-                addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,4,'')
+                print name
+                ##name=sembol_fix(name)
+                if "20" in name:
+                        pass
+                else:
+                        if "leti" in name:
+                                pass
+                        else:
+                                
+                                
+                                name=sembol_fix(name)
+                                addDir('[COLOR beige][B]'+name+'[/B][/COLOR]',url,4,'')
 def RECENT(url):
     link=get_url(url)
     soup = BeautifulSoup(link)
@@ -62,25 +72,33 @@ def Search():
         keyboard.doModal()
         if keyboard.isConfirmed():
             query = keyboard.getText()
-            url = ('http://www.ultrafilmizle.co/?s='+query)
+            url = ('http://www.ultrafilmizle.tv/?s='+query)
             RECENT(url)
 def ayrisdirma(name,url):
-        url=url+'7'
+        #url=url+'7'
         link=xbmctools.get_url(url)
-        name="Secenek - 1"
-        url1=url.replace('/7','/')
-        xbmctools.addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url1,44,"")
-        match=re.compile('href="(.*?)"><span>(.*?)</span>').findall(link)
+        #print link
+        #name="Secenek - 1"
+        #url1=url.replace('/7','/')
+        #xbmctools.addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url1,44,"")
+        match=re.compile('<a href="(.*?)" class="post-page-numbers"><span>(.*?)</span></a> ').findall(link)
+        print match
         for url,name in match:
-                addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
+                print url
+                if "embed" in name:
+                        pass
+                else:
+
+                        addDir('[COLOR yellow][B]'+name+'[/B][/COLOR]',url,44,'')
 def VIDEOLINKS(name,url):
         link=get_url(url)
         soup = BeautifulSoup(link)
         panel = soup.findAll("div", {"class": "filmicerik"},smartQuotesTo=None)
         match=re.compile('src="(.*?)"').findall(str(panel))
         for url in match:
-                if "ultrafilmizle.co/player" in url:
-                        url=url.replace('http://www.ultrafilmizle.co/player/url/','')
+                print url
+                if "ultrafilmizle.tv/player" in url:
+                        url=url.replace('http://www.ultrafilmizle.tv/player/url/','')
                         name=url
                         name=base64.b64decode(name)
                         reverseName=""
@@ -94,21 +112,21 @@ def VIDEOLINKS(name,url):
                         xbmctools.magix_player(name,url)
 
                 else:
-                        if "//vidmoly.me" in url:
-                                url=url.replace('//vidmoly.me','http://vidmoly.me')
+                        if "vidmol" in url:
+                                
                                 link=get_url(url)
-                                match=re.compile('\|100\|(.*?)\|.*?\|vid\|count\|').findall(link)
+                                match=re.compile('mp4\|(.*?)\|sources\|').findall(link)        
                                 for b in match:
                                     if match:
-                                        link=get_url(url)
-                                        match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
+                                        link=get_url(url)#https://user-content-hot-142.molyusercontentstage.me/xqx2osfolnokjiqbtfmcnisdxzftizef5aofciunixy2nngqbvc2q2pvh54a/v.mp4
+                                        match1=re.compile('\|molyusercontentstage\|(.*?)\|').findall(link)
                                         for a in match1:
-                                            url=a+'hls/,'+b+',.urlset/master.m3u8'
-                                            name='Play-VID'
-                                            url=url.replace('//','http://')
+                                            url='https://user-content-hot-'+a+'.molyusercontentstage.me/'+b+'/v.mp4'
+                                            url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
+                                            name='ViDmOlY'
                                             VideoLinksyet2(name,url)
                         else:
-                                if "http://play.ultrafilmizle.co/oynat/" in url:
+                                if "http://play.ultrafilmizle.tv/oynat/" in url:
                                         link=get_url(url)
                                         match1=re.compile('file":"(.*?)", "label":"(.*?)", "type": "mp4"').findall(link)
                                         for url,name in match1:
