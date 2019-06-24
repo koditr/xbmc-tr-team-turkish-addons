@@ -683,121 +683,29 @@ def Kanalddizivideo(url,name):
         url=url+code+'key=93a08dbbdd93b00670860974d0f63a6d'
         yenical4(name,url+tk)
 #22
-##def frame(url):
-##    name='Play'
-##    print url+"111"
-##    link=get_url(url)
-##    #--
-##    #--
-##    if "dizihd4" in url:
-##        import re
-##        link=get_url(url)
-##        ply223=re.compile('href="https://www.kanald.com.tr/(.*?)">').findall(link)
-##        for name in ply223:
-##            name='https://www.kanald.com.tr/'+name
-##            url=name
-##            Kanalddizivideo(url,name)
-##        ply223a=re.compile('href="https://www.fox.com.tr/(.*?)">').findall(link)
-##        for name in ply223a:
-##            name='https://www.fox.com.tr/'+name
-##            url=name
-##            link=get_url(url)
-##            ply223ab=re.compile("videoSrc : '(.*?)'").findall(link)
-##            for url in ply223ab:
-##                yenical4(name,url)
-##            
-##        matchqq=re.compile('div id\="(.*?)" style\=').findall(link)
-##        for vid in matchqq:
-##            resolve( vid)
-##        ply22=re.compile('<iframe src="(.*?)"').findall(link)
-##        for name in ply22:
-##            if "hqq" in name:
-##                pass
-##            else:
-##                url=name
-##                url=url.replace('//vidmoly','http://vidmoly')
-##                magix_player(name,url)
-##        ply222=re.compile('<iframe src\="(.*?)"').findall(link)
-##        for name in ply222:
-##            if "hqq" in name:
-##                pass
-##            else:
-##                url=name
-##                url=url.replace('//vidmoly','http://vidmoly')
-##                magix_player(name,url)
-##        mlr=re.compile("src='https://my.mail.ru/video/embed/(.*?)'").findall(link)
-##        for url in mlr:
-##            url='http://videoapi.my.mail.ru/videos/embed/mail/'+url+'.html'
-##            magix_player(name,url)
-##    else:
-##        print "cikis"
-##    link=get_url(url)
-##    import re
-##    ply22=re.compile('src=".*?oload(.*?)"').findall(link)
-##    for name in ply22:
-##        name='https://oload'+name
-##        url=name
-##        magix_player(name,url)
-###--------#
-##        
-###-------#
-##    link=get_url(url)    
-##    ply22r=re.compile('data-wpfc-original-src="http://www.canlidizihd(.*?)"').findall(link)
-##    for url in ply22r:
-##        name='http://www.canlidizihd'+url
-##        url=name
-##        
-##        import requests as req
-##        import requests
-##        org_url=url
-##        headers = {
-##            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-##            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15',
-##            'X-Requested-With': 'XMLHttpRequest',
-##            'Referer': org_url
-##        }
-##        data = {
-##            'MIME Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-##            'hash': url.split('/')[-1],
-##            'r': org_url
-##        }
-##        s = requests.Session()
-##        req = requests.Request('POST', url+'?do=getVideo', data=data, headers=headers)
-##        prepped = s.prepare_request(req)
-##        prepped.headers = headers
-##        resp = s.send(prepped)
-##        if resp.text:
-##            match=re.compile('"file":"(.*?),"label":"(.*?)"').findall(resp.text)
-##            for url,name in match:
-##                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
-##                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
-##            matcha=re.compile('"file":"(.*?)","label":"(.*?)","type"').findall(resp.text)
-##            for url,name in matcha:
-##                url=url.replace('\/','/').replace('%3A',':').replace('%2F','/').replace('%3F','?').replace('%3D','=').replace('%26','&').replace('"','')
-##                addLink('[COLOR gold] KALITE SeC >>  '+'[COLOR beige]'+name+'[/COLOR]'+'[/COLOR]',url+tk,'')
-##    match=re.compile('class="c5"><p><iframe src="(.*?)"').findall(link)
-##    for url in match:
-##        dizividcal(url)
-##    matchc=re.compile('<iframe src="(.*?)"  width=').findall(link)
-##    for url in matchc:
-##        if "reklam" in url:
-##            pass
-##        else:
-##            dizividcal(url)
-##    matchaqq=re.compile('src="https://www.dailymotion.com/embed/(.*?)"').findall(link)
-##    for urla in matchaqq:
-##        url = 'https://www.dailymotion.com/embed/'+urla
-##        name="Daily-M"
-##        #fix.daily_sec(name,url)
-##        magix_player(name,url)
-##        
-##    matcha=re.compile('src\=\".*?daily(.*?)\?').findall(link)
-##    for urla in matcha:
-##        urla=urla.replace('motion.com/embed/video/','')
-##        url = 'https://dailymotion.com/embed/video/'+urla
-##        name="Daily-M"
-##        #fix.daily_sec(name,url)
-##        magix_player(name,url)
+def frame(url):
+    name='Play'
+    print url
+    url=url.replace('"','')
+    link=get_url(url)
+    print url+"111"   #src\=\".*?motion.com/embed/video/(.*?)\\?.*?"
+    matcha=re.compile('src="https://www.dailymotion.com/embed/video/(.*?)\?logo=0&hideInfos=1"').findall(link)
+    for urla in matcha:
+        urla=urla.replace('motion.com/embed/video/','')
+        url = 'https://dailymotion.com/embed/video/'+urla
+        name="Daily-M"
+        #fix.daily_sec(name,url)
+        magix_player(name,url)
+    matchaa=re.compile('src=".*?youtube.com\/embed\/(.*?)\?rel.*?"').findall(link)
+    for url in matchaa:
+        url='http://www.youtube.com/embed/'+url
+        print url
+        name='Play-Youtube'
+        magix_player(name,url)
+    matchab=re.compile('ok.ru\/videoembed\/(.*?)"').findall(link)
+    for url in matchab:
+        url='http://ok.ru/videoembed/'+str(url)
+        magix_player(name,url)
 ##    matchab=re.compile('\/dm.php\?git\=(.*?)\?').findall(link)
 ##    for urlzz in matchab:
 ##        urla=url
