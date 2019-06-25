@@ -1289,11 +1289,12 @@ def yenical44(name,url):
 
 #105
 def radyo():
-    url="http://dreamtr.club/aZambak/Rdy.txt"
+    url="https://canliradyodinle.gen.tr/"
     link=get_url(url)
-    match=re.compile('<li><a href=\'(.*?)\'>(.*?)</a></li>').findall(link)
+    match=re.compile('</font><a title=".*?" href="(.*?)"><strong>(.*?)</strong></a></font><font face="Verdana"').findall(link)
     for url,name in match:
-        xbmctools.addDir('[COLOR beige]>>'+name+'[/COLOR]',url,107,'','')
+        name=fix.decode_fix(name)
+        xbmctools.addDir('[COLOR beige]>>'+name+'[/COLOR]','https://canliradyodinle.gen.tr/'+url,107,'','')
 
 
         
@@ -1387,9 +1388,9 @@ def magix_player(name,url):
                 for b in match:
                     if match:
                         link=get_url(url)#https://user-content-hot-142.molyusercontentstage.me/xqx2osfolnokjiqbtfmcnisdxzftizef5aofciunixy2nngqbvc2q2pvh54a/v.mp4
-                        match1=re.compile('\|molyusercontentstage\|(.*?)\|').findall(link)
-                        for a in match1:
-                            url='https://user-content-hot-'+a+'.molyusercontentstage.me/'+b+'/v.mp4'
+                        match1=re.compile('molyusercontentstage\|(.*?)\|\|(.*?)\|\|content').findall(link)
+                        for a,ss in match1:
+                            url='https://user-content-'+ss+'-'+a+'.molyusercontentstage.me/'+b+'/v.mp4'
                             url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
                             name='ViDmOlY'
                             xbmctools.yenical4(name,url)

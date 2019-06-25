@@ -439,46 +439,23 @@ def VIDEOLINKS1(name,url):
 #--
 #107
 def radyocal(url):
-    name=''#file: "https://trtcanlifm-lh.akamaihd.net/i/TRTERZURUM_1@182248/master.m3u8"
+    name=''
     link=get_url(url)
-    match93=re.compile('"h.*?\:\/\/(.*?)\.m3u8(.*?)"').findall(link)
-    for a,b in match93:
-        url='http://'+a+'.m3u8'+b+tk
-        xbmcPlayer = xbmc.Player()
-        playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
-        playList.clear()
-        addLink('[COLOR blue]'+'RETURN List <<'+' [/COLOR]','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
-        listitem = xbmcgui.ListItem(name)
-        playList.add(url, listitem)
-        xbmcPlayer.play(playList)
-        exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
-        if exec_version < 14.0:
-            playlist()
-        else:
-            playlist2()
-    match94=re.compile('style\="width.*?" src\="(.*?)">').findall(link)
-    for url in match94:
-        if ".gif" in url:
-            pass
-        else:
-            xbmcPlayer = xbmc.Player()
-            playList = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
-            playList.clear()
-            addLink('[COLOR blue]'+'RETURN List <<'+' [/COLOR]','','http://png-4.findicons.com/files/icons/1714/dropline_neu/128/edit_undo.png')
-            listitem = xbmcgui.ListItem(name)
-            playList.add(url, listitem)
-            xbmcPlayer.play(playList)
-            exec_version = float(str(xbmc.getInfoLabel("System.BuildVersion"))[0:4])
-            if exec_version < 14.0:
-                    playlist()
-            else:
-                    playlist2()
-    match95=re.compile('file: \'(.*?)\',\n\t\t\t\twidth').findall(link)
-    for url in match95:
-        yenical4(name,url)
-    match96=re.compile('<source src="(.*?)"').findall(link)
-    for url in match96:
-        yenical4(name,url)
+    match9a=re.compile('source src="(.*?)"').findall(link)
+    for url in match9a:
+        yenical4(name,url+tk)
+    match93=re.compile('<iframe src="(.*?)"').findall(link)
+    for url in match93:
+        url='https://canliradyodinle.gen.tr/'+url
+        link=get_url(url)
+        match9q=re.compile('file\:\"(.*?)"').findall(link)
+        for url in match9q:
+            url=url.replace(';stream.nsv','')
+            yenical4(name,url+tk)
+        match9a=re.compile('source src="(.*?)"').findall(link)
+        for url in match9a:
+            yenical4(name,url+tk)
+
 #--
 #42
 def yenical4(name,url):
@@ -498,25 +475,18 @@ def magix_player(name,url):
         urla=urla.replace('motion.com/embed/video/','')
         urla=urla.replace('https://daily','')
         name="Daily-M"
-        #url='plugin://plugin.video.dailymotion_com/?url=k1xKPy9bbnqUbMt3YSM&mode=playVideo'
         addLink(name,'plugin://plugin.video.dailymotion_com/?url='+urla+'&mode=playVideo','')   
     else:
-        if "vidmol" in url:#https://user-content-hot-125.molyusercontentstage.me/xqx2px2dkvokjiqbtfvsnla3xx7mjrdzsy6iolqg37ciyeptaukfq563za3a/v.mp4
+        if "vidmol" in url:
             link=get_url(url)
             match=re.compile('mp4\|(.*?)\|sources\|').findall(link)        
             for b in match:
                 if match:
                     link=get_url(url)
-                    match1=re.compile('var spriteSheetUrl = "(.*?)i/.*?.jpg"').findall(link)
-                    if match1:
-                        for a in match1:
-                                url=a+b+'/v.mp4'
-                                url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
-                                name='ViDmOlY'
-                                yenical4(name,url)
-                    else:
-                        url='https://user-content-hot-125.molyusercontentstage.me/'+b+'/v.mp4'
-                        print url,"DDD"
+                    match1=re.compile('molyusercontentstage\|(.*?)\|\|(.*?)\|\|content').findall(link)
+                    for a,ss in match1:
+                        url='https://user-content-'+ss+'-'+a+'.molyusercontentstage.me/'+b+'/v.mp4'
+                        url=url.replace('//','http://').replace('https:http://','https://').replace('01|100|','')
                         name='ViDmOlY'
                         yenical4(name,url)
                             
