@@ -1,6 +1,6 @@
-=== 0.0.30 ===
+=== 0.0.31 ===
 .............
-Tarih: 30.04.2019
+Tarih: 22.07.2019
 
 .............
 Bu Eklenti DreamTR ekibi tarafindan Hazirlanmistir.
